@@ -1,0 +1,20 @@
+<div class="container">
+    <div style="width: auto; flex-direction:column; flex: content; justify-content: center;">
+        <div style="display: flex; flex-direction: column;">
+        <mat-form-field appearance="fill">
+            <mat-label>Number</mat-label>
+            <input matInput [(ngModel)]="room.number">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Floor</mat-label>
+            <input matInput [(ngModel)]="room.floor">
+        </mat-form-field>
+        </div>
+        <div style="display: flex; justify-content: center; margin-bottom: 25px;">
+        <button mat-stroked-button (click)="createRoom()">
+            Submit
+        </button>
+        </div>
+    </div>
+</div>
+  

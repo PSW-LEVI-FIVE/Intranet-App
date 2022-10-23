@@ -1,0 +1,15 @@
+.navbar {
+    height: 150px;
+    background: greenyellow;
+    text-align: center;
+    padding-left: 24px;
+    padding-right: 24px;
+    margin-bottom: 48px;
+}
+.initialText {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+}
+p {
+    margin-bottom: 0px;
+}

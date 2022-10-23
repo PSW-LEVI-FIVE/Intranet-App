@@ -1,0 +1,20 @@
+<div *ngIf="room">
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Id</mat-label>
+            <input matInput [(ngModel)]="room.id" disabled>
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+            <mat-label>Number</mat-label>
+            <input matInput [(ngModel)]="room.number">
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+            <mat-label>Floor</mat-label>
+            <input matInput [(ngModel)]="room.floor">
+        </mat-form-field>
+        <button mat-stroked-button (click)="updateRoom()">
+            Submit
+        </button>
+    </div>
+</div>
+  
