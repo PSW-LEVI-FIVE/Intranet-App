@@ -1,0 +1,12 @@
+mat-card {
+    width: 30%;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 3px;
+    border: #DCD6CC 1px solid;
+    background-color: white;
+}
+
+mat-card-title {
+    margin-bottom: 20px;
+}
