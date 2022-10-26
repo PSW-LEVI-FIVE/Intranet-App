@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { FeedBack } from '../model/feedback.model';
+import { IFeedBack } from '../model/feedback.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +13,11 @@ export class FeedbackService {
 
   constructor(private http: HttpClient) { }
 
-  getFeedbacks(): Observable<FeedBack[]> {
-    return this.http.get<FeedBack[]>(this.apiHost + 'api/intranet/feedbacks', {headers: this.headers});
+  getFeedbacks(): Observable<IFeedBack[]> {
+    return this.http.get<IFeedBack[]>(this.apiHost + 'api/intranet/feedbacks', {headers: this.headers});
   }
-  getFeedback(id: number): Observable<FeedBack> {
-    return this.http.get<FeedBack>(this.apiHost + 'api/intranet/feedbacks/' + id, {headers: this.headers});
+  getFeedback(id: number): Observable<IFeedBack> {
+    return this.http.get<IFeedBack>(this.apiHost + 'api/intranet/feedbacks/' + id, {headers: this.headers});
   }
 
   deleteFeedback(id: any): Observable<any> {

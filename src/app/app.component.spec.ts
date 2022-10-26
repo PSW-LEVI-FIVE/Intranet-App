@@ -1,5 +1,3 @@
-import { NavbarModule } from './modules/navbar/navbar.module';
-import { FooterModule } from './modules/footer/footer.module';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
@@ -9,8 +7,6 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        FooterModule,
-        NavbarModule
       ],
       declarations: [
         AppComponent

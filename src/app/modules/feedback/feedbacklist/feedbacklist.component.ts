@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FeedBack } from '../model/feedback.model';
+import { IFeedBack } from '../model/feedback.model';
 import { FeedbackService } from '../services/feedback.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -11,9 +11,9 @@ import { Router } from '@angular/router';
 })
 export class FeedbacklistComponent implements OnInit {
 
-  public dataSource = new MatTableDataSource<FeedBack>();
+  public dataSource = new MatTableDataSource<IFeedBack>();
   public displayedColumns = ['number', 'floor', 'update', 'delete'];
-  public feedbacks: FeedBack[] = [];
+  public feedbacks: IFeedBack[] = [];
 
   constructor(private feedbackService: FeedbackService, private router: Router) { }
 
@@ -25,24 +25,8 @@ export class FeedbacklistComponent implements OnInit {
   }
 
   public chooseFeedback(id: number) {
-    this.router.navigate(['/rooms', id]);
+    this.router.navigate(['/feedbacks', id]);
   }
 
-  public updateFeedback(id: number) {
-    this.router.navigate(['/feedbacks/' + id + '/update']);
-  }
-
-  public deleteFeedback(id: number) {
-    this.feedbackService.deleteFeedback(id).subscribe(res => {
-      this.feedbackService.getFeedbacks().subscribe(res => {
-        this.feedbacks = res;
-        this.dataSource.data = this.feedbacks;
-      })
-    })
-  }
-
-  public addFeedback() {
-    this.router.navigate(['/feedbacks/add']);
-  }
 
 }
