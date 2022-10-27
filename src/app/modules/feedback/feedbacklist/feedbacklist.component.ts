@@ -12,20 +12,39 @@ import { Router } from '@angular/router';
 export class FeedbacklistComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<IFeedBack>();
-  public displayedColumns = ['number', 'floor', 'update', 'delete'];
+  public displayedColumns = ['number', 'floor', 'publishing'];
   public feedbacks: IFeedBack[] = [];
+  public publishChangingFeedbacks: IFeedBack[] = [];
 
   constructor(private feedbackService: FeedbackService, private router: Router) { }
 
   ngOnInit(): void {
     this.feedbackService.getFeedbacks().subscribe(res => {
       this.feedbacks = res;
-      this.dataSource.data = this.feedbacks;
+      this.dataSource.data = this.feedbacks.reverse();
     })
   }
 
   public chooseFeedback(id: number) {
     this.router.navigate(['/feedbacks', id]);
+  }
+
+  public addFeedbackToChange(addfeedback: IFeedBack){
+    var alreadyIn : boolean = false;
+    var index : number = -1;
+
+    this.publishChangingFeedbacks.forEach( (feedbackFor,indexFor) => {
+      if(feedbackFor.id === addfeedback.id) {
+        alreadyIn = true;
+        index = indexFor;
+        return;
+      }
+    });
+
+    if(alreadyIn)
+    this.publishChangingFeedbacks.splice(index,1);
+    else
+    this.publishChangingFeedbacks.push(addfeedback);
   }
 
 
