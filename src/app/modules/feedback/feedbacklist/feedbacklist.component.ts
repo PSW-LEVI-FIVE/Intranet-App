@@ -29,6 +29,13 @@ export class FeedbacklistComponent implements OnInit {
     this.router.navigate(['/feedbacks', id]);
   }
 
+  public saveChanges(){
+    this.publishChangingFeedbacks.forEach( (feedbackFor) => {
+      this.feedbackService.updateFeedback(feedbackFor);
+    });
+    
+  }
+
   public addFeedbackToChange(addfeedback: IFeedBack){
     var alreadyIn : boolean = false;
     var index : number = -1;
