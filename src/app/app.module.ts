@@ -1,3 +1,4 @@
+import { HospitalMapModule } from './modules/hospital-map/hospital-map.module';
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
@@ -21,7 +22,8 @@ import { FeedbackModule } from "./modules/feedback/feedback.module";
     MaterialModule,
     PagesModule,
     HospitalModule,
-    FeedbackModule
+    FeedbackModule,
+    HospitalMapModule
   ],
   providers: [],
   bootstrap: [AppComponent]
