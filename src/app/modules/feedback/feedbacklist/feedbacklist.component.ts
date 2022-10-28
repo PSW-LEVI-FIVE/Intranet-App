@@ -31,9 +31,12 @@ export class FeedbacklistComponent implements OnInit {
 
   public saveChanges(){
     this.publishChangingFeedbacks.forEach( (feedbackFor) => {
-      this.feedbackService.updateFeedback(feedbackFor);
+      feedbackFor.publishment = !feedbackFor.publishment;
+      this.feedbackService.updateFeedback(feedbackFor).subscribe(res => {
+        alert("xasdasdsadsadd");
+      });
+      this.publishChangingFeedbacks = [];
     });
-    
   }
 
   public addFeedbackToChange(addfeedback: IFeedBack){
