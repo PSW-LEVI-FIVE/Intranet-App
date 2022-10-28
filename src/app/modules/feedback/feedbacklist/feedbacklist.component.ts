@@ -30,21 +30,23 @@ export class FeedbacklistComponent implements OnInit {
   }
 
   public saveChanges(){
-    this.publishChangingFeedbacks.forEach( (feedbackFor) => {
-      feedbackFor.publishment = !feedbackFor.publishment;
-      this.feedbackService.updateFeedback(feedbackFor).subscribe(res => {
-        alert("xasdasdsadsadd");
+    this.publishChangingFeedbacks.forEach( (feedback) => {
+      feedback.published = !feedback.published;
+      feedback.anonimity = false;
+      feedback.allowPublishment = false;
+      this.feedbackService.updateFeedback(feedback).subscribe(res => {
+        this.router.navigate(['/']);
       });
       this.publishChangingFeedbacks = [];
     });
   }
 
-  public addFeedbackToChange(addfeedback: IFeedBack){
+  public addFeedbackToChange(feedbacktoadd: IFeedBack){
     var alreadyIn : boolean = false;
     var index : number = -1;
 
-    this.publishChangingFeedbacks.forEach( (feedbackFor,indexFor) => {
-      if(feedbackFor.id === addfeedback.id) {
+    this.publishChangingFeedbacks.forEach( (feedback,indexFor) => {
+      if(feedback.id === feedbacktoadd.id) {
         alreadyIn = true;
         index = indexFor;
         return;
@@ -54,7 +56,7 @@ export class FeedbacklistComponent implements OnInit {
     if(alreadyIn)
     this.publishChangingFeedbacks.splice(index,1);
     else
-    this.publishChangingFeedbacks.push(addfeedback);
+    this.publishChangingFeedbacks.push(feedbacktoadd);
   }
 
 
