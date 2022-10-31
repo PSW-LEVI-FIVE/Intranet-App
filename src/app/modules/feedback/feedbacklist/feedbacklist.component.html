@@ -1,5 +1,5 @@
-<div class="container">
-    <div class="table-header">
+<div class="feedbackviewpage">
+    <div class="table-header container table">
         <p class="table-title">Feedbacks</p>
 
         <table mat-table [dataSource]="dataSource">
@@ -10,14 +10,16 @@
             <ng-container matColumnDef="floor">
                 <th mat-header-cell *matHeaderCellDef class="cell-center"> Content </th>
                 <td mat-cell *matCellDef="let feedback" class="cell-center">{{feedback.feedbackContent}}</td>
-            </ng-container>
+            </ng-container >
             <ng-container matColumnDef="publishing">
                 <th mat-header-cell *matHeaderCellDef class="cell-center">Publish feedback</th>
-                <td mat-cell *matCellDef="let feedback" class="cell-center">
+                <td  mat-cell *matCellDef="let feedback" class="cell-center">
                     <label class="switch" >
-                        <input type="checkbox" [checked]="feedback.published" (change)="addFeedbackToChange(feedback)">
-                        <span class="slider round"></span>
-                      </label>
+                        <input type="checkbox" [disabled]="!feedback.allowPublishment" [checked]="feedback.published" (change)="addFeedbackToChange(feedback)">
+                        <span title="Some feedbakcs cannot be published, if patient want to stay private" class="slider round"></span>
+                      
+                    </label>
+                    <p class="cell-center" [hidden]="!feedback.published">Published</p>
                 </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

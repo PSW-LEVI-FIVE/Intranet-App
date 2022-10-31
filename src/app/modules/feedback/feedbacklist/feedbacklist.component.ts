@@ -33,9 +33,9 @@ export class FeedbacklistComponent implements OnInit {
     this.publishChangingFeedbacks.forEach( (feedback) => {
       feedback.published = !feedback.published;
       feedback.anonimity = false;
-      feedback.allowPublishment = false;
+      feedback.allowPublishment = feedback.allowPublishment;
       this.feedbackService.updateFeedback(feedback).subscribe(res => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/feedbacks']);
       });
       this.publishChangingFeedbacks = [];
     });
