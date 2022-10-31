@@ -1,0 +1,7 @@
+.interval {
+    position: absolute;
+    width: 80%;
+    background:#5b5fc7;
+    left: 10%;
+    z-index: 3;
+}

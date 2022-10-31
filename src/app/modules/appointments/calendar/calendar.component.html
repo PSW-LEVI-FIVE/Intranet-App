@@ -1,0 +1,20 @@
+<div class="calendar">
+
+    <div class="calendar-corner">
+
+    </div>
+    <div class="calendar-header">
+        <div class="header-chunk" *ngFor="let col of weekIntervals">
+            {{col.date}}
+        </div>
+    </div>
+    <div class="calendar-side-header">
+        <div class="side-header-chunk" *ngFor="let row of rows">
+            {{row}}
+        </div>
+    </div>
+    <div class="calendar-body">
+        <app-calendar-column *ngFor="let col of weekIntervals" [intervals]="col.intervals">
+        </app-calendar-column>
+    </div>
+</div>

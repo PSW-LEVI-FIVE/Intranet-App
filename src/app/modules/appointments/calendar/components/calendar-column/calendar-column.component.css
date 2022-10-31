@@ -1,0 +1,7 @@
+.calendar-column {
+    width: 100%;
+    height: 100%;
+    background: #1A1A2E;
+    outline: 1px solid white;
+    position: relative;
+}
