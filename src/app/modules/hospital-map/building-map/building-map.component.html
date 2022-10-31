@@ -1,2 +1,22 @@
-<h1>Building map overview</h1>
-<svg id="rect"></svg>
+<h1 class="title">Hospital map</h1>
+<div id="svgDiv" text-align="left" style="height: 400px; width: 800px;">
+</div>
+<div [style.visibility]="formVisible" class="buildInfo">
+    <h1>  Building information  </h1>
+    <mat-form-field appearance="fill">
+        <mat-label>Building ID</mat-label>
+        <input matInput disabled [value]="selectedBuilding.id">
+    </mat-form-field><br>
+    <mat-form-field appearance="fill">
+        <mat-label>Building name</mat-label>
+        <input matInput [value]="selectedBuilding.name">
+    </mat-form-field><br>
+    <mat-form-field appearance="fill">
+        <mat-label>Floors</mat-label>
+        <input matInput>
+    </mat-form-field>
+</div>
+
+<!-- <div text-align="center">
+    <svg id="rect" (click)="formVisibleClick()"></svg>
+</div> -->

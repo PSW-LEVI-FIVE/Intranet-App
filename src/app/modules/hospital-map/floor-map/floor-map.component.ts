@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { BuildingMapService } from './../services/building-map.service';
 import { FloorMapService } from './../services/floor-map.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,7 +15,7 @@ export class FloorMapComponent implements OnInit {
   svg:any;
   floors:any;
   floorsText:any;
-  constructor(private floorMapService: FloorMapService, private buildingMapService:BuildingMapService) { }
+  constructor(private floorMapService: FloorMapService, private buildingMapService:BuildingMapService, private router:Router) { }
 
   ngOnInit(): void {
     this.data = this.floorMapService.getData();
