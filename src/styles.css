@@ -1,6 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
 body {
     border: none !important;
     margin: 0px !important;
     padding: 0 !important;
+    background-color: #1e293b;
+}
+.text {
+    color: #06b6d4 !important;
+    font-family: Garamond, serif !important;
+    margin-bottom: 0px !important;
+}
+
+.mat-stroked-button {
+    color: #334155;
+    background-color: #06b6d4;
+    width: 150px;
+}
+
+.mat-form-field-label {
+    /*change color of label*/
+    color: #06b6d4 !important;
+  }
+  
+.mat-form-field-ripple {
+  color: #06b6d4 !important;
+  background-color: #06b6d4 !important;
+}
+
+.mat-form-field-empty.mat-form-field-label{
+    color: #06b6d4 !important;
+}
+
+.mat-form-field-underline{
+  color: #06b6d4 !important;
+  background-color: #06b6d4 !important;
+}
+
+.mat-form-field-underline {
+  color: #06b6d4 !important;
+  background-color: #06b6d4 !important;
+}
+
+input{
+    color: #06b6d4 !important;
 }

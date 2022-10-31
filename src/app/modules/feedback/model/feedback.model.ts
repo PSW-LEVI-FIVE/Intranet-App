@@ -1,5 +1,8 @@
 export interface IFeedBack {
-    id: number;
+    id?: number;
     patientId: number;
-    feedbackContent: string; 
+    feedbackContent: string;
+    allowPublishment : boolean;
+    published: boolean;
+    anonimity: boolean;
 }
