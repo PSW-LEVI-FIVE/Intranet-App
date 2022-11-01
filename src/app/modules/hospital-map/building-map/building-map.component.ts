@@ -14,6 +14,7 @@ export class BuildingMapComponent implements OnInit {
   svg:any;
   buildings:any;
   buildingsText:any;
+  label:any
   constructor(private buildingMapService: BuildingMapService) { }
 
   ngOnInit(): void {
@@ -21,6 +22,7 @@ export class BuildingMapComponent implements OnInit {
     this.svg  = this.buildingMapService.createSVG();
     this.buildings = this.buildingMapService.createRectangles(this.svg, this.data)
     this.buildingsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)
+    this.label = this.buildingMapService.onClickShowName(this.svg,this.data)
   }
 
 }
