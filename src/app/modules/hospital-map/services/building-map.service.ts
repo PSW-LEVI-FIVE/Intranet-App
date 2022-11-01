@@ -40,6 +40,17 @@ export class BuildingMapService {
     .attr("x", function(d:any){ return d.x })
     .attr("y", function(d:any){ return d.y})
     .attr("id", function(d:any){ return d.id})
+    .on("click", function(data2:any) {
+      console.log("caooo")
+    });
+    
+  }
+  onClickShowName(svg:any, data2:any){
+    return svg.selectAll("rect")
+    .on("click",function(e:any,d:any){
+      console.log(d.name)
+      alert(d.name)
+    })
   }
 
   addTextToRectangles(svg:any, data2:any){
@@ -54,7 +65,7 @@ export class BuildingMapService {
       .attr("font-size", 10)
       .text(function(d:any){ return d.name; })
       .on("click", function(d:any) {
-        console.log(d.name)
+        alert(d.name)
       });
   }
 }
