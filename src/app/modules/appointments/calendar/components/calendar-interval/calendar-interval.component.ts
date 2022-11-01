@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ITimeInterval } from '../../calendar.component';
+import { ITimeInterval, ITimeSpan } from '../../calendar.component';
 
 @Component({
   selector: 'app-calendar-interval',
@@ -9,8 +9,9 @@ import { ITimeInterval } from '../../calendar.component';
 export class CalendarIntervalComponent implements OnInit {
 
   @Input() public interval: ITimeInterval = {
-    startsAt: new Date(),
-    endsAt: new Date()
+    startsAt: { hours: 0, minutes: 0 },
+    endsAt: { hours: 0, minutes: 0 },
+    patient: ""
   }
   public startPosition: number = 0;
   public height: number = 0;
@@ -22,12 +23,23 @@ export class CalendarIntervalComponent implements OnInit {
     this.height = this.calculateMinutes(this.interval.endsAt) - this.calculateMinutes(this.interval.startsAt)
   }
 
+  calculateMinutes(time: ITimeSpan) {
+    return time.hours * 60 + time.minutes
+  }
+
+  formatDate() {
+    const startHours = this.addZeroIfOneNumber(this.interval.startsAt.hours)
+    const startMinutes = this.addZeroIfOneNumber(this.interval.startsAt.minutes)
+    const endHours = this.addZeroIfOneNumber(this.interval.endsAt.hours)
+    const endMinutes = this.addZeroIfOneNumber(this.interval.endsAt.minutes)
+
+    return `${startHours}:${startMinutes} - ${endHours}:${endMinutes}`
+  }
 
 
-  calculateMinutes(date: Date) {
-    let hours = date.getHours()
-    let minutes = date.getMinutes()
-    return hours * 60 + minutes
+  private addZeroIfOneNumber(num: number) {
+    if (num < 10) return "0" + num
+    return num + ""
   }
 
 }
