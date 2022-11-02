@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Room } from 'src/app/modules/hospital/model/room.model';
-import { RoomService } from 'src/app/modules/hospital/services/room.service';
+import { Room } from '../model/room.model';
+import { RoomService } from '../services/room.service';
 
 @Component({
   selector: 'app-create-room',

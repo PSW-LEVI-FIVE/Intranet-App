@@ -8,28 +8,28 @@ import { Room } from '../model/room.model';
 })
 export class RoomService {
 
-  apiHost: string = 'http://localhost:16177/';
+  apiHost: string = 'http://localhost:5000/api/intranet';
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient) { }
 
   getRooms(): Observable<Room[]> {
-    return this.http.get<Room[]>(this.apiHost + 'api/rooms', {headers: this.headers});
+    return this.http.get<Room[]>(this.apiHost + '/rooms', { headers: this.headers });
   }
 
   getRoom(id: number): Observable<Room> {
-    return this.http.get<Room>(this.apiHost + 'api/rooms/' + id, {headers: this.headers});
+    return this.http.get<Room>(this.apiHost + '/rooms/' + id, { headers: this.headers });
   }
 
   deleteRoom(id: any): Observable<any> {
-    return this.http.delete<any>(this.apiHost + 'api/rooms/' + id, {headers: this.headers});
+    return this.http.delete<any>(this.apiHost + '/rooms/' + id, { headers: this.headers });
   }
 
   createRoom(room: any): Observable<any> {
-    return this.http.post<any>(this.apiHost + 'api/rooms', room, {headers: this.headers});
+    return this.http.post<any>(this.apiHost + '/rooms', room, { headers: this.headers });
   }
 
   updateRoom(room: any): Observable<any> {
-    return this.http.put<any>(this.apiHost + 'api/rooms/' + room.id, room, {headers: this.headers});
+    return this.http.put<any>(this.apiHost + '/rooms/' + room.id, room, { headers: this.headers });
   }
 }

@@ -1,0 +1,32 @@
+.interval {
+    position: absolute;
+    width: 80%;
+    background:#1967d2;
+    left: 10%;
+    z-index: 3;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.interval:hover {
+    background:#7174bf; 
+}
+
+
+.interval-details {
+    color: white;
+    font-size: 20px;
+}
+
+.interval::before {
+    content: "";
+    background: #31346e;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+}

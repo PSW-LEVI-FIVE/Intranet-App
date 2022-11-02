@@ -4,14 +4,16 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { MaterialModule } from "./material/material.module";
-import { HospitalModule } from "./modules/hospital/hospital.module";
-import { PagesModule } from "./modules/pages/pages.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FeedbackModule } from "./modules/feedback/feedback.module";
+import { FeedbackModule } from "./manager/feedback/feedback.module";
+import { PagesModule } from "./manager/pages/pages.module";
+import { DoctorModule } from "./doctor/doctor.module";
+import { ManagerModule } from "./manager/manager.module";
+import { RoomModule } from "./manager/room/room.module";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -20,8 +22,10 @@ import { FeedbackModule } from "./modules/feedback/feedback.module";
     HttpClientModule,
     MaterialModule,
     PagesModule,
-    HospitalModule,
-    FeedbackModule
+    FeedbackModule,
+    DoctorModule,
+    ManagerModule,
+    RoomModule
   ],
   providers: [],
   bootstrap: [AppComponent]

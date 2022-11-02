@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Room } from 'src/app/modules/hospital/model/room.model';
-import { RoomService } from 'src/app/modules/hospital/services/room.service';
+import { Room } from '../model/room.model';
+import { RoomService } from '../services/room.service';
 
 @Component({
   selector: 'app-rooms',
@@ -42,6 +42,6 @@ export class RoomsComponent implements OnInit {
   }
 
   public addRoom() {
-    this.router.navigate(['/rooms/add']);
+    this.router.navigate(['manager/rooms/add']);
   }
 }

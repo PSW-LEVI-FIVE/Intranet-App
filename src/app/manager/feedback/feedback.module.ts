@@ -10,13 +10,13 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ManagerFeedbackViewComponent
+    ManagerFeedbackViewComponent,
   ],
   imports: [
     CommonModule,
     MaterialModule,
     RouterModule.forChild(routes)
-    
+
   ]
 })
 export class FeedbackModule { }

@@ -1,0 +1,10 @@
+<div class="calendar-header-chunk">
+    <div class="calendar-week-day">
+        {{getDayOfTheWeek()}}
+    </div>
+    <div class="calendar-date">
+        <div class="circle" [ngClass]="isToday ? 'blue-circle':''">
+            {{getDateNumber()}}
+        </div>
+    </div>
+</div>
