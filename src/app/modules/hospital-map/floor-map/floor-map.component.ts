@@ -26,9 +26,9 @@ export class FloorMapComponent implements OnInit {
 
   ngOnInit(): void {
     this.data = this.floorMapService.getData();
-    this.svg  = this.floorMapService.createSVG();
-    this.floors = this.buildingMapService.createRectangles(this.svg, this.data)
-    this.floorsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)
+    //this.svg  = this.floorMapService.createSVG();
+   // this.floors = this.buildingMapService.createRectangles(this.svg, this.data)
+    ///this.floorsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)
     //this.containerForInfo = this.floorMapService.createRectangleForAdditionalInformation(this.svg,this.data)
     this.clickInfo = this.floorMapService.onClickShowName(this.svg,this.data)
   }
