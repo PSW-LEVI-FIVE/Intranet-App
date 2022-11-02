@@ -15,13 +15,17 @@ export class FloorMapComponent implements OnInit {
   svg:any;
   floors:any;
   floorsText:any;
+  containerForInfo:any
+  ev:any
+  clickInfo:any
   constructor(private floorMapService: FloorMapService, private buildingMapService:BuildingMapService, private router:Router) { }
-
   ngOnInit(): void {
     this.data = this.floorMapService.getData();
-    this.svg  = this.buildingMapService.createSVG();
+    this.svg  = this.floorMapService.createSVG();
     this.floors = this.buildingMapService.createRectangles(this.svg, this.data)
     this.floorsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)
+    //this.containerForInfo = this.floorMapService.createRectangleForAdditionalInformation(this.svg,this.data)
+    this.clickInfo = this.floorMapService.onClickShowName(this.svg,this.data)
   }
 
 }
