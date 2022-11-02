@@ -8,10 +8,11 @@ import { HospitalModule } from "./modules/hospital/hospital.module";
 import { PagesModule } from "./modules/pages/pages.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FeedbackModule } from "./modules/feedback/feedback.module";
+import { AppointmentsModule } from "./modules/appointments/appointments.module";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,7 +22,8 @@ import { FeedbackModule } from "./modules/feedback/feedback.module";
     MaterialModule,
     PagesModule,
     HospitalModule,
-    FeedbackModule
+    FeedbackModule,
+    AppointmentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

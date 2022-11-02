@@ -7,6 +7,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [],
@@ -18,7 +21,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatCardModule,
     MatIconModule,
     MatTooltipModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     CommonModule,
@@ -28,7 +34,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatCardModule,
     MatIconModule,
     MatTooltipModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatProgressSpinnerModule
   ]
 })
-export class MaterialModule {}
+export class MaterialModule { }
