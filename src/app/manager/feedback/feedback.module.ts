@@ -10,7 +10,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ManagerFeedbackViewComponent
+    ManagerFeedbackViewComponent,
   ],
   imports: [
     CommonModule,

@@ -3,26 +3,12 @@ import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './calendar/calendar.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AppointmentComponent } from './appointment.component';
-import { AppComponent } from 'src/app/app.component';
 import { CalendarColumnComponent } from './calendar/components/calendar-column/calendar-column.component';
 import { CalendarIntervalComponent } from './calendar/components/calendar-interval/calendar-interval.component';
 import { CalendarHeaderChunkComponent } from './calendar/components/calendar-header-chunk/calendar-header-chunk.component';
 import { MaterialModule } from 'src/app/material/material.module';
-import { SharedModule } from '../shared/shared.module';
-
-
-const routes: Routes = [
-  {
-    path: 'appointments',
-    component: AppointmentComponent,
-    children: [
-      {
-        path: "calendar",
-        component: CalendarComponent
-      }
-    ]
-  },
-]
+import { SharedModule } from 'src/app/shared/shared.module';
+import { DoctorComponent } from '../doctor.component';
 
 
 @NgModule({
@@ -37,7 +23,7 @@ const routes: Routes = [
     MaterialModule,
     SharedModule,
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule
   ],
   exports: [RouterModule]
 })
