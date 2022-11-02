@@ -1,20 +1,27 @@
-<div class="calendar">
+<div class="calendar-outer">
+    <div class="calendar-widget">
+        <mat-card class="demo-inline-calendar-card">
+            <mat-calendar (selectedChange)="updateCalendar($event)" [(selected)]="selected"></mat-calendar>
+        </mat-card>
+    </div>
+    <div class="calendar">
 
-    <div class="calendar-corner">
+        <div class="calendar-corner">
 
-    </div>
-    <div class="calendar-header">
-        <div class="header-chunk" *ngFor="let col of weekIntervals">
-            {{col.date}}
         </div>
-    </div>
-    <div class="calendar-side-header">
-        <div class="side-header-chunk" *ngFor="let row of rows">
-            {{row}}
+        <div class="calendar-header">
+            <app-calendar-header-chunk *ngFor="let col of weekIntervals" [date]="col.date"></app-calendar-header-chunk>
         </div>
-    </div>
-    <div class="calendar-body">
-        <app-calendar-column *ngFor="let col of weekIntervals" [intervals]="col.intervals">
-        </app-calendar-column>
+        <div class="calendar-side-header">
+            <div class="side-header-chunk" *ngFor="let row of rows">
+                <span class="header-text">
+                    {{row}}
+                </span>
+            </div>
+        </div>
+        <div class="calendar-body">
+            <app-calendar-column *ngFor="let col of weekIntervals" [intervals]="col">
+            </app-calendar-column>
+        </div>
     </div>
 </div>

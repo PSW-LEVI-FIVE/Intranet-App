@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ITimeInterval } from '../../calendar.component';
+import { IDate, ITimeInterval } from '../../calendar.component';
 
 @Component({
   selector: 'app-calendar-column',
@@ -8,7 +8,7 @@ import { ITimeInterval } from '../../calendar.component';
 })
 export class CalendarColumnComponent implements OnInit {
 
-  @Input() public intervals: ITimeInterval[] = []
+  @Input() public intervals: IDate = { date: "", intervals: [] }
 
   constructor() { }
 

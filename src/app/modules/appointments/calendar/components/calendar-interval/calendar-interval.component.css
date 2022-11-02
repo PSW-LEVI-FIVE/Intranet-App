@@ -19,7 +19,6 @@
 .interval-details {
     color: white;
     font-size: 20px;
-    font-weight: bold;
 }
 
 .interval::before {

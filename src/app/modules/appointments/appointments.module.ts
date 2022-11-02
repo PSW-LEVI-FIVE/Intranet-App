@@ -6,6 +6,8 @@ import { AppointmentComponent } from './appointment.component';
 import { AppComponent } from 'src/app/app.component';
 import { CalendarColumnComponent } from './calendar/components/calendar-column/calendar-column.component';
 import { CalendarIntervalComponent } from './calendar/components/calendar-interval/calendar-interval.component';
+import { CalendarHeaderChunkComponent } from './calendar/components/calendar-header-chunk/calendar-header-chunk.component';
+import { MaterialModule } from 'src/app/material/material.module';
 
 
 const routes: Routes = [
@@ -28,8 +30,10 @@ const routes: Routes = [
     CalendarComponent,
     CalendarColumnComponent,
     CalendarIntervalComponent,
+    CalendarHeaderChunkComponent,
   ],
   imports: [
+    MaterialModule,
     CommonModule,
     RouterModule.forChild(routes)
   ],
