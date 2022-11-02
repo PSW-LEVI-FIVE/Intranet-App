@@ -6,6 +6,20 @@ import * as d3 from 'd3';
 })
 export class BuildingMapService {
 
+  // apiHost: string = 'http://localhost:5000/';
+  // headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  // constructor(private http: HttpClient) { }
+
+  // getBuildings(): Observable<IBuilding[]> {
+  //   return this.http.get<IBuilding[]>(this.apiHost + 'api/intranet/buildings', {headers: this.headers});
+  // }
+  // getBuilding(id: number): Observable<IBuilding> {
+  //   return this.http.get<IBuilding>(this.apiHost + 'api/intranet/buildings/' + id, {headers: this.headers});
+  // }
+  // updateBuilding(building: any): Observable<any> {
+  //   return this.http.put<any>(this.apiHost + 'api/intranet/buildings/' + building.id, building, {headers: this.headers});
+  // }
   constructor() { }
   getData(){
     var data2 = [{
@@ -29,7 +43,7 @@ export class BuildingMapService {
     return data2;
   }
   createSVG(){
-    return d3.select("body").append("svg").attr("height", 1000).attr("width", 2000)
+    return d3.select("#svgDiv").append("svg").attr("height", 500).attr("width", 800)
   }
   createRectangles(svg:any, data2:any){
     return svg.selectAll("rect").data(data2).enter().append("rect")
@@ -53,6 +67,7 @@ export class BuildingMapService {
     })
   }
 
+
   addTextToRectangles(svg:any, data2:any){
     return svg.append("text").selectAll("tspan")
       .data(data2)
@@ -69,3 +84,4 @@ export class BuildingMapService {
       });
   }
 }
+
