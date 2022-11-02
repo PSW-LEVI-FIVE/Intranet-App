@@ -61,12 +61,6 @@
   transition: 0.2s;
 }
 
-
-.clickable:hover {
-    font-weight: bold;
-    cursor: pointer;
-}
-
 .switch {
     position: relative;
     display: inline-block;
