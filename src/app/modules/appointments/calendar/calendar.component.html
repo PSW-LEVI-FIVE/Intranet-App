@@ -5,7 +5,6 @@
         </mat-card>
     </div>
     <div class="calendar">
-
         <div class="calendar-corner">
 
         </div>
@@ -20,6 +19,7 @@
             </div>
         </div>
         <div class="calendar-body">
+            <app-loader [isLoading]="isLoading"></app-loader>
             <app-calendar-column *ngFor="let col of weekIntervals" [intervals]="col">
             </app-calendar-column>
         </div>

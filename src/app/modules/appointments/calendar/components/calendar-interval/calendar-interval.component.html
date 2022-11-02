@@ -1,4 +1,5 @@
-<div class="interval" [style.top]="startPosition + '%'" [style.height]="height + 'px'">
+<div class="interval" (click)="redirectToAppointment()" [style.top]="startPosition + '%'"
+    [style.height]="height + 'px'">
     <div class="interval-details">
         {{interval.patient}}
     </div>

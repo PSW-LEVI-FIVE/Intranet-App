@@ -8,6 +8,7 @@ import { CalendarColumnComponent } from './calendar/components/calendar-column/c
 import { CalendarIntervalComponent } from './calendar/components/calendar-interval/calendar-interval.component';
 import { CalendarHeaderChunkComponent } from './calendar/components/calendar-header-chunk/calendar-header-chunk.component';
 import { MaterialModule } from 'src/app/material/material.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
   ],
   imports: [
     MaterialModule,
+    SharedModule,
     CommonModule,
     RouterModule.forChild(routes)
   ],
