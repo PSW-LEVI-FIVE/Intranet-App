@@ -32,6 +32,13 @@ export class FloorMapComponent implements OnInit {
     this.addOnClick(this.floors)
     this.markFloor(this.floors)
     this.showRooms(this.floors, this.router)
+
+    /*this.route.params.subscribe((params: Params) => {
+      this.floorMapService.getFloors(params['id']).subscribe(res => {
+        this.data = res;
+      })
+    });
+    */
   }
 
   addOnClick(svg:any){
@@ -50,6 +57,15 @@ export class FloorMapComponent implements OnInit {
     svg.on('mouseover', function(this:any,d:any,i:any,) { 
       d3.selectAll("rect").style("fill",'#d7d5db');
       d3.select(this).style("fill","#9e91bd")})
+  }
+
+  public updateFloor(): void {
+    // if (!this.isValidInput()) return;
+    // this.floorMapService.updateFloor(this.selectedFloor);
+  }
+
+  private isValidInput(): boolean {
+    return this.selectedFloor?.name != '' && this.selectedFloor?.area.toString() != '';
   }
 
 

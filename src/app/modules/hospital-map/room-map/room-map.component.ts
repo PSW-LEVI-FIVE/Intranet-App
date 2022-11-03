@@ -29,6 +29,13 @@ export class RoomMapComponent implements OnInit {
     this.showInformation(this.rooms);
     this.markRoom(this.rooms);
 
+    /*this.route.params.subscribe((params: Params) => {
+      this.roomMapService.getRooms(params['id']).subscribe(res => {
+        this.data = res;
+      })
+    });
+    */
+
   }
 
   showInformation(svg:any){
@@ -52,6 +59,15 @@ editForm(){
     alert('Please select select room')
   }
    
+}
+
+public updateRoom(): void {
+  // if (!this.isValidInput()) return;
+  // this.roomMapService.updateRoom(this.selectedRoom);
+}
+
+private isValidInput(): boolean {
+  return this.selectedObjects?.name != '';
 }
 
 }

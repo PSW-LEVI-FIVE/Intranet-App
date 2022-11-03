@@ -6,6 +6,18 @@ import * as d3 from 'd3';
 })
 export class FloorMapService {
 
+ // apiHost: string = 'http://localhost:5000/';
+  // headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  // constructor(private http: HttpClient) { }
+
+  // getFloorsByBuilding(id: number): Observable<IFloor> {
+  //   return this.http.get<IFloor>(this.apiHost + 'api/intranet/floors/' + id, {headers: this.headers});
+  // }
+  // updateFloor(floor: any): Observable<any> {
+  //   return this.http.put<any>(this.apiHost + 'api/intranet/floors/' + floor.id, floor.name, {headers: this.headers});
+  // }
+
   constructor() { }
   getData(){
     var data2 = [{
@@ -14,6 +26,7 @@ export class FloorMapService {
       "w": 200,
       "h": 200,
       "color": "white",
+      "area": 400,
       "name": "Floor 1",
       "id": "f1"
     },
@@ -23,6 +36,7 @@ export class FloorMapService {
       "w": 200,
       "h": 200,
       "color": "white",
+      "area": 400,
       "name": "Floor 2",
       "id": "f2"
     } ]

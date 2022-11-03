@@ -5,6 +5,18 @@ import { Injectable } from '@angular/core';
 })
 export class RoomMapService {
 
+  // apiHost: string = 'http://localhost:5000/';
+  // headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  // constructor(private http: HttpClient) { }
+
+  // getRoomsByBuilding(id: number): Observable<IRoom> {
+  //   return this.http.get<IRoom>(this.apiHost + 'api/intranet/rooms/' + id, {headers: this.headers});
+  // }
+  // updateRoom(room: any): Observable<any> {
+  //   return this.http.put<any>(this.apiHost + 'api/intranet/rooms/' + room.id, room.name, {headers: this.headers});
+  // }
+
   constructor() { }
   getData(){
     var data2 = [{
