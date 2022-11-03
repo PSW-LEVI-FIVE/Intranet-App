@@ -13,6 +13,7 @@ import { CreateFormComponent } from './create-form/create-form.component';
 import {MatSelectModule} from "@angular/material/select";
 import {FormsModule} from "@angular/forms";
 import {NgxMatDatetimePickerModule} from "@angular-material-components/datetime-picker";
+import { ViewFormComponent } from './view-form/view-form.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {NgxMatDatetimePickerModule} from "@angular-material-components/datetime-
     CalendarIntervalComponent,
     CalendarHeaderChunkComponent,
     CreateFormComponent,
+    ViewFormComponent,
   ],
   imports: [
     MaterialModule,

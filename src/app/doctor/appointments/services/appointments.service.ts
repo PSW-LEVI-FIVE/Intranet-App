@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { IDate, ITimeInterval } from '../calendar/calendar.component';
 import { ICreateAppointment } from '../create-form/create-form.component';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,8 +22,15 @@ export class AppointmentsService {
   }
 
 
+
   create(body: ICreateAppointment) {
     const url = this.apiHost + `/intranet/appointments`
-    return this.http.post(url, body, { headers: this.headers })
+    return this.http.post(url, body, {headers: this.headers})
   }
+  getAppointmentById(id: number)
+    {
+      const url = this.apiHost + `/intranet/appointments/${id}`
+      return this.http.get<ICreateAppointment>(url, {headers: this.headers});
+    }
+
 }
