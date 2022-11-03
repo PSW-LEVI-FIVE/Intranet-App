@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IDate, ITimeInterval } from '../calendar/calendar.component';
 import { ICreateAppointment } from '../create-form/create-form.component';
+import {IUpdateAppointment} from "../view-form/view-form.component";
 
 
 @Injectable({
@@ -21,9 +22,6 @@ export class AppointmentsService {
     return this.http.get<IDate[]>(url, { headers: this.headers });
   }
 
-
-
-
   create(body: ICreateAppointment) {
     const url = this.apiHost + `/intranet/appointments`
     return this.http.post(url, body, {headers: this.headers})
@@ -31,7 +29,13 @@ export class AppointmentsService {
   getAppointmentById(id: number)
     {
       const url = this.apiHost + `/intranet/appointments/${id}`
-      return this.http.get<ICreateAppointment>(url, {headers: this.headers});
+      return this.http.get<any>(url, {headers: this.headers});
     }
+
+    updateAppointment(body: IUpdateAppointment,id:number){
+      const url = this.apiHost + `/intranet/appointments/${id}`
+      return this.http.patch<any>(url,body, {headers: this.headers});
+    }
+
 
 }

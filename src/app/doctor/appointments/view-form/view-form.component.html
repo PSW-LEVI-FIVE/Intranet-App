@@ -1,19 +1,66 @@
-<app-template-form [title]="title" [error]="error">
+<div class="form-wrapper">
+  <app-template-form [title]="title" [error]="error">
 
+    <mat-form-field inputs appearance="fill">
+      <mat-label>Patient</mat-label>
+      <input matInput disabled  [(ngModel)]="patientName" readonly>
+    </mat-form-field>
 
+    <mat-form-field inputs appearance="fill">
+      <mat-label>Room</mat-label>
+      <input [(ngModel)]="roomName" matInput  disabled>
+    </mat-form-field>
 
-  <mat-form-field inputs appearance="fill">
-    <mat-label>Patient Name</mat-label>
-    <input disabled matInput placeholder="Your Patient Name">
-  </mat-form-field>
-  <mat-form-field inputs appearance="fill">
-    <mat-label>Room</mat-label>
-    <input disabled matInput placeholder="Your Room">
-  </mat-form-field>
+    <mat-form-field inputs appearance="fill">
+      <mat-label>Date {{date}}</mat-label>
+      <input matInput [matDatepicker]="date" [(ngModel)]="newStartDate" required>
+      <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+      <mat-datepicker #date></mat-datepicker>
+    </mat-form-field>
 
-  <mat-form-field inputs appearance="fill">
+    <mat-form-field inputs>
+      <mat-label>From </mat-label>
+      <ng-template [ngIf]="!isEditFrom" [ngIfElse]="editingFrom">
+        <div>
+          <input [(ngModel)]="from" matInput  required disabled>
+          <mat-icon class="icon" fontIcon="edit"  (click)="editFrom()"></mat-icon>
+        </div>
+      </ng-template>
+      <ng-template #editingFrom>
+        <div>
+          <input [(ngModel)]="newFrom" matInput type="time" required >
+          <mat-icon class="icon" fontIcon="exit"  (click)="editFrom()"></mat-icon>
+        </div>
+      </ng-template>
+    </mat-form-field>
 
-  </mat-form-field>
+    <mat-form-field inputs>
+      <mat-label>From </mat-label>
+      <ng-template [ngIf]="!isEditTo" [ngIfElse]="editingTo">
+        <div>
+          <input [(ngModel)]="to" matInput  required disabled>
+          <mat-icon class="icon" fontIcon="edit"  (click)="editTo()"></mat-icon>
+        </div>
+      </ng-template>
+      <ng-template #editingTo>
+        <div>
+          <input [(ngModel)]="newTo" matInput type="time" required >
+          <mat-icon class="icon" fontIcon="exit"  (click)="editTo()"></mat-icon>
+        </div>
+      </ng-template>
+    </mat-form-field>
 
+    <button mat-raised-button color="warn" (click)="cancelAppointment()" buttons>Cancel</button>
 
-</app-template-form>
+<!--    <ng-template [ngIf]="!btnLocked" [ngIfElse]="btnNotLock">-->
+<!--      <button mat-raised-button color="primary" (click)="close()" buttons ><span>Close</span></button>-->
+
+<!--    </ng-template>-->
+<!--    <ng-template #btnNotLock>-->
+<!--      <button mat-raised-button color="primary" (click)="update()" buttons ><span>UPDATE</span></button>-->
+<!--      <button mat-raised-button color="primary" (click)="update()" buttons ><span>UPDATE</span></button>-->
+<!--    </ng-template>-->
+    <button mat-raised-button color="primary" (click)="update()" buttons ><span>UPDATE</span></button>
+
+  </app-template-form>
+</div>
