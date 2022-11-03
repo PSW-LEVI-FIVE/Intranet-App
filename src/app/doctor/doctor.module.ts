@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { AppointmentComponent } from './appointments/appointment.component';
 import { DoctorComponent } from './doctor.component';
 import { CalendarComponent } from './appointments/calendar/calendar.component';
+import {SharedModule} from "../shared/shared.module";
 
 const routes = [
   {
@@ -33,7 +34,8 @@ const routes = [
   imports: [
     CommonModule,
     AppointmentsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule
   ],
   exports: [RouterModule]
 })
