@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {AppointmentsService} from "../services/appointments.service";
 import {ICreateAppointment} from "../create-form/create-form.component";
 
+
 @Component({
   selector: 'app-view-form',
   templateUrl: './view-form.component.html',
@@ -27,6 +28,10 @@ export class ViewFormComponent implements OnInit {
   getAppointment():void{
     const id=Number(this.route.snapshot.paramMap.get('id'))
     this.appointmentService.getAppointmentById(id)
+      .subscribe(appointment=>{
+        console.log(appointment)
+
+      });
   }
 
 }

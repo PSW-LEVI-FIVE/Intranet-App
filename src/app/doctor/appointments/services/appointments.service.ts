@@ -23,6 +23,7 @@ export class AppointmentsService {
 
 
 
+
   create(body: ICreateAppointment) {
     const url = this.apiHost + `/intranet/appointments`
     return this.http.post(url, body, {headers: this.headers})
