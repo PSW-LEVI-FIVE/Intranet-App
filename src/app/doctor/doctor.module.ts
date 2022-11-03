@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { AppointmentComponent } from './appointments/appointment.component';
 import { DoctorComponent } from './doctor.component';
 import { CalendarComponent } from './appointments/calendar/calendar.component';
+import { SharedModule } from '../shared/shared.module';
+import { TemplateFormComponent } from '../shared/template-form/template-form.component';
 
 const routes = [
   {
@@ -13,13 +15,12 @@ const routes = [
     children: [
       {
         path: 'appointments',
-        component: AppointmentComponent,
-        children: [
-          {
-            path: 'calendar',
-            component: CalendarComponent
-          }
-        ]
+        component: CalendarComponent,
+        
+      },
+      {
+        path: 'template',
+        component: TemplateFormComponent
       }
     ]
   }
@@ -33,7 +34,8 @@ const routes = [
   imports: [
     CommonModule,
     AppointmentsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule
   ],
   exports: [RouterModule]
 })
