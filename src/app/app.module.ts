@@ -10,7 +10,7 @@ import { PagesModule } from "./manager/pages/pages.module";
 import { DoctorModule } from "./doctor/doctor.module";
 import { ManagerModule } from "./manager/manager.module";
 import { RoomModule } from "./manager/room/room.module";
-
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +25,8 @@ import { RoomModule } from "./manager/room/room.module";
     FeedbackModule,
     DoctorModule,
     ManagerModule,
-    RoomModule
+    RoomModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

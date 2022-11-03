@@ -32,6 +32,6 @@ export class UpdateRoomComponent implements OnInit {
   }
 
   private isValidInput(): boolean {
-    return this.room?.number != '' && this.room?.floor.toString() != '';
+    return this.room?.roomNumber != '' && this.room?.floor.toString() != '';
   }
 }

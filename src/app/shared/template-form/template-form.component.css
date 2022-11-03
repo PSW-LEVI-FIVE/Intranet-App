@@ -1,0 +1,52 @@
+.template-form-box {
+    border: 1px solid lightgray;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 15px;
+    background-color: white;
+    margin: auto;
+    max-width: 500px;
+    border-radius: 5px;
+}
+
+.template-form-content {
+    padding: 20px;
+    margin: 10px;
+    background-color: white;
+    width: 70%;
+    max-width: 400px;
+}
+
+.template-form-error {
+    width: 70%;
+    text-align: left;
+    color: red;
+}
+
+.template-form-content * {
+    width: 100%;
+}
+
+.template-form-title {
+    width: 70%;
+    max-width: 400px;
+    display: flex;
+    justify-content: flex-start;
+}
+.template-form-title h3{
+    font-size: 30px;
+}
+.template-form-button {
+    width: 70%;
+    max-width: 400px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+}
+.template-form-button button {
+    width: 25%;
+    height: 100%;
+    text-align: center;
+}

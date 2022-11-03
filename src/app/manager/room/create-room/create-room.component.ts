@@ -22,6 +22,6 @@ export class CreateRoomComponent {
   }
 
   private isValidInput(): boolean {
-    return this.room?.number != '' && this.room?.floor.toString() != '';
+    return this.room?.roomNumber != '' && this.room?.floor.toString() != '';
   }
 }

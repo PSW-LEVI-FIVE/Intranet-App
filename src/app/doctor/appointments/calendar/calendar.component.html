@@ -1,9 +1,17 @@
 <div class="calendar-outer">
     <div class="calendar-widget">
+        <div class="create-btn">
+            <a routerLink="/doctor/appointments/create">
+                <button mat-raised-button color="primary">
+                    <mat-icon fontIcon="add"></mat-icon>CREATE
+                </button>
+            </a>
+        </div>
         <mat-card class="demo-inline-calendar-card">
             <mat-calendar (selectedChange)="updateCalendar($event)" [(selected)]="selected"></mat-calendar>
         </mat-card>
     </div>
+
     <div class="calendar">
         <div class="calendar-corner">
 
@@ -19,9 +27,9 @@
             </div>
         </div>
         <div class="calendar-body">
-            <app-loader [isLoading]="isLoading"></app-loader>
             <app-calendar-column *ngFor="let col of weekIntervals" [intervals]="col">
             </app-calendar-column>
+            <app-loader [isLoading]="isLoading"></app-loader>
         </div>
     </div>
 </div>
