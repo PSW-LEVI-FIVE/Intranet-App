@@ -24,13 +24,9 @@
                 <mat-label>Building name</mat-label>
                 <input matInput [value]="selectedBuilding.name">
             </mat-form-field><br>
-            <mat-form-field appearance="fill">
-                <mat-label>Address</mat-label>
-                <input matInput [value]="selectedBuilding.address">
-            </mat-form-field>
     </table>
     <div style="margin-top: 30px; margin-bottom: 15px;">
-        <button class="confirmButton" mat-stroked-button app:backgroundTint="#d1d5db">
+        <button class="confirmButton" mat-stroked-button app:backgroundTint="#d1d5db" (click)="updateBuilding()">
             Submit
         </button>
     </div>

@@ -18,7 +18,7 @@ export class BuildingMapService {
   //   return this.http.get<IBuilding>(this.apiHost + 'api/intranet/buildings/' + id, {headers: this.headers});
   // }
   // updateBuilding(building: any): Observable<any> {
-  //   return this.http.put<any>(this.apiHost + 'api/intranet/buildings/' + building.id, building, {headers: this.headers});
+  //   return this.http.put<any>(this.apiHost + 'api/intranet/buildings/' + building.id, building.name, {headers: this.headers});
   // }
   constructor() { }
   getData(){
