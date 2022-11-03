@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ManagerComponent } from './manager.component';
 import { RouterModule, Routes } from '@angular/router';
-import { ManagerFeedbackViewComponent } from './feedback/managerFeedbackView/managerFeedbackView.component';
 import { CreateRoomComponent } from './room/create-room/create-room.component';
 import { RoomDetailComponent } from './room/room-detail/room-detail.component';
 import { RoomsComponent } from './room/rooms/rooms.component';
 import { UpdateRoomComponent } from './room/update-room/update-room.component';
 import { RoomModule } from './room/room.module';
 import { RoomComponent } from './room/room.component';
+import { ManagerFeedbackListComponent } from './feedback/manager-feedback-list/manager-feedback-list.component';
 
 
 
@@ -19,7 +19,7 @@ const routes: Routes = [
     children: [
       {
         path: 'feedback',
-        component: ManagerFeedbackViewComponent
+        component: ManagerFeedbackListComponent
       },
       {
         path: 'rooms',

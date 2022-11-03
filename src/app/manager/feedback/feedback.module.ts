@@ -1,21 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from "@angular/router";;
-import { ManagerFeedbackViewComponent } from './managerFeedbackView/managerFeedbackView.component';
+import { RouterModule, Routes } from "@angular/router";
 import { MaterialModule } from "src/app/material/material.module";
-
-const routes: Routes = [
-  { path: 'feedbacks', component: ManagerFeedbackViewComponent },
-];
+import { ManagerFeedbackListComponent } from './manager-feedback-list/manager-feedback-list.component';
 
 @NgModule({
   declarations: [
-    ManagerFeedbackViewComponent,
+    ManagerFeedbackListComponent,
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule.forChild(routes)
+    RouterModule
 
   ]
 })
