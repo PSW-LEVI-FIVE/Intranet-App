@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IDate, ITimeInterval } from '../calendar/calendar.component';
+import {IAppointment} from "../create-form/create-form.component";
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,10 @@ export class AppointmentsService {
     const dateStr = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
     const url = this.apiHost + `/intranet/appointments/${dateStr}/week`
     return this.http.get<IDate[]>(url, { headers: this.headers });
+  }
+
+  getAppointmentById(id:number){
+    const url = this.apiHost+`/intranet/appointments/`+id;
+    return this.http.get<IAppointment>(url,{headers: this.headers});
   }
 }

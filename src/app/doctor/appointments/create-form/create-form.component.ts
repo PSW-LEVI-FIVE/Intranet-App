@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {NgxMatDatetimeContent} from "@angular-material-components/datetime-picker";
-import {Time} from "@angular/common";
-
 
 
 export interface ISelectPatient{
@@ -13,8 +10,11 @@ export interface ISelectRoom{
   id:number;
   roomNumber:string;
 }
-export interface ICreateAppointment{
-
+export interface IAppointment {
+patient:ISelectPatient;
+room:ISelectRoom;
+startAt:string;
+endAt:string;
 }
 
 

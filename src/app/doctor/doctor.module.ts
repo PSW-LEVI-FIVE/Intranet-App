@@ -7,6 +7,7 @@ import { DoctorComponent } from './doctor.component';
 import { CalendarComponent } from './appointments/calendar/calendar.component';
 import { SharedModule } from '../shared/shared.module';
 import {CreateFormComponent} from "./appointments/create-form/create-form.component";
+import {ViewFormComponent} from "./appointments/view-form/view-form.component";
 
 const routes = [
   {
@@ -24,6 +25,10 @@ const routes = [
           {
             path:'create',
             component: CreateFormComponent
+          },
+          {
+            path:':id',
+            component: ViewFormComponent
           },
         ]
       },
