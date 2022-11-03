@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppointmentsModule } from './appointments/appointments.module';
 import { RouterModule } from '@angular/router';
 import { AppointmentComponent } from './appointments/appointment.component';
 import { DoctorComponent } from './doctor.component';
 import { CalendarComponent } from './appointments/calendar/calendar.component';
+import {SharedModule} from "../shared/shared.module";
 
 const routes = [
   {
@@ -33,7 +34,8 @@ const routes = [
   imports: [
     CommonModule,
     AppointmentsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule
   ],
   exports: [RouterModule]
 })
