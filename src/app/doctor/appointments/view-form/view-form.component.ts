@@ -66,6 +66,7 @@ export class ViewFormComponent implements OnInit {
 
   cancelAppointment(){
 
+
   }
   update(){
     let startDate=this.convertToDateTime(this.newStartDate,this.newFrom)
