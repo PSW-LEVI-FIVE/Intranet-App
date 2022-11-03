@@ -50,6 +50,14 @@ export class BuildingMapComponent implements OnInit {
       router.navigate(['floor-map'], i.id)
     })
   }
+  public updateBuilding(): void {
+    // if (!this.isValidInput()) return;
+    // this.buildingMapService.updateBuilding(this.selectedBuilding);
+  }
+
+  private isValidInput(): boolean {
+    return this.selectedBuilding?.number != '' && this.selectedBuilding?.floors.toString() != '';
+  }
 }
 
 
