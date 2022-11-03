@@ -2,7 +2,9 @@
 <!-- OVO MOZE DA IDE U SHARED -->
     <div class="calendar-widget">
       <div class="create-btn">
-        <button mat-raised-button color="primary"><mat-icon fontIcon="add"></mat-icon>CREATE</button>
+        <a routerLink="/doctor/appointments/create">
+          <button mat-raised-button color="primary" ><mat-icon fontIcon="add"></mat-icon>CREATE</button>
+        </a>
       </div>
         <mat-card class="demo-inline-calendar-card">
             <mat-calendar (selectedChange)="updateCalendar($event)" [(selected)]="selected"></mat-calendar>

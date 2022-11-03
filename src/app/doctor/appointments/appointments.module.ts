@@ -9,6 +9,10 @@ import { CalendarHeaderChunkComponent } from './calendar/components/calendar-hea
 import { MaterialModule } from 'src/app/material/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DoctorComponent } from '../doctor.component';
+import { CreateFormComponent } from './create-form/create-form.component';
+import {MatSelectModule} from "@angular/material/select";
+import {FormsModule} from "@angular/forms";
+import {NgxMatDatetimePickerModule} from "@angular-material-components/datetime-picker";
 
 
 @NgModule({
@@ -18,12 +22,16 @@ import { DoctorComponent } from '../doctor.component';
     CalendarColumnComponent,
     CalendarIntervalComponent,
     CalendarHeaderChunkComponent,
+    CreateFormComponent,
   ],
   imports: [
     MaterialModule,
     SharedModule,
     CommonModule,
-    RouterModule
+    RouterModule,
+    MatSelectModule,
+    FormsModule,
+    NgxMatDatetimePickerModule
   ],
   exports: [RouterModule]
 })

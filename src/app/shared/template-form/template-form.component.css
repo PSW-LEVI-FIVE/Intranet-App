@@ -25,7 +25,7 @@
     color: red;
 }
 
-.template-form-content .mat-form-field {
+.template-form-content * {
     width: 100%;
 }
 

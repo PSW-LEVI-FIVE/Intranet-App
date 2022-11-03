@@ -12,7 +12,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 @NgModule({
   declarations: [
     LoaderComponent,
-    TemplateFormComponent
+    TemplateFormComponent,
     DoctorMenuComponent,
   ],
   imports: [
