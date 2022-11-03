@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppointmentsModule } from './appointments/appointments.module';
 import { RouterModule } from '@angular/router';
@@ -6,7 +6,6 @@ import { AppointmentComponent } from './appointments/appointment.component';
 import { DoctorComponent } from './doctor.component';
 import { CalendarComponent } from './appointments/calendar/calendar.component';
 import { SharedModule } from '../shared/shared.module';
-import { TemplateFormComponent } from '../shared/template-form/template-form.component';
 
 const routes = [
   {
@@ -17,10 +16,6 @@ const routes = [
         path: 'appointments',
         component: CalendarComponent,
         
-      },
-      {
-        path: 'template',
-        component: TemplateFormComponent
       }
     ]
   }
