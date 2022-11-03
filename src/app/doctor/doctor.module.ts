@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { AppointmentComponent } from './appointments/appointment.component';
 import { DoctorComponent } from './doctor.component';
 import { CalendarComponent } from './appointments/calendar/calendar.component';
-import {SharedModule} from "../shared/shared.module";
+import { SharedModule } from '../shared/shared.module';
 
 const routes = [
   {
@@ -14,13 +14,8 @@ const routes = [
     children: [
       {
         path: 'appointments',
-        component: AppointmentComponent,
-        children: [
-          {
-            path: 'calendar',
-            component: CalendarComponent
-          }
-        ]
+        component: CalendarComponent,
+        
       }
     ]
   }

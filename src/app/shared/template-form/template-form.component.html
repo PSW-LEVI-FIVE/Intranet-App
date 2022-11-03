@@ -1,0 +1,12 @@
+<div class="template-form-box">
+    <div class="template-form-title">
+        <h3>{{title}}</h3>
+    </div>
+    <div class="template-form-error">{{error}}</div>
+    <div class="template-form-content">
+        <ng-content select="[inputs]"></ng-content>
+    </div>
+    <div class="template-form-button">
+        <ng-content select="[buttons]" ></ng-content>
+    </div>
+</div>
