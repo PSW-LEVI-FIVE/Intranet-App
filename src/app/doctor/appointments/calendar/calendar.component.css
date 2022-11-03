@@ -7,12 +7,24 @@
 
 .calendar-outer {
     display: flex;
+    padding: 10px;
 }
 
 .calendar-widget {
-    flex: 1;
-}
+/*display: flex;*/
+  flex:1;
+  /*padding-top: 90px;*/
 
+  /*flex-direction: column;*/
+  /*justify-content: flex-end;*/
+}
+.create-btn{
+  width: 100%;
+  height: 100px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
 .calendar {
     display: grid;
     grid-template-columns: repeat(22, 1fr);
@@ -50,7 +62,7 @@
     grid-row: 2/26;
     display: table;
     width: 100%;
-    table-layout: fixed; 
+    table-layout: fixed;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 1fr;

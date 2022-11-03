@@ -4,11 +4,9 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { LoaderComponent } from './loader/loader.component';
 import { DoctorMenuComponent } from './doctor-menu/doctor-menu.component';
 import {MatMenuModule} from "@angular/material/menu";
-import {RouterModule,Routes,RouterOutlet} from "@angular/router";
+import {RouterModule,RouterOutlet} from "@angular/router";
 import {MatToolbarModule} from "@angular/material/toolbar";
 
-
-const routes: Routes = [];
 
 @NgModule({
   declarations: [
@@ -21,7 +19,7 @@ const routes: Routes = [];
     MatMenuModule,
     RouterOutlet,
     MatToolbarModule,
-    RouterModule.forRoot(routes)
+    RouterModule
   ],
   exports: [LoaderComponent, DoctorMenuComponent]
 })
