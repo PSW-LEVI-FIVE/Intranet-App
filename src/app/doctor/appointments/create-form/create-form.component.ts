@@ -80,6 +80,9 @@ export class CreateFormComponent implements OnInit {
     let startTime = this.convertToDateTime(this.startDate, this.from)
     let endTime = this.convertToDateTime(this.startDate, this.to)
 
+    startTime.setHours(startTime.getHours() - startTime.getTimezoneOffset() / 60)
+    endTime.setHours(endTime.getHours() - endTime.getTimezoneOffset() / 60)
+
     let body: ICreateAppointment = {
       DoctorId: this.doctorId,
       PatientId: this.selectedPatientId,
@@ -91,7 +94,6 @@ export class CreateFormComponent implements OnInit {
     this.appointmentService.create(body)
       .pipe(catchError(res => {
         const error = res.error
-        console.log(error)
         if (error.errors) {
           Object.keys(error.errors).forEach(key => {
             error.errors[key].forEach((err: any) => {
