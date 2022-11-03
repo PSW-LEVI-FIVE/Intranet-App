@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class TemplateFormComponent implements OnInit {
 
   @Input() title: string = '';
-  @Input() error: string = ''
+  @Input() error: string = '';
 
   constructor() { }
 

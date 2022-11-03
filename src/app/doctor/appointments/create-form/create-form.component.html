@@ -1,0 +1,40 @@
+<div class="form-wrapper">
+  <app-template-form [title]="title" [error]="error">
+    <mat-form-field inputs appearance="fill">
+      <mat-label>Select Patient</mat-label>
+      <mat-select [(value)]="selectedPatientId" required>
+        <mat-option *ngFor="let patient of patients" [value]="patient.id+''">
+          {{patient.name + ' ' + patient.surname}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field inputs appearance="fill">
+      <mat-label>Select Room</mat-label>
+      <mat-select [(value)]="selectedRoomId" required>
+        <mat-option *ngFor="let room of rooms" [value]="room.id"> {{room.roomNumber}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field inputs appearance="fill">
+      <mat-label>Date {{date}}</mat-label>
+      <input matInput [matDatepicker]="date" [(ngModel)]="startDate" required>
+      <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+      <mat-datepicker #date></mat-datepicker>
+    </mat-form-field>
+
+
+    <mat-form-field inputs>
+      <mat-label>From {{from}}</mat-label>
+      <input [(ngModel)]="from" matInput type="time" required>
+    </mat-form-field>
+
+    <mat-form-field inputs>
+      <mat-label>To {{to}}</mat-label>
+      <input [(ngModel)]="to" matInput type="time" required>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="create()" buttons>CREATE</button>
+  </app-template-form>
+</div>
+
