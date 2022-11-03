@@ -29,7 +29,8 @@ export class BuildingMapService {
       "h": 245,
       "color": "white",
       "name": "Building 1",
-      "id": "b1"
+      "id": "b1",
+      "address":"Bulevar Oslobodjenja 6"
     },
     {
       "x": 370,
@@ -38,7 +39,8 @@ export class BuildingMapService {
       "h": 245,
       "color": "white",
       "name": "Building 2",
-      "id": "b2"
+      "id": "b2",
+      "address":"Bulevar Bate Brkica 9"
     } ]
     return data2;
   }
@@ -54,9 +56,6 @@ export class BuildingMapService {
     .attr("x", function(d:any){ return d.x })
     .attr("y", function(d:any){ return d.y})
     .attr("id", function(d:any){ return d.id})
-    .on("click", function(data2:any) {
-      console.log("caooo")
-    });
     
   }
   onClickShowName(svg:any, data2:any){
@@ -79,9 +78,6 @@ export class BuildingMapService {
       .attr("stroke-width", "1")
       .attr("font-size", 10)
       .text(function(d:any){ return d.name; })
-      .on("click", function(d:any) {
-        alert(d.name)
-      });
   }
 }
 

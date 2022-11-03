@@ -31,6 +31,7 @@ export class FloorMapComponent implements OnInit {
     //this.clickInfo = this.floorMapService.onClickShowName(this.svg,this.data)
     this.addOnClick(this.floors)
     this.markFloor(this.floors)
+    this.showRooms(this.floors, this.router)
   }
 
   addOnClick(svg:any){
