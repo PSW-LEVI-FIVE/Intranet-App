@@ -1,9 +1,12 @@
 export interface IBuilding {
-      x: number ,
-      y: number,
-      w: number,
-      h: number,
-      name: string,
-      id: string,
-      address : string
+      XCoordinate: number ,
+      YCoordinate: number,
+      Width: number,
+      Height: number,
+      Id: string,
+      building: {
+            Id: string,
+            Name: string,
+            Address: string
+      }
 }

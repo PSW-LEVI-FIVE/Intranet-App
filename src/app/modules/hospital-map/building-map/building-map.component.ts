@@ -1,6 +1,8 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { BuildingMapService } from '../services/building-map.service';
+import { IBuilding } from '../model/building.model';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-building-map',
@@ -10,11 +12,11 @@ import { BuildingMapService } from '../services/building-map.service';
 })
 export class BuildingMapComponent implements OnInit {
 
-  // public dataSource = new MatTableDataSource<IBuilding>();
-  //public buildings: IBuilding[] = [];
+  public dataSource = new MatTableDataSource<IBuilding>();
+  public buildings: IBuilding[] = [];
   data:any;
   svg:any;
-  buildings:any;
+  buildingsMap:any;
   buildingsText:any;
   selectedBuilding:any;
   public selectedBuildingId:any;
@@ -23,17 +25,19 @@ export class BuildingMapComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.buildingMapService.getBuildings().subscribe(res => {
-    //   this.buildings = res;
-    //   this.dataSource.data = this.buildings;
-    // })
-    this.data = this.buildingMapService.getData();
-    this.svg  = this.buildingMapService.createSVG();
+    this.buildingMapService.getBuildings().subscribe(res => {
+      this.buildings = res;
+      this.dataSource.data = this.buildings;
 
-    this.buildings = this.buildingMapService.createRectangles(this.svg, this.data);
-    this.buildingsText = this.buildingMapService.addTextToRectangles(this.svg, this.data);
-    this.addOnClick(this.buildings);
-    this.showFloors(this.buildings, this.router);
+      this.svg  = this.buildingMapService.createSVG();
+
+      this.buildingsMap = this.buildingMapService.createRectangles(this.svg, this.buildings);
+      this.buildingsText = this.buildingMapService.addTextToRectangles(this.svg, this.buildings);
+      this.addOnClick(this.buildingsMap);
+      this.showFloors(this.buildingsMap, this.router);
+    })
+   // this.data = this.buildingMapService.getData();
+    
 
   }
 
@@ -50,8 +54,8 @@ export class BuildingMapComponent implements OnInit {
     })
   }
   public updateBuilding(): void {
-    // if (!this.isValidInput()) return;
-    // this.buildingMapService.updateBuilding(this.selectedBuilding);
+    if (!this.isValidInput()) return;
+    this.buildingMapService.updateBuilding(this.selectedBuilding);
   }
 
   private isValidInput(): boolean {
