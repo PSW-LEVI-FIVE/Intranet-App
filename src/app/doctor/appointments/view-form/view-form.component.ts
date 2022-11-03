@@ -65,8 +65,8 @@ export class ViewFormComponent implements OnInit {
   }
 
   cancelAppointment(){
-
-
+    let id=Number(this.route.snapshot.paramMap.get('id'))
+    this.appointmentService.cancelAppointmentById(id);
   }
   update(){
     let startDate=this.convertToDateTime(this.newStartDate,this.newFrom)
