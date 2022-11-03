@@ -30,9 +30,37 @@ export class FloorMapService {
   }
 
   createSVG(){
-    return d3.select("body").append("svg").attr("height", 600).attr("width", 900)
+    return d3.select("#svgDiv").append("svg").attr("height", 500).attr("width", 800)
   }
 
+  createRectangles(svg:any,data2:any){
+    return svg.selectAll("rect").data(data2).enter().append("rect")
+    .attr("height", function(d:any){ return d.h;})
+    .attr("width", function(d:any){ return d.w;})
+    .attr("fill", function(d:any){return d.color;})
+    .attr("stroke", "black")
+    .attr("x", function(d:any){ return d.x })
+    .attr("y", function(d:any){ return d.y})
+    .attr("id", function(d:any){ return d.id})
+    .on("click", function(data2:any) {
+      console.log("caooo")
+    });
+  }
+  addTextToRectangles(svg:any,data:any){
+    return svg.append("text").selectAll("tspan")
+      .data(data)
+      .enter().append("tspan")
+      .attr('x', function(d:any){ return d.x+20 })
+      .attr('y', function(d:any){ return d.y+20 })
+      .attr("text-anchor", "start")
+      .attr("stroke", "black")
+      .attr("stroke-width", "1")
+      .attr("font-size", 10)
+      .text(function(d:any){ return d.name; })
+      .on("click", function(d:any) {
+        alert(d.name)
+      });
+  }
   onClickShowName(svg:any, data2:any){
     return svg.selectAll("rect")
     .on("click",function(e:any,d:any){
