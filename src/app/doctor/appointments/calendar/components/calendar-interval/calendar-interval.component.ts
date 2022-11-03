@@ -32,7 +32,8 @@ export class CalendarIntervalComponent implements OnInit {
   }
 
   redirectToAppointment() {
-    this.router.navigate(['/appointments/' + this.interval.id])
+    console.log("navigating")
+    this.router.navigate(['doctor/appointments/' + this.interval.id])
   }
 
   formatDate() {

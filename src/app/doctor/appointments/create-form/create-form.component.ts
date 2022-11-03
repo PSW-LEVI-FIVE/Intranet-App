@@ -69,6 +69,8 @@ export class CreateFormComponent implements OnInit {
     let chunks = time.split(":")
     let newDate = new Date(date)
     newDate.setHours(+chunks[0], +chunks[1], 0)
+    newDate.setHours(newDate.getHours() - newDate.getTimezoneOffset() / 60)
+
     return newDate
   }
 
@@ -79,9 +81,6 @@ export class CreateFormComponent implements OnInit {
     }
     let startTime = this.convertToDateTime(this.startDate, this.from)
     let endTime = this.convertToDateTime(this.startDate, this.to)
-
-    startTime.setHours(startTime.getHours() - startTime.getTimezoneOffset() / 60)
-    endTime.setHours(endTime.getHours() - endTime.getTimezoneOffset() / 60)
 
     let body: ICreateAppointment = {
       DoctorId: this.doctorId,
