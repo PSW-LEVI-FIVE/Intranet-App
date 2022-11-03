@@ -10,7 +10,7 @@ import {IAppointment} from "../create-form/create-form.component";
 })
 export class ViewFormComponent implements OnInit {
 
-  public title:string ='Update Appointment';
+  public title:string ='View Appointment';
   public error:string = '';
   public roomName:string='';
   public patientName:string='';
