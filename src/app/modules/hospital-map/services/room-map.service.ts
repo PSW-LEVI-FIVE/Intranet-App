@@ -12,12 +12,14 @@ export class RoomMapService {
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient) { }
-
-  getRoomsByBuilding(id: number): Observable<IRoom> {
+  getByID(id: number): Observable<IRoom> {
     return this.http.get<IRoom>(this.apiHost + 'api/intranet/rooms/' + id, {headers: this.headers});
   }
+  getRoomsByBuilding(id: number): Observable<IRoom> {
+    return this.http.get<IRoom>(this.apiHost + 'api/intranet/map/rooms/' + id, {headers: this.headers});
+  }
   updateRoom(room: any): Observable<any> {
-    return this.http.put<any>(this.apiHost + 'api/intranet/rooms/' + room.id, room.name, {headers: this.headers});
+    return this.http.put<any>(this.apiHost + 'api/intranet/map/rooms/' + room.id, room.name, {headers: this.headers});
   }
 
   // getData(){

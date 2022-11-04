@@ -39,8 +39,13 @@ export class RoomMapComponent implements OnInit {
 
   showInformation(svg:any){
     svg.on('dblclick',(d:any, i:any) => {
-      this.selectedObjects = i;
-      this.enableEditing = false;
+    
+      
+      this.roomMapService.getByID(i.id).subscribe(res => {
+        this.selectedObjects=res;  
+        this.enableEditing = false;
+      })
+
     })
 }
 

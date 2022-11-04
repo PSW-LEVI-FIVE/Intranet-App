@@ -5,6 +5,6 @@ export interface IRoom{
     height: number,
     id: string,
     room: {
-        
+        roomNumber: string
     }
 }

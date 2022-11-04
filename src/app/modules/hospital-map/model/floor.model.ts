@@ -5,6 +5,6 @@ export interface IFloor {
       height: number,
       id: string,
       floor: {
-            
+         area:any   
       }
 }

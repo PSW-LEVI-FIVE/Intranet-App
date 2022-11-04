@@ -45,12 +45,14 @@ export class BuildingMapComponent implements OnInit {
     svg.on("click", (d:any, i:any) =>{
       this.formVisible = "visible";
       this.selectedBuilding = i;
+      this.buildingMapService.getBuilding(i.id).subscribe(res => {this.selectedBuilding=res;})
+
     })
   }
   showFloors(svg:any, router:any){
     svg.on("dblclick", function(d:any, i:any){
       //router.navigate(['floor-map']);
-      router.navigate(['floor-map'], i.id)
+      router.navigate(['floor-map/'+ i.id])
     })
   }
   public updateBuilding(): void {

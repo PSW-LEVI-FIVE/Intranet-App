@@ -44,12 +44,16 @@ export class FloorMapComponent implements OnInit {
     svg.on("click", (d:any, i:any) =>{
       this.formVisible = "visible";
       this.selectedFloor = i;
+
+      this.floorMapService.getFloorById(i.id).subscribe(res => {this.selectedFloor=res;})
     })
+
   }
   showRooms(svg:any, router:any){
     svg.on("dblclick", function(d:any, i:any){
       //router.navigate(['floor-map']);
-      router.navigate(['room-map'], i.id)
+      router.navigate(['room-map/'+ i.id]);
+      
     })
   }
   markFloor(svg:any){

@@ -8,8 +8,8 @@ import { RoomMapComponent } from './room-map/room-map.component';
 
 const routes: Routes = [
   { path: 'building-map', component: BuildingMapComponent },
-  { path: 'floor-map', component: FloorMapComponent },
-  { path: 'room-map', component: RoomMapComponent },
+  { path: 'floor-map/:id', component: FloorMapComponent },
+  { path: 'room-map/:id', component: RoomMapComponent },
 ];
 
 @NgModule({
