@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { BuildingMapService } from './../services/building-map.service';
 import { RoomMapService } from './../services/room-map.service';
 import { Component, OnInit } from '@angular/core';
@@ -18,23 +18,22 @@ export class RoomMapComponent implements OnInit {
   roomsText:any;
   enableEditing : boolean = false;
   selectedObjects:any;
-  constructor(private roomMapService:RoomMapService, private buildingMapService:BuildingMapService, private router:Router) { }
+  constructor(private roomMapService:RoomMapService, private buildingMapService:BuildingMapService, private route: ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
-    this.data = this.roomMapService.getData();
-    this.svg  = this.buildingMapService.createSVG();
-    this.rooms = this.roomMapService.createRectangles(this.svg, this.data)
-    this.roomsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)
-
-    this.showInformation(this.rooms);
-    this.markRoom(this.rooms);
-
-    /*this.route.params.subscribe((params: Params) => {
-      this.roomMapService.getRooms(params['id']).subscribe(res => {
+    this.route.params.subscribe((params: Params) => {
+      this.roomMapService.getRoomsByBuilding(params['id']).subscribe(res => {
         this.data = res;
+        this.svg  = this.buildingMapService.createSVG();
+        this.rooms = this.roomMapService.createRectangles(this.svg, this.data)
+        this.roomsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)
+
+        this.showInformation(this.rooms);
+        this.markRoom(this.rooms);
+
       })
     });
-    */
+    //this.data = this.roomMapService.getData();
 
   }
 

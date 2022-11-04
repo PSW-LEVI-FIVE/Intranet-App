@@ -1,8 +1,10 @@
 export interface IFloor {
-      x: number ,
-      y: number,
-      w: number,
-      h: number,
+      xCoordinate: number ,
+      yCoordinate: number,
+      width: number,
+      height: number,
       id: string,
-      area : number
+      floor: {
+            
+      }
 }
