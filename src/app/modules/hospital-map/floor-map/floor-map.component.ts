@@ -63,8 +63,8 @@ export class FloorMapComponent implements OnInit {
   }
 
   public updateFloor(): void {
-    // if (!this.isValidInput()) return;
-    // this.floorMapService.updateFloor(this.selectedFloor);
+    if (!this.isValidInput()) return;
+    this.floorMapService.updateFloor(this.selectedFloor);
   }
 
   private isValidInput(): boolean {

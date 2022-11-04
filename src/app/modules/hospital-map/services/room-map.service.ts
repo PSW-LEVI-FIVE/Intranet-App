@@ -19,7 +19,7 @@ export class RoomMapService {
     return this.http.get<IRoom>(this.apiHost + 'api/intranet/map/rooms/' + id, {headers: this.headers});
   }
   updateRoom(room: any): Observable<any> {
-    return this.http.put<any>(this.apiHost + 'api/intranet/map/rooms/' + room.id, room.name, {headers: this.headers});
+    return this.http.put<any>(this.apiHost + 'api/intranet/rooms/' + room.roomNumber, room.number, {headers: this.headers});
   }
 
   // getData(){

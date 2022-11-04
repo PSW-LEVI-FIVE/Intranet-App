@@ -66,12 +66,12 @@ editForm(){
 }
 
 public updateRoom(): void {
-  // if (!this.isValidInput()) return;
-  // this.roomMapService.updateRoom(this.selectedRoom);
+  //if (!this.isValidInput()) return;
+  this.roomMapService.updateRoom(this.selectedObjects);
 }
 
 private isValidInput(): boolean {
-  return this.selectedObjects?.name != '';
+  return this.selectedObjects?.roomNumber != '';
 }
 
 }

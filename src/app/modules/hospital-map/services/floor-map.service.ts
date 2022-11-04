@@ -20,7 +20,7 @@ export class FloorMapService {
     return this.http.get<IFloor>(this.apiHost + 'api/intranet/map/floors/' + id, {headers: this.headers});
   }
   updateFloor(floor: any): Observable<any> {
-    return this.http.put<any>(this.apiHost + 'api/intranet/map/floors/' + floor.id, floor.name, {headers: this.headers});
+    return this.http.put<any>(this.apiHost + 'api/intranet/floors/' + floor.id, floor.name, {headers: this.headers});
   }
   // getData(){
   //   var data2 = [{
