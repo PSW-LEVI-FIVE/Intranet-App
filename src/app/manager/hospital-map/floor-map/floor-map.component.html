@@ -1,0 +1,31 @@
+<div class="header">
+    <nav>
+        <div class="nav-links">
+              <ul>
+                  <li><a href="">Home</a></li>
+                  <li><a href="">About</a></li>
+              </ul>
+          </div>
+      </nav>
+</div> 
+<h1 class="title">Floors</h1>
+<div class="container">
+<div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 700px;"></div>
+
+<div [style.visibility]="formVisible" class="buildInfo">
+    <h1 class="cardTitle">  Floor information  </h1>
+    <table style="margin-left:40px;">
+        <mat-form-field appearance="fill">
+            <mat-label>Floor ID</mat-label>
+            <input matInput disabled [value]="selectedFloor.id">
+            
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+            <mat-label>Floor Area</mat-label>
+            <input matInput [value]="selectedFloor.area">
+            
+        </mat-form-field><br>
+        
+</table>
+</div>
+</div>
