@@ -1,0 +1,57 @@
+<!--<body>
+    <div class="row">
+   
+      <div id="svgDiv" class="column">
+       
+      </div>
+   
+      <div class="columnForm">
+       <h3>Room information</h3>
+       <p>Double-click on desired room in order to see additional information</p>
+       
+         <form *ngIf ="selectedObjects">
+           <p>
+            
+             <label>Room name:</label>
+             <input [disabled] ="!enableEditing" [value] = "selectedObjects.name">
+           </p>
+           <button (click)="editForm()">Edit information</button>
+         </form>
+      </div>
+    </div>
+   </body>-->
+
+   <div class="header">
+    <nav>
+        <div class="nav-links">
+              <ul>
+                  <li><a href="">Home</a></li>
+                  <li><a href="">About</a></li>
+              </ul>
+          </div>
+      </nav>
+</div> 
+<h1 class="title">Room map</h1>
+<div class="container">
+    <div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 700px;">
+    </div>
+    <div *ngIf ="selectedObjects">
+        <h1 class="cardTitle">  Room information  </h1>
+        <table style="margin-left:40px;">
+            <mat-form-field appearance="fill">
+                <mat-label>Room ID</mat-label>
+                <input matInput disabled [value]="selectedObjects.id">
+            </mat-form-field><br>
+            <mat-form-field appearance="fill">
+                <mat-label>Room name</mat-label>
+                <input matInput [value]="selectedObjects.roomNumber">
+            </mat-form-field><br>
+    </table>
+    <div style="margin-top: 30px; margin-bottom: 15px; margin-left: 40px;">
+      <button class="confirmButton" mat-stroked-button app:backgroundTint="#d1d5db" (click)="updateRoom()">
+          Submit
+      </button>
+  </div>
+    </div>
+</div>
+   
