@@ -5,11 +5,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-managerFeedbackView',
-  templateUrl: './managerFeedbackView.component.html',
-  styleUrls: ['./managerFeedbackView.component.css']
+  selector: 'app-manager-feedback-list',
+  templateUrl: './manager-feedback-list.component.html',
+  styleUrls: ['./manager-feedback-list.component.css']
 })
-export class ManagerFeedbackViewComponent implements OnInit {
+export class ManagerFeedbackListComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<IFeedBack>();
   public displayedColumns = ['Patient', 'Feedback Content', 'Publishing'];

@@ -14,7 +14,7 @@ export class FeedbackService {
   constructor(private http: HttpClient) { }
 
   getFeedbacks(): Observable<IFeedBack[]> {
-    return this.http.get<IFeedBack[]>(this.apiHost + 'api/intranet/feedbacks', {headers: this.headers});
+    return this.http.get<IFeedBack[]>(this.apiHost + 'api/intranet/feedbacks/manager', {headers: this.headers});
   }
 
   updateFeedbackStatus(feedback: IFeedBack): Observable<any> {
