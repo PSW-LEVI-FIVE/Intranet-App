@@ -1,0 +1,51 @@
+<mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Fill out your the data</ng-template>
+        <mat-form-field inputs appearance="fill">
+          <mat-label>Select starting room</mat-label>
+          <mat-select [(value)]="selectedStartingRoomId" required  (selectionChange)="drop(selectedStartingRoomId)">
+            <mat-option *ngFor="let room of startingRooms" [value]="room.id" > {{room.roomNumber}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field inputs appearance="fill" >
+          <mat-label>Select destination room</mat-label>
+          <mat-select [(value)]="selectedDestinationRoomId">
+            <mat-option *ngFor="let room of destinationRooms" [value]="room.id"> {{room.roomNumber}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field inputs appearance="fill">
+          <mat-label>Date {{date}}</mat-label>
+          <input matInput [matDatepicker]="date" [(ngModel)]="startDate" required>
+          <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+          <mat-datepicker #date></mat-datepicker>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+      <form [formGroup]="secondFormGroup">
+        <mat-form-field appearance="fill">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>

@@ -12,6 +12,17 @@ import { ManagerFeedbackListComponent } from './feedback/manager-feedback-list/m
 import { BuildingMapComponent } from './hospital-map/building-map/building-map.component';
 import { FloorMapComponent } from './hospital-map/floor-map/floor-map.component';
 import { RoomMapComponent } from './hospital-map/room-map/room-map.component';
+import { MatStepperModule} from '@angular/material/stepper';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RoomAllocationFormComponent } from '../manager/room-allocation-form/room-allocation-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButton, MatButtonModule} from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import {NgxMatDatetimePickerModule} from "@angular-material-components/datetime-picker";
+import { MaterialModule } from '../material/material.module';
+
+
 
 
 
@@ -46,6 +57,10 @@ const routes: Routes = [
         path: 'room-map/:id', 
         component: RoomMapComponent 
       },
+      {
+        path: 'room-alocation',
+        component: RoomAllocationFormComponent
+      },
     ]
 
   }
@@ -54,11 +69,21 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ManagerComponent
+    ManagerComponent,
+    RoomAllocationFormComponent,
   ],
   imports: [
     CommonModule,
+    MaterialModule,
+    MatInputModule,
     RoomModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatStepperModule,
+    FormsModule, 
+    ReactiveFormsModule,
+    NgxMatDatetimePickerModule,
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule]
