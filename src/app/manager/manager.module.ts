@@ -22,6 +22,17 @@ import { AnnualLeaveReviewComponent } from './annual-leave/annual-leave-review/a
 import { CreateBuildingComponent } from './hospital-map/create-building/create-building.component';
 import { CreateFloorComponent } from './hospital-map/create-floor/create-floor.component';
 import { CreateMapRoomComponent } from './hospital-map/create-map-room/create-map-room.component';
+import { MatStepperModule} from '@angular/material/stepper';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RoomAllocationFormComponent } from '../manager/room-allocation-form/room-allocation-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButton, MatButtonModule} from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import {NgxMatDatetimePickerModule} from "@angular-material-components/datetime-picker";
+
+
+
 
 
 const routes: Routes = [
@@ -83,7 +94,11 @@ const routes: Routes = [
       {
         path: 'create-room',
         component: CreateMapRoomComponent
-      }
+      },
+      {
+        path: 'room-alocation',
+        component: RoomAllocationFormComponent
+      },
     ]
 
   }
@@ -93,14 +108,25 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ManagerComponent,
+
     DoctorStatisticsPopularityComponent,
-    AllergenStatisticsFrequencyComponent
+    AllergenStatisticsFrequencyComponent,
+    RoomAllocationFormComponent,
   ],
   imports: [
     CommonModule,
+    MaterialModule,
+    MatInputModule,
     RoomModule,
     FormsModule,
     MaterialModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatStepperModule,
+    FormsModule, 
+    ReactiveFormsModule,
+    NgxMatDatetimePickerModule,
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule]
