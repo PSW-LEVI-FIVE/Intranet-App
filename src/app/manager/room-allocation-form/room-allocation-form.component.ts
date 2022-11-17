@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder,Validators} from '@angular/forms';
+import {FormBuilder,Validators,FormGroup, FormControl} from '@angular/forms';
 import { Room } from '../room/model/room.model';
 import { RoomService } from 'src/app/manager/room/services/room.service';
 
@@ -26,7 +26,10 @@ export class RoomAllocationFormComponent implements OnInit {
     {
     
   }
-
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
