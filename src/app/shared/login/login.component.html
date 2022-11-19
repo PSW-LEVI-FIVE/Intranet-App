@@ -1,0 +1,14 @@
+<div class="center">
+    <h1 class="text header" style="margin-bottom: 60px;text-align:center;">Login</h1>      
+    <div style="text-align: center;color:black">
+        <p style="text-align:center;font-size:larger, !important;"  >Username:</p>
+            <input type="text" style="height:30px;width:300px;font-size:20px;"   class="smalltext" [(ngModel)]="caughtEmail"/>
+            <br><br>
+        <p style="text-align:center !important;" class="smalltext" >Password:</p>
+            <input type="password" style="height:30px;width:300px;font-size:20px;" class="smalltext" [(ngModel)]="caughtPassword"/>
+        <p>
+            <br>
+            <input mat-stroked-button app:backgroundTint="#d1d5db" style="text-align:center;height:30px;width:70px;" (click)="makeLogin()" value="Submit!" type="button">
+        </p>
+    </div>
+</div>
