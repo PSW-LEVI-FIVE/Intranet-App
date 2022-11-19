@@ -8,6 +8,9 @@ import { CalendarComponent } from './appointments/calendar/calendar.component';
 import { SharedModule } from '../shared/shared.module';
 import {CreateFormComponent} from "./appointments/create-form/create-form.component";
 import {ViewFormComponent} from "./appointments/view-form/view-form.component";
+import { AnnualLeavesComponent } from './annual-leaves/annual-leaves.component';
+import { AnnualLeavesModule } from './annual-leaves/annual-leaves.module';
+import { CreateAnnualLeaveComponent } from './annual-leaves/components/create-annual-leave/create-annual-leave.component';
 
 const routes = [
   {
@@ -32,6 +35,16 @@ const routes = [
           },
         ]
       },
+      {
+        path:'annual-leaves',
+        component: AnnualLeavesComponent,
+        children: [
+          {
+            path:'create',
+            component: CreateAnnualLeaveComponent
+          }
+        ]
+      },
 
     ]
   }
@@ -45,6 +58,7 @@ const routes = [
   imports: [
     CommonModule,
     AppointmentsModule,
+    AnnualLeavesModule,
     RouterModule.forChild(routes),
     SharedModule
   ],

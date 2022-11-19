@@ -1,0 +1,34 @@
+<div class="form-wrapper">
+    <form [formGroup]="annualLeaveForm" class="template-form-box">
+        <div class="template-form-title">
+            <h3>{{title}}</h3>
+        </div>
+        <div class="template-form-content">
+            <mat-form-field inputs appearance="fill">
+                <mat-label>Start </mat-label>
+                <input matInput [matDatepicker]="start" formControlName="startDate" required>
+                <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+                <mat-datepicker #start></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field inputs appearance="fill">
+                <mat-label>Date </mat-label>
+                <input matInput [matDatepicker]="end" formControlName="endDate" required>
+                <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+                <mat-datepicker #end></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field inputs appearance="fill">
+                <mat-label>Reason</mat-label>
+                <textarea  matInput type="text" formControlName="reason" required> </textarea>
+            </mat-form-field>
+            <div class="is-urgent-wrapper">
+                <mat-checkbox formControlName="isUrgent" >
+                    Urgent
+                </mat-checkbox>
+            </div>
+            
+        </div>
+        <div class="template-form-button">
+            <button mat-raised-button color="primary" buttons (click)="create()">CREATE</button>
+        </div>
+    </form>
+</div>
