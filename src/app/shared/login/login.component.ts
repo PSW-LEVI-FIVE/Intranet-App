@@ -30,9 +30,12 @@ export class LoginComponent implements OnInit {
     this.login.Password = this.caughtPassword;
     console.log(this.login.Username + " " + this.login.Password);
     this.loginService.makeLogin(this.login).subscribe(res => {
-      console.log(res + " " + res.tokenHeader + " " + res.token);
-      localStorage.setItem('token',res);
-      this.router.navigate(['/']);
+      var token = res.split(' ')[0];
+      var role = res.split(' ')[1];
+      localStorage.setItem('token',token);
+      if(role == 'Doctor')this.router.navigate(['/doctor']);
+      else if(role == 'Manager')this.router.navigate(['/manager']);
+      //this.router.navigate(['/']);
     });
   }
 
