@@ -1,0 +1,61 @@
+.medical-record-view {
+    width: 100%;
+    margin: auto;
+    padding-top: 40px;
+    height: 91vh;
+    background: #f5f5f5;
+    position: relative;
+
+}
+
+table {
+    padding-top: 10px;
+    margin: auto;
+    width: 80%;
+    max-width: 80%;
+    text-align: center;
+    color: black;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+
+tr {
+    border-color: black;
+    background: white;
+}
+
+td {
+    color: #7e7e7e;
+    height: 50px;
+    font-size: 18px;
+}
+
+th {
+    font-size: 18px;
+    height: 40px;
+}
+
+.state-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.state-wrapper-text {
+    width: 50px;
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    background-color: #8bc34a;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.gray-dot {
+    background: gray;
+}
+

@@ -1,4 +1,4 @@
-import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppointmentsModule } from './appointments/appointments.module';
 import { RouterModule } from '@angular/router';
@@ -6,8 +6,11 @@ import { AppointmentComponent } from './appointments/appointment.component';
 import { DoctorComponent } from './doctor.component';
 import { CalendarComponent } from './appointments/calendar/calendar.component';
 import { SharedModule } from '../shared/shared.module';
-import {CreateFormComponent} from "./appointments/create-form/create-form.component";
-import {ViewFormComponent} from "./appointments/view-form/view-form.component";
+import { CreateFormComponent } from "./appointments/create-form/create-form.component";
+import { ViewFormComponent } from "./appointments/view-form/view-form.component";
+import { HospitalizationComponent } from './hospitalization/hospitalization.component';
+import { MedicalRecordViewComponent } from './hospitalization/medical-record-view/medical-record-view.component';
+import { HospitalizationModule } from './hospitalization/hospitalization.module';
 
 const routes = [
   {
@@ -15,7 +18,7 @@ const routes = [
     component: DoctorComponent,
     children: [
       {
-        path:'appointments',
+        path: 'appointments',
         component: AppointmentComponent,
         children: [
           {
@@ -23,15 +26,25 @@ const routes = [
             component: CalendarComponent,
           },
           {
-            path:'create',
+            path: 'create',
             component: CreateFormComponent
           },
           {
-            path:':id',
+            path: ':id',
             component: ViewFormComponent
           },
         ]
       },
+      {
+        path: 'records',
+        component: HospitalizationComponent,
+        children: [
+          {
+            path: '',
+            component: MedicalRecordViewComponent
+          }
+        ]
+      }
 
     ]
   }
@@ -45,6 +58,7 @@ const routes = [
   imports: [
     CommonModule,
     AppointmentsModule,
+    HospitalizationModule,
     RouterModule.forChild(routes),
     SharedModule
   ],
