@@ -36,7 +36,7 @@ export class CreateFormComponent implements OnInit {
   public rooms: Room[] = [];
   public doctorId = 2;
   public selectedPatientId = null;
-  public selectedRoomId = null;
+  public selectedRoomId = -1;
   public title: string = 'Create Appointment';
   public error: string = '';
   public startDate: Date = new Date()
