@@ -32,7 +32,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatSidenavModule,
     MatListModule,
     MatToolbarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatAutocompleteModule,
+    MatMenuModule,
   ],
   exports: [
     CommonModule,
@@ -48,7 +50,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatSidenavModule,
     MatListModule,
     MatToolbarModule,
-    MatSelectModule
-  ]
+    MatSelectModule,
+    MatAutocompleteModule,
+    MatMenuModule,
 })
 export class MaterialModule { }
