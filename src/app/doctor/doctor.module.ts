@@ -20,7 +20,6 @@ import { HospitalizationComponent } from './hospitalization/hospitalization.comp
 import { MedicalRecordViewComponent } from './hospitalization/medical-record-view/medical-record-view.component';
 import { HospitalizationModule } from './hospitalization/hospitalization.module';
 
-
 const routes = [
   {
     path: 'doctor',
