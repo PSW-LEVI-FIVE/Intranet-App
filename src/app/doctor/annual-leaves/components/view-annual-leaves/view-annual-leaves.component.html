@@ -1,0 +1,67 @@
+<div class="annual-leaves-outer">
+  <div class="button-wrapper">
+    <div class="create-btn">
+      <a routerLink="/doctor/annual-leaves/create">
+        <button mat-raised-button color="primary">
+          <mat-icon fontIcon="add"></mat-icon>CREATE
+        </button>
+      </a>
+    </div>
+    <div class="cancel-btn">
+      <a routerLink="/doctor/annual-leaves/create">
+        <button mat-raised-button color="primary">
+          <mat-icon>delete_outline</mat-icon>DELETE
+        </button>
+      </a>
+    </div>
+  </div>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+      <tr>
+        <th *ngFor="let column of columns">{{column}}</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let leave of annualLeaves">
+          <td>
+            {{leave.id}}
+          </td>
+          <td class="reason">
+            {{leave.reason}}
+          </td>
+          <td>
+            {{format(leave.startAt)}}
+          </td>
+          <td>
+            {{format(leave.endAt)}}
+          </td>
+          <td>
+            <span *ngIf="leave.state==0" class="state-wrapper">
+              <span class="dot"></span>
+              <span class="state-wrapper-text">
+                Pending
+              </span>
+            </span>
+            <span *ngIf="leave.state==1" class="state-wrapper">
+              <span class="dot green-dot"></span>
+              <span class="state-wrapper-text">
+                Approved
+              </span>
+            </span>
+            <span *ngIf="leave.state==3" class="state-wrapper">
+              <span class="dot red-dot"></span>
+              <span class="state-wrapper-text">
+                Canceled
+              </span>
+            </span>
+          </td>
+          <td>
+            <span *ngIf="leave.isUrgent==true"><mat-icon>done</mat-icon></span>
+            <span *ngIf="leave.isUrgent!=true"><mat-icon>clear</mat-icon></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
