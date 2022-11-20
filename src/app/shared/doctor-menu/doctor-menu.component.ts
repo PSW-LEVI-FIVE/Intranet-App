@@ -10,12 +10,12 @@ export class DoctorMenuComponent implements OnInit {
 
 
 
-  constructor(private router : Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    console.log("started")
   }
-  onLogout()
-  {
+  onLogout() {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     this.router.navigate(["/"]);
