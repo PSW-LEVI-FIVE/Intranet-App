@@ -7,6 +7,7 @@ import { DoctorMenuComponent } from './doctor-menu/doctor-menu.component';
 import {MatMenuModule} from "@angular/material/menu";
 import {RouterModule,RouterOutlet} from "@angular/router";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import { ModalFormComponent } from './modal-form/modal-form.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
     LoaderComponent,
     TemplateFormComponent,
     DoctorMenuComponent,
+    ModalFormComponent,
   ],
   imports: [
     CommonModule,

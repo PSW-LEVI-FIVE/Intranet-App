@@ -8,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class DoctorMenuComponent implements OnInit {
 
 
-
   constructor() { }
 
   ngOnInit(): void {
+    console.log("started")
   }
 
 }
