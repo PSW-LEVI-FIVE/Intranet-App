@@ -1,0 +1,26 @@
+<div class="medical-record-header">
+    <div class="left-side-wrapper">
+        <mat-form-field class="record-search">
+            <mat-label>UID</mat-label>
+            <input matInput placeholder="Ex. 12199121001" [formControl]="searchText">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="emitSearch()">Search</button>
+        <span *ngIf="medicalRecord == null">Medical record not found!</span>
+        <span *ngIf="medicalRecord != null">
+            <span>
+                {{medicalRecord.patient.name}}
+            </span>
+            <span>
+                {{medicalRecord.patient.surname}}
+            </span>
+            <span>
+                {{", " + medicalRecord.patient.address}}
+            </span>
+        </span>
+    </div>
+    <button mat-raised-button color="primary">
+        <mat-icon>add</mat-icon>
+        Create
+    </button>
+
+</div>
