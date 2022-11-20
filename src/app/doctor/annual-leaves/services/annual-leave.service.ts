@@ -24,4 +24,10 @@ export class AnnualLeaveService {
     const url= this.apiHost + `/intranet/annual-leaves/${id}`
     return this.http.get<AnnualLeave[]>(url, { headers: this.headers });
   }
+
+  delete(id:number){
+    const docId=2;
+    const url= this.apiHost + `/intranet/annual-leaves/cancel/${id}/${docId}`
+    return this.http.patch<any>(url, { headers: this.headers });
+  }
 }

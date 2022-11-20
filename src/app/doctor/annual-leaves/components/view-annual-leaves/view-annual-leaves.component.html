@@ -8,11 +8,9 @@
       </a>
     </div>
     <div class="cancel-btn">
-      <a routerLink="/doctor/annual-leaves/create">
-        <button mat-raised-button color="primary">
+        <button mat-raised-button color="primary" [disabled]="selectedAnnualLeaveID==-1" (click)="delete()">
           <mat-icon>delete_outline</mat-icon>DELETE
         </button>
-      </a>
     </div>
   </div>
   <div class="table-wrapper">
@@ -23,7 +21,8 @@
       </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let leave of annualLeaves">
+        <tr *ngFor="let leave of annualLeaves" (click)="selectAnnualLeave(leave.id)"
+            [class.selected]="selectedAnnualLeaveID==leave.id">
           <td>
             {{leave.id}}
           </td>

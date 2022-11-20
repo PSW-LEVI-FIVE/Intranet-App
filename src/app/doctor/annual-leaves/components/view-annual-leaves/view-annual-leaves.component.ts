@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { AnnualLeaveService } from '../../services/annual-leave.service';
+import {catchError, EMPTY} from "rxjs";
 
 export const enum AnnualLeaveState { PENDING, APPROVED, DELETED, CANCELED}
 
@@ -24,6 +25,7 @@ export class ViewAnnualLeavesComponent implements OnInit {
 
   public annualLeaves: AnnualLeave[]=[]
   public columns:string[]=["ID","Reason","Start At","End At","State","Is Urgent"]
+  public selectedAnnualLeaveID:number = -1;
 
   constructor(    private readonly annualLeaveService: AnnualLeaveService,
                   private readonly toastService: ToastrService) { }
@@ -47,4 +49,27 @@ export class ViewAnnualLeavesComponent implements OnInit {
     return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
   }
 
+  selectAnnualLeave(leaveID:number){
+    if(this.selectedAnnualLeaveID==leaveID){
+      this.selectedAnnualLeaveID=-1;
+    }else{
+      this.selectedAnnualLeaveID=leaveID;
+    }
+  }
+
+  delete() {
+    const isSure=confirm("Are you sure you want to delete selected Annual Leave?")
+    if(!isSure)
+      return
+    this.annualLeaveService.delete(this.selectedAnnualLeaveID)
+      .pipe(catchError( (res)=>{
+        this.toastService.error(res.error.Message)
+        console.log(res)
+        return EMPTY
+      }))
+      .subscribe(result=>{
+        this.getAnnualLeaves()
+        this.toastService.success("Successfully deleted Annual Leave!")
+      })
+  }
 }
