@@ -7,6 +7,8 @@ import { DoctorMenuComponent } from './doctor-menu/doctor-menu.component';
 import {MatMenuModule} from "@angular/material/menu";
 import {RouterModule,RouterOutlet} from "@angular/router";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms'; 
 
 
 @NgModule({
@@ -14,6 +16,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
     LoaderComponent,
     TemplateFormComponent,
     DoctorMenuComponent,
+    LoginComponent,
   ],
   imports: [
     CommonModule,
@@ -21,7 +24,8 @@ import {MatToolbarModule} from "@angular/material/toolbar";
     MatMenuModule,
     RouterOutlet,
     MatToolbarModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports: [LoaderComponent, DoctorMenuComponent, TemplateFormComponent]
 })
