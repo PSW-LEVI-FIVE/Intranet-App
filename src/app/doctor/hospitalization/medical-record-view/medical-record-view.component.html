@@ -1,0 +1,56 @@
+<div class="medical-record-view">
+    <app-loader [isLoading]="isLoading"></app-loader>
+    <app-medical-record-header [medicalRecord]="medicalRecord" (search)="search($event)"></app-medical-record-header>
+    <table class="hosp-items">
+        <thead>
+            <tr>
+                <th *ngFor="let column of columns">{{column}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let hosp of hospitalizations">
+                <td>
+                    {{hosp.id}}
+                </td>
+                <td>
+                    {{format(hosp.startTime)}}
+                </td>
+                <td>
+                    <span *ngIf="hosp.endTime == null" href="">Not Finished</span>
+                    <span *ngIf="hosp.endTime != null">{{format(hosp.endTime)}}</span>
+                </td>
+                <td>
+                    <a *ngIf="hosp.pdfUrl.trim() !== ''" [href]="hosp.pdfUrl">preview</a>
+                    <a *ngIf="hosp.pdfUrl.trim() === '' && hosp.endTime != null" href="">generate</a>
+                    <span *ngIf="hosp.pdfUrl.trim() === '' && hosp.endTime == null" href="">Not Finished</span>
+                </td>
+                <td>
+                    <span class="state-wrapper" *ngIf="hosp.state == 0">
+                        <span class="dot"></span>
+                        <span class="state-wrapper-text">
+                            Active
+                        </span>
+                    </span>
+                    <span class="state-wrapper" *ngIf="hosp.state == 1">
+                        <span class="dot gray-dot">
+                        </span>
+                        <span class="state-wrapper-text">
+                            Finished
+                        </span>
+                    </span>
+                </td>
+                <button mat-icon-button [matMenuTriggerFor]="menu"
+                    aria-label="Example icon button with a vertical three dot icon">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                        <mat-icon>notifications_off</mat-icon>
+                        <span>Finish</span>
+                    </button>
+                </mat-menu>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
