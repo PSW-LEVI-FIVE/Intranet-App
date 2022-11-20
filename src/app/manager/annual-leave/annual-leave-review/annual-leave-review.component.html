@@ -1,1 +1,28 @@
-<p>annual-leave-review works!</p>
+<div class="container">
+    <div class="card">
+        <h1 class="cardTitle"> Review leave request</h1>
+            <div class = "form">
+            <mat-form-field appearance="fill">
+                <mat-label>Review</mat-label>
+                <mat-select [(ngModel)]="state">
+                    <mat-option value="APPROVED">Approve</mat-option>
+                    <mat-option value="CANCELED">Reject</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+            <div *ngIf="state=='CANCELED'">
+            <mat-form-field appearance="fill">
+                <mat-label>Reason</mat-label>
+                <input matInput [(ngModel)]="reason">
+            </mat-form-field><br>
+            </div>
+            <div class="err" *ngIf="errorMess!='OK'"><br>
+                <label style="color: red;">{{errorMess}}</label>
+             </div>
+        </div>
+    <div class="additional">
+        <button class="confirmButton" mat-stroked-button app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width: 100px;" (click)="reviewRequest()">
+            Submit
+        </button>
+    </div>
+    </div>
+</div>

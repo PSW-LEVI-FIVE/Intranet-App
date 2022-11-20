@@ -17,10 +17,10 @@ export class AnnualLeaveComponent implements OnInit {
   constructor(private annualLeaveService:AnnualLeaveService, private router:Router) { }
 
   ngOnInit(): void {
-    // this.roomService.getAnnualLeaves().subscribe(res => {
-    //   this.annualLeaves = res;
-    //   this.dataSource.data = this.annualLeaves;
-    // })
+    this.annualLeaveService.getAnnualLeaves().subscribe(res => {
+      this.annualLeaves = res;
+      this.dataSource.data = this.annualLeaves;
+    })
   }
   public reviewAnnualLeave(id: number) {
     this.router.navigate(['/annual-leave/' + id + '/review']);

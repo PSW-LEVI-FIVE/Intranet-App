@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material/material.module';
 import { RouterModule } from '@angular/router';
 import { AnnualLeaveReviewComponent } from './annual-leave-review/annual-leave-review.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,8 @@ import { AnnualLeaveReviewComponent } from './annual-leave-review/annual-leave-r
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ]
 })
 export class AnnualLeaveModule { }

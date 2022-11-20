@@ -1,3 +1,4 @@
+import { IAnnualLeave } from './../model/annual-leave.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -11,8 +12,10 @@ export class AnnualLeaveService {
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient) { }
-  // U BEKU DODATI GET ALL NEZAVISNO OD DOKTORA
-  // getAnnualLeaves(): Observable<IAnnualLeave[]> {
-  //   return this.http.get<IAnnualLeave[]>(this.apiHost + 'api/intranet/annual-leaves', {headers: this.headers});
-  // }
+  getAnnualLeaves(): Observable<IAnnualLeave[]> {
+    return this.http.get<IAnnualLeave[]>(this.apiHost + 'api/intranet/annual-leaves/pending', {headers: this.headers});
+  }
+  reviewAnnualLeave(id:any, leave: any): Observable<any> {
+    return this.http.put<any>(this.apiHost + 'api/intranet/annual-leaves/review/' + id, leave, { headers: this.headers });
+  }
 }

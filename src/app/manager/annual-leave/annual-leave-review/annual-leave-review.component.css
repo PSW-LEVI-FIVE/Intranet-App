@@ -1,0 +1,29 @@
+.cardTitle{
+    margin-top: 30px;
+    margin-left: 200px;
+    font-weight: 800;
+    font-size: 20px;
+    width: 350px;
+    color: rgb(0, 0, 0);
+}
+.additional{
+    text-align: center;
+    margin-top: 10px;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+.card{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: #bfdbfe;
+    border-radius: 10px;
+    width: 600px;
+}
+.container{
+    margin-top: 40px;
+   align-items: center;
+   display: flex;
+   justify-content: center
+}
+.form{
+    margin-left: 200px;
+}
