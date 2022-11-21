@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY } from 'rxjs';
 import { Hospitalization } from '../model/hospitalization.model';
@@ -23,7 +23,8 @@ export class MedicalRecordViewComponent implements OnInit {
   constructor(
     private readonly toastService: ToastrService,
     private readonly medicalRecordService: MedicalRecordService,
-    private readonly hospitalizationService: HospitalizationService
+    private readonly hospitalizationService: HospitalizationService,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
@@ -114,6 +115,11 @@ export class MedicalRecordViewComponent implements OnInit {
     if (dt == null) return ""
     let date = new Date(dt)
     return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+  }
+
+
+  prescribeTherapies() {
+    this.router.navigate(['doctors/prescribe-therapies'])
   }
 
 }
