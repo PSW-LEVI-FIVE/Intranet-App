@@ -14,11 +14,14 @@ import { CreateAnnualLeaveComponent } from './annual-leaves/components/create-an
 import {ViewAnnualLeavesComponent} from "./annual-leaves/components/view-annual-leaves/view-annual-leaves.component";
 import { CreateBloodOrderComponent } from './blood-orders/components/create-blood-order/create-blood-order.component';
 import { BloodOrdersModule } from './blood-orders/blood-orders.module';
+import { RoleGuard } from '../shared/login/model/role.guard';
+import { BrowserModule } from '@angular/platform-browser';
 
 const routes = [
   {
     path: 'doctor',
     component: DoctorComponent,
+    canActivate:[RoleGuard],
     children: [
       {
         path:'appointments',
@@ -67,6 +70,7 @@ const routes = [
     DoctorComponent
   ],
   imports: [
+    BrowserModule,
     CommonModule,
     AppointmentsModule,
     AnnualLeavesModule,
