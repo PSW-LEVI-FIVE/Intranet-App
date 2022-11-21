@@ -1,0 +1,70 @@
+.annual-leaves-outer{
+  display: flex;
+  padding: 10px;
+}
+
+.button-wrapper{
+  flex:1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:30px;
+  padding-top: 30px;
+}
+
+.table-wrapper{
+  flex:6;
+  height: 80vh;
+  padding-top: 30px;
+}
+
+
+table {
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  color: black;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  background:#f0f0f0;
+
+}
+
+tr{
+  cursor:pointer;
+}
+
+td{
+  max-width: 100px;
+}
+
+.state-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.state-wrapper-text {
+  width: 50px;
+}
+
+.dot {
+  height: 15px;
+  width: 15px;
+  background-color: dodgerblue;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.green-dot{
+  background: limegreen;
+}
+
+.red-dot{
+  background: red;
+}
+
+.selected {
+  background: #6ea1ff;
+}

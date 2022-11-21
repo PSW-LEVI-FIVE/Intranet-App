@@ -9,11 +9,13 @@ import {NgxMatDatetimePickerModule} from "@angular-material-components/datetime-
 import { CreateAnnualLeaveComponent } from './components/create-annual-leave/create-annual-leave.component';
 import { AnnualLeavesComponent } from './annual-leaves.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ViewAnnualLeavesComponent } from './components/view-annual-leaves/view-annual-leaves.component';
 
 @NgModule({
   declarations: [
     CreateAnnualLeaveComponent,
-    AnnualLeavesComponent
+    AnnualLeavesComponent,
+    ViewAnnualLeavesComponent
   ],
   imports: [
     ReactiveFormsModule,
