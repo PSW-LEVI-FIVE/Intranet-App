@@ -64,7 +64,6 @@ export class ViewAnnualLeavesComponent implements OnInit {
     this.annualLeaveService.delete(this.selectedAnnualLeaveID)
       .pipe(catchError( (res)=>{
         this.toastService.error(res.error.Message)
-        console.log(res)
         return EMPTY
       }))
       .subscribe(result=>{
