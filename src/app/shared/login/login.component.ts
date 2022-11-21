@@ -17,12 +17,15 @@ export class LoginComponent implements OnInit {
   public caughtPassword : string = "";
 
   ngOnInit(): void {
+    if(localStorage.getItem('token'))
+    {
     this.loginService.getUserProfile().subscribe(
       res=>
       {
         console.log(res);
       }
     );
+    }
   }
 
   public makeLogin() {
