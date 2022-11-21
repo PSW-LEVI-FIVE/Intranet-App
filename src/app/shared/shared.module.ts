@@ -4,9 +4,9 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { LoaderComponent } from './loader/loader.component';
 import { TemplateFormComponent } from './template-form/template-form.component';
 import { DoctorMenuComponent } from './doctor-menu/doctor-menu.component';
-import {MatMenuModule} from "@angular/material/menu";
-import {RouterModule,RouterOutlet} from "@angular/router";
-import {MatToolbarModule} from "@angular/material/toolbar";
+import { MatMenuModule } from "@angular/material/menu";
+import { RouterModule, RouterOutlet } from "@angular/router";
+import { MatToolbarModule } from "@angular/material/toolbar";
 import { ModalFormComponent } from './modal-form/modal-form.component';
 
 
@@ -25,6 +25,6 @@ import { ModalFormComponent } from './modal-form/modal-form.component';
     MatToolbarModule,
     RouterModule
   ],
-  exports: [LoaderComponent, DoctorMenuComponent, TemplateFormComponent]
+  exports: [LoaderComponent, DoctorMenuComponent, TemplateFormComponent, ModalFormComponent]
 })
 export class SharedModule { }

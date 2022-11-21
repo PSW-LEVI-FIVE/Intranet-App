@@ -4,8 +4,6 @@
     padding-top: 40px;
     height: 91vh;
     background: #f5f5f5;
-    position: relative;
-
 }
 
 table {
@@ -57,5 +55,11 @@ th {
 
 .gray-dot {
     background: gray;
+}
+
+.action-link {
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
 }
 

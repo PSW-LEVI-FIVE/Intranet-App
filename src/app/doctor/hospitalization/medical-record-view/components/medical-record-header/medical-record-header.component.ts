@@ -11,6 +11,7 @@ export class MedicalRecordHeaderComponent implements OnInit {
 
   @Input() medicalRecord: MedicalRecord | null = null
   @Output() search: EventEmitter<string> = new EventEmitter()
+  @Output() create: EventEmitter<any> = new EventEmitter()
   public searchText: FormControl = new FormControl()
   constructor() { }
 
@@ -18,8 +19,11 @@ export class MedicalRecordHeaderComponent implements OnInit {
   }
 
   emitSearch() {
-    console.log(this.searchText.value)
     this.search.emit(this.searchText.value)
+  }
+
+  showCreateForm() {
+    this.create.emit()
   }
 
 }

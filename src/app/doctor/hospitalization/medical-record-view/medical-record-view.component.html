@@ -1,6 +1,7 @@
 <div class="medical-record-view">
     <app-loader [isLoading]="isLoading"></app-loader>
-    <app-medical-record-header [medicalRecord]="medicalRecord" (search)="search($event)"></app-medical-record-header>
+    <app-medical-record-header [medicalRecord]="medicalRecord" (create)="openCreate()" (search)="search($event)">
+    </app-medical-record-header>
     <table class="hosp-items">
         <thead>
             <tr>
@@ -21,7 +22,8 @@
                 </td>
                 <td>
                     <a *ngIf="hosp.pdfUrl.trim() !== ''" [href]="hosp.pdfUrl">preview</a>
-                    <a *ngIf="hosp.pdfUrl.trim() === '' && hosp.endTime != null" href="">generate</a>
+                    <span class="action-link" *ngIf="hosp.pdfUrl.trim() === '' && hosp.endTime != null"
+                        (click)="generateReport(hosp.id)">generate</span>
                     <span *ngIf="hosp.pdfUrl.trim() === '' && hosp.endTime == null" href="">Not Finished</span>
                 </td>
                 <td>
@@ -44,7 +46,7 @@
                     <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item>
+                    <button mat-menu-item (click)="finishHospitalization(hosp.id)">
                         <mat-icon>notifications_off</mat-icon>
                         <span>Finish</span>
                     </button>
@@ -52,5 +54,7 @@
             </tr>
         </tbody>
     </table>
-
+    <app-create-hospitalization-form (closeModalEmitter)="closeCreate()" *ngIf="showCreate"
+        (createSuccess)="getHospitalizations()">
+    </app-create-hospitalization-form>
 </div>

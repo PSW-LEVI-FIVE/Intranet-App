@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY } from 'rxjs';
 import { Hospitalization } from '../model/hospitalization.model';
 import { MedicalRecord } from '../model/medical-record.model';
+import { HospitalizationService } from '../services/hospitalization.service';
 import { MedicalRecordService } from '../services/medical-record.service';
 
 @Component({
@@ -15,36 +16,63 @@ export class MedicalRecordViewComponent implements OnInit {
 
   public hospitalizations: Hospitalization[] = []
   public medicalRecord: MedicalRecord | null = null
-  public id: number = 0
   public columns: string[] = ["No.", "Started At", "Ended At", "Pdf", "State", "Action"]
   public isLoading: boolean = false
+  public showCreate: boolean = false
 
   constructor(
     private readonly toastService: ToastrService,
     private readonly medicalRecordService: MedicalRecordService,
+    private readonly hospitalizationService: HospitalizationService
   ) { }
 
   ngOnInit(): void {
 
   }
 
+  closeCreate() {
+    this.showCreate = false
+  }
+
+  openCreate() {
+    this.showCreate = true
+  }
+
+  finishHospitalization(id: number) {
+    const today = new Date();
+    this.isLoading = true
+    this.hospitalizationService.finishHospitalization(id, today)
+      .pipe(catchError(res => {
+        this.isLoading = false
+        this.toastService.error(res.error.Message)
+        return EMPTY
+      }))
+      .subscribe(res => {
+        this.isLoading = false
+        this.toastService.success("Successfully finished hospitalization!")
+        this.getHospitalizations()
+      })
+
+  }
+
 
   search(text: string) {
     this.isLoading = true
-    setTimeout(() => {
-      this.medicalRecordService.getMedicalRecordByUID(text)
-        .subscribe(res => {
-          this.medicalRecord = res
-          if (res == null) {
-            this.hospitalizations = []
-            this.isLoading = false
-            this.toastService.error("Medical record for given UID doesn't exist!")
-          } else {
-            this.getHospitalizations()
-          }
-        })
-    }, 3000)
-
+    this.medicalRecordService.getMedicalRecordByUID(text)
+      .pipe(catchError(res => {
+        this.isLoading = false
+        return EMPTY
+      }))
+      .subscribe(res => {
+        this.medicalRecord = res
+        if (res == null) {
+          this.hospitalizations = []
+          this.isLoading = false
+          this.toastService.error("Medical record for given UID doesn't exist!")
+        } else {
+          this.getHospitalizations()
+        }
+      })
   }
 
 
@@ -64,6 +92,22 @@ export class MedicalRecordViewComponent implements OnInit {
         this.isLoading = false
       })
   }
+
+  generateReport(id: number) {
+    this.isLoading = true
+    this.hospitalizationService.generateReport(id)
+      .pipe(catchError(res => {
+        this.isLoading = false
+        this.toastService.error(res.error.Message)
+        return EMPTY
+      }))
+      .subscribe(res => {
+        this.isLoading = false
+        this.toastService.success("Successfully generated report!")
+        this.getHospitalizations()
+      })
+  }
+
 
 
   format(dt: Date | null) {
