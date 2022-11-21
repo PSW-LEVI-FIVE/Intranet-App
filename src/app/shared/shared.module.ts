@@ -7,8 +7,11 @@ import { DoctorMenuComponent } from './doctor-menu/doctor-menu.component';
 import { MatMenuModule } from "@angular/material/menu";
 import { RouterModule, RouterOutlet } from "@angular/router";
 import { MatToolbarModule } from "@angular/material/toolbar";
+<<<<<<< HEAD
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+=======
+>>>>>>> prescribing therapy form made
 import { ModalFormComponent } from './modal-form/modal-form.component';
 
 
