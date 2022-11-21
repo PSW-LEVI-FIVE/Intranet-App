@@ -1,0 +1,17 @@
+.medical-record-header {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    justify-content: space-between;
+    gap: 5px;
+    margin-bottom: 10px;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.left-side-wrapper {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}

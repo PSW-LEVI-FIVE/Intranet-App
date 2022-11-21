@@ -1,0 +1,60 @@
+<div class="medical-record-view">
+    <app-loader [isLoading]="isLoading"></app-loader>
+    <app-medical-record-header [medicalRecord]="medicalRecord" (create)="openCreate()" (search)="search($event)">
+    </app-medical-record-header>
+    <table class="hosp-items">
+        <thead>
+            <tr>
+                <th *ngFor="let column of columns">{{column}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let hosp of hospitalizations">
+                <td>
+                    {{hosp.id}}
+                </td>
+                <td>
+                    {{format(hosp.startTime)}}
+                </td>
+                <td>
+                    <span *ngIf="hosp.endTime == null" href="">Not Finished</span>
+                    <span *ngIf="hosp.endTime != null">{{format(hosp.endTime)}}</span>
+                </td>
+                <td>
+                    <a *ngIf="hosp.pdfUrl.trim() !== ''" [href]="hosp.pdfUrl">preview</a>
+                    <span class="action-link" *ngIf="hosp.pdfUrl.trim() === '' && hosp.endTime != null"
+                        (click)="generateReport(hosp.id)">generate</span>
+                    <span *ngIf="hosp.pdfUrl.trim() === '' && hosp.endTime == null" href="">Not Finished</span>
+                </td>
+                <td>
+                    <span class="state-wrapper" *ngIf="hosp.state == 0">
+                        <span class="dot"></span>
+                        <span class="state-wrapper-text">
+                            Active
+                        </span>
+                    </span>
+                    <span class="state-wrapper" *ngIf="hosp.state == 1">
+                        <span class="dot gray-dot">
+                        </span>
+                        <span class="state-wrapper-text">
+                            Finished
+                        </span>
+                    </span>
+                </td>
+                <button mat-icon-button [matMenuTriggerFor]="menu"
+                    aria-label="Example icon button with a vertical three dot icon">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="finishHospitalization(hosp.id)">
+                        <mat-icon>notifications_off</mat-icon>
+                        <span>Finish</span>
+                    </button>
+                </mat-menu>
+            </tr>
+        </tbody>
+    </table>
+    <app-create-hospitalization-form (closeModalEmitter)="closeCreate()" *ngIf="showCreate"
+        (createSuccess)="getHospitalizations()">
+    </app-create-hospitalization-form>
+</div>
