@@ -16,7 +16,7 @@
 }
 
 .button {
-    background-color: #7a4caf;
+    background-color: #333399;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -30,5 +30,5 @@
 
 .button:active{
 
-    background-color: rgb(123, 180, 17);
+    background-color:#A2A2D0;
 }

@@ -52,7 +52,7 @@ export class DoctorStatisticsPopularityComponent implements OnInit {
         label: ages,
         data: this.doctorsPopularities,
         borderWidth: 3,
-        backgroundColor: '#996666'
+        backgroundColor: '#5DADEC'
       }]
     },
     options: {
@@ -70,7 +70,6 @@ export class DoctorStatisticsPopularityComponent implements OnInit {
         y: {
           ticks: {
             callback: function (value) { if (Number.isInteger(value)) { return value; } return null;},
-            //stepSize: 1
           },
           beginAtZero: true
         }
@@ -83,10 +82,6 @@ export class DoctorStatisticsPopularityComponent implements OnInit {
 
 
   public changeStatistics(){
-    Chart.defaults.backgroundColor = 'rgba(0, 0, 0, 0.3)';
-    Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.3)';
-    Chart.defaults.color = 'rgba(0, 0, 0, 1)';
-    Chart.defaults.font.size = 30;
 
     this.dcotorStatisticsPopularityService.getDoctorsWithPopularity(this.fromAge,this.toAge).subscribe(res => {
       this.doctorsWithPopularity = res;
@@ -103,7 +98,6 @@ export class DoctorStatisticsPopularityComponent implements OnInit {
 
 
   async ngOnInit(): Promise<void> {
-
 
     this.dcotorStatisticsPopularityService.getDoctorsWithPopularity(0,666).subscribe(res => {
       this.doctorsWithPopularity = res;
