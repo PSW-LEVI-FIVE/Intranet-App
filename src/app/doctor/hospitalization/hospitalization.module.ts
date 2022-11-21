@@ -22,7 +22,6 @@ import { GiveMedicineTherapyComponent } from './give-therapy-form/components/giv
     GiveTherapyFormComponent,
     GiveBloodTherapyComponent,
     GiveMedicineTherapyComponent,
-    GiveTherapyFormComponent,
   ],
   exports: [RouterModule,
   ],
