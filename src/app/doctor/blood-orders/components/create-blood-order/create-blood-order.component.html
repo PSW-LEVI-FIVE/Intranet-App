@@ -1,0 +1,39 @@
+<div class="form-wrapper">
+    <form [formGroup]="bloodOrderForm" class="template-form-box">
+        <div class="template-form-title">
+            <h3>{{title}}</h3>
+        </div>
+        <div class="template-form-content">
+            <mat-form-field inputs appearance="fill">
+                <mat-label>Arrival </mat-label>
+                <input matInput [matDatepicker]="arrival" formControlName="arrival" required>
+                <mat-datepicker-toggle matSuffix [for]="arrival"></mat-datepicker-toggle>
+                <mat-datepicker #arrival></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field inputs appearance="fill">
+                <mat-label>Reason</mat-label>
+                <textarea  matInput type="text" formControlName="reason" required> </textarea>
+            </mat-form-field>
+            <mat-form-field inputs appearance="fill">
+                <mat-label>Blood type</mat-label>
+                <mat-select formControlName="bloodType">
+                    <mat-option value=0>A POSITIVE</mat-option>
+                    <mat-option value=1>A NEGATIVE</mat-option>
+                    <mat-option value=2>B POSITIVE</mat-option>
+                    <mat-option value=3>B NEGATIVE</mat-option>
+                    <mat-option value=4>AB POSITIVE</mat-option>
+                    <mat-option value=5>AB NEGATIVE</mat-option>
+                    <mat-option value=6>0 POSITIVE</mat-option>
+                    <mat-option value=7>0 NEGATIVE</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field inputs appearance="fill">
+                <mat-label>Quantity</mat-label>
+                <input matInput type="number" formControlName="quantity" required>
+            </mat-form-field>        
+        </div>
+        <div class="template-form-button">
+            <button mat-raised-button color="primary" buttons (click)="create()">CREATE</button>
+        </div>
+    </form>
+</div>

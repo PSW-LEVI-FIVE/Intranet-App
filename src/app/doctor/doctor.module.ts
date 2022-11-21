@@ -12,6 +12,8 @@ import { AnnualLeavesComponent } from './annual-leaves/annual-leaves.component';
 import { AnnualLeavesModule } from './annual-leaves/annual-leaves.module';
 import { CreateAnnualLeaveComponent } from './annual-leaves/components/create-annual-leave/create-annual-leave.component';
 import {ViewAnnualLeavesComponent} from "./annual-leaves/components/view-annual-leaves/view-annual-leaves.component";
+import { CreateBloodOrderComponent } from './blood-orders/components/create-blood-order/create-blood-order.component';
+import { BloodOrdersModule } from './blood-orders/blood-orders.module';
 
 const routes = [
   {
@@ -50,6 +52,10 @@ const routes = [
           }
         ]
       },
+      {
+        path:'blood-orders',
+        component: CreateBloodOrderComponent
+      }
 
     ]
   }
@@ -64,6 +70,7 @@ const routes = [
     CommonModule,
     AppointmentsModule,
     AnnualLeavesModule,
+    BloodOrdersModule,
     RouterModule.forChild(routes),
     SharedModule
   ],
