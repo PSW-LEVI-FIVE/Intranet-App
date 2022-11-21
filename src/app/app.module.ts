@@ -13,6 +13,8 @@ import { RoomModule } from "./manager/room/room.module";
 import { ToastrModule } from 'ngx-toastr';
 import { HospitalMapModule } from "./manager/hospital-map/hospital-map.module";
 import { AuthInterception } from "./shared/login/model/auth.interceptor";
+import { HospitalizationModule } from "./doctor/hospitalization/hospitalization.module";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,13 +31,14 @@ import { AuthInterception } from "./shared/login/model/auth.interceptor";
     ManagerModule,
     RoomModule,
     HospitalMapModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    HospitalizationModule,
   ],
   providers: [
     {
-      provide : HTTP_INTERCEPTORS,
+      provide: HTTP_INTERCEPTORS,
       useClass: AuthInterception,
-      multi:true
+      multi: true
     }
   ],
   bootstrap: [AppComponent]
