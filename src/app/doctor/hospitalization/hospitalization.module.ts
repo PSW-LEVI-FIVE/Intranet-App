@@ -26,7 +26,6 @@ import { MatSelectModule } from '@angular/material/select';
     GiveTherapyFormComponent,
     GiveBloodTherapyComponent,
     GiveMedicineTherapyComponent,
-    GiveTherapyFormComponent,
   ],
   exports: [RouterModule,
   ],
