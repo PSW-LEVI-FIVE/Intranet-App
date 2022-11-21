@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
       var token = res.split(' ')[0];
       var role = res.split(' ')[1];
       localStorage.setItem('token',token);
+      localStorage.setItem('role',role);
       if(role == 'Doctor')this.router.navigate(['/doctor']);
       else if(role == 'Manager')this.router.navigate(['/manager/building-map']);
       else
