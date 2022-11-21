@@ -12,6 +12,8 @@ import { ManagerModule } from "./manager/manager.module";
 import { RoomModule } from "./manager/room/room.module";
 import { ToastrModule } from 'ngx-toastr';
 import { HospitalMapModule } from "./manager/hospital-map/hospital-map.module";
+import { HospitalizationModule } from "./doctor/hospitalization/hospitalization.module";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,8 @@ import { HospitalMapModule } from "./manager/hospital-map/hospital-map.module";
     ManagerModule,
     RoomModule,
     HospitalMapModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    HospitalizationModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
