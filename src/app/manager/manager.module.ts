@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ManagerComponent } from './manager.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -13,7 +14,7 @@ import { BuildingMapComponent } from './hospital-map/building-map/building-map.c
 import { FloorMapComponent } from './hospital-map/floor-map/floor-map.component';
 import { RoomMapComponent } from './hospital-map/room-map/room-map.component';
 import { AuthGuard } from '../shared/login/model/auth.guard';
-
+import { DoctorStatisticsPopularityComponent } from './doctor-statistics-popularity/doctor-statistics-popularity.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,10 @@ const routes: Routes = [
       {
         path: 'feedback',
         component: ManagerFeedbackListComponent
+      },
+      {
+        path: 'doctor-statistics',
+        component: DoctorStatisticsPopularityComponent
       },
       {
         path: 'rooms',
@@ -56,11 +61,13 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ManagerComponent
+    ManagerComponent,
+    DoctorStatisticsPopularityComponent
   ],
   imports: [
     CommonModule,
     RoomModule,
+    FormsModule,
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule]
