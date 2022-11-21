@@ -11,6 +11,7 @@ import { ViewFormComponent } from "./appointments/view-form/view-form.component"
 import { HospitalizationComponent } from './hospitalization/hospitalization.component';
 import { MedicalRecordViewComponent } from './hospitalization/medical-record-view/medical-record-view.component';
 import { HospitalizationModule } from './hospitalization/hospitalization.module';
+import { GiveTherapyFormComponent } from './hospitalization/give-therapy-form/give-therapy-form.component';
 
 const routes = [
   {
@@ -41,11 +42,15 @@ const routes = [
         children: [
           {
             path: '',
-            component: MedicalRecordViewComponent
+            component: MedicalRecordViewComponent,
+
           }
         ]
-      }
-
+      },
+      {
+        path: 'prescribe-therapies',
+        component: GiveTherapyFormComponent,
+      },
     ]
   }
 ]
