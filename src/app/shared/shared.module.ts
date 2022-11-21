@@ -29,6 +29,6 @@ import { ModalFormComponent } from './modal-form/modal-form.component';
     RouterModule,
     FormsModule
   ],
-  exports: [LoaderComponent, DoctorMenuComponent, TemplateFormComponent]
+  exports: [LoaderComponent, DoctorMenuComponent, TemplateFormComponent, ModalFormComponent]
 })
 export class SharedModule { }

@@ -12,8 +12,6 @@ export class MedicalRecordService {
 
   constructor(private readonly httpClient: HttpClient) { }
 
-
-
   getHospitalizations(id: number) {
     const url = `${this.url}/intranet/hospitalization/patient/${id}`;
     return this.httpClient.get<Hospitalization[]>(url)
