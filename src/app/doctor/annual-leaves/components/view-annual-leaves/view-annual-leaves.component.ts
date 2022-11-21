@@ -39,7 +39,6 @@ export class ViewAnnualLeavesComponent implements OnInit {
     this.annualLeaveService.getAnnualLeaves(id)
       .subscribe(result=>{
         this.annualLeaves=result
-        console.log(result)
       })
   }
 
