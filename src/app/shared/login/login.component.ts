@@ -17,25 +17,31 @@ export class LoginComponent implements OnInit {
   public caughtPassword : string = "";
 
   ngOnInit(): void {
+    if(localStorage.getItem('token'))
+    {
     this.loginService.getUserProfile().subscribe(
       res=>
       {
         console.log(res);
       }
     );
+    }
   }
 
   public makeLogin() {
     this.login.Username = this.caughtEmail;
     this.login.Password = this.caughtPassword;
-    console.log(this.login.Username + " " + this.login.Password);
     this.loginService.makeLogin(this.login).subscribe(res => {
       var token = res.split(' ')[0];
       var role = res.split(' ')[1];
       localStorage.setItem('token',token);
       if(role == 'Doctor')this.router.navigate(['/doctor']);
-      else if(role == 'Manager')this.router.navigate(['/manager']);
-      //this.router.navigate(['/']);
+      else if(role == 'Manager')this.router.navigate(['/manager/building-map']);
+      else
+      {    
+        localStorage.removeItem('token');
+        this.router.navigate(['/']);
+      }
     });
   }
 
