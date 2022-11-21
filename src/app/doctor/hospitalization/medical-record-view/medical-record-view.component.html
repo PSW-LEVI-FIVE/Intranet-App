@@ -51,7 +51,7 @@
                         <span>Finish</span>
                     </button>
                     <button mat-menu-item>
-                        <a [routerLink]="'/doctor/records/prescribe-therapies'">Give therapy</a>
+                        <span (click)="prescribeTherapies()">Give therapy</span>
                     </button>
                 </mat-menu>
             </tr>
