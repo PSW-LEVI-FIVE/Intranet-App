@@ -15,6 +15,7 @@ import { FloorMapComponent } from './hospital-map/floor-map/floor-map.component'
 import { RoomMapComponent } from './hospital-map/room-map/room-map.component';
 import { AuthGuard } from '../shared/login/model/auth.guard';
 import { DoctorStatisticsPopularityComponent } from './doctor-statistics-popularity/doctor-statistics-popularity.component';
+import { AllergenStatisticsFrequencyComponent } from './allergen-statistics-frequency/allergen-statistics-frequency.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'feedback',
         component: ManagerFeedbackListComponent
+      },
+      {
+        path: 'allergen-statistics',
+        component: AllergenStatisticsFrequencyComponent
       },
       {
         path: 'doctor-statistics',
@@ -62,7 +67,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ManagerComponent,
-    DoctorStatisticsPopularityComponent
+    DoctorStatisticsPopularityComponent,
+    AllergenStatisticsFrequencyComponent
   ],
   imports: [
     CommonModule,
