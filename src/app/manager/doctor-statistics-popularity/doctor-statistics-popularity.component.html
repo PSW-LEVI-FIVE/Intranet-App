@@ -1,0 +1,25 @@
+<div style="display:inline-block ;">
+<div id="divChart">
+    <canvas id="myChart" style="font-size:100px;"></canvas>
+</div>
+<hr>
+<p class="verticalSpace"></p>
+<p style="font-size:50px;">Choose age group you want to see statistics from</p>
+<p class="verticalSpace"></p>
+<div>
+    <p class="horizontalSpace"></p>
+    <input type="number" min="0" max="300" [(ngModel)]="fromAge" (blur)="agesFocusOut()" style="width: 130px; font-size: 50pt; display: inline-block;">
+    <p class="horizontalSpace"></p>
+    <p style="font-size: 40pt; display: inline-block;"> to </p>
+    <p class="horizontalSpace"></p>
+    <input type="number" min="0" max="300"  [(ngModel)]="toAge" (blur)="agesFocusOut()"  style="width: 130px; font-size: 50pt; display: inline-block;">
+    <p class="horizontalSpace"></p>
+    <button mat-stroked-button type="Submit" class="button" (click)="changeStatistics()">Submit</button>
+    <p class="horizontalSpace"></p>
+    <p class="horizontalSpace"></p>
+    <p class="horizontalSpace"></p>
+    <p class="horizontalSpace"></p>
+    <p class="horizontalSpace"></p>
+    <button  style="display:inline-block;" mat-stroked-button type="Submit" class="button" (click)="ngOnInit()">All Patients</button>
+</div>
+</div>

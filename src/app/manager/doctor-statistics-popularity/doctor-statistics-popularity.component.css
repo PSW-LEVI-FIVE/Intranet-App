@@ -1,0 +1,38 @@
+#divChart{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+    width: 1400px;
+    height: 700px;
+    text-align: center;
+    font-size: large;
+}
+
+.horizontalSpace{
+    width: 50px;
+    display: inline-block;
+}
+
+.verticalSpace{
+    height: 50px;
+}
+
+.button {
+    background-color: #333399;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 40px;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+
+.button:active{
+
+    background-color:#A2A2D0;
+}
