@@ -5,19 +5,14 @@ import { IDoctorWithPopularityDTO } from './model/IDoctorWithPopularityDTO';
 import { DcotorStatisticsPopularityService } from './services/dcotor-statistics-popularity.service';
 Chart.register(...registerables);
 
-
 @Component({
   selector: 'app-doctor-statistics-popularity',
   templateUrl: './doctor-statistics-popularity.component.html',
   styleUrls: ['./doctor-statistics-popularity.component.css']
 })
 
-
-
-
 export class DoctorStatisticsPopularityComponent implements OnInit {
 
-  public doctorsWithPopularity: IDoctorWithPopularityDTO[] = [];
   public doctors: string[]= [];
   public doctorsPopularities: number[] =[];
   public fromAge: number = 15;
@@ -46,7 +41,8 @@ export class DoctorStatisticsPopularityComponent implements OnInit {
     var ctx = document.getElementById("myChart") as HTMLCanvasElement;
     this.chart = new Chart(ctx,{
       type: 'bar',
-    data: {
+    data: 
+    {
       labels: this.doctors,
       datasets: [{
         label: ages,
@@ -55,20 +51,21 @@ export class DoctorStatisticsPopularityComponent implements OnInit {
         backgroundColor: '#5DADEC'
       }]
     },
-    options: {
-      plugins: {
-        legend: {
-            labels: {
-                // This more specific font property overrides the global property
-                font: {
-                    size: 20
-                }
-            }
+    options: 
+    {
+      plugins: 
+      {
+        legend: 
+        {
+            labels: { font: { size: 20} }
         }
       },
-      scales: {
-        y: {
-          ticks: {
+      scales: 
+      {
+        y: 
+        {
+          ticks: 
+          {
             callback: function (value) { if (Number.isInteger(value)) { return value; } return null;},
           },
           beginAtZero: true
@@ -80,13 +77,10 @@ export class DoctorStatisticsPopularityComponent implements OnInit {
     this.doctorsPopularities = [];
   }
 
-
   public changeStatistics(){
 
     this.dcotorStatisticsPopularityService.getDoctorsWithPopularity(this.fromAge,this.toAge).subscribe(res => {
-      this.doctorsWithPopularity = res;
-
-     this.doctorsWithPopularity.forEach( (doctorWithPopularity:IDoctorWithPopularityDTO,index) => {
+      res.forEach( (doctorWithPopularity:IDoctorWithPopularityDTO,index) => {
         this.doctors.push(doctorWithPopularity.id + ' ' + doctorWithPopularity.name + ' ' + doctorWithPopularity.surname);
         this.doctorsPopularities.push(doctorWithPopularity.patientsPicked);
       });
@@ -94,20 +88,13 @@ export class DoctorStatisticsPopularityComponent implements OnInit {
   });
   }
 
-
-
-
   async ngOnInit(): Promise<void> {
-
-    this.dcotorStatisticsPopularityService.getDoctorsWithPopularity(0,666).subscribe(res => {
-      this.doctorsWithPopularity = res;
-
-     this.doctorsWithPopularity.forEach( (doctorWithPopularity:IDoctorWithPopularityDTO,index) => {
-        this.doctors.push(doctorWithPopularity.id + ' ' + doctorWithPopularity.name + ' ' + doctorWithPopularity.surname);
-        this.doctorsPopularities.push(doctorWithPopularity.patientsPicked);
-      });
-      this.createChart();
-  });
+    this.fromAge = 0;
+    this.toAge = 666;
+    this.init = false;
+    this.changeStatistics();
+    this.fromAge = 15;
+    this.toAge = 30;
   }
   
 

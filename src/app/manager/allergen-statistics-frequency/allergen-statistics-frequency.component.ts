@@ -10,7 +10,6 @@ import { AllergenStatsService } from './services/allergen-stats.service';
 })
 export class AllergenStatisticsFrequencyComponent implements OnInit {
 
-  public allergensWithPatients: IAllergenWithPatients[] = [];
   public allergens: string[] = [];
   public numberOfPatients: number[] = [];
 
@@ -34,24 +33,26 @@ export class AllergenStatisticsFrequencyComponent implements OnInit {
         backgroundColor: '#5DADEC'
       }]
     },
-    options: {
-      plugins: {
-        legend: {
-            labels: {
-                // This more specific font property overrides the global property
-                font: {
-                    size: 20
-                }
-            }
+    options: 
+    {
+      plugins:  
+      {
+        legend:
+        {
+            labels: {font: { size: 20 } }
         }
       },
-      scales: {
-        y: {
-          ticks: {
-            callback: function (value) { if (Number.isInteger(value)) { return value; } return null;},
+      scales: 
+      {
+          y: 
+          {
+            ticks: 
+            {
+              callback: function (value) { if (Number.isInteger(value)) { return value; } return null;
+            },
           },
           beginAtZero: true
-        }
+          }
       }
     }
     });
@@ -59,9 +60,7 @@ export class AllergenStatisticsFrequencyComponent implements OnInit {
 
   ngOnInit(): void {
     this.allergenStatsService.getAllergensWithPatients().subscribe(res =>{
-      this.allergensWithPatients = res;
-      console.log(res);
-      this.allergensWithPatients.forEach( allergenWithPats => {
+      res.forEach( allergenWithPats => {
         this.allergens.push(allergenWithPats.allergen);
         this.numberOfPatients.push(allergenWithPats.patients);
       })
