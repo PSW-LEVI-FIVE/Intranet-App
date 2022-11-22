@@ -1,4 +1,4 @@
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
@@ -12,6 +12,9 @@ import { ManagerModule } from "./manager/manager.module";
 import { RoomModule } from "./manager/room/room.module";
 import { ToastrModule } from 'ngx-toastr';
 import { HospitalMapModule } from "./manager/hospital-map/hospital-map.module";
+import { AuthInterception } from "./shared/login/model/auth.interceptor";
+import { HospitalizationModule } from "./doctor/hospitalization/hospitalization.module";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,9 +31,16 @@ import { HospitalMapModule } from "./manager/hospital-map/hospital-map.module";
     ManagerModule,
     RoomModule,
     HospitalMapModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    HospitalizationModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterception,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

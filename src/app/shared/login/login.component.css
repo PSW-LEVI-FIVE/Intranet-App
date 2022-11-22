@@ -1,0 +1,44 @@
+
+.center {
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75vw;
+  }
+.header{
+    font-weight: 700;
+    font-size: 3rem; /* 48px */
+    line-height: 1;
+    text-align: center;
+    padding-bottom: 48px;
+  }
+  textarea{
+    background-color: #cbd5e1;
+    width: 100%;
+    height: 10rem;
+    border-radius: 6px;
+  }
+  Button {
+    font-size: 30px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  Button:hover{
+    background-color: #22d3ee;
+    transition: 0.2s;
+  }
+  input.checkbox{
+    width : 20px;
+    height :20px;
+    margin-right: 16px;
+    vertical-align: middle;
+    margin-top: 0px;
+  }
+  p.checkbox{
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.75rem; /* 28px */
+    height: 100%;
+  }
+  

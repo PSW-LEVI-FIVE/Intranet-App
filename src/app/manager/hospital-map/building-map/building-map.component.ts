@@ -40,7 +40,12 @@ export class BuildingMapComponent implements OnInit {
     
 
   }
-
+  Logout()
+  {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    this.router.navigate(["/login"]);
+  }
   addOnClick(svg:any){
     svg.on("click", (d:any, i:any) =>{
       this.formVisible = "visible";

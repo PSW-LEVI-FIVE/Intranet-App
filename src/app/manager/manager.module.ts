@@ -12,6 +12,7 @@ import { ManagerFeedbackListComponent } from './feedback/manager-feedback-list/m
 import { BuildingMapComponent } from './hospital-map/building-map/building-map.component';
 import { FloorMapComponent } from './hospital-map/floor-map/floor-map.component';
 import { RoomMapComponent } from './hospital-map/room-map/room-map.component';
+import { AuthGuard } from '../shared/login/model/auth.guard';
 
 
 
@@ -19,6 +20,7 @@ const routes: Routes = [
   {
     path: 'manager',
     component: ManagerComponent,
+    canActivate:[AuthGuard],
     children: [
       {
         path: 'feedback',

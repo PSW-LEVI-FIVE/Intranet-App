@@ -8,6 +8,10 @@ import { MedicalRecordHeaderComponent } from './medical-record-view/components/m
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from "../../shared/shared.module";
 import { CreateHospitalizationFormComponent } from './medical-record-view/components/create-hospitalization-form/create-hospitalization-form.component';
+import { GiveTherapyFormComponent } from './give-therapy-form/give-therapy-form.component';
+import { GiveBloodTherapyComponent } from './give-therapy-form/components/give-blood-therapy/give-blood-therapy.component';
+import { GiveMedicineTherapyComponent } from './give-therapy-form/components/give-medicine-therapy/give-medicine-therapy.component';
+
 
 
 
@@ -17,8 +21,12 @@ import { CreateHospitalizationFormComponent } from './medical-record-view/compon
     MedicalRecordViewComponent,
     MedicalRecordHeaderComponent,
     CreateHospitalizationFormComponent,
+    GiveTherapyFormComponent,
+    GiveBloodTherapyComponent,
+    GiveMedicineTherapyComponent,
   ],
-  exports: [RouterModule],
+  exports: [RouterModule,
+  ],
   imports: [
     CommonModule,
     RouterModule,

@@ -7,6 +7,8 @@ import { DoctorMenuComponent } from './doctor-menu/doctor-menu.component';
 import { MatMenuModule } from "@angular/material/menu";
 import { RouterModule, RouterOutlet } from "@angular/router";
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms';
 import { ModalFormComponent } from './modal-form/modal-form.component';
 
 
@@ -15,6 +17,7 @@ import { ModalFormComponent } from './modal-form/modal-form.component';
     LoaderComponent,
     TemplateFormComponent,
     DoctorMenuComponent,
+    LoginComponent,
     ModalFormComponent,
   ],
   imports: [
@@ -23,7 +26,8 @@ import { ModalFormComponent } from './modal-form/modal-form.component';
     MatMenuModule,
     RouterOutlet,
     MatToolbarModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports: [LoaderComponent, DoctorMenuComponent, TemplateFormComponent, ModalFormComponent]
 })
