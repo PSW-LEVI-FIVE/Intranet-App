@@ -11,6 +11,7 @@ import { CreateHospitalizationFormComponent } from './medical-record-view/compon
 import { GiveTherapyFormComponent } from './give-therapy-form/give-therapy-form.component';
 import { GiveBloodTherapyComponent } from './give-therapy-form/components/give-blood-therapy/give-blood-therapy.component';
 import { GiveMedicineTherapyComponent } from './give-therapy-form/components/give-medicine-therapy/give-medicine-therapy.component';
+import { TherapyViewComponent } from './given-therapy-view/therapy-view/therapy-view.component';
 
 
 
@@ -24,6 +25,7 @@ import { GiveMedicineTherapyComponent } from './give-therapy-form/components/giv
     GiveTherapyFormComponent,
     GiveBloodTherapyComponent,
     GiveMedicineTherapyComponent,
+    TherapyViewComponent,
   ],
   exports: [RouterModule,
   ],
