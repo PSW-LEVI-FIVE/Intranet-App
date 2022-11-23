@@ -8,6 +8,7 @@ import { RoomDetailComponent } from './room/room-detail/room-detail.component';
 import { RoomsComponent } from './room/rooms/rooms.component';
 import { UpdateRoomComponent } from './room/update-room/update-room.component';
 import { RoomModule } from './room/room.module';
+import { MaterialModule } from '../material/material.module';
 import { RoomComponent } from './room/room.component';
 import { ManagerFeedbackListComponent } from './feedback/manager-feedback-list/manager-feedback-list.component';
 import { BuildingMapComponent } from './hospital-map/building-map/building-map.component';
@@ -91,6 +92,7 @@ const routes: Routes = [
     CommonModule,
     RoomModule,
     FormsModule,
+    MaterialModule,
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule]
