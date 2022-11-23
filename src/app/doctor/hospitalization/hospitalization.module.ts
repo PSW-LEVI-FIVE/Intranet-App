@@ -14,6 +14,8 @@ import { GiveMedicineTherapyComponent } from './give-therapy-form/components/giv
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { TherapyViewComponent } from './given-therapy-view/therapy-view/therapy-view.component';
+
 
 
 
@@ -26,6 +28,7 @@ import { MatSelectModule } from '@angular/material/select';
     GiveTherapyFormComponent,
     GiveBloodTherapyComponent,
     GiveMedicineTherapyComponent,
+    TherapyViewComponent,
   ],
   exports: [RouterModule,
   ],

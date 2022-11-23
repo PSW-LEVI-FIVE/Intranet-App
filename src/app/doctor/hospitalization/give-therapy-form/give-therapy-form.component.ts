@@ -17,8 +17,8 @@ import { catchError, EMPTY } from 'rxjs';
 })
 export class GiveTherapyFormComponent implements OnInit {
 
-  radioForm = this.fb.group({
-    radioSelected: [1]
+  tabForm = this.fb.group({
+    tabSelected: [1]
   })
 
 

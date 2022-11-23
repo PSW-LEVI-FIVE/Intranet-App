@@ -46,22 +46,23 @@ export class GiveMedicineTherapyComponent implements OnInit {
   }
 
 
+
+
   createMedicineTherapy() {
     if (this.giveMedicineTherapyForm.status == 'INVALID') {
       this.toastService.error("All fields should be filled!")
       return
     }
 
+    console.log(Number(this.route.snapshot.paramMap.get('id')));
+
     let body: IGiveMedicineTherapy = {
-      HospitalizationId: 1, //Number(this.route.snapshot.paramMap.get('id')),
+      HospitalizationId: Number(this.route.snapshot.paramMap.get('id')),
       GivenAt: new Date(),
       MedicineId: this.giveMedicineTherapyForm.get('medicineId')?.value,
       Quantity: this.giveMedicineTherapyForm.get('quantity')?.value,
-      DoctorId: 1, //Preko logina bi trebalo
+      DoctorId: 0, //Preko logina ide
     }
-
-    console.log(body)
-
     this.therapyService.createMedicineTherapy(body)
       .pipe(catchError(res => {
         const error = res.error

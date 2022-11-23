@@ -1,19 +1,15 @@
 <div>
-    <form [formGroup]="radioForm" class="template-form-box">
-        <h3>Chose the type of medicine to prescribe</h3>
-        <label>
-            <input type="radio" value=1 formControlName="radioSelected" name="radioSelected" checked>
-            Blood therapy
-        </label>
-        <label>
-            <input type="radio" value=2 formControlName="radioSelected" name="radioSelected">
-            Medicine therapy
-        </label>
-        <span *ngIf="this.radioForm.get('radioSelected')!.value == 1">
-            <app-give-blood-therapy></app-give-blood-therapy>
-        </span>
-        <span *ngIf="this.radioForm.get('radioSelected')!.value != 1">
-            <app-give-medicine-therapy></app-give-medicine-therapy>
-        </span>
+    <form [formGroup]="tabForm" class="template-form-box">
+        <div class="template-form-title h3">
+            <h3>Chose the type of medicine to prescribe</h3>
+        </div>
+        <mat-tab-group>
+            <mat-tab label="Blood therapy">
+                <app-give-blood-therapy></app-give-blood-therapy>
+            </mat-tab>
+            <mat-tab label="Medicine therapy">
+                <app-give-medicine-therapy></app-give-medicine-therapy>
+            </mat-tab>
+        </mat-tab-group>
     </form>
 </div>

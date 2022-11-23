@@ -1,0 +1,36 @@
+<div class="therapies-view">
+    <div class="template-form-title h3">
+        <h3>Prescribed therapies</h3>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th *ngFor="let column of columns">{{column}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let therapy of therapiesDisplay">
+                <td>
+                    {{therapy.position}}
+                </td>
+                <td>
+                    {{therapy.therapyType}}
+                </td>
+                <td>
+                    <span *ngIf="therapy.therapyType == 'blood'">
+                        {{therapy.bloodName}}
+                    </span>
+                    <span *ngIf="therapy.therapyType != 'blood'">
+                        {{therapy.medicineName}}
+                    </span>
+                </td>
+                <td>
+                    {{therapy.quantity}}
+                </td>
+                <td>
+                    {{format(therapy.prescribedDate)}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

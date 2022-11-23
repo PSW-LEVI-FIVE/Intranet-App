@@ -20,6 +20,9 @@ import { HospitalizationComponent } from './hospitalization/hospitalization.comp
 import { MedicalRecordViewComponent } from './hospitalization/medical-record-view/medical-record-view.component';
 import { HospitalizationModule } from './hospitalization/hospitalization.module';
 import { GiveTherapyFormComponent } from './hospitalization/give-therapy-form/give-therapy-form.component';
+import { BloodConsumptionModule } from './blood-consumption/blood-consumption.module';
+import { BloodConsumptionViewComponent } from './blood-consumption/blood-consumption-view/blood-consumption-view.component';
+import { TherapyViewComponent } from './hospitalization/given-therapy-view/therapy-view/therapy-view.component';
 
 const routes = [
   {
@@ -75,8 +78,16 @@ const routes = [
         ]
       },
       {
-        path: 'prescribe-therapies',
+        path: 'prescribe-therapies/:id',
         component: GiveTherapyFormComponent,
+      },
+      {
+        path: 'blood-consumption',
+        component: BloodConsumptionViewComponent,
+      },
+      {
+        path: 'hospitalization-therapies/:id',
+        component: TherapyViewComponent,
       },
     ]
   }
@@ -95,7 +106,8 @@ const routes = [
     BloodOrdersModule,
     HospitalizationModule,
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    BloodConsumptionModule,
   ],
   exports: [RouterModule]
 })

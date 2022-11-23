@@ -50,9 +50,14 @@
                         <mat-icon>notifications_off</mat-icon>
                         <span>Finish</span>
                     </button>
-                    <button mat-menu-item>
-                        <span (click)="prescribeTherapies()">Give therapy</span>
+                    <button mat-menu-item (click)="showPrescribedTherapies(hosp.id)">
+                        <span>Show therapies</span>
                     </button>
+                    <span *ngIf="hosp.state == 0">
+                        <button mat-menu-item>
+                            <span (click)="prescribeTherapies(hosp.id)">Give therapy</span>
+                        </button>
+                    </span>
                 </mat-menu>
             </tr>
         </tbody>

@@ -118,8 +118,12 @@ export class MedicalRecordViewComponent implements OnInit {
   }
 
 
-  prescribeTherapies() {
-    this.router.navigate(['doctors/prescribe-therapies'])
+  prescribeTherapies(id: number) {
+    this.router.navigate(['doctor/prescribe-therapies/' + id])
+  }
+
+  showPrescribedTherapies(id: number) {
+    this.router.navigate(['doctor/hospitalization-therapies/' + id])
   }
 
 }
