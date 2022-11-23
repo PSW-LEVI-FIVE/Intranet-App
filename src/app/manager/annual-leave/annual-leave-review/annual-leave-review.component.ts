@@ -34,7 +34,7 @@ export class AnnualLeaveReviewComponent implements OnInit {
       this.errorMess = 'OK';
       this.annualLeaveService.reviewAnnualLeave(this.id, body).subscribe(res => {
         alert("Review successfully sent!")
-        this.router.navigate(['/annual-leave']);
+        this.router.navigate(['manager/annual-leave']);
       });
     }
   }

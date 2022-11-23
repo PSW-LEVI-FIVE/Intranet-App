@@ -16,6 +16,6 @@ export class AnnualLeaveService {
     return this.http.get<IAnnualLeave[]>(this.apiHost + 'api/intranet/annual-leaves/pending', {headers: this.headers});
   }
   reviewAnnualLeave(id:any, leave: any): Observable<any> {
-    return this.http.put<any>(this.apiHost + 'api/intranet/annual-leaves/review/' + id, leave, { headers: this.headers });
+    return this.http.patch<any>(this.apiHost + 'api/intranet/annual-leaves/review/' + id, leave, { headers: this.headers });
   }
 }

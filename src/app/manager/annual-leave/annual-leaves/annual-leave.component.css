@@ -6,16 +6,30 @@
     border: #DCD6CC 1px solid;
     background-color: white;
 }
-
-table {
-    width: 100%;
+th{
+    font-size: 15px;
+    font-weight: bold;
 }
 
-.table-title {
+table {
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    background-color: #f0fdfa;
+  
+  }
+
+.table-header {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: #f0fdfa;
     padding-bottom: 20px;
     padding-top: 20px;
-    padding-left: 20px;
+    padding-left: 300px;
     font-size: 20px;
+    font-weight: bold;
 
 }
 

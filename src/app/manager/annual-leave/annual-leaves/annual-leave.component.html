@@ -1,19 +1,19 @@
 <div class="container">
     <div class="table-header">
-        <p class="table-title">Annual leaves</p>
+        <p class="table-title">Annual leave requests</p>
     </div>
     <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="Doctor">
             <th mat-header-cell *matHeaderCellDef class="cell-center"> Doctor </th>
-            <td mat-cell *matCellDef="let annualLeave" class="clickable cell-center">{{annualLeave.doctor.name}} {{annualLeave.doctor.surname}}</td>
+            <td mat-cell *matCellDef="let annualLeave" class="cell-center">{{annualLeave.doctorId}} - {{annualLeave.doctor}}</td>
         </ng-container>
         <ng-container matColumnDef="Starting">
             <th mat-header-cell *matHeaderCellDef class="cell-center"> Starting </th>
-            <td mat-cell *matCellDef="let annualLeave" class="cell-center">{{annualLeave.starting}}</td>
+            <td mat-cell *matCellDef="let annualLeave" class="cell-center">{{annualLeave.startAt}}</td>
         </ng-container>
         <ng-container matColumnDef="Ending">
             <th mat-header-cell *matHeaderCellDef class="cell-center"> Ending </th>
-            <td mat-cell *matCellDef="let annualLeave" class="cell-center">{{annualLeave.ending}}</td>
+            <td mat-cell *matCellDef="let annualLeave" class="cell-center">{{annualLeave.endAt}}</td>
         </ng-container>
         <ng-container matColumnDef="State">
             <th mat-header-cell *matHeaderCellDef class="cell-center"> State </th>
@@ -21,13 +21,16 @@
         </ng-container>
         <ng-container matColumnDef="Urgent">
             <th mat-header-cell *matHeaderCellDef class="cell-center"> Urgent </th>
-            <td mat-cell *matCellDef="let annualLeave" class="cell-center">{{annualLeave.urgent}}</td>
+            <td mat-cell *matCellDef="let annualLeave" class="cell-center">
+                <span *ngIf="annualLeave.isUrgent==true"><mat-icon>done</mat-icon></span>
+                <span *ngIf="annualLeave.isUrgent!=true"><mat-icon>clear</mat-icon></span>
+            </td>
         </ng-container>
         <ng-container matColumnDef="Review">
             <th mat-header-cell *matHeaderCellDef class="cell-center"></th>
             <td mat-cell *matCellDef="let annualLeave" class="cell-center">
                 <button mat-icon-button (click)="reviewAnnualLeave(annualLeave.id)">
-                    <mat-icon matTooltip="review">edit</mat-icon>
+                    <mat-icon matTooltip="Review">edit</mat-icon>
                 </button>
             </td>
         </ng-container>
