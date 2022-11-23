@@ -14,6 +14,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [],
@@ -35,6 +36,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     MatAutocompleteModule,
     MatMenuModule,
+    MatTabsModule
   ],
   exports: [
     CommonModule,
@@ -53,5 +55,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     MatAutocompleteModule,
     MatMenuModule,
+    MatTabsModule
+  ]
 })
 export class MaterialModule { }

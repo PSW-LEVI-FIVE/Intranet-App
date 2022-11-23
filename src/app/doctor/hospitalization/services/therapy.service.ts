@@ -4,6 +4,7 @@ import { IGiveBloodTherapy } from "../give-therapy-form/components/give-blood-th
 import { IGiveMedicineTherapy } from "../give-therapy-form/components/give-medicine-therapy/give-medicine-therapy.component";
 import { Medicine } from '../model/medicine.model';
 import { Blood } from '../model/blood.model';
+import { TherapiesDto } from '../model/therapiesDto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,9 @@ export class TherapyService {
     return this.httpClient.get<Blood[]>(url)
   }
 
+  getHospitalizationTherapies(id: number) {
+    const url = `${this.url}/intranet/therapies/hospitalization/` + id;
+    return this.httpClient.get<TherapiesDto[]>(url)
+  }
 
 }

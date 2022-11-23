@@ -1,0 +1,31 @@
+<div class="blood-consumption-view">
+    <div class="template-form-title h3">
+        <h3>Blood consumption history</h3>
+    </div>
+    <table class="hosp-items">
+        <thead>
+            <tr>
+                <th *ngFor="let column of columns">{{column}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let bloodConsumption of bloodConsumptions">
+                <td>
+                    {{bloodConsumption.position}}
+                </td>
+                <td>
+                    {{bloodConsumption.bloodName}}
+                </td>
+                <td>
+                    {{bloodConsumption.quantity}}
+                </td>
+                <td>
+                    {{format(bloodConsumption.prescribedDate)}}
+                </td>
+                <td>
+                    {{bloodConsumption.doctorName}} {{bloodConsumption.doctorSurname}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

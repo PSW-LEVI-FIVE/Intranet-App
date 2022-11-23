@@ -76,11 +76,11 @@ export class GiveBloodTherapyComponent implements OnInit {
     }
 
     let body: IGiveBloodTherapy = {
-      HospitalizationId: 1, //Number(this.route.snapshot.paramMap.get('id')),
+      HospitalizationId: Number(this.route.snapshot.paramMap.get('id')),
       GivenAt: new Date(),
       Type: this.giveBloodTherapyForm.get('bloodType')?.value,
       Quantity: this.giveBloodTherapyForm.get('quantity')?.value,
-      DoctorId: 1, //Preko logina bi trebalo
+      DoctorId: 7, //Preko logina bi trebalo
     }
 
     console.log(body)
