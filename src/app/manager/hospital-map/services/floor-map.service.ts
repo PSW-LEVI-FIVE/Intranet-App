@@ -41,16 +41,13 @@ export class FloorMapService {
     };
 
     for (let floor of floors) {
-      if(!this.checkYCoordinate(newFloor.yCoordinate, floor.yCoordinate)) {
+      if(!this.checkYCoordinate(newFloor.yCoordinate, floor.yCoordinate))
         break;
-      }
-
-      if(newFloor.yCoordinate - this.decrement > 0) {
-        newFloor.yCoordinate -= this.decrement;
-        continue;
-      }
-
-      return undefined;
+      
+      if(newFloor.yCoordinate - this.decrement < 0)
+        return undefined;  
+      
+      newFloor.yCoordinate -= this.decrement;
     }
 
     return newFloor;
