@@ -1,47 +1,48 @@
+import { IFloor } from './../model/floor.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as d3 from 'd3';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FloorMapService {
 
- // apiHost: string = 'http://localhost:5000/';
-  // headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+ apiHost: string = 'http://localhost:5000/';
+  headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-  // constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  // getFloorsByBuilding(id: number): Observable<IFloor> {
-  //   return this.http.get<IFloor>(this.apiHost + 'api/intranet/floors/' + id, {headers: this.headers});
-  // }
-  // updateFloor(floor: any): Observable<any> {
-  //   return this.http.put<any>(this.apiHost + 'api/intranet/floors/' + floor.id, floor.name, {headers: this.headers});
-  // }
-
-  constructor() { }
-  getData(){
-    var data2 = [{
-      "x": 100,
-      "y": 255,
-      "w": 200,
-      "h": 200,
-      "color": "white",
-      "area": 400,
-      "name": "Floor 1",
-      "id": "f1"
-    },
-    {
-      "x": 100,
-      "y": 50,
-      "w": 200,
-      "h": 200,
-      "color": "white",
-      "area": 400,
-      "name": "Floor 2",
-      "id": "f2"
-    } ]
-    return data2;
+  getFloorsByBuilding(id: number): Observable<IFloor> {
+    return this.http.get<IFloor>(this.apiHost + 'api/intranet/floors/' + id, {headers: this.headers});
   }
+  updateFloor(floor: any): Observable<any> {
+    return this.http.put<any>(this.apiHost + 'api/intranet/floors/' + floor.id, floor.name, {headers: this.headers});
+  }
+  // getData(){
+  //   var data2 = [{
+  //     "x": 100,
+  //     "y": 255,
+  //     "w": 200,
+  //     "h": 200,
+  //     "color": "white",
+  //     "area": 400,
+  //     "name": "Floor 1",
+  //     "id": "f1"
+  //   },
+  //   {
+  //     "x": 100,
+  //     "y": 50,
+  //     "w": 200,
+  //     "h": 200,
+  //     "color": "white",
+  //     "area": 400,
+  //     "name": "Floor 2",
+  //     "id": "f2"
+  //   } ]
+  //   return data2;
+  // }
 
   createSVG(){
     return d3.select("#svgDiv").append("svg").attr("height", 500).attr("width", 800)
@@ -49,12 +50,12 @@ export class FloorMapService {
 
   createRectangles(svg:any,data2:any){
     return svg.selectAll("rect").data(data2).enter().append("rect")
-    .attr("height", function(d:any){ return d.h;})
-    .attr("width", function(d:any){ return d.w;})
-    .attr("fill", function(d:any){return d.color;})
+    .attr("height", function(d:any){ return d.height;})
+    .attr("width", function(d:any){ return d.width;})
+    .attr("fill", "white")
     .attr("stroke", "black")
-    .attr("x", function(d:any){ return d.x })
-    .attr("y", function(d:any){ return d.y})
+    .attr("x", function(d:any){ return d.xCoordinate })
+    .attr("y", function(d:any){ return d.yCoordinate})
     .attr("id", function(d:any){ return d.id})
     .on("click", function(data2:any) {
       console.log("caooo")
@@ -64,16 +65,13 @@ export class FloorMapService {
     return svg.append("text").selectAll("tspan")
       .data(data)
       .enter().append("tspan")
-      .attr('x', function(d:any){ return d.x+20 })
-      .attr('y', function(d:any){ return d.y+20 })
+      .attr('x', function(d:any){ return d.xCoordinate+20 })
+      .attr('y', function(d:any){ return d.yCoordinate+20 })
       .attr("text-anchor", "start")
       .attr("stroke", "black")
       .attr("stroke-width", "1")
       .attr("font-size", 10)
-      .text(function(d:any){ return d.name; })
-      .on("click", function(d:any) {
-        alert(d.name)
-      });
+      .text(function(d:any){ return d.id; })
   }
   onClickShowName(svg:any, data2:any){
     return svg.selectAll("rect")

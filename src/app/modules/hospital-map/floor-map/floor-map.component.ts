@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BuildingMapService } from './../services/building-map.service';
 import { FloorMapService } from './../services/floor-map.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,38 +16,34 @@ export class FloorMapComponent implements OnInit {
   svg:any;
   floors:any;
   floorsText:any;
-<<<<<<< HEAD
-  constructor(private floorMapService: FloorMapService, private buildingMapService:BuildingMapService, private router:Router) { }
-=======
+
+  //constructor(private floorMapService: FloorMapService, private buildingMapService:BuildingMapService, private router:Router) { }
+
   containerForInfo:any
   ev:any
   clickInfo:any
-<<<<<<< HEAD
-  constructor(private floorMapService: FloorMapService, private buildingMapService:BuildingMapService) { }
->>>>>>> d30493f (Add form with information about floors in hospital)
 
-=======
+
   formVisible: any="hidden";
   selectedFloor: any;
-  constructor(private floorMapService: FloorMapService, private buildingMapService:BuildingMapService, private router:Router) { }
->>>>>>> cb9c77c (Made changes to design of floor map)
-  ngOnInit(): void {
-    this.data = this.floorMapService.getData();
-    this.svg  = this.floorMapService.createSVG();
-    this.floors = this.floorMapService.createRectangles(this.svg,this.data)
-    this.floorsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)
-    //this.containerForInfo = this.floorMapService.createRectangleForAdditionalInformation(this.svg,this.data)
-    //this.clickInfo = this.floorMapService.onClickShowName(this.svg,this.data)
-    this.addOnClick(this.floors)
-    this.markFloor(this.floors)
-    this.showRooms(this.floors, this.router)
+  constructor(private floorMapService: FloorMapService, private buildingMapService:BuildingMapService,private route: ActivatedRoute, private router:Router) { }
 
-    /*this.route.params.subscribe((params: Params) => {
-      this.floorMapService.getFloors(params['id']).subscribe(res => {
+  ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.floorMapService.getFloorsByBuilding(params['id']).subscribe(res => {
         this.data = res;
+        this.svg  = this.floorMapService.createSVG();
+        this.floors = this.floorMapService.createRectangles(this.svg,this.data)
+        this.floorsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)
+        this.addOnClick(this.floors)
+      this.markFloor(this.floors)
+      this.showRooms(this.floors, this.router)
       })
     });
-    */
+    //this.data = this.floorMapService.getData();
+    //this.containerForInfo = this.floorMapService.createRectangleForAdditionalInformation(this.svg,this.data)
+    //this.clickInfo = this.floorMapService.onClickShowName(this.svg,this.data)
+
   }
 
   addOnClick(svg:any){

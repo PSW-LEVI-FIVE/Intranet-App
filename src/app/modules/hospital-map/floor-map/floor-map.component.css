@@ -1,3 +1,42 @@
+.header{
+    top: 5;
+    left: 5;
+    width: 100%;
+    background: #fff;
+}
+.nav-links{
+    flex: 1;
+    text-align: right;
+}
+
+.nav-links ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
+}
+
+.nav-links ul li a {
+    font-weight: 800;
+    font-size: 20px;
+    width: 350px;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.nav-links ul li::after{
+    content: '';
+    width: 0%;  /*postavi se underline na hidden, kad je 100 vidi se pa se stavi na reakciju da se uveca*/
+    height: 3px;
+    /* background: rgb(177, 200, 255); */
+    background-color: #0891b2;
+    display: block;
+    margin: auto;
+}
+
+.nav-links ul li:hover::after{
+    width: 100%;
+}
 
 .buildInfo {
     text-align: center;
