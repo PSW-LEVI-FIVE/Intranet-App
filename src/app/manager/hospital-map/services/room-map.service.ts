@@ -37,10 +37,8 @@ export class RoomMapService {
     }
 
     for (let room of rooms) {
-      if (
-        !(this.checkCoordinate(newRoom.xCoordinate, room.xCoordinate, this.defaultRoomWidth) &&
-          this.checkCoordinate(newRoom.yCoordinate, room.yCoordinate, this.defaultRoomHeight))
-      ) break;
+      if (this.checkFit(newRoom, room)) 
+        break;
 
       if (this.checkBorderFit(newRoom.xCoordinate, this.defaultRoomWidth, this.mapWidth)) {
         newRoom.xCoordinate += this.defaultRoomHeight + this.offset;
@@ -55,6 +53,11 @@ export class RoomMapService {
     }
 
     return newRoom;
+  }
+
+  private checkFit(newRoom: CreateRoom, room: IRoom): boolean {
+    return !(this.checkCoordinate(newRoom.xCoordinate, room.xCoordinate, this.defaultRoomWidth) && 
+            this.checkCoordinate(newRoom.yCoordinate, room.yCoordinate, this.defaultRoomHeight))
   }
 
   private checkCoordinate(newCoordinate: number, oldCoordinate: number, def: number): boolean {
