@@ -10,7 +10,8 @@ import { BuildingMapService } from '../services/building-map.service';
 })
 export class BuildingMapComponent implements OnInit {
 
-  
+  // public dataSource = new MatTableDataSource<IBuilding>();
+  //public buildings: IBuilding[] = [];
   data:any;
   svg:any;
   buildings:any;
@@ -23,6 +24,10 @@ export class BuildingMapComponent implements OnInit {
 
 
   ngOnInit(): void {
+    // this.buildingMapService.getBuildings().subscribe(res => {
+    //   this.buildings = res;
+    //   this.dataSource.data = this.buildings;
+    // })
     this.data = this.buildingMapService.getData();
     this.svg  = this.buildingMapService.createSVG();
 
@@ -41,7 +46,6 @@ export class BuildingMapComponent implements OnInit {
   }
   showFloors(svg:any, router:any){
     svg.on("dblclick", function(d:any, i:any){
-      //alert(i.id);
       router.navigate(['floor-map']);
       //router.navigate(['floor-map'], i.id)
     })

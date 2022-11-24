@@ -6,6 +6,20 @@ import * as d3 from 'd3';
 })
 export class BuildingMapService {
 
+  // apiHost: string = 'http://localhost:5000/';
+  // headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  // constructor(private http: HttpClient) { }
+
+  // getBuildings(): Observable<IBuilding[]> {
+  //   return this.http.get<IBuilding[]>(this.apiHost + 'api/intranet/buildings', {headers: this.headers});
+  // }
+  // getBuilding(id: number): Observable<IBuilding> {
+  //   return this.http.get<IBuilding>(this.apiHost + 'api/intranet/buildings/' + id, {headers: this.headers});
+  // }
+  // updateBuilding(building: any): Observable<any> {
+  //   return this.http.put<any>(this.apiHost + 'api/intranet/buildings/' + building.id, building, {headers: this.headers});
+  // }
   constructor() { }
   getData(){
     var data2 = [{
