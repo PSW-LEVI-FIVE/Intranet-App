@@ -1,18 +1,65 @@
-import { IFloor } from './../model/floor.model';
+import { CreateFloor, IFloor } from './../model/floor.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as d3 from 'd3';
 import { Observable } from 'rxjs';
+import { flatRollup } from 'd3';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FloorMapService {
 
- apiHost: string = 'http://localhost:5000/';
+  apiHost: string = 'http://localhost:5000/';
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
+  private mapHeight = 500;
+  private mapWidth = 800;
+
+  private defaultFloorHeight = 80;
+  private defaultFloorWidth = 700;
+  private xOffset = 50;
+  private yOffset = 350;
+  private decrement = 100;
+
   constructor(private http: HttpClient) { }
+
+  public createFloor(createFloor: CreateFloor): Observable<CreateFloor> {
+    return this.http.post<CreateFloor>(
+      `${this.apiHost}api/intranet/map/floors`,
+      JSON.stringify(createFloor), 
+      { headers: this.headers }
+    );
+  }
+  
+  public handleFloorGeneration(floors: IFloor[]): CreateFloor | undefined{
+    const newFloor = <CreateFloor>{
+      xCoordinate: this.xOffset,
+      yCoordinate: this.yOffset,
+      width: this.defaultFloorWidth,
+      height: this.defaultFloorHeight
+    };
+
+    for (let floor of floors) {
+      if(!this.checkYCoordinate(newFloor.yCoordinate, floor.yCoordinate)) {
+        break;
+      }
+
+      if(newFloor.yCoordinate - this.decrement > 0) {
+        newFloor.yCoordinate -= this.decrement;
+        continue;
+      }
+
+      return undefined;
+    }
+
+    return newFloor;
+  }
+
+  private checkYCoordinate(newY: number, oldY: number): boolean {
+    return (newY >= oldY && newY <= oldY + this.defaultFloorHeight);
+  }
+
   getFloorById(id: number): Observable<IFloor> {
     return this.http.get<IFloor>(this.apiHost + 'api/intranet/floors/' + id, {headers: this.headers});
   }
@@ -47,7 +94,7 @@ export class FloorMapService {
   // }
 
   createSVG(){
-    return d3.select("#svgDiv").append("svg").attr("height", 500).attr("width", 800)
+    return d3.select("#svgDiv").append("svg").attr("height", this.mapHeight).attr("width", this.mapWidth)
   }
 
   createRectangles(svg:any,data2:any){

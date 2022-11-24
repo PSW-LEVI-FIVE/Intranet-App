@@ -19,9 +19,8 @@ import { DoctorStatisticsPopularityComponent } from './doctor-statistics-popular
 import { AllergenStatisticsFrequencyComponent } from './allergen-statistics-frequency/allergen-statistics-frequency.component';
 import { AnnualLeaveComponent } from './annual-leave/annual-leaves/annual-leave.component';
 import { AnnualLeaveReviewComponent } from './annual-leave/annual-leave-review/annual-leave-review.component';
-
-
 import { CreateBuildingComponent } from './hospital-map/create-building/create-building.component';
+import { CreateFloorComponent } from './hospital-map/create-floor/create-floor.component';
 
 
 const routes: Routes = [
@@ -76,6 +75,10 @@ const routes: Routes = [
         path: 'annual-leave/:id/review', 
         component: AnnualLeaveReviewComponent
       },
+      {
+        path: 'create-floor',
+        component: CreateFloorComponent
+      }
     ]
 
   }
