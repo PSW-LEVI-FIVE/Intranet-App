@@ -1,0 +1,15 @@
+<div>
+    <form [formGroup]="tabForm" class="template-form-box">
+        <div class="template-form-title h3">
+            <h3>Chose the type of medicine to prescribe</h3>
+        </div>
+        <mat-tab-group>
+            <mat-tab label="Blood therapy">
+                <app-give-blood-therapy></app-give-blood-therapy>
+            </mat-tab>
+            <mat-tab label="Medicine therapy">
+                <app-give-medicine-therapy></app-give-medicine-therapy>
+            </mat-tab>
+        </mat-tab-group>
+    </form>
+</div>

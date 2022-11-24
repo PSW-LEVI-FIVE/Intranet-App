@@ -1,0 +1,42 @@
+<app-modal-form [title]="'Create hospitalization'" (closeModal)="closeModal()">
+    <form [formGroup]="hospitalizationFormGroup" class="form-wrapper" (ngSubmit)="save()">
+        <div class="header-wrapper">
+            <h2>Create Hospitalization</h2>
+        </div>
+        <div class="form-group-wrapper">
+            <mat-form-field appearance="fill">
+                <mat-label>Patient</mat-label>
+                <mat-select formControlName="patient">
+                    <mat-option *ngFor="let patient of patients" value="{{patient.id}}">
+                        {{patient.name + " " + patient.surname + " " + patient.uid}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Room</mat-label>
+                <mat-select formControlName="room">
+                    <mat-option *ngFor="let room of rooms" value="{{room.id}}">
+                        {{room.roomNumber}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" *ngIf="beds.length > 0">
+                <mat-label>Bed</mat-label>
+                <mat-select formControlName="bed">
+                    <mat-option *ngFor="let bed of beds" value="{{bed.id}}">
+                        {{bed.number}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Start Time</mat-label>
+                <input matInput formControlName="startTime" type="datetime-local" />
+            </mat-form-field>
+        </div>
+
+        <div class="buttons-wrapper">
+            <button type="datetime" mat-raised-button color="primary"
+                [disabled]="!hospitalizationFormGroup.valid">Save</button>
+        </div>
+    </form>
+</app-modal-form>

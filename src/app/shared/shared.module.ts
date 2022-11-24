@@ -4,11 +4,12 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { LoaderComponent } from './loader/loader.component';
 import { TemplateFormComponent } from './template-form/template-form.component';
 import { DoctorMenuComponent } from './doctor-menu/doctor-menu.component';
-import {MatMenuModule} from "@angular/material/menu";
-import {RouterModule,RouterOutlet} from "@angular/router";
-import {MatToolbarModule} from "@angular/material/toolbar";
+import { MatMenuModule } from "@angular/material/menu";
+import { RouterModule, RouterOutlet } from "@angular/router";
+import { MatToolbarModule } from "@angular/material/toolbar";
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
+import { ModalFormComponent } from './modal-form/modal-form.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { FormsModule } from '@angular/forms';
     TemplateFormComponent,
     DoctorMenuComponent,
     LoginComponent,
+    ModalFormComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +29,6 @@ import { FormsModule } from '@angular/forms';
     RouterModule,
     FormsModule
   ],
-  exports: [LoaderComponent, DoctorMenuComponent, TemplateFormComponent]
+  exports: [LoaderComponent, DoctorMenuComponent, TemplateFormComponent, ModalFormComponent]
 })
 export class SharedModule { }

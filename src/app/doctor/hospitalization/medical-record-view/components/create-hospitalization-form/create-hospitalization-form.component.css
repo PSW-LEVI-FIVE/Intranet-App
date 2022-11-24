@@ -1,0 +1,19 @@
+.form-wrapper {
+    width: 400px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    border-radius: 5px;
+}
+
+
+.form-wrapper .form-group-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
