@@ -1,11 +1,11 @@
 export interface IAnnualLeave {
     id:number;
     doctorId:number;
-    doctor: String;
-    reason:String;
-    startAt:String;
-    endAt:String;
-    state:String;
+    doctor: string;
+    reason:string;
+    startAt:string;
+    endAt:string;
+    state:string;
     isUrgent:boolean;
 
 }

@@ -24,9 +24,6 @@
     flex: 0 1 auto;
     align-self: auto;
   }
-  .logout{
-    margin-left: 800px;
-  }
   
   .nav a:hover {
     background-color: #31346e;
