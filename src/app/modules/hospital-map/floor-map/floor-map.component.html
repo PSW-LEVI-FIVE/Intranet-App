@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h1>Floor overview</h1>
 <<<<<<< HEAD
 <div id="svgDiv" text-align="left" style="height: 400px; width: 800px;">
@@ -9,3 +10,29 @@
 <div id="div4"></div>
 <svg id="rect"></svg>
 >>>>>>> d30493f (Add form with information about floors in hospital)
+=======
+
+<h1 class="title">Floors</h1>
+<div class="container">
+<div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 700px;"></div>
+
+<div [style.visibility]="formVisible" class="buildInfo">
+    <h1 class="cardTitle">  Floor information  </h1>
+    <table style="margin-left:40px;">
+        <mat-form-field appearance="fill">
+            <mat-label>Building ID</mat-label>
+            <input matInput disabled [value]="selectedFloor.id">
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+            <mat-label>Building name</mat-label>
+            <input matInput [value]="selectedFloor.name">
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+            <mat-label>Floors</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+</table>
+</div>
+</div>
+>>>>>>> cb9c77c (Made changes to design of floor map)
