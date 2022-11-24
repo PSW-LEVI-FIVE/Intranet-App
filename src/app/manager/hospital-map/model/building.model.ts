@@ -10,3 +10,13 @@ export interface IBuilding {
             Address: string
       }
 }
+
+export interface CreateBuilding {
+    address: string,
+    name: string,
+	xCoordinate: number,
+	yCoordinate: number,
+	width: number,
+    height: number,
+	rgbColour: string
+}

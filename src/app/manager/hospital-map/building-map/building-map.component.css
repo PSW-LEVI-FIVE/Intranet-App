@@ -94,3 +94,12 @@
    display: flex;
    justify-content: center
 }
+
+#add-button {
+    position: absolute;
+    margin-left: 5%;
+    margin-top: 5%;
+    font-size: 24px;
+    width: 100px;
+    height: 100px;
+}

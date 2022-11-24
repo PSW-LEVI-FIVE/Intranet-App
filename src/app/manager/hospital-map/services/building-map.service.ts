@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as d3 from 'd3';
-import { Observable } from 'rxjs';
-import { IBuilding } from '../model/building.model';
+import { Observable, Subject } from 'rxjs';
+import { CreateBuilding, IBuilding } from '../model/building.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,61 @@ export class BuildingMapService {
   apiHost: string = 'http://localhost:5000/';
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
+  private mapHeight = 500;
+  private mapWidth = 800;
+
+  private defaultBuildingHeight = 200;
+  private defaultBuildingWidth = 200;
+  private offset = 35;
+  
   constructor(private http: HttpClient) { }
+
+  public createBuilding(createBuilding: CreateBuilding): Observable<CreateBuilding> {
+    return this.http.post<CreateBuilding>(
+      `${this.apiHost}api/intranet/map/buildings`, 
+      JSON.stringify(createBuilding), 
+      { headers: this.headers }
+    );
+  }
+
+  public handleBuildingGeneration(buildings: IBuilding []): CreateBuilding | undefined {
+    const newBuilding = <CreateBuilding>{
+      xCoordinate: this.offset,
+      yCoordinate: this.offset,
+      width: this.defaultBuildingWidth,
+      height: this.defaultBuildingHeight,
+    };
+
+    for(let building of buildings) {
+      if(
+        this.checkCoordinate(newBuilding.xCoordinate, building.xCoordinate, this.defaultBuildingWidth) &&
+        this.checkCoordinate(newBuilding.yCoordinate, building.yCoordinate, this.defaultBuildingHeight)
+      ){
+        if(this.checkBorderFit(newBuilding.xCoordinate, this.defaultBuildingWidth, this.mapWidth)) {
+          newBuilding.xCoordinate += this.defaultBuildingWidth + this.offset;
+        } else {
+          newBuilding.xCoordinate = this.offset;
+          if(this.checkBorderFit(newBuilding.yCoordinate, this.defaultBuildingHeight, this.mapHeight)) {
+            newBuilding.yCoordinate += this.defaultBuildingHeight + this.offset;
+          } else {
+            return undefined;
+          } 
+        }
+      } else {
+        break;
+      }
+    }
+
+    return newBuilding;
+  }
+
+  private checkCoordinate(newCoordinate: number, oldCoordinate: number, def: number): boolean {
+    return (newCoordinate >= oldCoordinate && newCoordinate <= oldCoordinate + def)
+  }
+
+  private checkBorderFit(newCoordinate: number, def: number, map: number): boolean {
+    return (newCoordinate + 2 * def + this.offset < map);
+  }
 
   getBuildings(): Observable<IBuilding[]> {
     return this.http.get<IBuilding[]>(this.apiHost + 'api/intranet/map/buildings', {headers: this.headers});
@@ -48,7 +102,7 @@ export class BuildingMapService {
   //   return data2;
   // }
   createSVG(){
-    return d3.select("#svgDiv").append("svg").attr("height", 500).attr("width", 800)
+    return d3.select("#svgDiv").append("svg").attr("height", this.mapHeight).attr("width", this.mapWidth);
   }
   createRectangles(svg:any, data2:any){
     return svg.selectAll("rect").data(data2).enter().append("rect")
