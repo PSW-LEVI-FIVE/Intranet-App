@@ -37,24 +37,23 @@ export class BuildingMapService {
       height: this.defaultBuildingHeight,
     };
 
-    for(let building of buildings) {
-      if(
-        this.checkCoordinate(newBuilding.xCoordinate, building.xCoordinate, this.defaultBuildingWidth) &&
-        this.checkCoordinate(newBuilding.yCoordinate, building.yCoordinate, this.defaultBuildingHeight)
-      ){
-        if(this.checkBorderFit(newBuilding.xCoordinate, this.defaultBuildingWidth, this.mapWidth)) {
-          newBuilding.xCoordinate += this.defaultBuildingWidth + this.offset;
-        } else {
-          newBuilding.xCoordinate = this.offset;
-          if(this.checkBorderFit(newBuilding.yCoordinate, this.defaultBuildingHeight, this.mapHeight)) {
-            newBuilding.yCoordinate += this.defaultBuildingHeight + this.offset;
-          } else {
-            return undefined;
-          } 
-        }
-      } else {
-        break;
+    for (let building of buildings) {
+      if (
+        !(this.checkCoordinate(newBuilding.xCoordinate, building.xCoordinate, this.defaultBuildingWidth) &&
+          this.checkCoordinate(newBuilding.yCoordinate, building.yCoordinate, this.defaultBuildingHeight))
+      ) break;
+
+      if (this.checkBorderFit(newBuilding.xCoordinate, this.defaultBuildingWidth, this.mapWidth)) {
+        newBuilding.xCoordinate += this.defaultBuildingWidth + this.offset;
+        continue;
       }
+
+      newBuilding.xCoordinate = this.offset;
+      if (!this.checkBorderFit(newBuilding.yCoordinate, this.defaultBuildingHeight, this.mapHeight))
+        return undefined;
+
+      newBuilding.yCoordinate += this.defaultBuildingHeight + this.offset;
+
     }
 
     return newBuilding;
