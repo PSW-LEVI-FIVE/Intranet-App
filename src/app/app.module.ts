@@ -35,7 +35,6 @@ import { HospitalizationModule } from "./doctor/hospitalization/hospitalization.
     HospitalMapModule,
     AnnualLeaveModule,
     ToastrModule.forRoot(),
-
     HospitalizationModule,
 
     
@@ -49,6 +48,10 @@ import { HospitalizationModule } from "./doctor/hospitalization/hospitalization.
     }
 
    
+
+
+    
+    
 
   ],
   bootstrap: [AppComponent]

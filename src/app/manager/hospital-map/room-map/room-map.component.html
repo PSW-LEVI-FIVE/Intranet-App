@@ -32,8 +32,14 @@
       </nav>
 </div> 
 <h1 class="title">Room map</h1>
+
 <div class="container">
+
     <div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 800px;">
+
+    <div style="margin-left: 15px; ">
+    <app-search-rooms (newItemEvent)="highlight($event)" [floorID]="floorId" ></app-search-rooms>
+
     </div>
     <div *ngIf ="selectedObjects">
         <h1 class="cardTitle">  Room information  </h1>
@@ -53,6 +59,8 @@
       </button>
   </div>
     </div>
+    
 </div>
+
    
 <button id="add-button" mat-fab color="primary" (click)="toggleCreate()">Add</button> 

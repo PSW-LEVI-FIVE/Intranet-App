@@ -29,7 +29,7 @@ export class BuildingMapComponent implements OnInit {
     this.buildingMapService.getBuildings().subscribe(res => {
       this.buildings = res;
       this.dataSource.data = this.buildings;
-
+      console.log(this.buildings)
       this.svg  = this.buildingMapService.createSVG();
 
       this.buildingsMap = this.buildingMapService.createRectangles(this.svg, this.buildings);
