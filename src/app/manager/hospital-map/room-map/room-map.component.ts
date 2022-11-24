@@ -53,7 +53,7 @@ export class RoomMapComponent implements OnInit {
       this.route.params.subscribe((params: Params) => createRoom.mapFloorId = params['id']);
       this.router.navigate(['manager/create-room'], {state: {data: createRoom}});
     } else {
-      this.toastService.info('Maximum number of buildings reached');
+      this.toastService.info('Maximum number of rooms reached');
     }
   }
 
