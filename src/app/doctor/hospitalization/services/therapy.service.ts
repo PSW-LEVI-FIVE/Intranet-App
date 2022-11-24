@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { IGiveBloodTherapy } from "../give-therapy-form/components/give-blood-therapy/give-blood-therapy.component";
 import { IGiveMedicineTherapy } from "../give-therapy-form/components/give-medicine-therapy/give-medicine-therapy.component";
 import { Medicine } from '../model/medicine.model';
-import { Blood } from '../model/blood.model';
+import { BloodType } from '../model/blood.model';
 import { TherapiesDto } from '../model/therapiesDto.model';
 
 @Injectable({
@@ -25,14 +25,14 @@ export class TherapyService {
     return this.httpClient.post(url, body)
   }
 
-  getMedicine() {
-    const url = `${this.url}/intranet/medicine`;
+  getMedicine(id: number) {
+    const url = `${this.url}/intranet/medicine/compatibile/` + id;
     return this.httpClient.get<Medicine[]>(url)
   }
 
-  getBlood() {
-    const url = `${this.url}/intranet/blood-storage`;
-    return this.httpClient.get<Blood[]>(url)
+  getBlood(id: number) {
+    const url = `${this.url}/intranet/blood-storage/compatibile/` + id;
+    return this.httpClient.get<number[]>(url)
   }
 
   getHospitalizationTherapies(id: number) {
