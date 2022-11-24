@@ -12,7 +12,7 @@
 </div> 
 <h1 class="title">Hospital map</h1>
 <div class="container">
-    <div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 700px;">
+    <div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 800px;">
     </div>
     <div [style.visibility]="formVisible" class="buildInfo">
         <h1 class="cardTitle">  Building information  </h1>
@@ -34,5 +34,4 @@
     </div>
 </div>
 
-
-
+<button id="add-button" mat-fab color="primary" (click)="toggleCreate()">Add</button> 

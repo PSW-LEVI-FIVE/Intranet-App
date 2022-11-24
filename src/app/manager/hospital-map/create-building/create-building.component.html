@@ -1,0 +1,21 @@
+<div id="createBuildingForm">
+    <h1>Create Building</h1>
+    <form>
+        <table>
+            <tr>
+                <mat-form-field appearance="outline">
+                    <mat-label>Building Name</mat-label>
+                    <input name="name" [(ngModel)]="createBuilding.name" matInput required>
+                </mat-form-field>
+            </tr>
+            <tr>
+                <mat-form-field appearance="outline">
+                    <mat-label>Building Address</mat-label>
+                    <input name="address" [(ngModel)]="createBuilding.address" matInput required>
+                </mat-form-field>
+            </tr>
+            <button mat-raised-button color="primary" (click)="submitForm()">Submit</button>
+        </table>
+
+    </form>
+</div>

@@ -13,6 +13,7 @@ import { RoomModule } from "./manager/room/room.module";
 import { ToastrModule } from 'ngx-toastr';
 import { HospitalMapModule } from "./manager/hospital-map/hospital-map.module";
 import { AuthInterception } from "./shared/login/model/auth.interceptor";
+
 @NgModule({
   declarations: [
     AppComponent,

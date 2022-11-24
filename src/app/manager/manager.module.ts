@@ -17,6 +17,8 @@ import { AuthGuard } from '../shared/login/model/auth.guard';
 import { DoctorStatisticsPopularityComponent } from './doctor-statistics-popularity/doctor-statistics-popularity.component';
 import { AllergenStatisticsFrequencyComponent } from './allergen-statistics-frequency/allergen-statistics-frequency.component';
 
+import { CreateBuildingComponent } from './hospital-map/create-building/create-building.component';
+
 
 const routes: Routes = [
   {
@@ -58,6 +60,10 @@ const routes: Routes = [
         path: 'room-map/:id', 
         component: RoomMapComponent 
       },
+      {
+        path: 'create-building',
+        component: CreateBuildingComponent
+      }
     ]
 
   }

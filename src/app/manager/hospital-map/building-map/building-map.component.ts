@@ -1,8 +1,9 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { BuildingMapService } from '../services/building-map.service';
-import { IBuilding } from '../model/building.model';
+import { CreateBuilding, IBuilding } from '../model/building.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-building-map',
@@ -21,8 +22,8 @@ export class BuildingMapComponent implements OnInit {
   selectedBuilding:any;
   public selectedBuildingId:any;
   formVisible: any = "hidden";
-  constructor(private buildingMapService: BuildingMapService, private router:Router) { }
 
+  constructor(private buildingMapService: BuildingMapService, private router:Router, private toastService: ToastrService) { }
 
   ngOnInit(): void {
     this.buildingMapService.getBuildings().subscribe(res => {
@@ -36,10 +37,17 @@ export class BuildingMapComponent implements OnInit {
       this.addOnClick(this.buildingsMap);
       this.showFloors(this.buildingsMap, this.router);
     })
-   // this.data = this.buildingMapService.getData();
-    
-
   }
+
+  public toggleCreate(): void {
+    const createBuilding = this.buildingMapService.handleBuildingGeneration(this.buildings);
+    if(createBuilding) {
+      this.router.navigate(['manager/create-building'], {state: {data: createBuilding}});
+    } else {
+      this.toastService.info('Maximum number of buildings reached');
+    }
+  }
+
   Logout()
   {
     localStorage.removeItem('token');
