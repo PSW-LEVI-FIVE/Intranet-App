@@ -19,7 +19,7 @@ export class AnnualLeaveComponent implements OnInit {
   ngOnInit(): void {
     this.annualLeaveService.getAnnualLeaves().subscribe(res => {
       this.annualLeaves = res;
-      this.annualLeaves.map(leave=>{
+      this.annualLeaves.forEach((leave) => { 
         leave.startAt = leave.startAt.split('T')[0]
         leave.endAt = leave.endAt.split('T')[0]
         leave.state = this.getState(leave.state);
