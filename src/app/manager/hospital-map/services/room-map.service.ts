@@ -1,4 +1,4 @@
-import { IRoom } from './../model/room.model';
+import { CreateRoom, IRoom } from './../model/room.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -11,7 +11,60 @@ export class RoomMapService {
   apiHost: string = 'http://localhost:5000/';
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
+  private mapHeight = 500;
+  private mapWidth = 800;
+
+  private defaultRoomHeight = 80;
+  private defaultRoomWidth = 80;
+  private offset = 35;
+
   constructor(private http: HttpClient) { }
+
+  public createRoom(createRoom: CreateRoom): Observable<CreateRoom> {
+    return this.http.post<CreateRoom>(
+      `${this.apiHost}api/intranet/map/rooms`, 
+      JSON.stringify(createRoom), 
+      { headers: this.headers }
+    );
+  }
+
+  public handleRoomGeneration(rooms: IRoom []): CreateRoom | undefined {
+    const newRoom = <CreateRoom> {
+      xCoordinate: this.offset,
+      yCoordinate: this.offset,
+      width: this.defaultRoomHeight,
+      height: this.defaultRoomWidth,
+    }
+
+    for (let room of rooms) {
+      if (
+        !(this.checkCoordinate(newRoom.xCoordinate, room.xCoordinate, this.defaultRoomWidth) &&
+          this.checkCoordinate(newRoom.yCoordinate, room.yCoordinate, this.defaultRoomHeight))
+      ) break;
+
+      if (this.checkBorderFit(newRoom.xCoordinate, this.defaultRoomWidth, this.mapWidth)) {
+        newRoom.xCoordinate += this.defaultRoomHeight + this.offset;
+        continue;
+      }
+
+      newRoom.xCoordinate = this.offset;
+      if (!this.checkBorderFit(newRoom.yCoordinate, this.defaultRoomHeight, this.mapHeight))
+        return undefined;
+
+      newRoom.yCoordinate += this.defaultRoomHeight + this.offset;
+    }
+
+    return newRoom;
+  }
+
+  private checkCoordinate(newCoordinate: number, oldCoordinate: number, def: number): boolean {
+    return (newCoordinate >= oldCoordinate && newCoordinate <= oldCoordinate + def)
+  }
+
+  private checkBorderFit(newCoordinate: number, def: number, map: number): boolean {
+    return (newCoordinate + 2 * def + this.offset < map);
+  }
+
   getByID(id: number): Observable<IRoom> {
     return this.http.get<IRoom>(this.apiHost + 'api/intranet/rooms/' + id, {headers: this.headers});
   }

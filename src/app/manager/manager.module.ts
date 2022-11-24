@@ -21,6 +21,7 @@ import { AnnualLeaveComponent } from './annual-leave/annual-leaves/annual-leave.
 import { AnnualLeaveReviewComponent } from './annual-leave/annual-leave-review/annual-leave-review.component';
 import { CreateBuildingComponent } from './hospital-map/create-building/create-building.component';
 import { CreateFloorComponent } from './hospital-map/create-floor/create-floor.component';
+import { CreateMapRoomComponent } from './hospital-map/create-map-room/create-map-room.component';
 
 
 const routes: Routes = [
@@ -78,6 +79,10 @@ const routes: Routes = [
       {
         path: 'create-floor',
         component: CreateFloorComponent
+      },
+      {
+        path: 'create-room',
+        component: CreateMapRoomComponent
       }
     ]
 

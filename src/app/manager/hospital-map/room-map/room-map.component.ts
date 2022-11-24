@@ -3,6 +3,9 @@ import { BuildingMapService } from './../services/building-map.service';
 import { RoomMapService } from './../services/room-map.service';
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
+import { ToastrService } from 'ngx-toastr';
+import { CreateRoom, IRoom } from '../model/room.model';
+import { create } from 'd3';
 
 @Component({
   selector: 'app-room-map',
@@ -18,7 +21,14 @@ export class RoomMapComponent implements OnInit {
   roomsText:any;
   enableEditing : boolean = false;
   selectedObjects:any;
-  constructor(private roomMapService:RoomMapService, private buildingMapService:BuildingMapService, private route: ActivatedRoute, private router:Router) { }
+
+  constructor(
+    private roomMapService:RoomMapService, 
+    private buildingMapService:BuildingMapService, 
+    private route: ActivatedRoute, 
+    private router:Router, 
+    private toastService: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -35,6 +45,16 @@ export class RoomMapComponent implements OnInit {
     });
     //this.data = this.roomMapService.getData();
 
+  }
+
+  public toggleCreate(): void {
+    const createRoom = this.roomMapService.handleRoomGeneration(this.data);
+    if(createRoom) {
+      this.route.params.subscribe((params: Params) => createRoom.mapFloorId = params['id']);
+      this.router.navigate(['manager/create-room'], {state: {data: createRoom}});
+    } else {
+      this.toastService.info('Maximum number of buildings reached');
+    }
   }
 
   showInformation(svg:any){
