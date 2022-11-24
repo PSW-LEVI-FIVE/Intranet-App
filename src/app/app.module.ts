@@ -1,4 +1,5 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AnnualLeaveModule } from './manager/annual-leave/annual-leave.module';
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
@@ -30,6 +31,7 @@ import { AuthInterception } from "./shared/login/model/auth.interceptor";
     ManagerModule,
     RoomModule,
     HospitalMapModule,
+    AnnualLeaveModule,
     ToastrModule.forRoot()
   ],
   providers: [

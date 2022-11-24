@@ -16,6 +16,9 @@ import { RoomMapComponent } from './hospital-map/room-map/room-map.component';
 import { AuthGuard } from '../shared/login/model/auth.guard';
 import { DoctorStatisticsPopularityComponent } from './doctor-statistics-popularity/doctor-statistics-popularity.component';
 import { AllergenStatisticsFrequencyComponent } from './allergen-statistics-frequency/allergen-statistics-frequency.component';
+import { AnnualLeaveComponent } from './annual-leave/annual-leaves/annual-leave.component';
+import { AnnualLeaveReviewComponent } from './annual-leave/annual-leave-review/annual-leave-review.component';
+
 
 import { CreateBuildingComponent } from './hospital-map/create-building/create-building.component';
 
@@ -63,7 +66,15 @@ const routes: Routes = [
       {
         path: 'create-building',
         component: CreateBuildingComponent
-      }
+      },
+      { 
+        path: 'annual-leave', 
+        component: AnnualLeaveComponent 
+      },
+      { 
+        path: 'annual-leave/:id/review', 
+        component: AnnualLeaveReviewComponent
+      },
     ]
 
   }
