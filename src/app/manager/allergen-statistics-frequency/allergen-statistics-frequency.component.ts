@@ -15,52 +15,53 @@ export class AllergenStatisticsFrequencyComponent implements OnInit {
 
   constructor(private allergenStatsService: AllergenStatsService) { }
 
-  public createChart(){
+  public createChart() {
     Chart.defaults.backgroundColor = 'rgba(0, 0, 0, 0.3)';
     Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.3)';
     Chart.defaults.color = 'rgba(0, 0, 0, 1)';
     Chart.defaults.font.size = 30;
 
     var ctx = document.getElementById("myChart") as HTMLCanvasElement;
-    var myChart = new Chart(ctx,{
+    var myChart = new Chart(ctx, {
       type: 'bar',
-    data: {
-      labels: this.allergens,
-      datasets: [{
-        label: "Allergens and number of patients that are alergic to them",
-        data: this.numberOfPatients,
-        borderWidth: 3,
-        backgroundColor: '#5DADEC'
-      }]
-    },
-    options: 
-    {
-      plugins:  
-      {
-        legend:
-        {
-            labels: {font: { size: 20 } }
-        }
+      data: {
+        labels: this.allergens,
+        datasets: [{
+          label: "Allergens and number of patients that are alergic to them",
+          data: this.numberOfPatients,
+          borderWidth: 3,
+          backgroundColor: '#5DADEC'
+        }]
       },
-      scales: 
+      options:
       {
-          y: 
+        plugins:
+        {
+          legend:
           {
-            ticks: 
-            {
-              callback: function (value) { if (Number.isInteger(value)) { return value; } return null;
-            },
-          },
-          beginAtZero: true
+            labels: { font: { size: 20 } }
           }
+        },
+        scales:
+        {
+          y:
+          {
+            ticks:
+            {
+              callback: function (value: any) {
+                if (Number.isInteger(value)) { return value; } return null;
+              },
+            },
+            beginAtZero: true
+          }
+        }
       }
-    }
     });
   }
 
   ngOnInit(): void {
-    this.allergenStatsService.getAllergensWithPatients().subscribe(res =>{
-      res.forEach( allergenWithPats => {
+    this.allergenStatsService.getAllergensWithPatients().subscribe(res => {
+      res.forEach(allergenWithPats => {
         this.allergens.push(allergenWithPats.allergen);
         this.numberOfPatients.push(allergenWithPats.patients);
       })

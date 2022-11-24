@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY } from 'rxjs';
 import { BloodOrderService } from '../../services/blood-order.service';
 
- enum BloodType {
+enum BloodType {
   A_POSITIVE,
   A_NEGATIVE,
   B_POSITIVE,
@@ -32,7 +32,7 @@ export interface ICreateBloodOrder {
 })
 export class CreateBloodOrderComponent implements OnInit {
 
-  public arrival: Date = new Date();
+  private arrival: Date = new Date()
 
   bloodOrderForm = this.fb.group({
     arrival: [this.arrival, Validators.required],
@@ -53,17 +53,26 @@ export class CreateBloodOrderComponent implements OnInit {
   }
 
   create() {
-    if(this.bloodOrderForm.status == 'INVALID') {
+    if (this.bloodOrderForm.status == 'INVALID') {
       this.toastService.error("All fields should be filled!")
       return
     }
 
-    if(this.arrival < new Date()) {
+    let arrival = this.bloodOrderForm.get('arrival')?.value
+
+    if (arrival == null) return
+    let today = new Date()
+
+    arrival.setUTCHours(0, 0, 0, 0)
+    today.setUTCHours(0, 0, 0, 0)
+    console.log(arrival, today)
+
+    if (arrival.getTime() <= today.getTime()) {
       this.toastService.error("Date should be in future!")
       return
     }
 
-    if(Number(this.bloodOrderForm.get('quantity')?.value).valueOf() < 1) {
+    if (Number(this.bloodOrderForm.get('quantity')?.value).valueOf() < 1) {
       this.toastService.error("Quantity should be greater than 0")
       return
     }
