@@ -5,7 +5,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Validators } from '@angular/forms';
 import { TherapyService } from '../../../services/therapy.service';
 import { catchError, EMPTY } from 'rxjs';
-import { DatePipe } from '@angular/common';
 import { Medicine } from '../../../model/medicine.model';
 
 
@@ -32,6 +31,7 @@ export class GiveMedicineTherapyComponent implements OnInit {
   })
 
   public title: string = 'Prescribe medicine therapy';
+  public hospId: number = Number(this.route.snapshot.paramMap.get('id'));
 
   constructor(private readonly therapyService: TherapyService,
     private route: ActivatedRoute,
@@ -40,13 +40,10 @@ export class GiveMedicineTherapyComponent implements OnInit {
     private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.therapyService.getMedicine().subscribe(res => {
+    this.therapyService.getMedicine(this.hospId).subscribe(res => {
       this.medicines = res;
     })
   }
-
-
-
 
   createMedicineTherapy() {
     if (this.giveMedicineTherapyForm.status == 'INVALID') {
@@ -57,7 +54,7 @@ export class GiveMedicineTherapyComponent implements OnInit {
     console.log(Number(this.route.snapshot.paramMap.get('id')));
 
     let body: IGiveMedicineTherapy = {
-      HospitalizationId: Number(this.route.snapshot.paramMap.get('id')),
+      HospitalizationId: this.hospId,
       GivenAt: new Date(),
       MedicineId: this.giveMedicineTherapyForm.get('medicineId')?.value,
       Quantity: this.giveMedicineTherapyForm.get('quantity')?.value,

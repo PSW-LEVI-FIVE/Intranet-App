@@ -1,5 +1,4 @@
-export interface Blood {
+export interface BloodType {
     bloodType: number,
-    quantity: number,
     name?: string,
 }

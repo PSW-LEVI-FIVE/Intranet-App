@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Validators } from '@angular/forms';
 import { TherapyService } from '../../../services/therapy.service';
 import { catchError, EMPTY } from 'rxjs';
-import { Blood } from '../../../model/blood.model';
+import { BloodType } from '../../../model/blood.model';
 
 export interface IGiveBloodTherapy {
   HospitalizationId: number | null | undefined;
@@ -15,17 +15,21 @@ export interface IGiveBloodTherapy {
   DoctorId: number | null | undefined;
 }
 
+export type BloodToShow = {
+  bType: number;
+  name: string;
+};
+
 @Component({
   selector: 'app-give-blood-therapy',
   templateUrl: './give-blood-therapy.component.html',
   styleUrls: ['./give-blood-therapy.component.css']
 })
 
-
-
 export class GiveBloodTherapyComponent implements OnInit {
 
-  public allBlood: Blood[] = [];
+  public allBloodTypes: number[] = [];
+  public allBlood: BloodToShow[] = [];
 
   giveBloodTherapyForm = this.fb.group({
     bloodType: [-1, Validators.required],
@@ -33,6 +37,7 @@ export class GiveBloodTherapyComponent implements OnInit {
   })
 
   public title: string = 'Prescribe blood therapy';
+  public hospId: number = Number(this.route.snapshot.paramMap.get('id'));
 
   constructor(private readonly therapyService: TherapyService,
     private route: ActivatedRoute,
@@ -40,31 +45,58 @@ export class GiveBloodTherapyComponent implements OnInit {
     private readonly router: Router,
     private fb: FormBuilder) { }
 
+
+
   ngOnInit(): void {
-    this.therapyService.getBlood().subscribe(res => {
-      this.allBlood = res;
-      this.giveNameByType(this.allBlood);
+    this.therapyService.getBlood(this.hospId).subscribe(res => {
+      this.allBloodTypes = res;
+      this.giveNameByType(this.allBloodTypes);
     })
   }
 
-  giveNameByType(blood: Blood[]) {
+  giveNameByType(blood: number[]) {
     blood.forEach(element => {
-      if (element.bloodType == 0)
-        element.name = "A positive";
-      else if (element.bloodType == 1)
-        element.name = "A negative";
-      else if (element.bloodType == 2)
-        element.name = "B positive";
-      else if (element.bloodType == 3)
-        element.name = "B negative";
-      else if (element.bloodType == 4)
-        element.name = "AB positive";
-      else if (element.bloodType == 5)
-        element.name = "AB negative";
-      else if (element.bloodType == 6)
-        element.name = "0 positive";
-      else
-        element.name = "0 negative";
+      let one: BloodToShow = { bType: -1, name: "" };
+      if (element == 0) {
+        one.bType = 0;
+        one.name = "A+";
+        this.allBlood.push(one);
+      }
+      else if (element == 1) {
+        one.bType = 1;
+        one.name = "A-";
+        this.allBlood.push(one);
+      }
+      else if (element == 2) {
+        one.bType = 2;
+        one.name = "B+";
+        this.allBlood.push(one);
+      }
+      else if (element == 3) {
+        one.bType = 3;
+        one.name = "B-";
+        this.allBlood.push(one);
+      }
+      else if (element == 4) {
+        one.bType = 4;
+        one.name = "AB+";
+        this.allBlood.push(one);
+      }
+      else if (element == 5) {
+        one.bType = 5;
+        one.name = "AB-";
+        this.allBlood.push(one);
+      }
+      else if (element == 6) {
+        one.bType = 6;
+        one.name = "O+";
+        this.allBlood.push(one);
+      }
+      else {
+        one.bType = 7;
+        one.name = "O-";
+        this.allBlood.push(one);
+      }
     });
   }
 
@@ -76,7 +108,7 @@ export class GiveBloodTherapyComponent implements OnInit {
     }
 
     let body: IGiveBloodTherapy = {
-      HospitalizationId: Number(this.route.snapshot.paramMap.get('id')),
+      HospitalizationId: this.hospId,
       GivenAt: new Date(),
       Type: this.giveBloodTherapyForm.get('bloodType')?.value,
       Quantity: this.giveBloodTherapyForm.get('quantity')?.value,
