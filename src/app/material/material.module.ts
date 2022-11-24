@@ -15,6 +15,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 
 @NgModule({
   declarations: [],
@@ -55,7 +57,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatSelectModule,
     MatAutocompleteModule,
     MatMenuModule,
-    MatTabsModule
+    MatTabsModule,
+    MatNativeDateModule
   ]
 })
 export class MaterialModule { }
