@@ -1,3 +1,4 @@
+
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AnnualLeaveModule } from './manager/annual-leave/annual-leave.module';
 import { NgModule } from "@angular/core";
@@ -34,14 +35,21 @@ import { HospitalizationModule } from "./doctor/hospitalization/hospitalization.
     HospitalMapModule,
     AnnualLeaveModule,
     ToastrModule.forRoot(),
+
     HospitalizationModule,
-  ],
+
+    
+    
+ ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterception,
       multi: true
     }
+
+   
+
   ],
   bootstrap: [AppComponent]
 })
