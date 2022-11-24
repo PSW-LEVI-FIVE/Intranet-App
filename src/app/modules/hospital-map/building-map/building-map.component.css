@@ -1,0 +1,13 @@
+.buildInfo {
+    text-align: center;
+    width: 300px;
+    margin-left: 170px;
+    border-width:2px;
+    border-style:solid;
+    border-color:rgb(148, 168, 247);
+}
+.title {
+    text-align: left;
+    margin-left: 20px;
+    margin-top: 20px;
+}

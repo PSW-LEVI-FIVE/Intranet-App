@@ -29,7 +29,7 @@ export class BuildingMapService {
     return data2;
   }
   createSVG(){
-    return d3.select("body").append("svg").attr("height", 1000).attr("width", 2000)
+    return d3.select("#svgDiv").append("svg").attr("height", 500).attr("width", 800)
   }
   createRectangles(svg:any, data2:any){
     return svg.selectAll("rect").data(data2).enter().append("rect")
@@ -53,6 +53,7 @@ export class BuildingMapService {
     })
   }
 
+
   addTextToRectangles(svg:any, data2:any){
     return svg.append("text").selectAll("tspan")
       .data(data2)
@@ -69,3 +70,4 @@ export class BuildingMapService {
       });
   }
 }
+
