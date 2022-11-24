@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { BuildingMapService } from '../services/building-map.service';
 import { CreateBuilding, IBuilding } from '../model/building.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-building-map',
@@ -22,7 +23,7 @@ export class BuildingMapComponent implements OnInit {
   public selectedBuildingId:any;
   formVisible: any = "hidden";
 
-  constructor(private buildingMapService: BuildingMapService, private router:Router) { }
+  constructor(private buildingMapService: BuildingMapService, private router:Router, private toastService: ToastrService) { }
 
   ngOnInit(): void {
     this.buildingMapService.getBuildings().subscribe(res => {
@@ -43,7 +44,7 @@ export class BuildingMapComponent implements OnInit {
     if(createBuilding) {
       this.router.navigate(['manager/create-building'], {state: {data: createBuilding}});
     } else {
-      alert('Maximum number of buildings reached');
+      this.toastService.info('Maximum number of buildings reached');
     }
   }
 

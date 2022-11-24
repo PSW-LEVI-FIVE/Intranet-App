@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { create } from 'd3';
+import { ToastrService } from 'ngx-toastr';
 import { CreateBuilding } from '../model/building.model';
 import { BuildingMapService } from '../services/building-map.service';
 
@@ -13,7 +14,7 @@ export class CreateBuildingComponent implements OnInit {
 
   public createBuilding: CreateBuilding = <CreateBuilding>{};
 
-  constructor(private router:Router, private buildingService: BuildingMapService) {}
+  constructor(private router:Router, private buildingService: BuildingMapService, private toastService: ToastrService) {}
 
   ngOnInit(): void {
     this.createBuilding = <CreateBuilding>history.state.data;
@@ -23,10 +24,12 @@ export class CreateBuildingComponent implements OnInit {
   }
 
   public submitForm(): void {
-    console.log(this.createBuilding);
     this.createBuilding.rgbColour = '#FFFFFF';
     this.buildingService.createBuilding(this.createBuilding).subscribe(() => {
-      this.router.navigate(['manager/building-map']);
+      this.toastService.success('Successfully created');
+      setTimeout(() => {
+        this.router.navigate(['manager/building-map']);
+      }, 1000);
     });
   }
 }
