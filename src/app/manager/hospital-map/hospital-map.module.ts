@@ -8,6 +8,8 @@ import { MaterialModule } from 'src/app/material/material.module';
 import {MatButtonModule} from '@angular/material/button';
 import { CreateBuildingComponent } from './create-building/create-building.component';
 import { FormsModule } from '@angular/forms';
+import { CreateFloorComponent } from './create-floor/create-floor.component';
+import { CreateMapRoomComponent } from './create-map-room/create-map-room.component';
 
 
 @NgModule({
@@ -16,6 +18,8 @@ import { FormsModule } from '@angular/forms';
     FloorMapComponent,
     RoomMapComponent,
     CreateBuildingComponent,
+    CreateFloorComponent,
+    CreateMapRoomComponent
   ],
   imports: [
     CommonModule,

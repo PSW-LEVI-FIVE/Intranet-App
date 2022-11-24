@@ -1,0 +1,21 @@
+<div id="createRoomForm">
+    <h1>Create Room</h1>
+    <form>
+        <table>
+            <tr>
+                <mat-form-field appearance="outline">
+                    <mat-label>Room Number</mat-label>
+                    <input name="number" [(ngModel)]="createRoom.roomNumber" matInput required>
+                </mat-form-field>
+            </tr>
+            <tr>
+                <mat-form-field appearance="outline">
+                    <mat-label>Room Area</mat-label>
+                    <input name="area" [(ngModel)]="createRoom.area" matInput required>
+                </mat-form-field>
+            </tr>
+            <button mat-raised-button color="primary" (click)="submitForm()">Submit</button>
+        </table>
+
+    </form>
+</div>

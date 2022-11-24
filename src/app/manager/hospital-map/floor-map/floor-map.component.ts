@@ -3,6 +3,8 @@ import { BuildingMapService } from './../services/building-map.service';
 import { FloorMapService } from './../services/floor-map.service';
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
+import { ToastrService } from 'ngx-toastr';
+import { IFloor } from '../model/floor.model';
 
 @Component({
   selector: 'app-floor-map',
@@ -21,7 +23,9 @@ export class FloorMapComponent implements OnInit {
   clickInfo:any
   formVisible: any="hidden";
   selectedFloor: any;
-  constructor(private floorMapService: FloorMapService, private buildingMapService:BuildingMapService,private route: ActivatedRoute, private router:Router) { }
+
+  constructor(private toastService: ToastrService, private floorMapService: FloorMapService, private buildingMapService:BuildingMapService,private route: ActivatedRoute, private router:Router) { }
+  
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.floorMapService.getFloorsByBuilding(params['id']).subscribe(res => {
@@ -38,6 +42,16 @@ export class FloorMapComponent implements OnInit {
     //this.containerForInfo = this.floorMapService.createRectangleForAdditionalInformation(this.svg,this.data)
     //this.clickInfo = this.floorMapService.onClickShowName(this.svg,this.data)
 
+  }
+
+  public toggleCreate(): void {
+    const createFloor = this.floorMapService.handleFloorGeneration(this.data);
+    if(createFloor) {
+      this.route.params.subscribe((params: Params) => createFloor.buildingId = params['id']);
+      this.router.navigate(['manager/create-floor'], {state: {data: createFloor}});
+    } else {
+      this.toastService.info('Maximum number of floors reached');
+    }
   }
 
   addOnClick(svg:any){
