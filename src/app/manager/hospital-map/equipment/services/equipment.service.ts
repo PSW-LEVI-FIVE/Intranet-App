@@ -14,11 +14,11 @@ export class EquipmentService {
 
   constructor(private http: HttpClient) { }
 
-  searchInRoom(equipment: any): Observable<Room[]> {
-    return this.http.get<Room[]>(this.apiHost + '/equipment/floorSearch' + '?Name=' + equipment.name + '&Quantity=' + equipment.quantity + '&roomId=' + equipment.RoomId, { headers: this.headers });
+  searchInRoom(equipment: any): Observable<Equipment[]> {
+    return this.http.get<Equipment[]>(this.apiHost + '/equipment/search' + '?Name=' + equipment.name + '&Quantity=' + equipment.quantity + '&roomId=' + equipment.roomId, { headers: this.headers });
   }
 
-  searchOnFloor(equipment: any): Observable<Equipment[]> {
-    return this.http.get<Equipment[]>(this.apiHost + '/equipment/search' + '?Name=' + equipment.name + '&Quantity=' + equipment.quantity + '&roomId=' + equipment.RoomId, { headers: this.headers });
+  searchOnFloor(equipment: any): Observable<Room[]> {
+    return this.http.get<Room[]>(this.apiHost + '/equipment/floorSearch' + '?Name=' + equipment.name + '&Quantity=' + equipment.quantity + '&roomId=' + equipment.roomId, { headers: this.headers });
   }
 }

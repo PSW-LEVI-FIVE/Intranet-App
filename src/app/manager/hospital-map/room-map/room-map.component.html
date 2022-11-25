@@ -64,4 +64,29 @@
 
    
 <button id="add-button" mat-fab color="primary" (click)="toggleCreate()">Add</button> 
-<app-equipment></app-equipment>
+
+<div class="table-container" *ngIf ="selectedObjects">
+  <div class="search-container" style="margin-right: 20px;">
+    <input type="number" min="0" [(ngModel)]="equipment.quantity" style="height: 40px;">
+    <mat-form-field style="margin-left: 3%;">
+      <input matInput placeholder="Search by name" [(ngModel)]="equipment.name">
+    </mat-form-field>
+    <button class="button" (click)="searchEquipemnt()" mat-stroked-button app:backgroundTint="#d1d5db" style="margin-left: 3%; width:200px">Search equipment</button>
+  </div>
+  <div class="subconatiner" style="margin-right: 20px;">
+    <table class="table">
+      <thead class="table-head">
+        <tr class="head-row" style="background-color: #0891b2;" >
+          <th scope="col" class="header">Name</th>
+          <th scope="col" class="header">Quantity</th>
+        </tr>
+      </thead>
+      <tbody class="table-body">
+        <tr class="body-row" *ngFor="let e of searchedEquipment">
+          <td>{{e.name}}</td>
+          <td>{{e.quantity}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

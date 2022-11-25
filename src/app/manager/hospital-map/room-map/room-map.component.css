@@ -136,3 +136,36 @@ h3{
     width: 100px;
     height: 100px;
 }
+
+.table{
+    border: 1px solid #0891b2;
+    margin-left:40px;
+    align-content: center;
+    margin-top: 50px;
+    /*margin-left: 60px;*/
+    text-align: left;
+    font-weight: 800;
+    font-size: 20px;
+    width: 350px;
+    color: rgb(0, 0, 0);
+}
+
+.th .td .tr{
+    border: 1px solid #0891b2;
+}
+.table-container{
+    display: flex;
+    align-items: center;
+    margin-left: 50%;
+}
+
+.search-container{
+    display: flex;
+}
+
+.subcontanier{
+    
+    margin-left: 90%;
+}
+
+

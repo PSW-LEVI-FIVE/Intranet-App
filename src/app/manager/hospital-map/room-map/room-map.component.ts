@@ -7,6 +7,9 @@ import { ToastrService } from 'ngx-toastr';
 import { CreateRoom, IRoom } from '../model/room.model';
 import { create } from 'd3';
 import { Room } from '../../room/model/room.model';
+import { Equipment } from '../equipment/model/equipment.model';
+import { RoomService } from '../../room/services/room.service';
+import { EquipmentService } from '../equipment/services/equipment.service';
 
 @Component({
   selector: 'app-room-map',
@@ -25,13 +28,17 @@ export class RoomMapComponent implements OnInit {
   selected:any
   enableEditing : boolean = false;
   selectedObjects:any;
+  searchedEquipment: Equipment[] = [];
+  equipment: Equipment = {} as Equipment;
 
   constructor(
     private roomMapService:RoomMapService, 
     private buildingMapService:BuildingMapService, 
     private route: ActivatedRoute, 
     private router:Router, 
-    private toastService: ToastrService
+    private toastService: ToastrService,
+    private roomService: RoomService,
+    private equipmentService: EquipmentService
   ) {}
 
   ngOnInit(): void {
@@ -77,6 +84,11 @@ export class RoomMapComponent implements OnInit {
         this.selectedObjects=res;  
         this.enableEditing = false;
       })
+      this.roomService.getEquipment(i.id).subscribe(res=>{
+        this.searchedEquipment = res;
+        this.equipment.roomId = i.id;
+        this.equipment.quantity = 0;
+      })
 
     })
 }
@@ -119,6 +131,15 @@ private isValidInput(): boolean {
   //svg.on("click",function(this:any){
     //console.log(this.id+"caoooo")
     
+  }
+
+  public searchEquipemnt(): void{
+    if(this.equipment.name == undefined || this.equipment.name == "") {this.equipment.name = "0"}
+    this.equipmentService.searchInRoom(this.equipment).subscribe(res =>{
+      this.searchedEquipment = res;
+      if(this.equipment.name == "0")
+         this.equipment.name = "";
+    })
   }
 }
 
