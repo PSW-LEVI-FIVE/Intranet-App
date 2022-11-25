@@ -80,6 +80,7 @@ export class DoctorStatisticsPopularityComponent implements OnInit {
   public changeStatistics() {
 
     this.dcotorStatisticsPopularityService.getDoctorsWithPopularity(this.fromAge, this.toAge).subscribe(res => {
+      console.log(res);
       res.forEach((doctorWithPopularity: IDoctorWithPopularityDTO, index) => {
         this.doctors.push(doctorWithPopularity.id + ' ' + doctorWithPopularity.name + ' ' + doctorWithPopularity.surname);
         this.doctorsPopularities.push(doctorWithPopularity.patientsPicked);
