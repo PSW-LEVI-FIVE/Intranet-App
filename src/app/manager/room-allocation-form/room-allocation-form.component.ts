@@ -2,14 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder,Validators,FormGroup, FormControl} from '@angular/forms';
 import { Room } from '../room/model/room.model';
 import { RoomService } from 'src/app/manager/room/services/room.service';
+import { JsonPipe } from '@angular/common';
 
+export class TimeInterval {
+  start: Date = new Date;
+  end: Date = new Date;
+}
 
-export interface ICreateAppointment {
-  EquipmentId: number;
-  StartingRoomId: number | null;
-  DestinationRoomId: number | null;
-  StartAt: Date;
-  EndAt: Date;
+export class EquipmentForRoom{
+  id:number=0; 
+  quantity:number=0;
+  name:String="";
+  roomId:number=0;
+  room:undefined;
+}
+
+export class IntervalDto {
+  startingRoomId: number = 0;
+  destinationRoomId: number = 0;
+  date: Date | undefined;
+  duration:number = 0;
+}
+
+export class ICreateAppointment {
+  equipmentId: number=0;
+  startingRoomId: number =0;
+  destinationRoomId: number =0;
+  startDate: Date=new Date;
+  endDate: Date=new Date;
+  amount:number=0;
 }
 
 @Component({
@@ -26,10 +47,10 @@ export class RoomAllocationFormComponent implements OnInit {
     {
     
   }
-  range = new FormGroup({
+  /*range = new FormGroup({
     start: new FormControl<Date | null>(null),
     end: new FormControl<Date | null>(null),
-  });
+  });*/
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
@@ -37,60 +58,74 @@ export class RoomAllocationFormComponent implements OnInit {
     secondCtrl: ['', Validators.required],
   });
   isLinear = true;
-  public startingRooms: Room[] = [
-    {id: 1,
-      roomNumber: "100A",
-      floor: 1},
-    {id: 2,
-      roomNumber: "200A",
-      floor: 2},
-    {id: 3,
-      roomNumber: "202B",
-      floor: 2}
-  ];
+  public startingRooms: Room[] = [];
   public selectedStartingRoomId = 0;
-  public destinationRooms: Room[] = [
-    {id: 1,
-      roomNumber: "100A",
-      floor: 1},
-    {id: 2,
-      roomNumber: "200A",
-      floor: 2},
-    {id: 3,
-      roomNumber: "202B",
-      floor: 2}
-  ];
+  public destinationRooms: Room[] = [];
   public selectedDestinationRoomId= 0;
-  public startDate: Date = new Date()
-  public endDate: Date = new Date()
+  public pick: Date = new Date()
+  public dur = 0;
+  public dto:IntervalDto={
+    startingRoomId: 0,
+    destinationRoomId: 0,
+    date: new Date(),
+    duration:0    
+  };
+  public CreateDto:ICreateAppointment=new ICreateAppointment;
 
+
+  public intervals:TimeInterval[]=[];
+  public selectedInterval:TimeInterval=new TimeInterval;
+
+  public equipments:EquipmentForRoom[]=[];
+  public selectedEquipment:EquipmentForRoom=new EquipmentForRoom;
+
+  public amount:number=0;
+
+  public new:ICreateAppointment=new ICreateAppointment;
   
   ngOnInit(): void {
-    // this.roomService.getRooms().subscribe(res => {
-    //   this.startingRooms = res;
-    // })
+     this.roomService.getRooms().subscribe(res => {
+       this.startingRooms = res;
+       this.destinationRooms=res;
+     })
+  }
+  stringify(interval:TimeInterval):String {
+    return JSON.stringify(interval);
+  }
+  stringify1(eq:EquipmentForRoom):String {
+    return JSON.stringify(eq) ;
   }
   fill(): Room[]{
-    return [
-      {id: 1,
-        roomNumber: "100A",
-        floor: 1},
-      {id: 2,
-        roomNumber: "200A",
-        floor: 2},
-      {id: 3,
-        roomNumber: "202B",
-        floor: 2}
-    ]
-  }
-  drop(selectedStartingRoomId:number){
-    this.destinationRooms=this.fill();
-    this.destinationRooms.forEach((room,index)=>{
-      if(room.id==selectedStartingRoomId) this.destinationRooms.splice(index,1);
-   });
-    return this.destinationRooms;
+    return this.startingRooms;
   }
 
-  
+  find_available()
+  {
+    this.dto.startingRoomId=this.selectedStartingRoomId;
+    this.dto.destinationRoomId=this.selectedDestinationRoomId;
+    this.dto.duration = this.dur;
+    this.dto.date=this.pick;
+    this.dto.date.setDate( this.pick.getDate() + 1 );
+
+    this.roomService.getInterval(this.dto).subscribe(res => {
+      this.intervals=res;
+    })
+    this.roomService.getEquipment(this.dto.startingRoomId).subscribe(res => {
+      this.equipments=res;
+    })
+  }
+
+  create_new(){
+    this.CreateDto.startingRoomId=this.selectedStartingRoomId;
+    this.CreateDto.destinationRoomId=this.selectedDestinationRoomId;
+    this.CreateDto.equipmentId=this.selectedEquipment.id;
+    this.CreateDto.startDate=this.selectedInterval.start;
+    this.CreateDto.endDate=this.selectedInterval.end;
+    this.CreateDto.amount=this.amount;
+
+    this.roomService.createReallocation(this.CreateDto).subscribe(res => {
+      this.new=res;
+    })
+  }
 
 }

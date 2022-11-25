@@ -1,6 +1,6 @@
 <mat-stepper [linear]="!isLinear" #stepper>
     <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
+      <form>
         
         
         
@@ -8,7 +8,7 @@
         <div>
               <mat-form-field inputs appearance="fill">
                 <mat-label>Select starting room</mat-label>
-                <mat-select [(value)]="selectedStartingRoomId"  (selectionChange)="drop(selectedStartingRoomId)">
+                <mat-select [(value)]="selectedStartingRoomId" >
                   <mat-option *ngFor="let room of startingRooms" [value]="room.id" > {{room.roomNumber}}
                   </mat-option>
                 </mat-select>
@@ -26,43 +26,70 @@
         </mat-form-field>
       </div>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Enter a date range</mat-label>
-          <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-            <input matStartDate formControlName="start" placeholder="Start date">
-            <input matEndDate formControlName="end" placeholder="End date">
-          </mat-date-range-input>
-          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-date-range-picker #picker></mat-date-range-picker>
-        
-          <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-          <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
-        </mat-form-field>
-        
-        
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
+      <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="pick" name="pick">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      </div>
 
+      <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Duration (in minutes)</mat-label>
+        <input matInput [(ngModel)]="dur" name="dur">
+      </mat-form-field> 
+      </div>
+
+      <div>
+        <button mat-button matStepperNext (click)="find_available()">Next</button>
+      </div>
 
       </form>
     </mat-step>
+    
     <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
-      <form [formGroup]="secondFormGroup">
-        <mat-form-field appearance="fill">
-          <mat-label>Address</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                 required>
-        </mat-form-field>
+      <form>
+        
+        
+        <div>
+          <mat-form-field inputs appearance="fill">
+            <mat-label>Select Time Interval</mat-label>
+            <mat-select [(value)]="selectedInterval">
+              <mat-option *ngFor="let interval of intervals" [value]="interval" > {{interval.start}} - {{interval.end}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field inputs appearance="fill">
+            <mat-label>Select Equipment</mat-label>
+            <mat-select [(value)]="selectedEquipment">
+              <mat-option *ngFor="let equipment of equipments" [value]="equipment" > {{equipment.name}} {{equipment.quantity}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Amount</mat-label>
+            <input matInput [(ngModel)]="amount" name="amount">
+          </mat-form-field> 
+          </div>
+
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperNext (click)="create_new()">Next</button>
         </div>
       </form>
     </mat-step>
     
-    
+       
+
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
       <p>You are now done.</p>
