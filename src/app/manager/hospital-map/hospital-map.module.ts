@@ -13,6 +13,7 @@ import { CreateMapRoomComponent } from './create-map-room/create-map-room.compon
 import { SearchRoomsComponent } from './search-rooms/search-rooms.component';
 import {MatInputModule} from '@angular/material/input';
 import { MatSelectModule} from '@angular/material/select';
+import { EquipmentComponent } from './equipment/equipment.component';
 
 
 
@@ -24,10 +25,8 @@ import { MatSelectModule} from '@angular/material/select';
     CreateBuildingComponent,
     CreateFloorComponent,
     CreateMapRoomComponent,
-
     SearchRoomsComponent,
-
-
+    EquipmentComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +36,6 @@ import { MatSelectModule} from '@angular/material/select';
     FormsModule,
     MatInputModule,
     MatSelectModule,
-    
     
 
   ]

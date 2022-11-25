@@ -35,7 +35,7 @@
 
 <div class="container">
 
-    <div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 800px;">
+    <div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 800px;"></div>
 
     <div style="margin-left: 15px; ">
     <app-search-rooms (newItemEvent)="highlight($event)" [floorID]="floorId" ></app-search-rooms>
@@ -53,14 +53,15 @@
                 <input matInput [value]="selectedObjects.roomNumber">
             </mat-form-field><br>
     </table>
-    <div style="margin-top: 30px; margin-bottom: 15px; margin-left: 40px;">
-      <button class="confirmButton" mat-stroked-button app:backgroundTint="#d1d5db" (click)="updateRoom()">
-          Submit
-      </button>
-  </div>
+      <div style="margin-top: 30px; margin-bottom: 15px; margin-left: 40px;">
+        <button class="confirmButton" mat-stroked-button app:backgroundTint="#d1d5db" (click)="updateRoom()">
+            Submit
+        </button>
+      </div>
     </div>
     
 </div>
 
    
 <button id="add-button" mat-fab color="primary" (click)="toggleCreate()">Add</button> 
+<app-equipment></app-equipment>

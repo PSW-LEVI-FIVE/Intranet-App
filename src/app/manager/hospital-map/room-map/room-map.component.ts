@@ -6,7 +6,6 @@ import * as d3 from 'd3';
 import { ToastrService } from 'ngx-toastr';
 import { CreateRoom, IRoom } from '../model/room.model';
 import { create } from 'd3';
-import { Equipment } from '../../equipment/model/equipment.model';
 import { Room } from '../../room/model/room.model';
 
 @Component({
