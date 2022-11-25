@@ -111,6 +111,7 @@ const routes: Routes = [
 
     DoctorStatisticsPopularityComponent,
     AllergenStatisticsFrequencyComponent,
+
     RoomAllocationFormComponent,
   ],
   imports: [

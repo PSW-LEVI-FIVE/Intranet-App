@@ -41,6 +41,7 @@ export class RoomService {
   getInterval(reallocationDTO:IntervalDto):  Observable<TimeInterval[]>{
     return this.http.post<any>(this.apiHost + '/EquipmentReallocation/' , reallocationDTO, { headers: this.headers });
   }
+  
   getEquipment1(roomId:number): Observable<EquipmentForRoom[]> {
     return this.http.get<EquipmentForRoom[]>(this.apiHost + '/EquipmentReallocation/room/'+roomId, { headers: this.headers });
   }
