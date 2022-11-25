@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Equipment } from '../../hospital-map/equipment/model/equipment.model';
+import { EquipmentForRoom, ICreateAppointment, IntervalDto, TimeInterval } from '../../room-allocation-form/room-allocation-form.component';
 import { Room } from '../model/room.model';
 
 @Injectable({
@@ -36,5 +37,15 @@ export class RoomService {
 
   getEquipment(roomId: number): Observable<Equipment[]> {
     return this.http.get<Equipment[]>(this.apiHost + '/rooms/equipmentView/' + roomId, { headers: this.headers });
+  }
+  getInterval(reallocationDTO:IntervalDto):  Observable<TimeInterval[]>{
+    return this.http.post<any>(this.apiHost + '/EquipmentReallocation/' , reallocationDTO, { headers: this.headers });
+  }
+  getEquipment1(roomId:number): Observable<EquipmentForRoom[]> {
+    return this.http.get<EquipmentForRoom[]>(this.apiHost + '/EquipmentReallocation/room/'+roomId, { headers: this.headers });
+  }
+
+  createReallocation(reallocationDTO:ICreateAppointment):  Observable<ICreateAppointment>{
+    return this.http.post<any>(this.apiHost + '/EquipmentReallocation/Create' ,reallocationDTO , { headers: this.headers });
   }
 }
