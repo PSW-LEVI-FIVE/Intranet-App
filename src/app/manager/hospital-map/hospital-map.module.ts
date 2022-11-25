@@ -10,6 +10,10 @@ import { CreateBuildingComponent } from './create-building/create-building.compo
 import { FormsModule } from '@angular/forms';
 import { CreateFloorComponent } from './create-floor/create-floor.component';
 import { CreateMapRoomComponent } from './create-map-room/create-map-room.component';
+import { SearchRoomsComponent } from './search-rooms/search-rooms.component';
+import {MatInputModule} from '@angular/material/input';
+import { MatSelectModule} from '@angular/material/select';
+
 
 
 @NgModule({
@@ -19,14 +23,23 @@ import { CreateMapRoomComponent } from './create-map-room/create-map-room.compon
     RoomMapComponent,
     CreateBuildingComponent,
     CreateFloorComponent,
-    CreateMapRoomComponent
+    CreateMapRoomComponent,
+
+    SearchRoomsComponent,
+
+
   ],
   imports: [
     CommonModule,
     MaterialModule,
     RouterModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    MatInputModule,
+    MatSelectModule,
+    
+    
+
   ]
 })
 export class HospitalMapModule { }

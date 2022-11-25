@@ -19,6 +19,9 @@ export class RoomMapComponent implements OnInit {
   svg:any;
   rooms:any;
   roomsText:any;
+  floorId :any 
+  provera="eee"
+  selected:any
   enableEditing : boolean = false;
   selectedObjects:any;
 
@@ -31,11 +34,19 @@ export class RoomMapComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.floorId = params['id'];
+      console.log(this.floorId)
+    });
+    
+    this.svg  = this.buildingMapService.createSVG();
+    
     this.route.params.subscribe((params: Params) => {
       this.roomMapService.getRoomsByBuilding(params['id']).subscribe(res => {
         this.data = res;
+        console.log(this.data)
         this.svg  = this.buildingMapService.createSVG();
-        this.rooms = this.roomMapService.createRectangles(this.svg, this.data)
+        this.rooms = this.roomMapService.createRectangles(this.svg,this.data)
         this.roomsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)
 
         this.showInformation(this.rooms);
@@ -94,4 +105,20 @@ private isValidInput(): boolean {
   return this.selectedObjects?.roomNumber != '';
 }
 
+ highlight(id:any){
+  d3.selectAll("rect").style("fill",'white')
+  
+  d3.select("#id"+id).style("fill",'#d7d5db')
+  
+  
+
 }
+ click(svg:any){
+  //console.log(this.floorId+"hahahhahahhah")
+  //svg.on("click",function(this:any){
+    //console.log(this.id+"caoooo")
+    
+  }
+}
+
+
