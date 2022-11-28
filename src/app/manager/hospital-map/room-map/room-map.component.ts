@@ -20,7 +20,6 @@ export class RoomMapComponent implements OnInit {
   rooms:any;
   roomsText:any;
   floorId :any 
-  provera="eee"
   selected:any
   enableEditing : boolean = false;
   selectedObjects:any;

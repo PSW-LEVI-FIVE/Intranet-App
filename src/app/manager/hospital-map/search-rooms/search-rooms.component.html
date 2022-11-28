@@ -1,10 +1,8 @@
 <div>
     <mat-form-field appearance="outline" style="margin-right: 20px;">
         <mat-select [(ngModel)]="searchRoomDTO.roomType" (selectionChange)="changedRoomType(option)">
-            <mat-option value="OPERATION_ROOM">Examination room</mat-option>
-            <mat-option value ="EXAMINATION_ROOM">Operation room</mat-option>
-            <mat-option value="HOSPITAL_ROOM">Hospital room</mat-option>
-            <mat-option value="CAFETERIA">Cafeteria</mat-option>
+            <mat-option [value]="option" *ngFor="let option of availableRoomTypes">{{getOptionLabel(option)}}</mat-option>
+            
         </mat-select>
     </mat-form-field>
     <mat-form-field>

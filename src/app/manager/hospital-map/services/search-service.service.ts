@@ -15,14 +15,7 @@ export class SearchServiceService {
   constructor(private http:HttpClient) { }
 
   searchRooms(searchRoomsFloor:any,searchRoomDTO:any):Observable<any>{
-     searchRoomDTO = JSON.stringify(searchRoomDTO)
-     console.log(searchRoomDTO)
-      return this.http.post<IRoom[]>(this.apiHost + 'api/intranet/rooms/search/' + searchRoomsFloor,searchRoomDTO,{headers: this.headers})
-    /*.pipe(tap(data=>{
-      console.log(data)
-      console.log("hahahahahha")
-    }))*/
-      
+      return this.http.post<IRoom[]>(this.apiHost + 'api/intranet/rooms/search/' + searchRoomsFloor,searchRoomDTO,{headers: this.headers}) 
 
   }
 }

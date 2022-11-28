@@ -45,7 +45,9 @@ export class BuildingMapComponent implements OnInit {
   addOnClick(svg:any){
     svg.on("click", (d:any, i:any) =>{
       this.formVisible = "visible";
+      
       this.selectedBuilding = i;
+      
     })
   }
   showFloors(svg:any, router:any){

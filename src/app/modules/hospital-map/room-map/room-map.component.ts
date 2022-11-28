@@ -33,7 +33,7 @@ export class RoomMapComponent implements OnInit {
 
       })
     });
-    //this.data = this.roomMapService.getData();
+    
 
   }
 

@@ -65,7 +65,6 @@ export class FloorMapComponent implements OnInit {
   }
   showRooms(svg:any, router:any){
     svg.on("dblclick", function(d:any, i:any){
-      //router.navigate(['floor-map']);
       router.navigate(['manager/room-map/'+ i.id]);
       
     })
