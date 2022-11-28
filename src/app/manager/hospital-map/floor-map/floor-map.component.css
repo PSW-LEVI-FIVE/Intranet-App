@@ -28,7 +28,6 @@
     content: '';
     width: 0%;  /*postavi se underline na hidden, kad je 100 vidi se pa se stavi na reakciju da se uveca*/
     height: 3px;
-    /* background: rgb(177, 200, 255); */
     background-color: #0891b2;
     display: block;
     margin: auto;
@@ -42,11 +41,7 @@
     text-align: center;
     width: 300px;
     margin-left: 70px;
-    /* border-width:2px;
-    border-style:solid;
-    border-color:rgb(148, 168, 247); */
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    /* background-color: rgb(255, 255, 228); */
     background-color: #f0fdfa;
     border-radius: 10px;
 }
@@ -58,20 +53,13 @@
     margin-bottom: 40px;
     line-height: 50px;
     width: 90%;
-    /* text-align: left;
-    margin-left: 20px;
-    margin-top: 20px; */
+
 }
 
 .mapa{
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    /* box-shadow: 10px 10px 10px 1px lightblue; */
     background-color: #0891b2;
-    /* background-color: rgb(255, 255, 228); */
     border-radius: 10px;
-    /* border-width:2px;
-    border-style:solid;
-    border-color:rgb(148, 168, 247); */
 }
 .container{
    align-items: center;

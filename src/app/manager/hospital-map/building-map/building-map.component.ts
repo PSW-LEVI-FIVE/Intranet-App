@@ -64,7 +64,6 @@ export class BuildingMapComponent implements OnInit {
   }
   showFloors(svg:any, router:any){
     svg.on("dblclick", function(d:any, i:any){
-      //router.navigate(['floor-map']);
       router.navigate(['manager/floor-map/'+ i.id])
     })
   }

@@ -53,7 +53,7 @@ export class RoomMapComponent implements OnInit {
 
       })
     });
-    //this.data = this.roomMapService.getData();
+    
 
   }
 
@@ -96,7 +96,6 @@ editForm(){
 }
 
 public updateRoom(): void {
-  //if (!this.isValidInput()) return;
   this.roomMapService.updateRoom(this.selectedObjects);
 }
 
@@ -113,10 +112,7 @@ private isValidInput(): boolean {
 
 }
  click(svg:any){
-  //console.log(this.floorId+"hahahhahahhah")
-  //svg.on("click",function(this:any){
-    //console.log(this.id+"caoooo")
-    
+ 
   }
 }
 

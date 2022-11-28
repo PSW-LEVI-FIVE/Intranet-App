@@ -37,9 +37,6 @@ import { MatSelectModule} from '@angular/material/select';
     FormsModule,
     MatInputModule,
     MatSelectModule,
-    
-    
-
   ]
 })
 export class HospitalMapModule { }
