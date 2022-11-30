@@ -22,13 +22,13 @@ export class RoomMapService {
 
   createRectangles(svg:any, data2:any){
     return svg.selectAll("rect").data(data2).enter().append("rect")
-    .attr("height", function(d:any){ return d.height;})
-    .attr("width", function(d:any){ return d.width;})
+    .attr("height", (d:any)=>{ return d.height;})
+    .attr("width", (d:any)=>{ return d.width;})
     .attr("fill", '#d7d5db')
     .attr("stroke", "black")
-    .attr("x", function(d:any){ return d.xCoordinate })
-    .attr("y", function(d:any){ return d.yCoordinate})
-    .attr("id", function(d:any){ return d.id})
+    .attr("x", (d:any)=>{ return d.xCoordinate })
+    .attr("y", (d:any)=>{ return d.yCoordinate})
+    .attr("id", (d:any)=>{ return d.id})
     .attr('cursor', 'pointer')
     
   }
