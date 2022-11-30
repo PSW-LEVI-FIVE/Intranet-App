@@ -24,10 +24,7 @@ import { MatSelectModule} from '@angular/material/select';
     CreateBuildingComponent,
     CreateFloorComponent,
     CreateMapRoomComponent,
-
     SearchRoomsComponent,
-
-
   ],
   imports: [
     CommonModule,

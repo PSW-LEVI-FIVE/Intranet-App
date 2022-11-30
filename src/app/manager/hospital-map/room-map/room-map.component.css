@@ -1,5 +1,5 @@
 
-.buildInfo {
+.build-info {
     text-align: center;
     width: 300px;
     margin-left: 70px;
@@ -16,14 +16,14 @@
     line-height: 50px;
     width: 90%;
 }
-.rightSide{
+.right-side{
     text-align: right;
     font-weight: 800;
     font-size: 15px;
     color: #000;
     width: 350px;
 }
-.cardTitle{
+.card-title{
     margin-top: 30px;
     margin-left: 60px;
     text-align: left;

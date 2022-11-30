@@ -45,13 +45,7 @@ import { HospitalizationModule } from "./doctor/hospitalization/hospitalization.
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterception,
       multi: true
-    }
-
-   
-
-
-    
-    
+    } 
 
   ],
   bootstrap: [AppComponent]

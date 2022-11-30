@@ -1,25 +1,4 @@
-<!--<body>
-    <div class="row">
-   
-      <div id="svgDiv" class="column">
-       
-      </div>
-   
-      <div class="columnForm">
-       <h3>Room information</h3>
-       <p>Double-click on desired room in order to see additional information</p>
-       
-         <form *ngIf ="selectedObjects">
-           <p>
-            
-             <label>Room name:</label>
-             <input [disabled] ="!enableEditing" [value] = "selectedObjects.name">
-           </p>
-           <button (click)="editForm()">Edit information</button>
-         </form>
-      </div>
-    </div>
-   </body>-->
+
 
    <div class="header">
     <nav>
@@ -36,7 +15,7 @@
     <div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 700px;">
     </div>
     <div *ngIf ="selectedObjects">
-        <h1 class="cardTitle">  Room information  </h1>
+        <h1 class="card-title">  Room information  </h1>
         <table style="margin-left:40px;">
             <mat-form-field appearance="fill">
                 <mat-label>Room ID</mat-label>

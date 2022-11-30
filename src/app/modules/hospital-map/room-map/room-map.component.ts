@@ -27,7 +27,6 @@ export class RoomMapComponent implements OnInit {
         this.svg  = this.buildingMapService.createSVG();
         this.rooms = this.roomMapService.createRectangles(this.svg, this.data)
         this.roomsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)
-
         this.showInformation(this.rooms);
         this.markRoom(this.rooms);
 
@@ -61,8 +60,7 @@ editForm(){
 }
 
 public updateRoom(): void {
-  // if (!this.isValidInput()) return;
-  // this.roomMapService.updateRoom(this.selectedRoom);
+
 }
 
 private isValidInput(): boolean {

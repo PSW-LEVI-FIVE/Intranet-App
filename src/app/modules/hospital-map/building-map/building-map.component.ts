@@ -29,15 +29,13 @@ export class BuildingMapComponent implements OnInit {
     this.buildingMapService.getBuildings().subscribe(res => {
       this.buildings = res;
       this.dataSource.data = this.buildings;
-
       this.svg  = this.buildingMapService.createSVG();
-
       this.buildingsMap = this.buildingMapService.createRectangles(this.svg, this.buildings);
       this.buildingsText = this.buildingMapService.addTextToRectangles(this.svg, this.buildings);
       this.addOnClick(this.buildingsMap);
       this.showFloors(this.buildingsMap, this.router);
     })
-   // this.data = this.buildingMapService.getData();
+   
     
 
   }
@@ -45,14 +43,12 @@ export class BuildingMapComponent implements OnInit {
   addOnClick(svg:any){
     svg.on("click", (d:any, i:any) =>{
       this.formVisible = "visible";
-      
       this.selectedBuilding = i;
       
     })
   }
   showFloors(svg:any, router:any){
     svg.on("dblclick", function(d:any, i:any){
-      //router.navigate(['floor-map']);
       router.navigate(['floor-map'], i.id)
     })
   }
