@@ -49,10 +49,6 @@ export class SearchRoomsComponent implements OnInit {
   constructor(private searchService:SearchServiceService,private  roomService:RoomMapService) { }
 
   ngOnInit(): void {}
-
-        
- 
-
   highlightRoom(room:any){
     this.newItemEvent.emit(room)
 
@@ -69,10 +65,4 @@ export class SearchRoomsComponent implements OnInit {
     this.rooms= res
       })
     }
-    
-    
-    
-  
-  
-
 }

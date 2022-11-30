@@ -20,34 +20,10 @@ export class FloorMapService {
   updateFloor(floor: any): Observable<any> {
     return this.http.put<any>(this.apiHost + 'api/intranet/floors/' + floor.id, floor.name, {headers: this.headers});
   }
-  // getData(){
-  //   var data2 = [{
-  //     "x": 100,
-  //     "y": 255,
-  //     "w": 200,
-  //     "h": 200,
-  //     "color": "white",
-  //     "area": 400,
-  //     "name": "Floor 1",
-  //     "id": "f1"
-  //   },
-  //   {
-  //     "x": 100,
-  //     "y": 50,
-  //     "w": 200,
-  //     "h": 200,
-  //     "color": "white",
-  //     "area": 400,
-  //     "name": "Floor 2",
-  //     "id": "f2"
-  //   } ]
-  //   return data2;
-  // }
-
   createSVG(){
     return d3.select("#svgDiv").append("svg").attr("height", 500).attr("width", 800)
   }
-
+  
   createRectangles(svg:any,data2:any){
     return svg.selectAll("rect").data(data2).enter().append("rect")
     .attr("height", function(d:any){ return d.height;})
@@ -73,49 +49,5 @@ export class FloorMapService {
       .attr("font-size", 10)
       .text(function(d:any){ return d.id; })
   }
-  onClickShowName(svg:any, data2:any){
-    return svg.selectAll("rect")
-    .on("click",function(e:any,d:any){
-      d3.select("#div1")
-    .append("label").text("Floor")
-    .append("label").text("hh")
-    .append("input").attr("type","text")
-    .attr("value","meee")
-  
-   d3.select("#div2")
-   .append("label").text("Building")
-   .append("input").attr("type","text")
-   .attr("value","ggeeg")
-
-   d3.select("#div3")
-   .append("label").text("Name")
-   .append("input").attr("type","text")
-   .attr("value","ee")
-      console.log(d.name)
-      //alert(d.name)
-    })
-  }
-
-  createRectangleForAdditionalInformation(svg:any,d:any){
-    d3.select("#div1")
-    .append("label").text("Floor")
-    .append("label").text("hh")
-    .append("input").attr("type","text")
-    .attr("value","meee")
-  
-   d3.select("#div2")
-   .append("label").text("Building")
-   .append("input").attr("type","text")
-   .attr("value","ggeeg")
-
-   d3.select("#div3")
-   .append("label").text("Name")
-   .append("input").attr("type","text")
-   .attr("value","ee")
-   
-    
-     
-     
-}
 
 }

@@ -40,9 +40,6 @@ export class FloorMapComponent implements OnInit {
       this.showRooms(this.floors, this.router)
       })
     });
-    //this.data = this.floorMapService.getData();
-    //this.containerForInfo = this.floorMapService.createRectangleForAdditionalInformation(this.svg,this.data)
-    //this.clickInfo = this.floorMapService.onClickShowName(this.svg,this.data)
 
   }
 
@@ -54,7 +51,6 @@ export class FloorMapComponent implements OnInit {
   }
   showRooms(svg:any, router:any){
     svg.on("dblclick", function(d:any, i:any){
-      //router.navigate(['floor-map']);
       router.navigate(['room-map'], i.id)
     })
   }
@@ -65,8 +61,7 @@ export class FloorMapComponent implements OnInit {
   }
 
   public updateFloor(): void {
-    // if (!this.isValidInput()) return;
-    // this.floorMapService.updateFloor(this.selectedFloor);
+
   }
 
   private isValidInput(): boolean {

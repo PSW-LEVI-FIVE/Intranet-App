@@ -38,9 +38,6 @@ export class FloorMapComponent implements OnInit {
       this.showRooms(this.floors, this.router)
       })
     });
-    //this.data = this.floorMapService.getData();
-    //this.containerForInfo = this.floorMapService.createRectangleForAdditionalInformation(this.svg,this.data)
-    //this.clickInfo = this.floorMapService.onClickShowName(this.svg,this.data)
 
   }
 

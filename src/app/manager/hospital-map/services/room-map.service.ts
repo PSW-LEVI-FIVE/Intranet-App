@@ -79,52 +79,7 @@ export class RoomMapService {
     return this.http.put<any>(this.apiHost + 'api/intranet/rooms/' + room.roomNumber, room.number, {headers: this.headers});
   }
 
- /*  getData(){
-    var data2 = [{
-      "x": 160,
-      "y": 150,
-      "w": 105,
-      "h": 45,
-      "name": "Room 1",
-      "id": "r1"
-    },
-    {
-      "x": 273,
-      "y": 150,
-      "w": 100,
-      "h": 45,
-      "name": "Room 2",
-      "id": "r2"
-    },
-    {
-      "x": 381,
-      "y": 150,
-      "w": 105,
-      "h": 45,
-      "name": "Room 3",
-      "id": "r3"
-    },
-    {
-      "x": 160,
-      "y": 200,
-      "w": 105,
-      "h": 65,
-      "name": "Room 4",
-      "id": "r4"
-    },
-    {
-      "x": 272,
-      "y": 200,
-      "w": 215,
-      "h": 65,
-      "name": "Room 5",
-      "id": "r5"
-    } ]
-    return data2;
-  } */
-
   createRectangles(svg:any,data:any){
-    
     return svg.selectAll("rect").data(data).enter().append("rect")
     .attr("height", function(d:any){ return d.height;})
     .attr("width", function(d:any){ return d.width;})
@@ -134,6 +89,6 @@ export class RoomMapService {
     .attr("y", function(d:any){ return d.yCoordinate})
     .attr('id',function(d:any){ return "id"+ d.id})
     .attr('cursor', 'pointer')
-   // function(d:any){ return d.roomNumber})
+
   }
 }

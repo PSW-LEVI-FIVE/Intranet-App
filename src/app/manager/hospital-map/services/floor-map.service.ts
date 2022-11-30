@@ -97,6 +97,4 @@ export class FloorMapService {
       .attr("font-size", 10)
       .text(function(d:any){ return d.id; })
   }
-
-
 }

@@ -44,9 +44,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
     MatMenuModule,
     MatTabsModule,
     MatSelectModule
-  
-  
-    
 
   ],
   exports: [
@@ -71,8 +68,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
     MatSidenavModule,
     MatListModule,
     MatToolbarModule
-
-
   ]
 })
 export class MaterialModule { }

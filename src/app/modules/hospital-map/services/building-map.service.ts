@@ -23,30 +23,6 @@ export class BuildingMapService {
   updateBuilding(building: any): Observable<any> {
     return this.http.put<any>(this.apiHost + 'api/intranet/buildings/' + building.id, building.name, {headers: this.headers});
   }
-  // constructor() { }
-  // getData(){
-  //   var data2 = [{
-  //     "x": 100,
-  //     "y": 100,
-  //     "w": 265,
-  //     "h": 245,
-  //     "color": "white",
-  //     "name": "Building 1",
-  //     "id": "b1",
-  //     "address":"Bulevar Oslobodjenja 6"
-  //   },
-  //   {
-  //     "x": 370,
-  //     "y": 100,
-  //     "w": 255,
-  //     "h": 245,
-  //     "color": "white",
-  //     "name": "Building 2",
-  //     "id": "b2",
-  //     "address":"Bulevar Bate Brkica 9"
-  //   } ]
-  //   return data2;
-  // }
   createSVG(){
     return d3.select("#svgDiv").append("svg").attr("height", 500).attr("width", 800)
   }
