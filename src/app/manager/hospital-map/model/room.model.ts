@@ -7,7 +7,7 @@ export interface IRoom{
     room: {
         roomNumber: string,
         area: number
-        type: number
+        
     }
 }
 
