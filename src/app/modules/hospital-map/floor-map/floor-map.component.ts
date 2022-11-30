@@ -16,9 +16,6 @@ export class FloorMapComponent implements OnInit {
   svg:any;
   floors:any;
   floorsText:any;
-
-  //constructor(private floorMapService: FloorMapService, private buildingMapService:BuildingMapService, private router:Router) { }
-
   containerForInfo:any
   ev:any
   clickInfo:any
