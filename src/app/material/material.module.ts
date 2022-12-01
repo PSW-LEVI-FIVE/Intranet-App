@@ -18,6 +18,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 
+
+
+
+
 @NgModule({
   declarations: [],
   imports: [
@@ -38,7 +42,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
     MatSelectModule,
     MatAutocompleteModule,
     MatMenuModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSelectModule
+
   ],
   exports: [
     CommonModule,
@@ -58,7 +64,10 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
     MatAutocompleteModule,
     MatMenuModule,
     MatTabsModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule
   ]
 })
 export class MaterialModule { }

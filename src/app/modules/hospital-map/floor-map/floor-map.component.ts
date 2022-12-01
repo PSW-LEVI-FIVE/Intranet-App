@@ -3,8 +3,6 @@ import { BuildingMapService } from './../services/building-map.service';
 import { FloorMapService } from './../services/floor-map.service';
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
-import { ToastrService } from 'ngx-toastr';
-import { IFloor } from '../model/floor.model';
 
 @Component({
   selector: 'app-floor-map',
@@ -21,11 +19,12 @@ export class FloorMapComponent implements OnInit {
   containerForInfo:any
   ev:any
   clickInfo:any
+
+
   formVisible: any="hidden";
   selectedFloor: any;
+  constructor(private floorMapService: FloorMapService, private buildingMapService:BuildingMapService,private route: ActivatedRoute, private router:Router) { }
 
-  constructor(private toastService: ToastrService, private floorMapService: FloorMapService, private buildingMapService:BuildingMapService,private route: ActivatedRoute, private router:Router) { }
-  
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.floorMapService.getFloorsByBuilding(params['id']).subscribe(res => {
@@ -41,29 +40,15 @@ export class FloorMapComponent implements OnInit {
 
   }
 
-  public toggleCreate(): void {
-    const createFloor = this.floorMapService.handleFloorGeneration(this.data);
-    if(createFloor) {
-      this.route.params.subscribe((params: Params) => createFloor.buildingId = params['id']);
-      this.router.navigate(['manager/create-floor'], {state: {data: createFloor}});
-    } else {
-      this.toastService.info('Maximum number of floors reached');
-    }
-  }
-
   addOnClick(svg:any){
     svg.on("click", (d:any, i:any) =>{
       this.formVisible = "visible";
       this.selectedFloor = i;
-
-      this.floorMapService.getFloorById(i.id).subscribe(res => {this.selectedFloor=res;})
     })
-
   }
   showRooms(svg:any, router:any){
     svg.on("dblclick", function(d:any, i:any){
-      router.navigate(['manager/room-map/'+ i.id]);
-      
+      router.navigate(['room-map'], i.id)
     })
   }
   markFloor(svg:any){
@@ -73,8 +58,7 @@ export class FloorMapComponent implements OnInit {
   }
 
   public updateFloor(): void {
-    if (!this.isValidInput()) return;
-    this.floorMapService.updateFloor(this.selectedFloor);
+
   }
 
   private isValidInput(): boolean {

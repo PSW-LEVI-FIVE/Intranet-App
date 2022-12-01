@@ -1,17 +1,28 @@
+
+<div class="header">
+    <nav>
+        <div class="nav-links">
+              <ul>
+                  <li><a href="">Home</a></li>
+                  <li><a href="">About</a></li>
+              </ul>
+          </div>
+      </nav>
+</div> 
 <h1 class="title">Hospital map</h1>
 <div class="container">
-    <div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 800px;">
+    <div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 700px;">
     </div>
     <div [style.visibility]="formVisible" class="build-info">
         <h1 class="card-title">  Building information  </h1>
         <table style="margin-left:40px;">
             <mat-form-field appearance="fill">
                 <mat-label>Building ID</mat-label>
-                <input matInput disabled [value]="selectedBuilding.id">
+                <input matInput disabled [value]="selectedBuilding.BuildingId">
             </mat-form-field><br>
             <mat-form-field appearance="fill">
                 <mat-label>Building name</mat-label>
-                <input matInput [value]="selectedBuilding.name">
+                <input matInput [value]="selectedBuilding.id">
             </mat-form-field><br>
     </table>
     <div style="margin-top: 30px; margin-bottom: 15px;">
@@ -22,4 +33,7 @@
     </div>
 </div>
 
-<button id="add-button" mat-fab color="primary" (click)="toggleCreate()">Add</button> 
+<h1>Building map overview</h1>
+
+<svg id="rect"></svg>
+

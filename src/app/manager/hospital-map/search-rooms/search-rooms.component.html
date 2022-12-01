@@ -1,0 +1,20 @@
+<div>
+    <mat-form-field appearance="outline" style="margin-right: 20px;">
+        <mat-select [(ngModel)]="searchRoomDTO.roomType" (selectionChange)="changedRoomType(option)">
+            <mat-option [value]="option" *ngFor="let option of availableRoomTypes">{{getOptionLabel(option)}}</mat-option>
+            
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Search rooms" [(ngModel)]="searchRoomDTO.roomName" (keyup)="searchRoomsText()">
+        </mat-form-field>
+<section>
+
+<ul class="list">
+    <li *ngFor="let r of rooms" id="r.roomNumber" (click)="highlightRoom(r.id)">
+    
+{{r.id}} {{r.roomNumber}}
+    </li>
+</ul>
+</section>
+</div>

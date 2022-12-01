@@ -1,9 +1,8 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { BuildingMapService } from '../services/building-map.service';
-import { CreateBuilding, IBuilding } from '../model/building.model';
+import { IBuilding } from '../model/building.model';
 import { MatTableDataSource } from '@angular/material/table';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-building-map',
@@ -19,11 +18,12 @@ export class BuildingMapComponent implements OnInit {
   svg:any;
   buildingsMap:any;
   buildingsText:any;
+  label:any
   selectedBuilding:any;
   public selectedBuildingId:any;
   formVisible: any = "hidden";
+  constructor(private buildingMapService: BuildingMapService, private router:Router) { }
 
-  constructor(private buildingMapService: BuildingMapService, private router:Router, private toastService: ToastrService) { }
 
   ngOnInit(): void {
     this.buildingMapService.getBuildings().subscribe(res => {
@@ -35,34 +35,21 @@ export class BuildingMapComponent implements OnInit {
       this.addOnClick(this.buildingsMap);
       this.showFloors(this.buildingsMap, this.router);
     })
+   
+    
+
   }
 
-  public toggleCreate(): void {
-    const createBuilding = this.buildingMapService.handleBuildingGeneration(this.buildings);
-    if(createBuilding) {
-      this.router.navigate(['manager/create-building'], {state: {data: createBuilding}});
-    } else {
-      this.toastService.info('Maximum number of buildings reached');
-    }
-  }
-
-  Logout()
-  {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    this.router.navigate(["/login"]);
-  }
   addOnClick(svg:any){
     svg.on("click", (d:any, i:any) =>{
       this.formVisible = "visible";
       this.selectedBuilding = i;
-      this.buildingMapService.getBuilding(i.id).subscribe(res => {this.selectedBuilding=res;})
-
+      
     })
   }
   showFloors(svg:any, router:any){
     svg.on("dblclick", function(d:any, i:any){
-      router.navigate(['manager/floor-map/'+ i.id])
+      router.navigate(['floor-map'], i.id)
     })
   }
   public updateBuilding(): void {
