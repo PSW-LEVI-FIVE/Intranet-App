@@ -19,5 +19,11 @@ export interface CreateRoom {
     yCoordinate: number,
     width: number,
     height: number,
-    rgbColour: string
+    rgbColour: string,
+    roomType: number
+}
+
+export interface RoomType {
+    name: string,
+    value: number
 }
