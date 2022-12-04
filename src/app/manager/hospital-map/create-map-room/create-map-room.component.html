@@ -14,6 +14,16 @@
                     <input name="area" [(ngModel)]="createRoom.area" matInput required>
                 </mat-form-field>
             </tr>
+            <tr>
+                <mat-form-field appearance="outline">
+                    <mat-label>Room Type</mat-label>
+                    <mat-select [(ngModel)]="selectedType" name="type" required>
+                        <mat-option *ngFor="let type of roomType" [value]="type.value">
+                            {{type.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </tr>
             <button mat-raised-button color="primary" (click)="submitForm()">Submit</button>
         </table>
 

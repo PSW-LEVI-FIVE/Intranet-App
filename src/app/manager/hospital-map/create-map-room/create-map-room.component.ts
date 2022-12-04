@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY } from 'rxjs';
-import { CreateRoom } from '../model/room.model';
+import { CreateRoom, RoomType } from '../model/room.model';
 import { RoomMapService } from '../services/room-map.service';
 
 @Component({
@@ -13,6 +13,15 @@ import { RoomMapService } from '../services/room-map.service';
 export class CreateMapRoomComponent implements OnInit {
 
   public createRoom : CreateRoom = <CreateRoom>{};
+  public roomType: RoomType[] = [
+    { value: 0, name: 'No type' },
+    { value: 1, name: 'Operation room' },
+    { value: 2, name: 'Examination room' },
+    { value: 3, name: 'Hospital room' },
+    { value: 4, name: 'Cafeteria' },
+  ];
+  
+  public selectedType = this.roomType[0].value;
 
   constructor(
     private router: Router,
@@ -29,6 +38,7 @@ export class CreateMapRoomComponent implements OnInit {
 
   public submitForm():void {
     this.createRoom.rgbColour = '#FFFFFF';
+    this.createRoom.roomType = this.selectedType;
     this.roomService.createRoom(this.createRoom)
     .pipe(catchError(res => {
       const error = res.error
