@@ -6,6 +6,10 @@ import * as d3 from 'd3';
 import { ToastrService } from 'ngx-toastr';
 import { CreateRoom, IRoom } from '../model/room.model';
 import { create } from 'd3';
+import { Equipment } from '../../equipment/model/equipment.model';
+import { Room } from '../../room/model/room.model';
+import { EquipmentService } from '../../equipment/services/equipment.service';
+import { RoomService } from '../../room/services/room.service';
 
 @Component({
   selector: 'app-room-map',
@@ -23,13 +27,20 @@ export class RoomMapComponent implements OnInit {
   selected:any
   enableEditing : boolean = false;
   selectedObjects:any;
+  searchedEquipment: Equipment[] = [];
+  searchedRooms: Room[] = [];
+  searchEquipmentInput: Equipment = {} as Equipment;
+  searchFloorInput: Equipment = {} as Equipment;
+  
 
   constructor(
     private roomMapService:RoomMapService, 
     private buildingMapService:BuildingMapService, 
     private route: ActivatedRoute, 
     private router:Router, 
-    private toastService: ToastrService
+    private toastService: ToastrService,
+    private equipmentService: EquipmentService,
+    private roomService: RoomService
   ) {}
 
   ngOnInit(): void {
@@ -54,7 +65,7 @@ export class RoomMapComponent implements OnInit {
       })
     });
     
-
+    this.searchFloorInput.quantity = 0;
   }
 
   public toggleCreate(): void {
@@ -74,6 +85,12 @@ export class RoomMapComponent implements OnInit {
       this.roomMapService.getByID(i.id).subscribe(res => {
         this.selectedObjects=res;  
         this.enableEditing = false;
+      })
+
+      this.roomService.getRoomEquipment(i.id).subscribe(res =>{
+        this.searchedEquipment = res;
+        this.searchEquipmentInput.roomId = i.id;
+        this.searchEquipmentInput.quantity = 0;
       })
 
     })
@@ -113,6 +130,26 @@ private isValidInput(): boolean {
 }
  click(svg:any){
  
+  }
+
+  public searchEquipmentInRoom(){
+    if(this.searchEquipmentInput.name == undefined || this.searchEquipmentInput.name == "") this.searchEquipmentInput.name = "0";
+
+     this.equipmentService.searchEquipmentInRoom(this.searchEquipmentInput).subscribe(res =>{
+      this.searchedEquipment = res;
+      if(this.searchEquipmentInput.name == "0") this.searchEquipmentInput.name = "";
+     })
+  }
+
+  public searchRoomsByFloorContainigEquipment(){
+    if(this.searchFloorInput.name == undefined || this.searchFloorInput.name == "") this.searchFloorInput.name = "0";
+    this.route.params.subscribe((params: Params) => {
+       this.searchFloorInput.roomId = params['id']
+       this.equipmentService.searchRoomsByFloorContainigEquipment(this.searchFloorInput).subscribe(res =>{
+       this.searchedRooms = res;
+       if(this.searchFloorInput.name == "0") this.searchFloorInput.name = "";
+       })
+      });
   }
 }
 

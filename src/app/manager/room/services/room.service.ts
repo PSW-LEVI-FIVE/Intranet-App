@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Equipment } from '../../equipment/model/equipment.model';
 import { Room } from '../model/room.model';
 
 @Injectable({
@@ -31,5 +32,9 @@ export class RoomService {
 
   updateRoom(room: any): Observable<any> {
     return this.http.put<any>(this.apiHost + '/rooms/' + room.id, room, { headers: this.headers });
+  }
+
+  getRoomEquipment(roomId: number): Observable<Equipment[]>{
+    return this.http.get<Equipment[]>(this.apiHost + '/rooms/equipment/room/' + roomId, { headers: this.headers })
   }
 }
