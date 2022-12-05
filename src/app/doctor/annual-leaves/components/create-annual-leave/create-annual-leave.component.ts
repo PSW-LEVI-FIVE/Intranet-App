@@ -8,11 +8,11 @@ import { catchError, EMPTY } from 'rxjs';
 
 
 export interface ICreateAnnualLeave {
-    DoctorId?: number;
-    Reason: string | null | undefined;
-    StartAt: Date | null | undefined;
-    EndAt: Date | null | undefined;
-    IsUrgent: boolean | null | undefined;
+  DoctorId?: number;
+  Reason: string | null | undefined;
+  StartAt: Date | null | undefined;
+  EndAt: Date | null | undefined;
+  IsUrgent: boolean | null | undefined;
 }
 
 
@@ -45,15 +45,21 @@ export class CreateAnnualLeaveComponent implements OnInit {
   }
 
   create() {
-    if(this.annualLeaveForm.status == 'INVALID') {
+    if (this.annualLeaveForm.status == 'INVALID') {
       this.toastService.error("All fields should be filled!")
       return
     }
 
+    const startAt = this.annualLeaveForm.get('startDate')?.value
+    const endAt = this.annualLeaveForm.get('endDate')?.value
+    if (!startAt || !endAt) return
+    startAt.setDate(startAt.getDate() + 1)
+    endAt.setDate(endAt.getDate() + 1)
+
     let body: ICreateAnnualLeave = {
       DoctorId: 2,
-      StartAt: this.annualLeaveForm.get('startDate')?.value,
-      EndAt: this.annualLeaveForm.get('endDate')?.value,
+      StartAt: startAt,
+      EndAt: endAt,
       Reason: this.annualLeaveForm.get('reason')?.value,
       IsUrgent: this.annualLeaveForm.get('isUrgent')?.value
     }
