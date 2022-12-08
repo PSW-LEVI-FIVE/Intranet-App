@@ -47,6 +47,7 @@ export class RoomMapComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.floorId = params['id'];
       console.log(this.floorId)
+      this.searchFloorInput.roomId = params['id']
     });
     
     this.svg  = this.buildingMapService.createSVG();
@@ -143,13 +144,10 @@ private isValidInput(): boolean {
 
   public searchRoomsByFloorContainigEquipment(){
     if(this.searchFloorInput.name == undefined || this.searchFloorInput.name == "") this.searchFloorInput.name = "0";
-    this.route.params.subscribe((params: Params) => {
-       this.searchFloorInput.roomId = params['id']
-       this.equipmentService.searchRoomsByFloorContainigEquipment(this.searchFloorInput).subscribe(res =>{
+    this.equipmentService.searchRoomsByFloorContainigEquipment(this.searchFloorInput).subscribe(res =>{
        this.searchedRooms = res;
        if(this.searchFloorInput.name == "0") this.searchFloorInput.name = "";
-       })
-      });
+    }) 
   }
 }
 
