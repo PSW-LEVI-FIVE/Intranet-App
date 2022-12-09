@@ -1,4 +1,5 @@
 <h1 class="title">Hospital map</h1>
+<app-navigation *ngIf="selectedBuilding" [selectedBuilding]="selectedBuilding.id"></app-navigation>
 <div class="container">
     <div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 800px;">
     </div>
@@ -23,3 +24,4 @@
 </div>
 
 <button id="add-button" mat-fab color="primary" (click)="toggleCreate()">Add</button> 
+

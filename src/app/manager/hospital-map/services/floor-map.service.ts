@@ -60,8 +60,8 @@ export class FloorMapService {
   getFloorById(id: number): Observable<IFloor> {
     return this.http.get<IFloor>(this.apiHost + 'api/intranet/floors/' + id, {headers: this.headers});
   }
-  getFloorsByBuilding(id: number): Observable<IFloor> {
-    return this.http.get<IFloor>(this.apiHost + 'api/intranet/map/floors/' + id, {headers: this.headers});
+  getFloorsByBuilding(id: number): Observable<IFloor[]> {
+    return this.http.get<IFloor[]>(this.apiHost + 'api/intranet/map/floors/' + id, {headers: this.headers});
   }
   updateFloor(floor: any): Observable<any> {
     return this.http.put<any>(this.apiHost + 'api/intranet/floors/' + floor.id, floor.name, {headers: this.headers});

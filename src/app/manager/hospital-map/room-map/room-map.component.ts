@@ -53,7 +53,7 @@ export class RoomMapComponent implements OnInit {
     this.svg  = this.buildingMapService.createSVG();
     
     this.route.params.subscribe((params: Params) => {
-      this.roomMapService.getRoomsByBuilding(params['id']).subscribe(res => {
+      this.roomMapService.getRoomsByFloor(params['id']).subscribe(res => {
         this.data = res;
         console.log(this.data)
         this.svg  = this.buildingMapService.createSVG();
