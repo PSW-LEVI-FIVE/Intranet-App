@@ -37,15 +37,15 @@ import { HospitalizationModule } from "./doctor/hospitalization/hospitalization.
     ToastrModule.forRoot(),
     HospitalizationModule,
 
-    
-    
- ],
+
+
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterception,
       multi: true
-    } 
+    }
 
   ],
   bootstrap: [AppComponent]

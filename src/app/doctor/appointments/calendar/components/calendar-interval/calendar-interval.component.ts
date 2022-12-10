@@ -13,6 +13,7 @@ export class CalendarIntervalComponent implements OnInit {
     startsAt: { hours: 0, minutes: 0 },
     endsAt: { hours: 0, minutes: 0 },
     patient: "",
+    type: 0,
     id: 0
   }
   public startPosition: number = 0;
@@ -32,8 +33,9 @@ export class CalendarIntervalComponent implements OnInit {
   }
 
   redirectToAppointment() {
-    console.log("navigating")
-    this.router.navigate(['doctor/appointments/' + this.interval.id])
+    if (this.interval.type == 1)
+      return this.router.navigate(['doctor/examination/' + this.interval.id + '/report'])
+    return this.router.navigate(['doctor/appointments/' + this.interval.id])
   }
 
   formatDate() {
@@ -45,9 +47,19 @@ export class CalendarIntervalComponent implements OnInit {
     return `${startHours}:${startMinutes} - ${endHours}:${endMinutes}`
   }
 
+  getColorByType() {
+    if (this.interval.type == 0)
+      return { background: "#039BE5" }
+    if (this.interval.type == 1)
+      return { background: "#AD1457" }
+    return { background: "#33B679" }
+  }
+
+
   private addZeroIfOneNumber(num: number) {
     if (num < 10) return "0" + num
     return num + ""
   }
+
 
 }

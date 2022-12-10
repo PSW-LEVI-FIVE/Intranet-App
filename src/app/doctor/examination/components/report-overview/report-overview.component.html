@@ -1,0 +1,22 @@
+<div class="report-overview">
+    <h2>Report:</h2>
+    <div class="report">
+        <p>
+            {{report}}
+        </p>
+    </div>
+    <h2>Symptoms:</h2>
+    <div class="symptoms-overview">
+        <mat-chip-list #chipList aria-label="Symptom selection">
+            <mat-chip *ngFor="let symptom of symptoms">
+                {{symptom.name}}
+            </mat-chip>
+        </mat-chip-list>
+    </div>
+    <h2>Prescriptions:</h2>
+    <div class="prescriptions-overview">
+        <p *ngFor="let prescription of prescriptions">
+            <label for="">{{prescription.medicineName}} - {{prescription.dose}}</label>
+        </p>
+    </div>
+</div>

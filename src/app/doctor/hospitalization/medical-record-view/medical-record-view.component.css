@@ -3,7 +3,6 @@
     margin: auto;
     padding-top: 40px;
     height: 91vh;
-    background: #f5f5f5;
 }
 
 table {
@@ -15,12 +14,13 @@ table {
     color: black;
     border-collapse: separate;
     border-spacing: 0 10px;
+    background: #f5f5f5;
 }
 
 
 tr {
     border-color: black;
-    background: white;
+    background: #f5f5f5;;
 }
 
 td {

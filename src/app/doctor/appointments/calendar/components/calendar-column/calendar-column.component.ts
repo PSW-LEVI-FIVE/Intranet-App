@@ -9,6 +9,7 @@ import { IDate, ITimeInterval } from '../../calendar.component';
 export class CalendarColumnComponent implements OnInit {
 
   @Input() public intervals: IDate = { date: "", intervals: [] }
+  @Input() public showApps: boolean[] = [true, true, true]
 
   constructor() { }
 

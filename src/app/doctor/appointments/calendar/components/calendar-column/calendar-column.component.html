@@ -1,4 +1,7 @@
 <div class="calendar-column">
-    <app-calendar-interval *ngFor="let interval of intervals.intervals" [interval]="interval">
-    </app-calendar-interval>
+    <ng-container *ngFor="let interval of intervals.intervals">
+        <app-calendar-interval [interval]="interval" *ngIf="showApps[interval.type]">
+        </app-calendar-interval>
+    </ng-container>
+
 </div>
