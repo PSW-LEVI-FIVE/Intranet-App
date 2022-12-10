@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { catchError, EMPTY } from 'rxjs';
 import { AppointmentsService } from '../services/appointments.service';
 
 export interface ITimeSpan {
@@ -55,13 +56,17 @@ export class CalendarComponent implements OnInit {
 
   loadAppointments(date: Date) {
     this.isLoading = true
-    this.appointmentService.getCalendarIntervalsForDate(date).subscribe(res => {
-      console.log(res)
-      this.weekIntervals = res
-      setTimeout(() => {
-        this.isLoading = false
-      }, 500)
-    })
+    this.appointmentService.getCalendarIntervalsForDate(date)
+      .pipe(catchError(res => {
+        this.isLoading = false;
+        return EMPTY
+      }))
+      .subscribe(res => {
+        this.weekIntervals = res
+        setTimeout(() => {
+          this.isLoading = false
+        }, 500)
+      })
   }
 
   updateCalendar(date: Date) {
