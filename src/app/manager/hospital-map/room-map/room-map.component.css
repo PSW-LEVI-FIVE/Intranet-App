@@ -90,3 +90,42 @@
     width: 100px;
     height: 100px;
 }
+
+.table-container{
+    margin-top: 5%;
+    margin-left: 52%;
+}
+
+.searchBtn{
+   margin-left: 11%;
+}
+
+.quantity-search{
+    margin-left: 3%;
+    height: 40px;
+    border-radius: 12px;
+    border-color: #eee;
+}
+
+#equipment-view{
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+}
+
+#equipment-view td, #equipment-view th{
+    border: 1px solid #ddd;
+    padding: 8px;
+    width: 190px;
+}
+
+#equipment-view th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #0891b2;
+}
+
+.room-search-container{
+    margin-top: 5%;
+    margin-left: 52%;
+}

@@ -22,6 +22,7 @@ import { AnnualLeaveReviewComponent } from './annual-leave/annual-leave-review/a
 import { CreateBuildingComponent } from './hospital-map/create-building/create-building.component';
 import { CreateFloorComponent } from './hospital-map/create-floor/create-floor.component';
 import { CreateMapRoomComponent } from './hospital-map/create-map-room/create-map-room.component';
+import { EquipmentComponent } from './equipment/equipment.component';
 
 
 const routes: Routes = [
@@ -94,7 +95,8 @@ const routes: Routes = [
   declarations: [
     ManagerComponent,
     DoctorStatisticsPopularityComponent,
-    AllergenStatisticsFrequencyComponent
+    AllergenStatisticsFrequencyComponent,
+    EquipmentComponent
   ],
   imports: [
     CommonModule,

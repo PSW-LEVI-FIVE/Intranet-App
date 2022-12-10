@@ -40,5 +40,49 @@
     
 </div>
 
-   
+
 <button id="add-button" mat-fab color="primary" (click)="toggleCreate()">Add</button> 
+
+<div class="room-search-container">
+    <div class="search-container">
+        <mat-form-field>
+          <input matInput placeholder="Equipment name" [(ngModel)]="searchFloorInput.name">
+        </mat-form-field>
+        <input type="number" class="quantity-search" [(ngModel)]="searchFloorInput.quantity" min="0">
+        <button type="btn" class="searchBtn" mat-stroked-button app:backgroundTint="#d1d5db" (click)="searchRoomsByFloorContainigEquipment()">Search</button>
+      </div>
+      <div>
+        <label>Rooms on current floor with searched equipment:</label>
+         <ul class="list">
+           <li *ngFor="let room of searchedRooms">{{room.id}} {{room.roomNumber}}</li>
+         </ul>
+      </div>
+</div>
+
+<div class="table-container" *ngIf ="selectedObjects">
+    <div class="search-container">
+      <mat-form-field>
+        <input matInput placeholder="Equipment name" [(ngModel)]="searchEquipmentInput.name">
+      </mat-form-field>
+      <input type="number" class="quantity-search" [(ngModel)]="searchEquipmentInput.quantity" min="0">
+      <button type="btn" class="searchBtn" mat-stroked-button app:backgroundTint="#d1d5db" (click)="searchEquipmentInRoom()">Search</button>
+    </div>
+    <div class="subcontainer">
+    <table id="equipment-view">
+      <thead>
+         <tr>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Room Id</th>
+         </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let equipment of searchedEquipment">
+          <td>{{equipment.name}}</td>
+          <td>{{equipment.quantity}}</td>
+          <td>{{equipment.roomId}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
