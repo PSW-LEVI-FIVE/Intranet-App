@@ -10,6 +10,8 @@
         <mat-card class="demo-inline-calendar-card">
             <mat-calendar (selectedChange)="updateCalendar($event)" [(selected)]="selected"></mat-calendar>
         </mat-card>
+
+        <app-calendar-interval-enable (toggleInterval)="updateAppointmentsShown($event)"></app-calendar-interval-enable>
     </div>
 
     <div class="calendar">
@@ -27,7 +29,7 @@
             </div>
         </div>
         <div class="calendar-body">
-            <app-calendar-column *ngFor="let col of weekIntervals" [intervals]="col">
+            <app-calendar-column *ngFor="let col of weekIntervals" [intervals]="col" [showApps]="appointmentsShown">
             </app-calendar-column>
             <app-loader [isLoading]="isLoading"></app-loader>
         </div>

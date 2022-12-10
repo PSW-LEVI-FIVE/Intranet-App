@@ -9,7 +9,8 @@ export interface ITimeSpan {
 export interface ITimeInterval {
   startsAt: ITimeSpan,
   endsAt: ITimeSpan,
-  patient: string,
+  patient?: string,
+  type: number,
   id: number
 }
 
@@ -29,6 +30,7 @@ export class CalendarComponent implements OnInit {
   public weekIntervals: IDate[] = []
   public selected: Date = new Date()
   public isLoading: boolean = false
+  public appointmentsShown = [true, true, true]
 
 
   constructor(
@@ -54,6 +56,7 @@ export class CalendarComponent implements OnInit {
   loadAppointments(date: Date) {
     this.isLoading = true
     this.appointmentService.getCalendarIntervalsForDate(date).subscribe(res => {
+      console.log(res)
       this.weekIntervals = res
       setTimeout(() => {
         this.isLoading = false
@@ -64,6 +67,11 @@ export class CalendarComponent implements OnInit {
   updateCalendar(date: Date) {
     this.selected = date
     this.loadAppointments(date)
+  }
+
+  updateAppointmentsShown(values: boolean[]) {
+    console.log(values)
+    this.appointmentsShown = values
   }
 
 }

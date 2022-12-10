@@ -10,8 +10,8 @@ import { RoleGuard } from "./shared/login/model/role.guard";
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'doctor', component: DoctorComponent,canActivate:[RoleGuard]},
-  { path: 'manager', component: ManagerComponent,canActivate:[AuthGuard]}
+  { path: 'doctor', component: DoctorComponent, canActivate: [RoleGuard] },
+  { path: 'manager', component: ManagerComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

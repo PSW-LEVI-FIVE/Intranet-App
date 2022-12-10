@@ -14,6 +14,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {FormsModule} from "@angular/forms";
 import {NgxMatDatetimePickerModule} from "@angular-material-components/datetime-picker";
 import { ViewFormComponent } from './view-form/view-form.component';
+import { CalendarIntervalEnableComponent } from './calendar/components/calendar-interval-enable/calendar-interval-enable.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ViewFormComponent } from './view-form/view-form.component';
     CalendarHeaderChunkComponent,
     CreateFormComponent,
     ViewFormComponent,
+    CalendarIntervalEnableComponent,
   ],
   imports: [
     MaterialModule,

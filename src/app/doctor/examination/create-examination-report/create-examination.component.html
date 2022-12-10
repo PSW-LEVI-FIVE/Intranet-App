@@ -1,0 +1,81 @@
+<div class="create-examination-report">
+  <mat-stepper class="stepper" [linear]="isLinear" orientation="vertical" #stepper>
+    <mat-step class="step" [stepControl]="symptomFormGroup">
+      <form [formGroup]="symptomFormGroup">
+        <ng-template matStepLabel>Symptoms</ng-template>
+        <mat-form-field class="example-chip-list" appearance="fill">
+          <mat-label>Type in Symptom!</mat-label>
+          <mat-chip-list #chipList aria-label="Symptom selection">
+            <mat-chip *ngFor="let symptom of symptoms" (removed)="remove(symptom)">
+              {{symptom.name}}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+            <input placeholder="Search Symptom..." #symptomInput formControlName="symptom" [matAutocomplete]="auto"
+              [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="search($event)">
+          </mat-chip-list>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let symptom of allSymptoms" [value]="symptom.id">
+              {{symptom.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step class="step" [stepControl]="reportFormGroup" label="Report">
+      <form [formGroup]="reportFormGroup">
+        <mat-form-field appearance="fill">
+          <mat-label>Write a report!</mat-label>
+          <textarea matInput formControlName="report" placeholder="Patients results of a scan are...."
+            required></textarea>
+        </mat-form-field>
+        <div class="button-container">
+          <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step class="step" [stepControl]="prescriptionFormGroup">
+      <form [formGroup]="medicineFormGroup">
+        <ng-template matStepLabel>Prescriptions</ng-template>
+        <mat-form-field class="example-chip-list" appearance="fill">
+          <mat-label>Type in Medicine!</mat-label>
+          <input matInput placeholder="Search Medicine..." #medicineInput formControlName="medicine"
+            [matAutocomplete]="autoMedicine">
+          <mat-autocomplete #autoMedicine="matAutocomplete" (optionSelected)="selectedMedicine($event)">
+            <mat-option *ngFor="let medicine of allMedicines" [value]="medicine.id">
+              {{medicine.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <form [formGroup]="prescriptionFormGroup" class="prescription-wrapper">
+          <div class="prescription" *ngFor="let pr of prescriptions">
+            <mat-form-field inputs appearance="fill">
+              <mat-label>{{pr.medicineName}} Dose</mat-label>
+              <input matInput required formControlName="{{pr.medicineId}}">
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="removePrescription(pr.medicineId)">Remove</button>
+          </div>
+        </form>
+        <div>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step class="step">
+      <ng-template matStepLabel>Done</ng-template>
+      <app-report-overview [report]="reportFormGroup.get('report')?.value" [prescriptions]="prescriptions"
+        [symptoms]="symptoms"></app-report-overview>
+      <div class="button-container">
+        <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary" (click)="sendReport()">Done</button>
+        <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>

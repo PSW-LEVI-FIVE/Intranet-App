@@ -1,0 +1,10 @@
+<div class="enable-intervals">
+    <mat-checkbox [(ngModel)]="regular" class="enabler regular" (ngModelChange)="updated()">
+        Regular
+    </mat-checkbox>
+
+    <mat-checkbox [(ngModel)]="examination" (ngModelChange)="updated()" class="enabler exam">
+        Examinations</mat-checkbox>
+    <mat-checkbox [(ngModel)]="consilium" (ngModelChange)="updated()" class="enabler cons">
+        Consiliums</mat-checkbox>
+</div>

@@ -23,6 +23,8 @@ import { GiveTherapyFormComponent } from './hospitalization/give-therapy-form/gi
 import { BloodConsumptionModule } from './blood-consumption/blood-consumption.module';
 import { BloodConsumptionViewComponent } from './blood-consumption/blood-consumption-view/blood-consumption-view.component';
 import { TherapyViewComponent } from './hospitalization/given-therapy-view/therapy-view/therapy-view.component';
+import { ExaminationModule } from './examination/examination.module';
+import { CreateExaminationComponent } from './examination/create-examination-report/create-examination.component';
 
 const routes = [
   {
@@ -89,6 +91,10 @@ const routes = [
         path: 'hospitalization-therapies/:id',
         component: TherapyViewComponent,
       },
+      {
+        path: 'examination/:id/report',
+        component: CreateExaminationComponent
+      }
     ]
   }
 ]
@@ -107,6 +113,7 @@ const routes = [
     RouterModule.forChild(routes),
     SharedModule,
     BloodConsumptionModule,
+    ExaminationModule
   ],
   exports: [RouterModule]
 })

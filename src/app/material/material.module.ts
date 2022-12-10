@@ -17,8 +17,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
-
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatChipsModule } from '@angular/material/chips';
 
 
 
@@ -43,7 +44,10 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
     MatAutocompleteModule,
     MatMenuModule,
     MatTabsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule,
+    MatStepperModule,
+    MatChipsModule,
 
   ],
   exports: [
@@ -67,7 +71,10 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
     MatNativeDateModule,
     MatSidenavModule,
     MatListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatCheckboxModule,
+    MatStepperModule,
+    MatChipsModule,
   ]
 })
 export class MaterialModule { }

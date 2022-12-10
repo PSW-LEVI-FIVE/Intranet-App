@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY } from 'rxjs';
 import { Hospitalization } from '../model/hospitalization.model';
@@ -24,11 +24,14 @@ export class MedicalRecordViewComponent implements OnInit {
     private readonly toastService: ToastrService,
     private readonly medicalRecordService: MedicalRecordService,
     private readonly hospitalizationService: HospitalizationService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-
+    const id = this.activatedRoute.snapshot.queryParamMap.get('uid')
+    if (id == null) return
+    this.search(id + "")
   }
 
   closeCreate() {
@@ -58,7 +61,9 @@ export class MedicalRecordViewComponent implements OnInit {
 
 
   search(text: string) {
+    if (text == "-1") return
     this.isLoading = true
+    this.updateUrl(text)
     this.medicalRecordService.getMedicalRecordByUID(text)
       .pipe(catchError(res => {
         this.isLoading = false
@@ -126,4 +131,16 @@ export class MedicalRecordViewComponent implements OnInit {
     this.router.navigate(['doctor/hospitalization-therapies/' + id])
   }
 
+
+  public updateUrl(value: string) {
+    const queryParams: Params = { uid: value };
+
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.activatedRoute,
+        queryParams: queryParams,
+        queryParamsHandling: 'merge', // remove to replace all query params by provided
+      });
+  }
 }

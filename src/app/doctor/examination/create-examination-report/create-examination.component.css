@@ -1,0 +1,54 @@
+.create-examination-report {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.create-examination-report * {
+    height: 100%;
+}
+
+.mat-stepper-vertical {
+    width: 800px!important;
+}
+
+.mat-stepper-vertical-line {
+    padding-top: 10px!important;
+}
+
+.mat-mdc-form-field {
+    width: 500px!important;
+}
+
+.step {
+    width: 400px!important;
+}
+.mat-form-field{
+    width: 400px!important;
+}
+textarea {
+    min-height: 200px!important;
+}
+
+
+.prescription-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.prescription {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+}
