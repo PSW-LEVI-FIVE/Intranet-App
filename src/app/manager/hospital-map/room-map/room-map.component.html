@@ -30,6 +30,8 @@
                 <mat-label>Room name</mat-label>
                 <input id="roomNameInput" matInput [(ngModel)]="selectedRoomModel.roomNumber">
             </mat-form-field><br>
+            <button mat-stroked-button><span>Room schedule</span> </button>
+
     </table>
     <div style="margin-top: 30px; margin-bottom: 15px; margin-left: 40px;">
       <button class="confirmButton" id="confirmRoomEdit" mat-stroked-button app:backgroundTint="#d1d5db" (click)="updateRoom()">
