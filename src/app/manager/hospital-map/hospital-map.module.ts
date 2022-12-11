@@ -14,6 +14,8 @@ import { SearchRoomsComponent } from './search-rooms/search-rooms.component';
 import {MatInputModule} from '@angular/material/input';
 import { MatSelectModule} from '@angular/material/select';
 import { NavigationComponent } from './navigation/navigation.component';
+import { RoomOverviewComponent } from './room-overview/room-overview.component';
+
 
 
 
@@ -27,6 +29,8 @@ import { NavigationComponent } from './navigation/navigation.component';
     CreateMapRoomComponent,
     SearchRoomsComponent,
     NavigationComponent,
+    RoomOverviewComponent,
+
   ],
   imports: [
     CommonModule,
