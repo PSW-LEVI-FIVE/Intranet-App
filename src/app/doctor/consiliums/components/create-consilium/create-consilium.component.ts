@@ -112,7 +112,7 @@ export class CreateConsiliumComponent implements OnInit {
       return
     }
 
-    if (from <= to) {
+    if (from >= to) {
       this.toastService.error("Start should be before end!")
       return
     }
