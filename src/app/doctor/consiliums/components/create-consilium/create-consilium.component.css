@@ -1,0 +1,101 @@
+.mat-form-field {
+    width: 100%;
+  }
+  
+  
+  .form-wrapper {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    margin-top: 90px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .template-form-box {
+    border: 1px solid lightgray;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 15px;
+    background-color: white;
+    margin: auto;
+    max-width: 900px;
+    border-radius: 5px;
+}
+
+.template-form-content {
+    padding: 20px;
+    margin: 10px;
+    background-color: white;
+    width: 90%;
+    max-width: 1000px;
+}
+
+.template-form-error {
+    width: 70%;
+    text-align: left;
+    color: red;
+}
+
+.template-form-content * {
+    width: 100%;
+}
+
+.template-form-content {
+    display: flex;
+}
+
+.doctor-details {
+    gap: 10px;
+    margin-left: 30px;
+}
+
+.template-form-title {
+    max-width: 400px;
+    display: flex;
+    justify-content: flex-start;
+}
+.template-form-title h3{
+    font-size: 30px;
+}
+/* .template-form-button {
+    width: 70%;
+    max-width: 400px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+} */
+.template-form-button {
+    display: flex;
+    justify-content: flex-end;
+}
+.template-form-button button {
+    width: 150px;
+}
+
+.is-urgent-wrapper mat-checkbox {
+    width: 30%;
+}
+
+.is-urgent-wrapper {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.search-type-details {
+    display: flex;
+    gap: 15px;
+}
+
+.slot-suggest {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.time-details {
+    text-align: left;
+}
+

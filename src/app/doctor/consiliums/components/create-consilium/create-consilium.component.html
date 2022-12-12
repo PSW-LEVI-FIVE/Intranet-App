@@ -1,0 +1,80 @@
+<div class="form-wrapper">
+    <form [formGroup]="createConsiliumForm" class="template-form-box">
+        <div class="template-form-title">
+            <h3>{{title}}</h3>
+        </div>
+        <div class="template-form-content">
+            <div class="time-details">
+                <mat-form-field inputs appearance="fill">
+                    <mat-label>Reason</mat-label>
+                    <input  matInput type="text" formControlName="reason" required>
+                </mat-form-field>
+                <mat-form-field inputs appearance="fill">
+                    <mat-label>From </mat-label>
+                    <input matInput [matDatepicker]="from" formControlName="fromDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+                    <mat-datepicker #from></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field inputs appearance="fill">
+                    <mat-label>To </mat-label>
+                    <input matInput [matDatepicker]="to" formControlName="toDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+                    <mat-datepicker #to></mat-datepicker>
+                </mat-form-field>
+            
+                <mat-form-field inputs>
+                    <mat-label>Duration in minutes </mat-label>
+                    <input matInput type="number" required formControlName="duration" required> 
+                </mat-form-field>
+            </div>
+            <div class="doctor-details">
+                <div class="search-type-details">
+                    <div>
+                        <mat-radio-button (click)="changeSearchType()" checked="">By speciality</mat-radio-button>
+                        <mat-radio-button (click)="changeSearchType()">Choose doctors</mat-radio-button>
+                    </div>
+                    <div>
+                        <div *ngIf="!searchType">
+                            <mat-form-field appearance="fill">
+                                <mat-select [formControl]="speciality">
+                                    <mat-option *ngFor="let spec of specialities" [value]="spec.id"> {{spec.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div *ngIf="searchType">
+                            <mat-form-field appearance="fill">
+                                <mat-select [formControl]="ids" multiple class="multiselect">
+                                    <mat-option *ngFor="let doc of doctors" [value]="doc.id"> {{doc.name}} {{doc.surname}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="template-form-button">
+                    <button mat-raised-button color="primary" buttons (click)="suggest()">Suggest</button>
+                </div>
+                
+                <div *ngIf="bestSuggest !== undefined && isFound" >
+                    <div class="slot-suggest">
+                    <div class="time-details">
+                        <p>From: {{bestSuggest.from}}</p>
+                        <p>To: {{bestSuggest.to}}</p>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Doctors</mat-label>
+                            <mat-select>
+                                <mat-option *ngFor="let doc of bestSuggest.doctors" [value]="doc.id" disabled>{{doc.name}} {{doc.surname}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="template-form-button">
+                        <button mat-raised-button color="primary" buttons (click)="create()">Create</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </form>
+</div>
