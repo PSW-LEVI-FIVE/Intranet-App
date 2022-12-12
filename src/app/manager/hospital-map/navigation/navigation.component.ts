@@ -15,11 +15,15 @@ export class NavigationComponent implements OnInit {
 
   constructor(private navigationService: NavigationService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.navigationService.resetNavigation();
+  }
 
   ngOnChanges(): void {
-    if(this.selectedBuilding)
+    if(this.selectedBuilding){
+      this.navigationService.makeBuildingScope(this.selectedBuilding);
       this.buildingRooms = this.navigationService.getRoomsByBuilding(this.selectedBuilding);
+    }
   }
 
   public navigate(): void {
