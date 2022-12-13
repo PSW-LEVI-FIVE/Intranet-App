@@ -25,6 +25,8 @@ import { BloodConsumptionViewComponent } from './blood-consumption/blood-consump
 import { TherapyViewComponent } from './hospitalization/given-therapy-view/therapy-view/therapy-view.component';
 import { ExaminationModule } from './examination/examination.module';
 import { CreateExaminationComponent } from './examination/create-examination-report/create-examination.component';
+import { ConsiliumsModule } from './consiliums/consiliums.module';
+import { CreateConsiliumComponent } from './consiliums/components/create-consilium/create-consilium.component';
 
 const routes = [
   {
@@ -94,7 +96,11 @@ const routes = [
       {
         path: 'examination/:id/report',
         component: CreateExaminationComponent
-      }
+      },
+      {
+        path: 'consilium',
+        component: CreateConsiliumComponent,
+      },
     ]
   }
 ]
@@ -113,7 +119,8 @@ const routes = [
     RouterModule.forChild(routes),
     SharedModule,
     BloodConsumptionModule,
-    ExaminationModule
+    ExaminationModule,
+    ConsiliumsModule
   ],
   exports: [RouterModule]
 })
