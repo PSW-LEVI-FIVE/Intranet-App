@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ExaminationReportService } from 'src/app/doctor/examination/services/examination-report.service';
 import { ITimeInterval, ITimeSpan } from '../../calendar.component';
 
 @Component({
@@ -20,7 +21,8 @@ export class CalendarIntervalComponent implements OnInit {
   public height: number = 0;
 
   constructor(
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly reportService: ExaminationReportService
   ) { }
 
   ngOnInit(): void {
@@ -34,7 +36,7 @@ export class CalendarIntervalComponent implements OnInit {
 
   redirectToAppointment() {
     if (this.interval.type == 1)
-      return this.router.navigate(['doctor/examination/' + this.interval.id + '/report'])
+      return this.isReportDone();
     return this.router.navigate(['doctor/appointments/' + this.interval.id])
   }
 
@@ -59,6 +61,17 @@ export class CalendarIntervalComponent implements OnInit {
   private addZeroIfOneNumber(num: number) {
     if (num < 10) return "0" + num
     return num + ""
+  }
+
+  private isReportDone() {
+    this.reportService.getReportByExaminationId(this.interval.id).subscribe(response => {
+      if(response == null) {
+        this.router.navigate(['doctor/examination/' + this.interval.id + '/report']);
+      } else {
+        window.location.href = response.url;
+      }
+
+    })
   }
 
 
