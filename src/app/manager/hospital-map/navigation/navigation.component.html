@@ -1,4 +1,4 @@
-<mat-form-field appearance="outline">
+<mat-form-field class="combobox" appearance="outline">
     <mat-label>Navigate from entrance to :</mat-label>
      <mat-select [(ngModel)]="selectedRoom" (selectionChange)="navigate()" name="type" required>
         <mat-option *ngFor="let room of buildingRooms" [value]="room">
