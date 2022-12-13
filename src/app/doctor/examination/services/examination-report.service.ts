@@ -16,4 +16,9 @@ export class ExaminationReportService {
         const url = `${this.url}/examination/report`
         return this.httpClient.post<any>(url, dto)
     }
+
+    getReportByExaminationId(id: number) {
+        const url = `${this.url}/examination/${id}/report`
+        return this.httpClient.get<any>(url)
+    }
 }
