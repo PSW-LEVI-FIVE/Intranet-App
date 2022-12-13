@@ -9,15 +9,15 @@
                 <div class="input-wrapper">
                     <mat-form-field>
                         <mat-label>Username</mat-label>
-                        <input matInput placeholder="Username..." [(ngModel)]="caughtEmail">
+                        <input matInput placeholder="Username..." [(ngModel)]="caughtEmail" id="input-username">
                     </mat-form-field>
                     <mat-form-field>
                         <mat-label>Password</mat-label>
                         <input matInput type="password" color="accent" placeholder="Password..."
-                            [(ngModel)]="caughtPassword">
+                            [(ngModel)]="caughtPassword" id="input-password">
                     </mat-form-field>
                 </div>
-                <button mat-raised-button color="primary" (click)="logIn()">Sign In</button>
+                <button mat-raised-button color="primary" (click)="logIn()" id="submit-login">Sign In</button>
             </div>
         </div>
         <div class="right-side">

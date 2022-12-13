@@ -7,24 +7,24 @@
             <div class="time-details">
                 <mat-form-field inputs appearance="fill">
                     <mat-label>Reason</mat-label>
-                    <input  matInput type="text" formControlName="reason" required>
+                    <input  matInput type="text" formControlName="reason" required id="reason-consilium">
                 </mat-form-field>
                 <mat-form-field inputs appearance="fill">
                     <mat-label>From </mat-label>
-                    <input matInput [matDatepicker]="from" formControlName="fromDate" required>
+                    <input matInput [matDatepicker]="from" formControlName="fromDate" required id="from-consilium">
                     <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
                     <mat-datepicker #from></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field inputs appearance="fill">
                     <mat-label>To </mat-label>
-                    <input matInput [matDatepicker]="to" formControlName="toDate" required>
+                    <input matInput [matDatepicker]="to" formControlName="toDate" required id="to-consilium">
                     <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
                     <mat-datepicker #to></mat-datepicker>
                 </mat-form-field>
             
                 <mat-form-field inputs>
                     <mat-label>Duration in minutes </mat-label>
-                    <input matInput type="number" required formControlName="duration" required> 
+                    <input matInput type="number" required formControlName="duration" required id="duration-consilium"> 
                 </mat-form-field>
             </div>
             <div class="doctor-details">
@@ -36,7 +36,7 @@
                     <div>
                         <div *ngIf="!searchType">
                             <mat-form-field appearance="fill">
-                                <mat-select [formControl]="speciality">
+                                <mat-select [formControl]="speciality" id="speciality-consilium">
                                     <mat-option *ngFor="let spec of specialities" [value]="spec.id"> {{spec.name}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="template-form-button">
-                    <button mat-raised-button color="primary" buttons (click)="suggest()">Suggest</button>
+                    <button mat-raised-button color="primary" buttons (click)="suggest()" id="suggest-consilium">Suggest</button>
                 </div>
                 
                 <div *ngIf="bestSuggest !== undefined && isFound" >
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="template-form-button">
-                        <button mat-raised-button color="primary" buttons (click)="create()">Create</button>
+                        <button mat-raised-button color="primary" buttons (click)="create()" id="create-consilium">Create</button>
                     </div>
                 </div>
             </div>
