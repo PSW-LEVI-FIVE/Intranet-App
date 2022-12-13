@@ -23,6 +23,8 @@ import { CreateBuildingComponent } from './hospital-map/create-building/create-b
 import { CreateFloorComponent } from './hospital-map/create-floor/create-floor.component';
 import { CreateMapRoomComponent } from './hospital-map/create-map-room/create-map-room.component';
 import { EquipmentComponent } from './equipment/equipment.component';
+import { DoctorStatisticsLeavesComponent } from './doctor-statistics-leaves/doctor-statistics-leaves.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 const routes: Routes = [
@@ -84,6 +86,10 @@ const routes: Routes = [
       {
         path: 'create-room',
         component: CreateMapRoomComponent
+      },
+      { 
+        path: 'doctors-leave-statistics', 
+        component: DoctorStatisticsLeavesComponent
       }
     ]
 
@@ -96,13 +102,15 @@ const routes: Routes = [
     ManagerComponent,
     DoctorStatisticsPopularityComponent,
     AllergenStatisticsFrequencyComponent,
-    EquipmentComponent
+    EquipmentComponent,
+    DoctorStatisticsLeavesComponent
   ],
   imports: [
     CommonModule,
     RoomModule,
     FormsModule,
     MaterialModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule]
