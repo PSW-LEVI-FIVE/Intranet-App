@@ -35,10 +35,7 @@ import { HospitalizationModule } from "./doctor/hospitalization/hospitalization.
     HospitalMapModule,
     AnnualLeaveModule,
     ToastrModule.forRoot(),
-    HospitalizationModule,
-
-
-
+    HospitalizationModule
   ],
   providers: [
     {
