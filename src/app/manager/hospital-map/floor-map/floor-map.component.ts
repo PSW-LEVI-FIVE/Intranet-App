@@ -62,10 +62,7 @@ export class FloorMapComponent implements OnInit {
 
   private showDestinationFloor(): void {
     const floor = this.navigationService.getDestinationFloor();
-
-    if(floor) {
-      d3.select('#id' + floor.id).style("fill",'#d7ee00')
-    }
+    if(floor) d3.select('#id' + floor.id).style("fill",'#d7ee00');
   }
 
   addOnClick(svg:any){

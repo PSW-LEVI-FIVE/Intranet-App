@@ -33,7 +33,6 @@ export class RoomMapComponent implements OnInit {
   searchEquipmentInput: Equipment = {} as Equipment;
   searchFloorInput: Equipment = {} as Equipment;
   
-
   constructor(
     private roomMapService:RoomMapService, 
     private buildingMapService:BuildingMapService, 
@@ -66,6 +65,7 @@ export class RoomMapComponent implements OnInit {
         this.markRoom(this.rooms);
 
         this.showDestinationRoom();
+        this.visualizeNavigation();
       })
     });
 
@@ -84,10 +84,11 @@ export class RoomMapComponent implements OnInit {
 
   private showDestinationRoom(): void {
     const room = this.navigationService.getDestination();
+    if(room) d3.select('#id'+ room.id).style("fill",'#d7ee00');
+  }
 
-    if(room) {
-      d3.select('#id'+ room.id).style("fill",'#d7ee00')
-    }
+  private visualizeNavigation(): void {
+    this.navigationService.visualizeNavigation(this.svg);
   }
 
   showInformation(svg:any){

@@ -22,11 +22,11 @@ export class NavigationComponent implements OnInit {
   ngOnChanges(): void {
     if(this.selectedBuilding){
       this.navigationService.makeBuildingScope(this.selectedBuilding);
-      this.buildingRooms = this.navigationService.getRoomsByBuilding(this.selectedBuilding);
+      this.buildingRooms = this.navigationService.getRoomsByBuilding();
     }
   }
 
   public navigate(): void {
-    this.navigationService.navigate(this.selectedRoom);
+    this.navigationService.navigateSetup(this.selectedRoom);
   }
 }

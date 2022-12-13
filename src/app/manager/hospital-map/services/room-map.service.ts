@@ -89,6 +89,6 @@ export class RoomMapService {
     .attr("y", function(d:any){ return d.yCoordinate})
     .attr('id',function(d:any){ return "id"+ d.id})
     .attr('cursor', 'pointer')
-
+    
   }
 }
