@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import { ToastrService } from 'ngx-toastr';
 import { IFloor } from '../model/floor.model';
+import { NavigationService } from '../services/navigation.service';
 
 @Component({
   selector: 'app-floor-map',
@@ -24,7 +25,14 @@ export class FloorMapComponent implements OnInit {
   formVisible: any="hidden";
   selectedFloor: any;
 
-  constructor(private toastService: ToastrService, private floorMapService: FloorMapService, private buildingMapService:BuildingMapService,private route: ActivatedRoute, private router:Router) { }
+  constructor(
+    private toastService: ToastrService, 
+    private floorMapService: FloorMapService, 
+    private buildingMapService:BuildingMapService,
+    private route: ActivatedRoute, 
+    private router:Router,
+    private navigationService: NavigationService
+  ) { }
   
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -36,6 +44,7 @@ export class FloorMapComponent implements OnInit {
         this.addOnClick(this.floors)
       this.markFloor(this.floors)
       this.showRooms(this.floors, this.router)
+      this.showDestinationFloor();
       })
     });
 
@@ -49,6 +58,11 @@ export class FloorMapComponent implements OnInit {
     } else {
       this.toastService.info('Maximum number of floors reached');
     }
+  }
+
+  private showDestinationFloor(): void {
+    const floor = this.navigationService.getDestinationFloor();
+    if(floor) d3.select('#id' + floor.id).style("fill",'#d7ee00');
   }
 
   addOnClick(svg:any){

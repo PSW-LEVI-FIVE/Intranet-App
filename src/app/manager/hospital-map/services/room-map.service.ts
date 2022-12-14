@@ -72,8 +72,8 @@ export class RoomMapService {
     
     return this.http.get<IRoom>(this.apiHost + 'api/intranet/rooms/' + id, {headers: this.headers});
   }
-  getRoomsByBuilding(id: number): Observable<IRoom> {
-    return this.http.get<IRoom>(this.apiHost + 'api/intranet/map/rooms/' + id, {headers: this.headers});
+  getRoomsByFloor(id: number): Observable<IRoom[]> {
+    return this.http.get<IRoom[]>(this.apiHost + 'api/intranet/map/rooms/' + id, {headers: this.headers});
   }
   updateRoom(room: any): Observable<any> {
     return this.http.put<any>(this.apiHost + 'api/intranet/rooms/' + room.roomNumber, room.number, {headers: this.headers});
@@ -89,6 +89,6 @@ export class RoomMapService {
     .attr("y", function(d:any){ return d.yCoordinate})
     .attr('id',function(d:any){ return "id"+ d.id})
     .attr('cursor', 'pointer')
-
+    
   }
 }

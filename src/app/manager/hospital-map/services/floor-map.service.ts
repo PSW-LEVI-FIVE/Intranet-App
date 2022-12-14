@@ -60,8 +60,8 @@ export class FloorMapService {
   getFloorById(id: number): Observable<IFloor> {
     return this.http.get<IFloor>(this.apiHost + 'api/intranet/floors/' + id, {headers: this.headers});
   }
-  getFloorsByBuilding(id: number): Observable<IFloor> {
-    return this.http.get<IFloor>(this.apiHost + 'api/intranet/map/floors/' + id, {headers: this.headers});
+  getFloorsByBuilding(id: number): Observable<IFloor[]> {
+    return this.http.get<IFloor[]>(this.apiHost + 'api/intranet/map/floors/' + id, {headers: this.headers});
   }
   updateFloor(floor: any): Observable<any> {
     return this.http.put<any>(this.apiHost + 'api/intranet/floors/' + floor.id, floor.name, {headers: this.headers});
@@ -80,7 +80,7 @@ export class FloorMapService {
     .attr("stroke", "black")
     .attr("x", function(d:any){ return d.xCoordinate })
     .attr("y", function(d:any){ return d.yCoordinate})
-    .attr("id", function(d:any){ return d.id})
+    .attr("id", function(d:any){ return 'id'+ d.id})
     .on("click", function(data2:any) {
       
     });

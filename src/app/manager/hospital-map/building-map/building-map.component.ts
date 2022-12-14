@@ -19,7 +19,7 @@ export class BuildingMapComponent implements OnInit {
   svg:any;
   buildingsMap:any;
   buildingsText:any;
-  selectedBuilding:any;
+  public selectedBuilding:any = undefined;
   public selectedBuildingId:any;
   formVisible: any = "hidden";
 

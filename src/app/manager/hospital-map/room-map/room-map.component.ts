@@ -10,6 +10,7 @@ import { Equipment } from '../../equipment/model/equipment.model';
 import { Room } from '../../room/model/room.model';
 import { EquipmentService } from '../../equipment/services/equipment.service';
 import { RoomService } from '../../room/services/room.service';
+import { NavigationService } from '../services/navigation.service';
 
 @Component({
   selector: 'app-room-map',
@@ -32,7 +33,6 @@ export class RoomMapComponent implements OnInit {
   searchEquipmentInput: Equipment = {} as Equipment;
   searchFloorInput: Equipment = {} as Equipment;
   
-
   constructor(
     private roomMapService:RoomMapService, 
     private buildingMapService:BuildingMapService, 
@@ -40,7 +40,8 @@ export class RoomMapComponent implements OnInit {
     private router:Router, 
     private toastService: ToastrService,
     private equipmentService: EquipmentService,
-    private roomService: RoomService
+    private roomService: RoomService,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit(): void {
@@ -53,7 +54,7 @@ export class RoomMapComponent implements OnInit {
     this.svg  = this.buildingMapService.createSVG();
     
     this.route.params.subscribe((params: Params) => {
-      this.roomMapService.getRoomsByBuilding(params['id']).subscribe(res => {
+      this.roomMapService.getRoomsByFloor(params['id']).subscribe(res => {
         this.data = res;
         console.log(this.data)
         this.svg  = this.buildingMapService.createSVG();
@@ -63,9 +64,11 @@ export class RoomMapComponent implements OnInit {
         this.showInformation(this.rooms);
         this.markRoom(this.rooms);
 
+        this.showDestinationRoom();
+        this.visualizeNavigation();
       })
     });
-    
+
     this.searchFloorInput.quantity = 0;
   }
 
@@ -77,6 +80,15 @@ export class RoomMapComponent implements OnInit {
     } else {
       this.toastService.info('Maximum number of rooms reached');
     }
+  }
+
+  private showDestinationRoom(): void {
+    const room = this.navigationService.getDestination();
+    if(room) d3.select('#id'+ room.id).style("fill",'#d7ee00');
+  }
+
+  private visualizeNavigation(): void {
+    this.navigationService.visualizeNavigation(this.svg);
   }
 
   showInformation(svg:any){
@@ -125,8 +137,6 @@ private isValidInput(): boolean {
   d3.selectAll("rect").style("fill",'white')
   
   d3.select("#id"+id).style("fill",'#d7d5db')
-  
-  
 
 }
  click(svg:any){
