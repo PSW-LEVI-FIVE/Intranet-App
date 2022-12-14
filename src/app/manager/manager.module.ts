@@ -25,6 +25,7 @@ import { CreateMapRoomComponent } from './hospital-map/create-map-room/create-ma
 import { EquipmentComponent } from './equipment/equipment.component';
 import { DoctorStatisticsLeavesComponent } from './doctor-statistics-leaves/doctor-statistics-leaves.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { MaliciousPatientsComponent } from './malicious-patients/malicious-patients.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,10 @@ const routes: Routes = [
     component: ManagerComponent,
     canActivate:[AuthGuard],
     children: [
+      {
+        path: 'malicious-patients',
+        component: MaliciousPatientsComponent
+      },
       {
         path: 'feedback',
         component: ManagerFeedbackListComponent
@@ -103,7 +108,8 @@ const routes: Routes = [
     DoctorStatisticsPopularityComponent,
     AllergenStatisticsFrequencyComponent,
     EquipmentComponent,
-    DoctorStatisticsLeavesComponent
+    DoctorStatisticsLeavesComponent,
+    MaliciousPatientsComponent
   ],
   imports: [
     CommonModule,
