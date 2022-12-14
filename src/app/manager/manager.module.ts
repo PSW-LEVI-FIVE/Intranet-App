@@ -31,6 +31,7 @@ import { ExaminationReportStatisticsModule } from './examination-report-statisti
 import { ExaminationReportStatisticsComponent } from './examination-report-statistics/examination-report-statistics.component';
 import { SharedModule } from "../shared/shared.module";
 import { StatisticsComponent } from './statistics/statistics.component';
+import {RoomOverviewComponent} from './hospital-map/room-overview/room-overview.component'
 
 
 const routes: Routes = [
@@ -97,10 +98,7 @@ const routes: Routes = [
         path: 'create-room',
         component: CreateMapRoomComponent
       },
-      {
-        path: 'doctors-leave-statistics',
-        component: DoctorStatisticsLeavesComponent
-      },
+      
       {
         path: 'create-commercials',
         component: CreateCommercialsComponent
@@ -112,6 +110,16 @@ const routes: Routes = [
       {
         path: 'statistics',
         component: StatisticsComponent
+      },
+      { 
+        path: 'doctors-leave-statistics', 
+        component: DoctorStatisticsLeavesComponent
+      },
+
+      {
+        path:'room-schedule/:id',
+        component: RoomOverviewComponent
+
       }
     ]
 

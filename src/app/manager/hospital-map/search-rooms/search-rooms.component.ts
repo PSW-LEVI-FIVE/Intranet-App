@@ -6,7 +6,7 @@ import { Output, EventEmitter } from '@angular/core';
 import { RoomMapService } from '../services/room-map.service';
 import {  Input } from '@angular/core';
 import { Observable } from 'rxjs';
-
+import {FlexLayoutModule} from '@angular/flex-layout'
 enum RoomTypes {
   NO_TYPE,
   OPERATION_ROOM,
@@ -22,6 +22,7 @@ enum RoomTypes {
 export class SearchRoomsComponent implements OnInit {
 
   @Output() newItemEvent = new EventEmitter<string>()
+  @Output() emit = new EventEmitter<string>()
   @Input() floorID :any
   availableRoomTypes =[RoomTypes.HOSPITAL_ROOM,RoomTypes.EXAMINATION_ROOM,RoomTypes.OPERATION_ROOM,RoomTypes.CAFETERIA]
   searchRoomDTO={
@@ -52,6 +53,9 @@ export class SearchRoomsComponent implements OnInit {
   highlightRoom(room:any){
     this.newItemEvent.emit(room)
 
+  }
+  openSearchForEquipment(roomId:any){
+    this.emit.emit(roomId);
   }
   changedRoomType(d:any){
     this.searchService.searchRooms(this.floorID,this.searchRoomDTO).subscribe( res =>{

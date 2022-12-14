@@ -1,22 +1,12 @@
 
-   <div class="header">
-    <nav>
-        <div class="nav-links">
-              <ul>
-                  <li><a href="">Home</a></li>
-                  <li><a href="">About</a></li>
-              </ul>
-          </div>
-      </nav>
-</div> 
 <h1 class="title">Room map</h1>
 
 <div class="container">
 
     <div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 800px;">
       </div>
-    <div style="margin-left: 15px; ">
-    <app-search-rooms (newItemEvent)="highlight($event)" [floorID]="floorId" ></app-search-rooms>
+    <div style="margin-left: 15px; height:500px ">
+    <app-search-rooms (newItemEvent)="highlight($event)" (emit)="openRoomEquipmentSearch($event)" [floorID]="floorId" ></app-search-rooms>
 
     </div>
     <div *ngIf ="selectedRoomModel">
@@ -30,11 +20,15 @@
                 <mat-label>Room name</mat-label>
                 <input id="roomNameInput" matInput [(ngModel)]="selectedRoomModel.roomNumber">
             </mat-form-field><br>
-            <button mat-stroked-button><span>Room schedule</span> </button>
+            <button mat-stroked-button (click)="roomSchedule(selectedObjects.id)"><span>Room schedule</span> </button>
 
     </table>
     <div style="margin-top: 30px; margin-bottom: 15px; margin-left: 40px;">
-      <button class="confirmButton" id="confirmRoomEdit" mat-stroked-button app:backgroundTint="#d1d5db" (click)="updateRoom()">
+
+     
+
+      <button class="confirmButton" mat-stroked-button  (click)="updateRoom()">
+
           Submit
       </button>
   </div>
@@ -45,23 +39,26 @@
 
 <button id="add-button" mat-fab color="primary" (click)="toggleCreate()">Add</button> 
 
-<div class="room-search-container">
+<div class="room-search-container" *ngIf ="roomObject">
     <div class="search-container">
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <input matInput placeholder="Equipment name" [(ngModel)]="searchFloorInput.name">
         </mat-form-field>
-        <input type="number" class="quantity-search" [(ngModel)]="searchFloorInput.quantity" min="0">
-        <button type="btn" class="searchBtn" mat-stroked-button app:backgroundTint="#d1d5db" (click)="searchRoomsByFloorContainigEquipment()">Search</button>
+        <input type="number" class="quantity-search"  [(ngModel)]="searchFloorInput.quantity" min="0">
+        <button type="btn" class="searchBtn" mat-stroked-button  (click)="searchRoomsByFloorContainigEquipment()">Search</button>
       </div>
       <div>
-        <label>Rooms on current floor with searched equipment:</label>
          <ul class="list">
            <li *ngFor="let room of searchedRooms">{{room.id}} {{room.roomNumber}}</li>
          </ul>
       </div>
 </div>
 
+<<<<<<< HEAD
 <div class="table-container" *ngIf ="selectedRoomModel">
+=======
+<div class="table-container" *ngIf ="roomObject">
+>>>>>>> 5e41fec (refactored code)
     <div class="search-container">
       <mat-form-field>
         <input matInput placeholder="Equipment name" [(ngModel)]="searchEquipmentInput.name">

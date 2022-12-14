@@ -1,15 +1,19 @@
 .list  li{
     position: relative;
     left: 0px;
-    color: black;
+    color: rgb(14, 14, 14);
     list-style: none;
     transition: 0.5s;
     cursor: pointer;
-    border-left:2px solid black;
+    
+    font-size:large;
+    margin-bottom: 20px;
+    
 }
 .list li:hover{
    
     left: 10px;
+    background-color: azure;
     
 }
 list li::before{
@@ -25,4 +29,3 @@ list li::before{
 .list li:hover::before{
     transform: scaleX(1);
 }
-
