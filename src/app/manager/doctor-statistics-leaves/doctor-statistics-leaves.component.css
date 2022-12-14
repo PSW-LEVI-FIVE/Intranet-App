@@ -1,0 +1,25 @@
+.example-form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display:flex;
+    justify-content: center;
+  }
+  .example-full-width {
+    width: 400px;
+  }
+  #divChart{
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+    width: 1400px;
+    height: 700px;
+    font-size: large;
+}
+p {
+  padding-bottom: 20px;
+  padding-top: 20px;
+  padding-left: 300px;
+  font-size: 20px;
+  font-weight: bold;
+}
