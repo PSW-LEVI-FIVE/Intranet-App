@@ -28,6 +28,8 @@ export class RoomMapComponent implements OnInit {
   selected:any
   enableEditing : boolean = false;
   public selectedRoomModel: IRoomModel | undefined;
+  selectedObjects:any;
+  roomObject:any
   searchedEquipment: Equipment[] = [];
   searchedRooms: Room[] = [];
   searchEquipmentInput: Equipment = {} as Equipment;
@@ -48,7 +50,6 @@ export class RoomMapComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.floorId = params['id'];
-      console.log(this.floorId)
       this.searchFloorInput.roomId = params['id']
       this.checkNumberOfRooms()
     });
@@ -114,7 +115,8 @@ export class RoomMapComponent implements OnInit {
 markRoom(svg:any){
   svg.on('click', function(this:any,d:any,i:any,) { 
     d3.selectAll("rect").style("fill",'#d7d5db');
-    d3.select(this).style("fill","#9e91bd")})
+    d3.select(this).style("fill","#9e91bd");
+})
 }
 
 public editForm(){
@@ -131,14 +133,20 @@ public updateRoom(): void {
 
 
  highlight(id:any){
-  d3.selectAll("rect").style("fill",'white')
-  
+  d3.selectAll("rect").style("fill",'white') 
   d3.select("#id"+id).style("fill",'#d7d5db')
 
 }
- click(svg:any){
- 
-  }
+
+openRoomEquipmentSearch(id:any){
+  this.roomMapService.getByID(id).subscribe(res => {
+    this.roomObject=res;  
+   
+  })
+}
+roomSchedule(roomId:number){
+  this.router.navigate(['manager/room-schedule/'+roomId]);
+}
 
   public searchEquipmentInRoom(){
     if(this.searchEquipmentInput.name == undefined || this.searchEquipmentInput.name == "") this.searchEquipmentInput.name = "0";
