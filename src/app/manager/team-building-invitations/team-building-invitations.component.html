@@ -1,0 +1,68 @@
+
+<div style="height:1000px; width:500px;margin-left: 500px;">
+    <mat-card class="mat-card-css">
+        <mat-card-title>Create event </mat-card-title>
+        <mat-card-content>
+            <div>
+            <mat-form-field style="width:400px !important" appearance="fill" class="event-mat">
+                <mat-label>Event name</mat-label>
+                <input matInput [(ngModel)]="title">
+            </mat-form-field>
+            </div>
+            <div >
+                <mat-form-field  style="height:70px !important; margin-top: 30px!important;margin-right: 20px;" appearance="fill">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="startDate">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker">
+                      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                  <mat-form-field >
+                    <mat-label>From {{from}}</mat-label>
+                    <input [(ngModel)]="from" matInput type="time"  required id="time-from">
+                  </mat-form-field>
+            </div>
+            <div>
+               
+                <mat-form-field  appearance="fill" style="height:70px !important; margin-top: 30px!important;margin-right: 20px;">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="pdate" [(ngModel)]="endDate">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="pdate">
+                      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #pdate></mat-datepicker>
+                  </mat-form-field>
+                  <mat-form-field inputs>
+                    <mat-label>From {{from}}</mat-label>
+                    <input [(ngModel)]="to" matInput type="time" required id="time-from">
+                  </mat-form-field>  
+            </div>
+            <div>
+           <mat-form-field style="width:400px !important; margin-top: 30px!important;margin-right: 20px;" appearance="fill">
+            <mat-label>Description</mat-label>
+            <input matInput [(ngModel)]="description">
+           </mat-form-field>
+           </div>
+           <div>
+            <mat-form-field style="width:400px !important; margin-top: 30px!important;margin-right: 20px;" appearance="fill">
+                <mat-label>Place</mat-label>
+                <input matInput [(ngModel)]="place">
+            </mat-form-field>
+           </div>
+           <div>
+            <mat-form-field style="width:400px !important; margin-top: 30px!important;margin-right: 20px;" appearance="fill">
+                <label>Invite</label>
+                <mat-select [(ngModel)]="invite"  >
+                    <mat-option [value]="option" *ngFor="let option of specialties"><mat-radio-button>{{option.name}}</mat-radio-button></mat-option>
+                    </mat-select>
+            </mat-form-field>
+           </div>
+           <div>
+            <button class="button-2" (click) = "createEvent()"> Create</button>
+           </div>
+        </mat-card-content>
+    </mat-card>
+</div>

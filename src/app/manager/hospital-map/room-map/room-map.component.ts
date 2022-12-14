@@ -69,21 +69,21 @@ export class RoomMapComponent implements OnInit {
         this.data = res;
 
         this.svg = this.buildingMapService.createSVG();
-        
+
         this.rooms = this.roomMapService.createRectangles(
-          this.svg, 
+          this.svg,
           this.data.filter(room => !room.secondaryCoordinates)
         );
 
         this.complexRooms = this.roomMapService.createComplexRoom(
-          this.svg, 
+          this.svg,
           this.data.filter(room => room.secondaryCoordinates)
         );
         this.roomsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)
 
         this.showInformationBasic(this.rooms);
         this.markRoom(this.rooms);
-        if(this.complexRooms) {
+        if (this.complexRooms) {
           this.showInformationComplex(this.complexRooms, this);
           this.complexRooms.forEach((room: any) => this.markRoom(room));
         }
@@ -144,31 +144,33 @@ export class RoomMapComponent implements OnInit {
       this.searchEquipmentInput.quantity = 0;
     })
   }
+  public highlight(id: any) {
+    d3.selectAll('rect').style('fill', 'white');
+    d3.select("#id" + id).style('fill', '#d7d5db');
+  }
 
-  private markRoom(svg: any) {
+  openRoomEquipmentSearch(id: any) {
+    this.roomMapService.getByID(id).subscribe(res => {
+      this.roomObject = res;
+
+    })
+
+  }
+  roomSchedule(roomId: number) {
+    this.router.navigate(['manager/room-schedule/' + roomId]);
+
+  }
+
+  markRoom(svg: any) {
     svg.on('click', function (this: any, d: any, i: any,) {
-      d3.selectAll('rect').style('fill', '#FFFFFF');
-      d3.selectAll('path').style('fill', '#FFFFFF');  
-      d3.select(this).style('fill', '#9e91bd');
+      d3.selectAll("rect").style("fill", '#d7d5db');
+      d3.select(this).style("fill", "#9e91bd");
     })
   }
 
   public editForm() {
     if (this.selectedRoomModel) this.enableEditing = true;
   }
-
-
-  
-  openRoomEquipmentSearch(id: any) {
-    this.roomMapService.getByID(id).subscribe(res => {
-      this.roomObject = res;
-
-    })
-  }
-  roomSchedule(roomId: number) {
-    this.router.navigate(['manager/room-schedule/' + roomId]);
-  }
-
 
   public updateRoom(): void {
     if (this.selectedRoomModel) {
@@ -178,10 +180,8 @@ export class RoomMapComponent implements OnInit {
     }
   }
 
-  public highlight(id: any) {
-    d3.selectAll('rect').style('fill', 'white');
-    d3.select("#id" + id).style('fill', '#d7d5db');
-  }
+
+
 
   public searchEquipmentInRoom() {
     if (this.searchEquipmentInput.name == undefined || this.searchEquipmentInput.name == "") this.searchEquipmentInput.name = "0";
@@ -208,14 +208,14 @@ export class RoomMapComponent implements OnInit {
   }
 
   public toggleMerge(): void {
-    if(!this.select) {
+    if (!this.select) {
       this.select = true;
       this.toastService.info('Please select rooms for merging');
       this.toggleMergeSelect(this.rooms);
       return;
-    } 
-    
-    if(this.selectedRooms.length < 2) {
+    }
+
+    if (this.selectedRooms.length < 2) {
       this.toastService.error('Please select at least two rooms to merge');
       return;
     }
@@ -232,14 +232,14 @@ export class RoomMapComponent implements OnInit {
   }
 
   private toggleMergeSelect(svg: any) {
-    svg.on('click', (d : any, i: IRoom) => {
-      if(this.selectedRooms.length === 0 || !this.selectedRooms.find(room => room.id === i.id) && this.roomMapService.canSelect(this.selectedRooms, i)) {
+    svg.on('click', (d: any, i: IRoom) => {
+      if (this.selectedRooms.length === 0 || !this.selectedRooms.find(room => room.id === i.id) && this.roomMapService.canSelect(this.selectedRooms, i)) {
         this.selectedRooms.push(i);
         d3.select('#id' + i.id).style("fill", "#89023E");
       } else if (this.roomMapService.canDeselect(this.selectedRooms, i)) {
         this.selectedRooms.pop();
-        d3.select('#id' + i.id).style("fill", "#FFFFFF");  
-      } 
+        d3.select('#id' + i.id).style("fill", "#FFFFFF");
+      }
     });
   }
 }

@@ -42,6 +42,8 @@ import { RenovationStatisticsScheduleComponent } from './renovation-statistics-s
 import { RenovationStatisticsScheduleModule } from './renovation-statistics-schedule/renovation-statistics-schedule.module';
 
 
+
+
 const routes: Routes = [
   {
     path: 'manager',
@@ -157,6 +159,7 @@ const routes: Routes = [
       {
         path: 'split-room/:floorId',
         component: SplitRoomComponent
+
       },
       {
         path:'room-schedule/:id',
@@ -165,6 +168,17 @@ const routes: Routes = [
       {
         path: 'doctors-workload-statistics',
         component: DoctorStatisticsWorkloadComponent
+      },
+      { 
+        path: 'doctors-leave-statistics', 
+        component: DoctorStatisticsLeavesComponent
+      },
+
+      {
+        path:'room-schedule/:id',
+        component: RoomOverviewComponent
+
+
       }
     ]
 

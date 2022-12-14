@@ -11,6 +11,7 @@ export interface IRoomAppointment {
   type: Type;
 }
 export enum Type {
+
   Examination = 0,
   Hospitalisation = 1,
   Type3 = 2,
@@ -22,6 +23,7 @@ export enum Type {
   styleUrls: ['./room-overview.component.css']
 })
 export class RoomOverviewComponent implements OnInit {
+
 
   displayedColumns: string[] = ['start_date', 'end_date', 'appointment_type'];
 
@@ -44,8 +46,8 @@ export class RoomOverviewComponent implements OnInit {
         leave.endAt = leave.endAt.split('T')[0] + " " + leave.endAt.split('T')[1]
 
       })
-
     })
+ 
 
   }
 
