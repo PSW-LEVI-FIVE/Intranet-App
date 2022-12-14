@@ -36,6 +36,7 @@ export class MaliciousPatientsComponent {
           blockingPatients.push(patientToChecker)
         }
       });
+      this.patientsChecker = JSON.parse(JSON.stringify(this.maliciousPatients));
       blockingPatients.forEach( (patient) => {
       this.blockingUnblockingPatients(patient);
     });
