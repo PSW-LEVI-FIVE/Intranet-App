@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { NgModule } from '@angular/core';
 import { IDoctorWithPopularityDTO } from './model/IDoctorWithPopularityDTO';
-import { DcotorStatisticsPopularityService } from './services/dcotor-statistics-popularity.service';
+import { DcotorStatisticsPopularityService } from './services/doctor-statistics-popularity.service';
 Chart.register(...registerables);
 
 @Component({
@@ -20,7 +20,7 @@ export class DoctorStatisticsPopularityComponent implements OnInit {
   public chart?: Chart;
   public init: boolean = false;
 
-  constructor(private dcotorStatisticsPopularityService: DcotorStatisticsPopularityService) { }
+  constructor(private doctorStatisticsPopularityService: DcotorStatisticsPopularityService) { }
 
   public agesFocusOut() {
     if (this.fromAge > 300) this.fromAge = 300;
@@ -79,7 +79,7 @@ export class DoctorStatisticsPopularityComponent implements OnInit {
 
   public changeStatistics() {
 
-    this.dcotorStatisticsPopularityService.getDoctorsWithPopularity(this.fromAge, this.toAge).subscribe(res => {
+    this.doctorStatisticsPopularityService.getDoctorsWithPopularity(this.fromAge, this.toAge).subscribe(res => {
       res.forEach((doctorWithPopularity: IDoctorWithPopularityDTO, index) => {
         this.doctors.push(doctorWithPopularity.id + ' ' + doctorWithPopularity.name + ' ' + doctorWithPopularity.surname);
         this.doctorsPopularities.push(doctorWithPopularity.patientsPicked);
