@@ -26,13 +26,13 @@
                 <mat-label>Room ID</mat-label>
                 <input matInput disabled [value]="selectedRoomModel.id">
             </mat-form-field><br>
-            <mat-form-field appearance="fill">
+            <mat-form-field  appearance="fill">
                 <mat-label>Room name</mat-label>
-                <input matInput [(ngModel)]="selectedRoomModel.roomNumber">
+                <input id="roomNameInput" matInput [(ngModel)]="selectedRoomModel.roomNumber">
             </mat-form-field><br>
     </table>
     <div style="margin-top: 30px; margin-bottom: 15px; margin-left: 40px;">
-      <button class="confirmButton" mat-stroked-button app:backgroundTint="#d1d5db" (click)="updateRoom()">
+      <button class="confirmButton" id="confirmRoomEdit" mat-stroked-button app:backgroundTint="#d1d5db" (click)="updateRoom()">
           Submit
       </button>
   </div>
