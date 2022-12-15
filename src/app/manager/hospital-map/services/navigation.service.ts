@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { B } from 'chart.js/dist/chunks/helpers.core';
+import { B, p } from 'chart.js/dist/chunks/helpers.core';
+import { index } from 'd3';
 import { IFloor } from '../model/floor.model';
 import { IterationBlock } from '../model/navigation.model';
 import { IRoom } from '../model/room.model';
@@ -14,10 +15,13 @@ export class NavigationService {
   public buildingId: number = -1;
   public buildingRooms: IRoom[] = [];
   public buildingScope: {room: IRoom; floor: IFloor}[] = [];
+  public textPath: IterationBlock[] = [];
 
   private source: IRoom | string | undefined;
   private destination: IRoom | undefined;
   private markedFloor: IFloor | undefined;
+  private navigationTips: string[] = [];
+  private foundRoomsId: string[] = [];
 
   private iterationBlockSize = 10;
   private mapHeight = 500;
@@ -72,6 +76,7 @@ export class NavigationService {
     }
 
     this.navigate(startBlock, svg);
+    this.writeDirections();
   }
 
   private navigate(block: IterationBlock, svg: any): IterationBlock | undefined {
@@ -161,6 +166,8 @@ export class NavigationService {
     .attr('height', block.height)
     .attr('stroke', 'black')
     .attr('fill', '#d7ee00');
+
+    this.textPath.push(block);
   }
 
   public resetNavigation(): void {
@@ -177,6 +184,66 @@ export class NavigationService {
 
   public getDestinationFloor(): IFloor | undefined {
     return this.markedFloor;
+  }
+
+  private writeDirections(){
+      this.textPath.reverse();
+      var endPoint = this.destination?.id as string;
+      var forward = true;
+      this.navigationTips.push("Go to floor: " + this.markedFloor?.id);
+      for(let i = 0; i < this.textPath.length; i++){
+        if( i>1 && this.textPath[i].y !== this.textPath[i-1].y && this.textPath[i].x !== this.textPath[i-2].x)
+        {
+          const foundRoom = this.foundRoomsId.pop();
+          this.navigationTips.push("Turn right at: "+ foundRoom)
+          forward = !forward
+        }
+        else if(i > 1 && this.textPath[i].x !== this.textPath[i-1].x && this.textPath[i].y !== this.textPath[i-2].y)
+        {
+          this.navigationTips.push("Turn left at: "+ this.destination?.id)
+          forward = !forward
+          if(this.foundRoomsId.indexOf(endPoint) !== -1) break;
+        }
+        else{
+           if(forward){
+            this.isInContrastToRoom(this.textPath[i]);
+           }
+            else this.isInContrastToRoomY(this.textPath[i]);
+        }
+ 
+        if(this.foundRoomsId.indexOf(endPoint) !== -1) break;
+      }
+      //console.log(this.navigationTips);
+
+  }
+
+  private isInContrastToRoom(p: IterationBlock){
+     const found = this.buildingScope.find( room => {
+        return room.room.xCoordinate === p.x && room.room.yCoordinate - this.iterationBlockSize === p.y + this.iterationBlockSize;
+      })
+      if(found){
+        this.makeTextPath(found.room.id);
+      }
+  }
+
+  private isInContrastToRoomY(p: IterationBlock){
+    const found = this.buildingScope.find( room => {
+       return room.room.yCoordinate === p.y && room.room.xCoordinate - this.iterationBlockSize === p.x;
+     })
+     if(found){
+       this.makeTextPath(found.room.id);
+     }
+ }
+
+  private makeTextPath(room: string){
+    if(this.foundRoomsId.indexOf(room) === -1){
+      this.foundRoomsId.push(room);
+      this.navigationTips.push('Keep moving forward to room: '+ room);
+    } 
+  }
+
+  public getDirections(){
+    return this.navigationTips;
   }
 
 }
