@@ -1,4 +1,4 @@
-import { CreateRoom, IRoom } from './../model/room.model';
+import { CreateRoom, IRoom, IRoomModel } from './../model/room.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -68,15 +68,14 @@ export class RoomMapService {
     return (newCoordinate + 2 * def + this.offset < map);
   }
 
-  getByID(id: number): Observable<IRoom> {
-    
-    return this.http.get<IRoom>(this.apiHost + 'api/intranet/rooms/' + id, {headers: this.headers});
+  public getByID(id: number): Observable<IRoomModel> {
+    return this.http.get<IRoomModel>(this.apiHost + 'api/intranet/rooms/' + id, {headers: this.headers});
   }
-  getRoomsByFloor(id: number): Observable<IRoom[]> {
+  public getRoomsByFloor(id: number): Observable<IRoom[]> {
     return this.http.get<IRoom[]>(this.apiHost + 'api/intranet/map/rooms/' + id, {headers: this.headers});
   }
-  updateRoom(room: any): Observable<any> {
-    return this.http.put<any>(this.apiHost + 'api/intranet/rooms/' + room.roomNumber, room.number, {headers: this.headers});
+  public updateRoom(room: IRoomModel): Observable<IRoomModel> {
+    return this.http.put<IRoomModel>(this.apiHost + 'api/intranet/rooms/' + room.id, JSON.stringify(room.roomNumber), {headers: this.headers});
   }
 
   createRectangles(svg:any,data:any){
@@ -89,6 +88,5 @@ export class RoomMapService {
     .attr("y", function(d:any){ return d.yCoordinate})
     .attr('id',function(d:any){ return "id"+ d.id})
     .attr('cursor', 'pointer')
-    
   }
 }
