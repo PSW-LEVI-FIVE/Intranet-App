@@ -2,7 +2,7 @@
   <app-template-form [title]="title" [error]="error">
     <mat-form-field inputs appearance="fill">
       <mat-label>Select Patient</mat-label>
-      <mat-select [(value)]="selectedPatientId" required>
+      <mat-select [(value)]="selectedPatientId" required id="patient-select">
         <mat-option *ngFor="let patient of patients" [value]="patient.id+''">
           {{patient.name + ' ' + patient.surname}}
         </mat-option>
@@ -10,7 +10,7 @@
     </mat-form-field>
     <mat-form-field inputs appearance="fill">
       <mat-label>Select Room</mat-label>
-      <mat-select [(value)]="selectedRoomId" required>
+      <mat-select [(value)]="selectedRoomId" required id="room-select">
         <mat-option *ngFor="let room of rooms" [value]="room.id"> {{room.roomNumber}}
         </mat-option>
       </mat-select>
@@ -18,7 +18,7 @@
 
     <mat-form-field inputs appearance="fill">
       <mat-label>Date {{date}}</mat-label>
-      <input matInput [matDatepicker]="date" [(ngModel)]="startDate" required>
+      <input matInput [matDatepicker]="date" [(ngModel)]="startDate" required id="date-input">
       <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
       <mat-datepicker #date></mat-datepicker>
     </mat-form-field>
@@ -26,18 +26,18 @@
 
     <mat-form-field inputs>
       <mat-label>From {{from}}</mat-label>
-      <input [(ngModel)]="from" matInput type="time" required>
+      <input [(ngModel)]="from" matInput type="time" required id="time-from">
     </mat-form-field>
 
     <mat-form-field inputs>
       <mat-label>To {{to}}</mat-label>
-      <input [(ngModel)]="to" matInput type="time" required>
+      <input [(ngModel)]="to" matInput type="time" required id="time-to">
     </mat-form-field>
 
     <mat-radio-group aria-label="Select an option" class="rad-group" [(ngModel)]="type" inputs>
       <mat-radio-button value="0">Regular</mat-radio-button>
       <mat-radio-button value="1">Examination</mat-radio-button>
     </mat-radio-group>
-    <button mat-raised-button color="primary" (click)="create()" buttons>CREATE</button>
+    <button mat-raised-button color="primary" (click)="create()" buttons id="btn-create">CREATE</button>
   </app-template-form>
 </div>
