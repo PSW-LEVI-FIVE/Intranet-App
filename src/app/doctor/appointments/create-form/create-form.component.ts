@@ -22,6 +22,7 @@ export interface ICreateAppointment {
   RoomId: number | null;
   StartAt: Date;
   EndAt: Date;
+  Type: number;
 }
 
 
@@ -42,6 +43,7 @@ export class CreateFormComponent implements OnInit {
   public startDate: Date = new Date()
   public from: string = "";
   public to: string = ""
+  public type: string = "1"
 
 
   constructor(
@@ -87,7 +89,8 @@ export class CreateFormComponent implements OnInit {
       PatientId: this.selectedPatientId,
       RoomId: this.selectedRoomId,
       StartAt: startTime,
-      EndAt: endTime
+      EndAt: endTime,
+      Type: Number(this.type)
     }
 
     this.appointmentService.create(body)

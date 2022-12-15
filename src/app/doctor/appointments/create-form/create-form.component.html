@@ -34,7 +34,10 @@
       <input [(ngModel)]="to" matInput type="time" required>
     </mat-form-field>
 
+    <mat-radio-group aria-label="Select an option" class="rad-group" [(ngModel)]="type" inputs>
+      <mat-radio-button value="0">Regular</mat-radio-button>
+      <mat-radio-button value="1">Examination</mat-radio-button>
+    </mat-radio-group>
     <button mat-raised-button color="primary" (click)="create()" buttons>CREATE</button>
   </app-template-form>
 </div>
-

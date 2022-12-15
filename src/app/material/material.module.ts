@@ -20,7 +20,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatChipsModule } from '@angular/material/chips';
-
+import { MatRadioModule } from '@angular/material/radio';
 
 
 @NgModule({
@@ -48,6 +48,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatCheckboxModule,
     MatStepperModule,
     MatChipsModule,
+    MatRadioModule
 
   ],
   exports: [
@@ -75,6 +76,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatCheckboxModule,
     MatStepperModule,
     MatChipsModule,
+    MatRadioModule
   ]
 })
 export class MaterialModule { }
