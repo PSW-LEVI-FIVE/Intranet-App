@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IDate, ITimeInterval } from '../calendar/calendar.component';
 import { ICreateAppointment } from '../create-form/create-form.component';
+import { ICreateAppointmentFor, IGetAppointmentsInRange } from '../createfor-form/createfor-form.component';
 import { IUpdateAppointment } from "../view-form/view-form.component";
 
 
@@ -45,5 +46,15 @@ export class AppointmentsService {
     return this.http.patch<any>(url, body, { headers: this.headers });
   }
 
+  createFor(body: ICreateAppointmentFor) {
+    const url = this.apiHost + `/intranet/appointments/for`
+    return this.http.post(url, body, { headers: this.headers })
+  }
+
+  getCalendarIntervalsAroundDate(docDate: IGetAppointmentsInRange) {
+    const dateStr = `${docDate.desiredDate.getFullYear()}-${docDate.desiredDate.getMonth() + 1}-${docDate.desiredDate.getDate()}`
+    const url = this.apiHost + `/intranet/appointments/${dateStr}/${docDate.id}`
+    return this.http.get<IDate[]>(url, { headers: this.headers });
+  }
 
 }
