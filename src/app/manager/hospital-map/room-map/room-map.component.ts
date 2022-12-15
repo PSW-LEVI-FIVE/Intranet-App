@@ -4,7 +4,7 @@ import { RoomMapService } from './../services/room-map.service';
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import { ToastrService } from 'ngx-toastr';
-import { CreateRoom, IRoom } from '../model/room.model';
+import { CreateRoom, IRoom, IRoomModel } from '../model/room.model';
 import { create } from 'd3';
 import { Equipment } from '../../equipment/model/equipment.model';
 import { Room } from '../../room/model/room.model';
@@ -27,7 +27,7 @@ export class RoomMapComponent implements OnInit {
   floorId :any 
   selected:any
   enableEditing : boolean = false;
-  selectedObjects:any;
+  public selectedRoomModel: IRoomModel | undefined;
   searchedEquipment: Equipment[] = [];
   searchedRooms: Room[] = [];
   searchEquipmentInput: Equipment = {} as Equipment;
@@ -96,7 +96,7 @@ export class RoomMapComponent implements OnInit {
     
       
       this.roomMapService.getByID(i.id).subscribe(res => {
-        this.selectedObjects=res;  
+        this.selectedRoomModel = res;  
         this.enableEditing = false;
       })
 
@@ -115,23 +115,18 @@ markRoom(svg:any){
     d3.select(this).style("fill","#9e91bd")})
 }
 
-editForm(){
-  if(this.selectedObjects != null){
-   this.enableEditing = true;
-  }
-  else{
-    alert('Please select select room')
-  }
-   
+public editForm(){
+  if(this.selectedRoomModel) this.enableEditing = true;
 }
 
 public updateRoom(): void {
-  this.roomMapService.updateRoom(this.selectedObjects);
+  if(this.selectedRoomModel){
+    this.roomMapService.updateRoom(this.selectedRoomModel).subscribe(() => {
+      this.toastService.success('Successfully updated room name');
+    });
+  }
 }
 
-private isValidInput(): boolean {
-  return this.selectedObjects?.roomNumber != '';
-}
 
  highlight(id:any){
   d3.selectAll("rect").style("fill",'white')

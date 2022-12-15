@@ -11,6 +11,11 @@ export interface IRoom{
     }
 }
 
+export interface IRoomModel {
+    id: number;
+    roomNumber: string;
+}
+
 export interface CreateRoom {
     mapFloorId: number,
     roomNumber: string,
