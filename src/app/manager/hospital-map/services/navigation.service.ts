@@ -230,7 +230,4 @@ export class NavigationService {
   public getDestinationFloor(): IFloor | undefined {
     return this.markedFloor;
   }
-
-
-
 }
