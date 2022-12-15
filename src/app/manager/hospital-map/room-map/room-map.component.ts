@@ -34,6 +34,8 @@ export class RoomMapComponent implements OnInit {
   searchedRooms: Room[] = [];
   searchEquipmentInput: Equipment = {} as Equipment;
   searchFloorInput: Equipment = {} as Equipment;
+  textNavigation: string[] = [];
+  navigation: boolean = true;
   
   constructor(
     private roomMapService:RoomMapService, 
@@ -64,7 +66,8 @@ export class RoomMapComponent implements OnInit {
 
         this.showInformation(this.rooms);
         this.markRoom(this.rooms);
-
+        
+        this.textNavigation = [];
         this.showDestinationRoom();
         this.visualizeNavigation(params['id']);
       })
@@ -88,8 +91,17 @@ export class RoomMapComponent implements OnInit {
     if(room) d3.select('#id'+ room.id).style("fill",'#d7ee00');
   }
 
+<<<<<<< HEAD
   private visualizeNavigation(floorId: string): void {
     this.navigationService.visualizeNavigation(this.svg, floorId);
+=======
+  private visualizeNavigation(): void {
+    this.navigationService.visualizeNavigation(this.svg);
+    this.textNavigation = this.navigationService.getDirections();
+    if(this.textNavigation.length > 0){
+      this.navigation = false;
+    }
+>>>>>>> 2883640 (add text navigation)
   }
 
   showInformation(svg:any){

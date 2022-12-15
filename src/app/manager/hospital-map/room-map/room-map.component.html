@@ -2,7 +2,16 @@
 <h1 class="title">Room map</h1>
 <button id="add-button" mat-fab color="primary" (click)="toggleCreate()">Add room</button> 
 <div class="container">
+<<<<<<< HEAD
   
+=======
+    <div class="navigation-container" *ngIf="!navigation">
+      <label style="font-size: 18px;">Navigation</label>
+      <ul *ngFor="let item of textNavigation" style="size: 500;">
+        <li>{{item}}</li>
+      </ul>
+    </div>
+>>>>>>> 6ae016b (add text navigation)
     <div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 800px;">
       </div>
     <div style="margin-left: 30px; height:500px; width:450px ">
