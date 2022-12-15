@@ -1,6 +1,6 @@
 <div class="create-examination-report">
   <mat-stepper class="stepper" [linear]="isLinear" orientation="vertical" #stepper>
-    <mat-step class="step" [stepControl]="symptomFormGroup">
+    <mat-step class="step" [stepControl]="symptomFormGroup" id="step-symptoms">
       <form [formGroup]="symptomFormGroup">
         <ng-template matStepLabel>Symptoms</ng-template>
         <mat-form-field class="example-chip-list" appearance="fill">
@@ -13,41 +13,42 @@
               </button>
             </mat-chip>
             <input placeholder="Search Symptom..." #symptomInput formControlName="symptom" [matAutocomplete]="auto"
-              [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" id="input-symptoms"
               (matChipInputTokenEnd)="search($event)">
           </mat-chip-list>
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-            <mat-option *ngFor="let symptom of allSymptoms" [value]="symptom.id">
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)" id="symptoms-autoc">
+            <mat-option *ngFor="let symptom of allSymptoms" [value]="symptom.id" class="symptom-autoc">
               {{symptom.name}}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
         <div>
-          <button mat-raised-button color="primary" matStepperNext>Next</button>
+          <button mat-raised-button color="primary" matStepperNext id="symptoms-next">Next</button>
         </div>
       </form>
     </mat-step>
-    <mat-step class="step" [stepControl]="reportFormGroup" label="Report">
+    <mat-step class="step" [stepControl]="reportFormGroup" label="Report" id="step-report">
       <form [formGroup]="reportFormGroup">
         <mat-form-field appearance="fill">
           <mat-label>Write a report!</mat-label>
-          <textarea matInput formControlName="report" placeholder="Patients results of a scan are...."
+          <textarea matInput formControlName="report" placeholder="Patients results of a scan are...." id="report"
             required></textarea>
         </mat-form-field>
         <div class="button-container">
           <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-          <button mat-raised-button color="primary" matStepperNext>Next</button>
+          <button mat-raised-button color="primary" id="report-next" matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>
-    <mat-step class="step" [stepControl]="prescriptionFormGroup">
+    <mat-step class="step" [stepControl]="prescriptionFormGroup" id="step-prescription">
       <form [formGroup]="medicineFormGroup">
         <ng-template matStepLabel>Prescriptions</ng-template>
         <mat-form-field class="example-chip-list" appearance="fill">
           <mat-label>Type in Medicine!</mat-label>
           <input matInput placeholder="Search Medicine..." #medicineInput formControlName="medicine"
-            [matAutocomplete]="autoMedicine">
-          <mat-autocomplete #autoMedicine="matAutocomplete" (optionSelected)="selectedMedicine($event)">
+            [matAutocomplete]="autoMedicine" id="input-medicine">
+          <mat-autocomplete #autoMedicine="matAutocomplete" (optionSelected)="selectedMedicine($event)"
+            id="medicine-autoc">
             <mat-option *ngFor="let medicine of allMedicines" [value]="medicine.id">
               {{medicine.name}}
             </mat-option>
@@ -63,17 +64,17 @@
           </div>
         </form>
         <div>
-          <button mat-raised-button color="primary" matStepperNext>Next</button>
+          <button mat-raised-button color="primary" matStepperNext id="prescriptions-next">Next</button>
         </div>
       </form>
     </mat-step>
-    <mat-step class="step">
+    <mat-step class="step" id="step-done">
       <ng-template matStepLabel>Done</ng-template>
       <app-report-overview [report]="reportFormGroup.get('report')?.value" [prescriptions]="prescriptions"
         [symptoms]="symptoms"></app-report-overview>
       <div class="button-container">
         <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-        <button mat-raised-button color="primary" (click)="sendReport()">Done</button>
+        <button mat-raised-button color="primary" (click)="sendReport()" id="done">Done</button>
         <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
       </div>
     </mat-step>

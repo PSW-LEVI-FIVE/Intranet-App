@@ -11,3 +11,8 @@
   align-items: center;
   justify-content: center;
 }
+
+.rad-group {
+  display: flex;
+  gap: 10px;
+}
