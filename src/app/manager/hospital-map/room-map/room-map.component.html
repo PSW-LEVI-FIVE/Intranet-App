@@ -40,8 +40,11 @@
     
 </div>
 
-
-<button id="add-button" mat-fab color="primary" (click)="toggleCreate()">Add</button> 
+<div class="option-container">
+   <button id="add-button" mat-fab color="primary" (click)="toggleCreate()">Add</button>
+   <button id="merge-button" mat-fab color="primary" (click)="toggleMerge()">Merge</button> 
+   <button id="split-button" mat-fab color="primary" (click)="toggleSplit()">Split</button> 
+</div>
 
 <div class="room-search-container">
     <div class="search-container">

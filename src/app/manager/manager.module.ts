@@ -31,6 +31,8 @@ import { ExaminationReportStatisticsModule } from './examination-report-statisti
 import { ExaminationReportStatisticsComponent } from './examination-report-statistics/examination-report-statistics.component';
 import { SharedModule } from "../shared/shared.module";
 import { StatisticsComponent } from './statistics/statistics.component';
+import { MergeRoomsComponent } from './renovation/merge-rooms/merge-rooms.component';
+import { SplitRoomComponent } from './renovation/split-room/split-room.component';
 
 
 const routes: Routes = [
@@ -112,6 +114,14 @@ const routes: Routes = [
       {
         path: 'statistics',
         component: StatisticsComponent
+      },
+      {
+        path: 'merge-rooms/:floorId',
+        component: MergeRoomsComponent
+      },
+      {
+        path: 'split-room/:floorId',
+        component: SplitRoomComponent
       }
     ]
 
@@ -128,7 +138,9 @@ const routes: Routes = [
     DoctorStatisticsLeavesComponent,
     MaliciousPatientsComponent,
     CreateCommercialsComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    MergeRoomsComponent,
+    SplitRoomComponent
   ],
   exports: [RouterModule],
   imports: [

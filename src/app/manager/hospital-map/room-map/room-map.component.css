@@ -129,3 +129,25 @@
     margin-top: 5%;
     margin-left: 52%;
 }
+
+.option-container{
+    display: flex;
+}
+
+#merge-button{
+    position: absolute;
+    margin-top: 5%;
+    margin-left: 15%;
+    font-size: 24px;
+    width: 100px;
+    height: 100px;
+}
+
+#split-button{
+    position: absolute;
+    margin-top: 5%;
+    margin-left: 25%;
+    font-size: 24px;
+    width: 100px;
+    height: 100px;
+}

@@ -1,0 +1,118 @@
+<mat-stepper [linear]="!isLinear" #stepper>
+
+    <mat-step>
+      <form>
+        <ng-template matStepLabel>Choose rooms for MERGING<br> and define time slot</ng-template>
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Select first room</mat-label>
+                <mat-select [(value)]="selectedFirstRoomId" (selectionChange)="checkFirstStepInput()">
+                  <mat-option *ngFor="let room of floorRooms" [value]="room.id" > {{room.roomNumber}}
+                  </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Select second room</mat-label>
+            <mat-select [(value)]="selectedSecondRoomId" (selectionChange)="checkFirstStepInput()">
+              <mat-option *ngFor="let room of floorRooms" [value]="room.id" > {{room.roomNumber}}
+              </mat-option>
+            </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Choose a date</mat-label>
+              <input matInput [matDatepicker]="picker" [(ngModel)]="pick" name="pick">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Duration (in minutes)</mat-label>
+              <input matInput [(ngModel)]="durationInput" name="dur" (change)="checkFirstStepInput()">
+            </mat-form-field> 
+          </div>
+          <div>
+            <button mat-button class="quit-button" (click)="abortRenovation()">Quit</button>
+            <button mat-button class="step-button" matStepperNext [disabled]="nextStep">Next</button>
+          </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+        <form id="secondStep" >
+          <ng-template matStepLabel>Choose a free appointment</ng-template>
+          <div>
+            <mat-form-field>
+            <mat-label>Select Time Interval</mat-label>
+            <mat-select [(value)]="selectedInterval">
+              <mat-option *ngFor="let interval of intervals" [value]="interval" > {{interval.start}} - {{interval.end}}
+              </mat-option>
+            </mat-select>
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-button matStepperPrevious class="step-button">Back</button>
+            <button mat-button matStepperNext class="step-button" *ngIf="resumeAction">Next</button>
+          </div>
+          <div>
+            <button mat-button class="quit-button" (click)="abortRenovation()">Quit</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step>
+        <form id="thirdStep">
+          <ng-template matStepLabel>Fill in the data for new room</ng-template>
+          <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Room name</mat-label>
+              <input matInput placeholder="Room name" >
+            </mat-form-field>
+          </div>
+          <div>
+              <mat-form-field appearance="fill">
+                <mat-select>
+                    <mat-option [value]="option" *ngFor="let option of availableRoomTypes">{{getOptionLabel(option)}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          <div>
+            <button mat-button matStepperPrevious class="step-button">Back</button>
+            <button mat-button matStepperNext class="step-button">Next</button>
+          </div>
+          <div>
+            <button mat-button class="quit-button" (click)="abortRenovation()">Quit</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step>
+        <form id="fourthStep">
+          <ng-template matStepLabel>Confirm data for merging</ng-template>
+          <div>
+           <div class="data-container">
+            <label class="data-view">Selected rooms for merging: {{selectedFirstRoomId}} and {{selectedSecondRoomId}}</label>
+           </div>
+           <div class="data-container">
+            <label class="data-view">Selected interval:</label>
+           </div>
+           <div class="data-container">
+            <label class="data-view">Result of renovation is room:</label>
+           </div>
+           <div>
+            <button mat-button matStepperPrevious class="step-button">Back</button>
+            <button mat-button class="confirm-button" (click)="scheduleMerge()">Schedule</button>
+           </div>
+          <div>
+            <button mat-button class="quit-button" (click)="abortRenovation()">Quit</button>
+          </div>
+        </div>
+        </form>
+      </mat-step>
+
+</mat-stepper>
