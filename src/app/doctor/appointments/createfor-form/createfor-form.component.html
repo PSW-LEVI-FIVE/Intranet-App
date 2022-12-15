@@ -1,0 +1,85 @@
+<div class="for-doctor-wrapper">
+    <div class="form-wrapper">
+        <app-template-form [title]="title" [error]="error">
+            <mat-form-field inputs appearance="fill">
+                <mat-label>Select Specialization</mat-label>
+                <mat-select [formControl]="specialityId" required (selectionChange)="onPickedSpec()">
+                    <mat-option *ngFor="let spec of specialities" [value]="spec.id">
+                        {{spec.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field inputs appearance="fill">
+                <mat-label>Select Doctor</mat-label>
+                <mat-select [formControl]="doctorId" required>
+                    <mat-option onchange *ngFor="let doc of doctors" [value]="doc.id">
+                        {{doc.name+ ' '+ doc.surname}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field inputs appearance="fill">
+                <mat-label>Desired date </mat-label>
+                <input matInput [matDatepicker]="dated" [(ngModel)]="desiredDate" required
+                    (dateChange)="onDatePicked()">
+                <mat-datepicker-toggle matSuffix [for]="dated"></mat-datepicker-toggle>
+                <mat-datepicker #dated></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field inputs appearance="fill">
+                <mat-label>Select Patient</mat-label>
+                <mat-select [(value)]="selectedPatientId" required>
+                    <mat-option *ngFor="let patient of patients" [value]="patient.id+''">
+                        {{patient.name + ' ' + patient.surname}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field inputs appearance="fill">
+                <mat-label>Select Room</mat-label>
+                <mat-select [(value)]="selectedRoomId" required>
+                    <mat-option *ngFor="let room of rooms" [value]="room.id"> {{room.roomNumber}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field inputs appearance="fill">
+                <mat-label>Date {{date}}</mat-label>
+                <input matInput [matDatepicker]="date" [(ngModel)]="startDate" required>
+                <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                <mat-datepicker #date></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field inputs>
+                <mat-label>From {{from}}</mat-label>
+                <input [(ngModel)]="from" matInput type="time" required>
+            </mat-form-field>
+
+            <mat-form-field inputs>
+                <mat-label>To {{to}}</mat-label>
+                <input [(ngModel)]="to" matInput type="time" required>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" (click)="create()" buttons>CREATE</button>
+        </app-template-form>
+    </div>
+
+    <div class="calendar">
+        <div class="calendar-header">
+            <app-calendar-header-chunk *ngFor="let col of weekIntervals" [date]="col.date"></app-calendar-header-chunk>
+        </div>
+        <div class="calendar-side-header">
+            <div class="side-header-chunk" *ngFor="let row of rows">
+                <span class="header-text">
+                    {{row}}
+                </span>
+            </div>
+        </div>
+        <div class="calendar-body">
+            <app-calendar-column *ngFor="let col of weekIntervals" [intervals]="col">
+            </app-calendar-column>
+            <app-loader [isLoading]="isLoading"></app-loader>
+        </div>
+    </div>
+</div>

@@ -77,7 +77,7 @@ export class GiveMedicineTherapyComponent implements OnInit {
       .subscribe(res => {
         this.toastService.success("Successfully prescribed medicine therapy")
         setTimeout(() => {
-          this.router.navigate(["doctor/records"]) //Jel to ta ruta?
+          this.router.navigate(["doctor/records"])
         }, 1000)
 
       })

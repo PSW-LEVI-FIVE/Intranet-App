@@ -112,7 +112,7 @@ export class GiveBloodTherapyComponent implements OnInit {
       GivenAt: new Date(),
       Type: this.giveBloodTherapyForm.get('bloodType')?.value,
       Quantity: this.giveBloodTherapyForm.get('quantity')?.value,
-      DoctorId: 7, //Preko logina bi trebalo
+      DoctorId: 7,
     }
 
     console.log(body)
@@ -134,7 +134,7 @@ export class GiveBloodTherapyComponent implements OnInit {
       .subscribe(res => {
         this.toastService.success("Successfully prescribed blood therapy")
         setTimeout(() => {
-          this.router.navigate(["doctor/records"]) //Jel to ta ruta?
+          this.router.navigate(["doctor/records"])
         }, 1000)
 
       })

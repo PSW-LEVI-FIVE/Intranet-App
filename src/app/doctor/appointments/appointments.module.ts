@@ -11,10 +11,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { DoctorComponent } from '../doctor.component';
 import { CreateFormComponent } from './create-form/create-form.component';
 import { MatSelectModule } from "@angular/material/select";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgxMatDatetimePickerModule } from "@angular-material-components/datetime-picker";
 import { ViewFormComponent } from './view-form/view-form.component';
 import { CalendarIntervalEnableComponent } from './calendar/components/calendar-interval-enable/calendar-interval-enable.component';
+import { CreateforFormComponent } from './createfor-form/createfor-form.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { CalendarIntervalEnableComponent } from './calendar/components/calendar-
     CreateFormComponent,
     ViewFormComponent,
     CalendarIntervalEnableComponent,
+    CreateforFormComponent,
   ],
   imports: [
     MaterialModule,
@@ -35,6 +37,7 @@ import { CalendarIntervalEnableComponent } from './calendar/components/calendar-
     RouterModule,
     MatSelectModule,
     FormsModule,
+    ReactiveFormsModule,
     NgxMatDatetimePickerModule
   ],
   exports: [RouterModule]

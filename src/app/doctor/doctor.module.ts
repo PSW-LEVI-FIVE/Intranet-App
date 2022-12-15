@@ -27,6 +27,7 @@ import { ExaminationModule } from './examination/examination.module';
 import { CreateExaminationComponent } from './examination/create-examination-report/create-examination.component';
 import { ConsiliumsModule } from './consiliums/consiliums.module';
 import { CreateConsiliumComponent } from './consiliums/components/create-consilium/create-consilium.component';
+import { CreateforFormComponent } from './appointments/createfor-form/createfor-form.component';
 
 const routes = [
   {
@@ -45,6 +46,10 @@ const routes = [
           {
             path: 'create',
             component: CreateFormComponent
+          },
+          {
+            path: 'createfor',
+            component: CreateforFormComponent
           },
           {
             path: ':id',
