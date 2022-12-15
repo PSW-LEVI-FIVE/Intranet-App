@@ -30,7 +30,10 @@ export class AnnualLeaveReviewComponent implements OnInit {
     if(body.state==""){
       this.errorMess="You didn't choose review option";
       return;
-    } else {
+    }else if(body.state=="CANCELED" && body.reason==""){
+      this.errorMess="You didn't enter rejection reason";
+      return;
+    }else {
       this.errorMess = 'OK';
       this.annualLeaveService.reviewAnnualLeave(this.id, body).subscribe(res => {
         alert("Review successfully sent!")
