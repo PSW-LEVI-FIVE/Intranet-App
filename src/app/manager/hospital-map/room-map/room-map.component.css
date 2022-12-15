@@ -129,3 +129,11 @@
     margin-top: 5%;
     margin-left: 52%;
 }
+
+.navigation-container{
+    width: auto;
+    height: auto;
+    margin-right: 10%;
+    align-items: center;
+    font-size: 15px;
+}
