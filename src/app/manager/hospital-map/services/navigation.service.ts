@@ -221,6 +221,7 @@ export class NavigationService {
     this.alreadyChecked = [];
     this.winningBlock = undefined;
     this.destinations = [];
+    this.navigationTips = [];
   }
 
   public getDestination(): IRoom | undefined {
