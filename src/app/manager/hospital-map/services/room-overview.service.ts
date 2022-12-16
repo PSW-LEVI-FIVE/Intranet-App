@@ -13,6 +13,7 @@ export class RoomOverviewService {
 
   constructor(private http:HttpClient) { }
 
+<<<<<<< HEAD
   getRoomSchedule(roomId:number):Observable<any>{
     return this.http.get(this.apiHost+"api/intranet/rooms/schedule/appointment/"+roomId)
   }
@@ -34,6 +35,25 @@ export class RoomOverviewService {
 
   getEquipmentName(equipmentId:number):Observable<any>{
     return this.http.get<any>(this.apiHost+"api/intranet/equipment/get/"+equipmentId)
+=======
+  GetRoomSchedule(roomId:number):Observable<any>{
+    return this.http.get(this.apiHost+"api/intranet/rooms/schedule/appointment/"+roomId)
+  }
+
+  GetEquipmentRelocationForRoom(roomId:number):Observable<any>{
+    return this.http.get(this.apiHost+"api/intranet/rooms/schedule/relocation/"+roomId)
+  }
+
+  GetRenovationForRoom(roomId:number):Observable<any>{
+    return this.http.get(this.apiHost+"api/intranet/rooms/schedule/renovation/"+roomId)
+  }
+
+  CancelRenovationForRoom(renovationId:number){
+    return this.http.get(this.apiHost+"api/intranet/rooms/schedule/cancel/renovation"+renovationId)
+  }
+  CancelRellocation(rellocationId:number):any{
+    return this.http.get(this.apiHost+"api/intranet/rooms/schedule/cancel/renovation"+rellocationId)
+>>>>>>> 68cc2e7 (refactored code)
   }
 
  

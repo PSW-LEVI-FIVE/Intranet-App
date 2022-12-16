@@ -11,13 +11,22 @@
     </ng-container>
 
     <ng-container matColumnDef="renovation_type">
+<<<<<<< HEAD
         <th mat-header-cell *matHeaderCellDef> Renovation type </th>
         <td mat-cell *matCellDef="let appointment">{{getOptionLabel(appointment.type)}} </td>
+=======
+        <th mat-header-cell *matHeaderCellDef> Appointment type </th>
+        <td mat-cell *matCellDef="let appointment"> </td>
+>>>>>>> 68cc2e7 (refactored code)
       </ng-container>
 
       <ng-container matColumnDef="cancel">
         <th mat-header-cell *matHeaderCellDef>Cancelation</th>
+<<<<<<< HEAD
         <td mat-cell *matCellDef="let appointment"><button id="{{ 'renovation-'+appointment.id }}" (click)="cancelRenovation(appointment.id)">Cancel</button> </td>
+=======
+        <td mat-cell *matCellDef="let appointment"><button (click)="cancelRenovation(appointment.id)">Cancel</button> </td>
+>>>>>>> 68cc2e7 (refactored code)
       </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -8,7 +8,8 @@ export interface IRoomAppointment {
   roomId: number | null;
   startAt: any;
   endAt: any;
-  type: Type;
+  type:Type;
+
 }
 export enum Type {
 
@@ -25,10 +26,10 @@ export enum Type {
 export class RoomOverviewComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['start_date', 'end_date', 'appointment_type'];
-
-  roomId: number = 0
-  dataSource: IRoomAppointment[] = []
+  displayedColumns: string[] = ['start_date', 'end_date','appointment_type'];
+  
+  roomId:number = 0
+  dataSource:IRoomAppointment[]=[]
   Type = Type
   constructor(private http: HttpClient,
     private roomOverViewService: RoomOverviewService,
@@ -39,11 +40,13 @@ export class RoomOverviewComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.roomId = params['id'];
     });
+
     this.roomOverViewService.getRoomSchedule(this.roomId).subscribe(res => {
       this.dataSource = res
       this.dataSource.forEach((leave) => {
         leave.startAt = leave.startAt.split('T')[0] + " " + leave.startAt.split('T')[1]
         leave.endAt = leave.endAt.split('T')[0] + " " + leave.endAt.split('T')[1]
+
 
       })
     })

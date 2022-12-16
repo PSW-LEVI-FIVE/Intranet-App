@@ -7,6 +7,7 @@ import { Room } from '../../room/model/room.model';
 import { RoomService } from '../../room/services/room.service';
 import { BuildingMapService } from '../services/building-map.service';
 import { RoomMapService } from '../services/room-map.service';
+
 export interface IRoomEquipment{
   quantity:number,
   name:string
@@ -17,6 +18,7 @@ export interface IRoomEquipment{
   styleUrls: ['./room-information.component.css']
 })
 export class RoomInformationComponent implements OnInit {
+
   displayedColumns: string[] = ['name','quantity'];
   dataSource:Equipment[]=[]
   constructor(
@@ -54,6 +56,7 @@ export class RoomInformationComponent implements OnInit {
     this.equipmentService.getEquipmentByRoom(this.roomId).subscribe(res=>{
       this.dataSource = res
     });
+
   }
 
   roomSchedule(id:number){

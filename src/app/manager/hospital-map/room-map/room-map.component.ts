@@ -168,20 +168,6 @@ export class RoomMapComponent implements OnInit {
     })
   }
 
-  public editForm() {
-    if (this.selectedRoomModel) this.enableEditing = true;
-  }
-
-  public updateRoom(): void {
-    if (this.selectedRoomModel) {
-      this.roomMapService.updateRoom(this.selectedRoomModel).subscribe(() => {
-        this.toastService.success('Successfully updated room name');
-      });
-    }
-  }
-
-
-
 
   public searchEquipmentInRoom() {
     if (this.searchEquipmentInput.name == undefined || this.searchEquipmentInput.name == "") this.searchEquipmentInput.name = "0";

@@ -89,7 +89,6 @@ const routes: Routes = [
         path: 'room-map/:id',
         component: RoomMapComponent
       },
-
       { 
         path: 'room-map/:id', 
         component: RoomMapComponent ,
@@ -151,7 +150,6 @@ const routes: Routes = [
         component: StatisticsComponent
 
       },
-
       {
         path: 'merge-rooms/:floorId',
         component: MergeRoomsComponent
@@ -159,6 +157,7 @@ const routes: Routes = [
       {
         path: 'split-room/:floorId',
         component: SplitRoomComponent
+
 
       },
       {
@@ -169,6 +168,7 @@ const routes: Routes = [
         path: 'doctors-workload-statistics',
         component: DoctorStatisticsWorkloadComponent
       },
+
       { 
         path: 'doctors-leave-statistics', 
         component: DoctorStatisticsLeavesComponent
@@ -177,7 +177,6 @@ const routes: Routes = [
       {
         path:'room-schedule/:id',
         component: RoomOverviewComponent
-
 
       }
     ]

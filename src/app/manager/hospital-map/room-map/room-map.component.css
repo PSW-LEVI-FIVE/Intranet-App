@@ -130,6 +130,7 @@
     margin-left: 52%;
 }
 
+
 .option-container{
     display:block;
     margin-left: 200px;
@@ -176,6 +177,7 @@
   touch-action: manipulation;
 
 }
+
 .navigation-container{
     width: auto;
     height: auto;
@@ -183,4 +185,5 @@
     align-items: center;
     font-size: 15px;
 }
+
 

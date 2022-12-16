@@ -14,6 +14,7 @@ export enum TypeRen {
   Merge = 0,
   Split = 1,
 
+
 }
 @Component({
   selector: 'app-room-renovation-overview',
@@ -21,7 +22,6 @@ export enum TypeRen {
   styleUrls: ['./room-renovation-overview.component.css']
 })
 export class RoomRenovationOverviewComponent implements OnInit {
-
   @Input() roomID: any
   answer: any
   constructor(private http: HttpClient,
@@ -69,6 +69,9 @@ export class RoomRenovationOverviewComponent implements OnInit {
     })
 
   }
+
+
+
 
 
 

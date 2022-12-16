@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY } from 'rxjs';
 import { RoomMapService } from '../services/room-map.service';
 import { RoomOverviewService } from '../services/room-overview.service';
+
 export interface IEquipmentRelocation {
   startingRoomId: number,
   startAt: any,
@@ -18,6 +19,7 @@ export interface IEquipmentRelocation {
   styleUrls: ['./equipment-relocation-overview.component.css']
 })
 export class EquipmentRelocationOverviewComponent implements OnInit {
+
   @Input() roomID: any
   constructor(
     private http: HttpClient,
@@ -60,6 +62,8 @@ export class EquipmentRelocationOverviewComponent implements OnInit {
       this.dataSource = res
     })
 
-  }
 
+  
+
+}
 }

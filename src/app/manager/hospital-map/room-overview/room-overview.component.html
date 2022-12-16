@@ -9,7 +9,10 @@
     <ng-container matColumnDef="end_date">
       <th mat-header-cell *matHeaderCellDef> End date  </th>
       <td mat-cell *matCellDef="let appointment"> {{appointment.endAt}} </td>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 68cc2e7 (refactored code)
     </ng-container>
 
     <ng-container matColumnDef="appointment_type">
@@ -21,7 +24,12 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
  </mat-tab>
+<<<<<<< HEAD
   <mat-tab label="Equipment rellocation" id="rellocation"> <app-equipment-relocation-overview [roomID]="roomId"></app-equipment-relocation-overview> </mat-tab>
   <mat-tab label="Room renovation" id="renovation"> <app-room-renovation-overview [roomID]="roomId"></app-room-renovation-overview> </mat-tab>
+=======
+  <mat-tab label="Equipment rellocation"> <app-equipment-relocation-overview [roomID]="roomId"></app-equipment-relocation-overview> </mat-tab>
+  <mat-tab label="Room renovation"> <app-room-renovation-overview [roomID]="roomId"></app-room-renovation-overview> </mat-tab>
+>>>>>>> 68cc2e7 (refactored code)
 </mat-tab-group>
 
