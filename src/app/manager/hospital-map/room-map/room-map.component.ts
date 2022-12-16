@@ -94,20 +94,15 @@ export class RoomMapComponent implements OnInit {
 
   showInformation(svg:any){
     svg.on('dblclick',(d:any, i:any) => {
-    
-      
       this.roomMapService.getByID(i.id).subscribe(res => {
         this.selectedRoomModel = res;  
-        this.enableEditing = false;
-      })
 
-      this.roomService.getRoomEquipment(i.id).subscribe(res =>{
-        this.searchedEquipment = res;
-        this.searchEquipmentInput.roomId = i.id;
-        this.searchEquipmentInput.quantity = 0;
-      })
+      var ids = this.floorId + '-'+ i.id
+      this.router.navigate(['manager/room-info/'+this.floorId+'/'+i.id]);
+
 
     })
+  })
 }
 
 markRoom(svg:any){

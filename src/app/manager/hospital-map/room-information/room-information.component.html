@@ -1,0 +1,44 @@
+<div></div>
+<div>
+    <h1 style="margin-left:30px; margin-top:50px">Search equipment inside room</h1>
+    <div style=" width: 300px;margin-left:30px; margin-top:50px" >
+        <div >
+            <div>
+          <mat-form-field appearance="outline">
+            <input matInput placeholder="Equipment name" [(ngModel)]="searchEquipmentInput.name">
+          </mat-form-field>
+          </div>
+          <div>
+          <input appearance="outline" style="height:50px" type="number" matInput class="quantity-search" [(ngModel)]="searchEquipmentInput.quantity" min="0">
+          </div>
+          <button class="button-2" (click)="searchEquipmentInRoom()">Search</button>
+        </div>
+            <div>
+                <ul class="list">
+                  <li *ngFor="let room of searchedRooms">{{room.id}} {{room.roomNumber}}</li>
+                </ul>
+             </div>
+      
+    </div>
+</div>
+<div >
+    <h1 class="card-title">  Room information  </h1>
+    <table style="margin-left:40px;">
+        <mat-form-field appearance="fill">
+            <mat-label>Room ID</mat-label>
+            <input matInput disabled  [value]="selectedObjects.id">
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+            <mat-label>Room name</mat-label>
+            <input matInput [value]="selectedObjects.name">
+        </mat-form-field><br>
+        <button  class="button-2" (click)="roomSchedule(selectedObjects.id)"  ><span>Room schedule</span> </button>
+
+</table>
+<div style="margin-top: 30px; margin-bottom: 15px; margin-left: 40px; ">
+  <button class="button-2"  (click) ="roomSchedule(selectedObjects.id)">
+      Submit
+  </button>
+</div>
+</div>
+
