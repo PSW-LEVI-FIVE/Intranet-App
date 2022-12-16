@@ -34,6 +34,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { MergeRoomsComponent } from './renovation/merge-rooms/merge-rooms.component';
 import { SplitRoomComponent } from './renovation/split-room/split-room.component';
 import {RoomOverviewComponent} from './hospital-map/room-overview/room-overview.component'
+import { RoomInformationComponent } from './hospital-map/room-information/room-information.component';
 
 
 
@@ -77,10 +78,25 @@ const routes: Routes = [
         path: 'floor-map/:id',
         component: FloorMapComponent
       },
+
       {
         path: 'room-map/:id',
         component: RoomMapComponent
       },
+      { 
+        path: 'room-map/:id', 
+        component: RoomMapComponent ,
+        children:[
+          {path:'view', component:RoomInformationComponent}
+        ]
+
+      },
+
+      {
+        path:'room-info/:id/:fid',
+        component: RoomInformationComponent
+      },
+      
       {
         path: 'create-building',
         component: CreateBuildingComponent

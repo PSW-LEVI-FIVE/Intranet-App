@@ -6,8 +6,8 @@ export interface IRoomAppointment {
   doctorId: number;
   patientId: number | null;
   roomId: number | null;
-  startAt: Date;
-  endAt: Date;
+  startAt: any;
+  endAt: any;
   type:Type;
 }
 export enum Type{
@@ -23,7 +23,7 @@ export enum Type{
 })
 export class RoomOverviewComponent implements OnInit {
 
-  displayedColumns: string[] = ['start_date', 'end_date', 'start_time', 'end_time','appointment_type'];
+  displayedColumns: string[] = ['start_date', 'end_date','appointment_type'];
   
   roomId:number = 0
   dataSource:IRoomAppointment[]=[]
@@ -36,7 +36,13 @@ export class RoomOverviewComponent implements OnInit {
     });
     this.roomOverViewService.GetRoomSchedule(this.roomId).subscribe(res=>
       {
+        console.log(this.roomId)
         this.dataSource = res
+        this.dataSource.forEach((leave) => { 
+          leave.startAt = leave.startAt.split('T')[0]+" "+ leave.startAt.split('T')[1]
+          leave.endAt = leave.endAt.split('T')[0] +" "+ leave.endAt.split('T')[1]
+        
+        })
         console.log(this.dataSource)
       })
 

@@ -60,6 +60,8 @@ export class SearchRoomsComponent implements OnInit {
   changedRoomType(d:any){
     this.searchService.searchRooms(this.floorID,this.searchRoomDTO).subscribe( res =>{
     this.rooms= res
+    console.log(res+"hahaha")
+
       
     })
   }
