@@ -1,13 +1,12 @@
 .tableContainer {
     margin-top: 32px;
-    border-radius: 4px;
-    border: #06b6d4 2px solid;
-    background-color: #164e63;
+    background-color: #3f51b5;
     vertical-align: middle;
     padding-top: 24px;
     padding-bottom: 24px;
     padding-left: 16px;
     padding-right: 16px;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 2px 24px 8px, rgba(0, 0, 0, 0.36) 0px 0px 0px 0px !important;
 }
 
 .mat-cell {
@@ -45,7 +44,7 @@
 }
 
 .table {
-  background-color: #164e63; 
+  background-color: #3f51b5; 
   width: 100%;
   border-spacing:16px 0px;
 }
@@ -58,7 +57,7 @@
   padding-right: 16px;
 }
 .confirmButton:hover{
-  background-color: #22d3ee;
+  background-color: #5398e7;
   transition: 0.2s;
 }
 
@@ -84,7 +83,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #0e7490;
+    background-color: #3660d4;
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -102,7 +101,7 @@
   }
   
   input:checked + .slider {
-    background-color: #0d9488;
+    background-color: #83bdfe;
   }
   input:disabled + .slider {
     background-color: #525252;
@@ -123,3 +122,18 @@
   .slider.round:before {
     border-radius: 50%;
   }
+.text {
+    color: white !important;
+    font-family: Garamond, serif !important;
+    margin-bottom: 0px !important;
+}
+.header{
+    font-family: Garamond, serif !important;
+    margin-bottom: 0px !important;
+}
+.mat-stroked-button {
+    color: white;
+    background-color: #3f51b5;
+    width: 150px;
+    border-radius: 3px;
+}
