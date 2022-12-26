@@ -10,6 +10,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { ModalFormComponent } from './modal-form/modal-form.component';
+import { SideMenuComponent } from './side-menu/side-menu.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { ModalFormComponent } from './modal-form/modal-form.component';
     DoctorMenuComponent,
     LoginComponent,
     ModalFormComponent,
+    SideMenuComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,6 @@ import { ModalFormComponent } from './modal-form/modal-form.component';
     RouterModule,
     FormsModule
   ],
-  exports: [LoaderComponent, DoctorMenuComponent, TemplateFormComponent, ModalFormComponent]
+  exports: [LoaderComponent, DoctorMenuComponent, TemplateFormComponent, ModalFormComponent, SideMenuComponent]
 })
 export class SharedModule { }
