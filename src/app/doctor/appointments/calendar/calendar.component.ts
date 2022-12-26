@@ -1,5 +1,8 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
-import { catchError, EMPTY } from 'rxjs';
+import { Router } from '@angular/router';
+import { catchError, EMPTY, subscribeOn, Subscription } from 'rxjs';
+import { MenuService } from 'src/app/shared/services/menu.service';
 import { AppointmentsService } from '../services/appointments.service';
 
 export interface ITimeSpan {
@@ -23,7 +26,23 @@ export interface IDate {
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css']
+  styleUrls: ['./calendar.component.css'],
+  animations: [
+    trigger('openClose', [
+      state('open', style({
+        width: '50%',
+        display: 'block',
+        opacity: 1
+      })),
+      state('closed', style({
+        opacity: 0,
+        display: 'none',
+        width: '100%'
+      })),
+      transition('open => closed', animate('600ms 0.4ms ease-in-out')),
+      transition('closed => open', animate('600ms 0.4ms ease-in-out'))
+    ]),
+  ],
 })
 export class CalendarComponent implements OnInit {
 
@@ -32,13 +51,20 @@ export class CalendarComponent implements OnInit {
   public selected: Date = new Date()
   public isLoading: boolean = false
   public appointmentsShown = [true, true, true]
+  public showCalendarWidget = true
+  private burgerSub: Subscription = new Subscription()
 
 
   constructor(
     private readonly appointmentService: AppointmentsService,
+    private readonly router: Router,
+    private readonly menuService: MenuService
   ) { }
 
   ngOnInit(): void {
+    this.burgerSub = this.menuService.getBurgerState().subscribe(val => {
+      this.showCalendarWidget = val
+    })
     this.rows = [
       "0:00 AM", "1:00 AM", "2:00 AM", "3:00 AM",
       "4:00 AM", "5:00 AM", "6:00 AM",
@@ -77,6 +103,14 @@ export class CalendarComponent implements OnInit {
   updateAppointmentsShown(values: boolean[]) {
     console.log(values)
     this.appointmentsShown = values
+  }
+
+  navigate(route: string) {
+    this.router.navigate([route])
+  }
+
+  ngOnDestroy() {
+    this.burgerSub.unsubscribe();
   }
 
 }

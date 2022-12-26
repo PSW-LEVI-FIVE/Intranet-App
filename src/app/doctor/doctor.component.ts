@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DoctorComponent implements OnInit {
 
+
+  showCalendarWidget: boolean = true
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  toggleCalendarWidget() {
+    this.showCalendarWidget = !this.showCalendarWidget
   }
 
 }
