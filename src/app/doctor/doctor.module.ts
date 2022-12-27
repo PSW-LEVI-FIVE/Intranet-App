@@ -125,7 +125,7 @@ const routes = [
     SharedModule,
     BloodConsumptionModule,
     ExaminationModule,
-    ConsiliumsModule
+    ConsiliumsModule,
   ],
   exports: [RouterModule]
 })

@@ -1,0 +1,57 @@
+<div class="side-menu" [@menuLoading]="true">
+    <div class="top-menu">
+    </div>
+    <div class="center-menu">
+        <div class="item" style="margin-top: 7px" (click)="toggleBurger()">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="menu"></mat-icon>
+        </div>
+        <a [routerLink]="'/doctor/appointments'">
+            <div class="item">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+                <div class="tooltip">Home</div>
+            </div>
+        </a>
+        <a [routerLink]="'/doctor/records'">
+            <div class="item">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="assignment"></mat-icon>
+                <div class="tooltip">Records</div>
+            </div>
+        </a>
+        <a [routerLink]="'/doctor/annual-leaves'">
+            <div class="item">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="sunny"></mat-icon>
+                <div class="tooltip">Vacations</div>
+            </div>
+        </a>
+        <a [routerLink]="'/doctor/blood-consumption'">
+            <div class="item">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="bloodtype"></mat-icon>
+                <div class="tooltip">Blood Consumption</div>
+            </div>
+        </a>
+        <a [routerLink]="'/doctor/consilium'">
+            <div class="item">
+                <mat-icon aria-hidden="false" aria-label="Example home icon"
+                    fontIcon="perm_contact_calendar"></mat-icon>
+                <div class="tooltip">Consilium</div>
+            </div>
+        </a>
+    </div>
+    <div class="bottom-menu">
+        <div class="item" (click)="onLogout()">
+            <mat-icon aria-hidden="false" class="mat-icon-rtl-mirror" aria-label="Example home icon"
+                fontIcon="logout"></mat-icon>
+            <div class="tooltip">Logout</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- <a routerLink="/doctor">Home</a>
+<a routerLink="/doctor/appointments">Appointments</a>
+<a [routerLink]="'/doctor/records'">Records</a>
+<a routerLink="/doctor/annual-leaves">Annual leaves</a>
+<a routerLink="/doctor/blood-orders">Blood orders</a>
+<a routerLink="/doctor/blood-consumption">Blood consumption</a>
+<a routerLink="/doctor/consilium">Create consilium</a>
+<a (click)="onLogout()">Logout</a> -->

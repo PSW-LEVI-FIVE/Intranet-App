@@ -1,0 +1,15 @@
+
+.content-wrapper {
+    display: flex;
+    height: calc(100vh - 200px);    
+}
+
+
+.side-menu-placeholder{
+    width: 80px;
+    min-width: 80px;
+}
+
+#frame {
+    width: calc(100% - 80px);
+}

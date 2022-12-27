@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Authenticated, Role } from '../login/model/authenticated.model';
+import { LoginService } from '../login/service/login.service';
+import { MenuService } from '../services/menu.service';
 
 @Component({
   selector: 'app-doctor-menu',
@@ -7,19 +10,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./doctor-menu.component.css']
 })
 export class DoctorMenuComponent implements OnInit {
+  profile: Authenticated = { name: "", surname: '', role: Role.DOCTOR, username: '' }
+  burgerState: boolean = true
 
-
-
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private readonly loginService: LoginService
+  ) { }
 
   ngOnInit(): void {
     console.log("started")
-  }
-  onLogout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    this.router.navigate(["/"]);
 
+    this.loginService.getUserProfile().subscribe(res => {
+      this.profile = res
+    })
   }
 
 }
