@@ -16,8 +16,8 @@ export class ExaminationReportService {
         return this.httpClient.post<any>(url, { examinationId })
     }
 
-    sendReport(dto: CreateExaminationReportDTO) {
-        const url = `${this.url}/examination/report`
+    sendReport(dto: CreateExaminationReportDTO, uuid: string) {
+        const url = `${this.url}/examination/report/${uuid}`
         return this.httpClient.patch<any>(url, dto)
     }
 
