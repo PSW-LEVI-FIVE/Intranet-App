@@ -33,6 +33,8 @@ export class CreateExaminationComponent implements OnInit {
   })
   prescriptionFormGroup = new FormGroup({})
 
+  startedReport: any = null
+
   symptoms: Symptom[] = []
   allSymptoms: Symptom[] = []
   prescriptions: Prescription[] = []
@@ -61,6 +63,12 @@ export class CreateExaminationComponent implements OnInit {
     this.medicineFormGroup.get('medicine')?.valueChanges.subscribe(change => {
       if (typeof (change) === "number" || change == null) return
       this.findMedicines(change)
+    })
+
+    let examinationId = Number(this.route.snapshot.paramMap.get("id"))
+    this.examinationReportService.startReport(examinationId).subscribe(res => {
+      console.log(res)
+      this.startedReport = res
     })
   }
 
@@ -110,6 +118,7 @@ export class CreateExaminationComponent implements OnInit {
       return
     }
     const dto: CreateExaminationReportDTO = {
+      id: this.startedReport ? this.startedReport.id : 0,
       content: this.reportFormGroup.get('report')?.value,
       prescriptions: this.mapPrescriptionDoses(),
       symptoms: this.symptoms,
