@@ -23,7 +23,7 @@
           </mat-autocomplete>
         </mat-form-field>
         <div>
-          <button mat-raised-button color="primary" matStepperNext id="symptoms-next">Next</button>
+          <button mat-raised-button color="primary" matStepperNext id="symptoms-next" (click)="sendEvent(1)">Next</button>
         </div>
       </form>
     </mat-step>
@@ -36,7 +36,7 @@
         </mat-form-field>
         <div class="button-container">
           <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-          <button mat-raised-button color="primary" id="report-next" matStepperNext>Next</button>
+          <button mat-raised-button color="primary" id="report-next" matStepperNext (click)="sendEvent(2)">Next</button>
         </div>
       </form>
     </mat-step>
@@ -64,7 +64,7 @@
           </div>
         </form>
         <div>
-          <button mat-raised-button color="primary" matStepperNext id="prescriptions-next">Next</button>
+          <button mat-raised-button color="primary" matStepperNext id="prescriptions-next" (click)="sendEvent(3)">Next</button>
         </div>
       </form>
     </mat-step>

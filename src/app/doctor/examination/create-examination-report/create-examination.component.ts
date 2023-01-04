@@ -12,6 +12,7 @@ import { ExaminationReportService } from '../services/examination-report.service
 import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ExaminationReportEventDTO } from '../dtos/examination-report-event.dto';
 
 @Component({
   selector: 'app-create-examination',
@@ -68,11 +69,19 @@ export class CreateExaminationComponent implements OnInit {
 
     let examinationId = Number(this.route.snapshot.paramMap.get("id"))
     this.examinationReportService.startReport(examinationId).subscribe(res => {
-      console.log(res)
-      console.log(res.uuid)
       this.reportUuid = res.uuid;
       this.startedReport = res
     })
+  }
+
+  sendEvent(type: number) {
+    const dto: ExaminationReportEventDTO = {
+      eventType: type,
+      time: new Date(),
+      uuid: this.reportUuid,
+      examinationReportId: this.startedReport.id
+    }
+    this.examinationReportService.sendEvent(dto).subscribe();
   }
 
   remove(val: Symptom) {
