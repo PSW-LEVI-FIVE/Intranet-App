@@ -65,7 +65,7 @@ export class CalendarIntervalComponent implements OnInit {
 
   private isReportDone() {
     this.reportService.getReportByExaminationId(this.interval.id).subscribe(response => {
-      if(response == null) {
+      if (response == null || response.url == null) {
         this.router.navigate(['doctor/examination/' + this.interval.id + '/report']);
       } else {
         window.location.href = response.url;
