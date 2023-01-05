@@ -14,7 +14,7 @@
 >>>>>>> 6ae016b (add text navigation)
     <div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 800px;">
       </div>
-    <div style="margin-left: 30px; height:500px; width:450px ">
+    <div style="margin-left: 30px; height:600px; width:450px ">
       <mat-tab-group>
       <mat-tab label="Room search" style="margin-bottom:40px">
         <app-search-rooms style="margin-bottom:40px; margin-left:30px" (newItemEvent)="highlight($event)" (emit)="openRoomEquipmentSearch($event)" [floorID]="floorId" >
@@ -22,13 +22,17 @@
         </app-search-rooms>
         </mat-tab>
   <mat-tab label="Room equipment search"><div>
-    <div  style="margin-top:20px ;font-size: 12px; margin-right:10px" >
+    
+      <div>
         <mat-form-field appearance="outline" style="width:250px; margin-right:10px">
           <input matInput placeholder="Equipment name" [(ngModel)]="searchFloorInput.name">
         </mat-form-field>
+        </div>
+        <div>
         <input type="number" matInput style="border-radius:5px; width:250px; height:40px; border-color:black" [(ngModel)]="searchFloorInput.quantity" min="0">
+        </div>
         <div><button class="button-2" (click)="searchRoomsByFloorContainigEquipment()">Search</button></div>
-      </div>
+      
       <div>
          <ul class="list">
            <li *ngFor="let room of searchedRooms">{{room.id}} {{room.roomNumber}}</li>
