@@ -21,3 +21,14 @@
     touch-action: manipulation;
   
   }
+
+ .card-app
+ {
+  width: 300px;
+  background-color: gainsboro;
+  margin-left: 40%;
+  
+ }
+ table {
+  width: 100%;
+}

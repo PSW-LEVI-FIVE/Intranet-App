@@ -20,7 +20,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
  </mat-tab>
-  <mat-tab label="Equipment rellocation"> <app-equipment-relocation-overview [roomID]="roomId"></app-equipment-relocation-overview> </mat-tab>
-  <mat-tab label="Room renovation"> <app-room-renovation-overview [roomID]="roomId"></app-room-renovation-overview> </mat-tab>
+  <mat-tab label="Equipment rellocation" id="rellocation"> <app-equipment-relocation-overview [roomID]="roomId"></app-equipment-relocation-overview> </mat-tab>
+  <mat-tab label="Room renovation" id="renovation"> <app-room-renovation-overview [roomID]="roomId"></app-room-renovation-overview> </mat-tab>
 </mat-tab-group>
 

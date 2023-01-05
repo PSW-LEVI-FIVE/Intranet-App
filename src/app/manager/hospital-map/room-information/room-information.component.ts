@@ -7,14 +7,18 @@ import { Room } from '../../room/model/room.model';
 import { RoomService } from '../../room/services/room.service';
 import { BuildingMapService } from '../services/building-map.service';
 import { RoomMapService } from '../services/room-map.service';
-
+export interface IRoomEquipment{
+  quantity:number,
+  name:string
+}
 @Component({
   selector: 'app-room-information',
   templateUrl: './room-information.component.html',
   styleUrls: ['./room-information.component.css']
 })
 export class RoomInformationComponent implements OnInit {
-
+  displayedColumns: string[] = ['name','quantity'];
+  dataSource:Equipment[]=[]
   constructor(
     private roomMapService:RoomMapService, 
     private buildingMapService:BuildingMapService, 
@@ -46,6 +50,9 @@ export class RoomInformationComponent implements OnInit {
     })
       this.roomMapService.getByID(this.roomId).subscribe(res => {
         this.selectedObjects=res;
+    });
+    this.equipmentService.getEquipmentByRoom(this.roomId).subscribe(res=>{
+      this.dataSource = res
     });
   }
 
