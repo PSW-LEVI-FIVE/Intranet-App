@@ -32,7 +32,6 @@ export class CreateCommercialsComponent implements OnInit {
   public createCommercial() {
     this.commercialService.createCommercial(this.commercial).subscribe(res => {
         this.toastService.success("Your commercial recorded!")
-      this.router.navigate(['/manager/create-commercials']);
     });
   }
  rememberEvent(ev : Event)
@@ -66,7 +65,6 @@ export class CreateCommercialsComponent implements OnInit {
       if (data.error) {
         this.message = `Error send message ${data.error.message}`;
       } else {
-        console.log(data.data);
         this.commercial.pictureUrl = name;
         this.message = `File ${file.name} uploaded with success!`;
       }
