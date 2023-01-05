@@ -8,7 +8,7 @@
     <input type="email" id="form2Example1" class="form-input" style="text-align:center;padding: 0.5%;margin-top:2%;margin-left:0.5%;" [(ngModel)]="commercial.text" />
   </div>
   <div class="form-outline mb-4" style="text-align: center;">
-    <input id="customFile" type="file" for="form2Example1" (change)="selectFile($event)" class="custom-file-input rounded-pill" style="text-align:center;padding: 0.5%;margin-top:2%;">
+    <input id="customFile" type="file" for="form2Example1" (change)="rememberEvent($event)" class="custom-file-input rounded-pill" style="text-align:center;padding: 0.5%;margin-top:2%;">
   </div>
-  <button  class="smalltext" (click)="createCommercial()"> Submit!</button>
+  <button  class="smalltext" (click)="selectFile();createCommercial()"> Submit!</button>
 </div>

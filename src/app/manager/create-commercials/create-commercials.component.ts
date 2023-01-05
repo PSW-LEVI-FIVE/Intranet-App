@@ -15,6 +15,7 @@ export class CreateCommercialsComponent implements OnInit {
   message!: string;
   status!: boolean;
   bucket!: string;
+  eventt!: Event;
 
   public commercial:ICommercial = <ICommercial>{};
   constructor(private storageService: StorageService,private commercialService: CreateCommercialsService, 
@@ -31,12 +32,26 @@ export class CreateCommercialsComponent implements OnInit {
   public createCommercial() {
     this.commercialService.createCommercial(this.commercial).subscribe(res => {
         this.toastService.success("Your commercial recorded!")
-      this.router.navigate(['/']);
+      this.router.navigate(['/manager/create-commercials']);
     });
   }
+ rememberEvent(ev : Event)
+ {
+  this.eventt = ev;
+  const input = ev.target as HTMLInputElement;
+  if (!input.files || input.files.length == 0) {
+    this.message = 'You must select an image to upload.';
+    return;
+  }
+
+  this.status = true;
+  const file: File = input.files[0];
+  const name = file.name.replace(/ /g, '');
+  this.commercial.pictureUrl = name;
+ }
   
- selectFile(event: Event) {
-    const input = event.target as HTMLInputElement;
+ selectFile() {
+    const input = this.eventt.target as HTMLInputElement;
 
     if (!input.files || input.files.length == 0) {
       this.message = 'You must select an image to upload.';
