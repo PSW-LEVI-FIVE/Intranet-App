@@ -222,6 +222,8 @@ export class NavigationService {
     this.winningBlock = undefined;
     this.destinations = [];
     this.navigationTips = [];
+    this.textPath = [];
+    this.foundRoomsId = [];
   }
 
   public getDestination(): IRoom | undefined {
