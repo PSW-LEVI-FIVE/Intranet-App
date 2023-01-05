@@ -1,1 +1,14 @@
-<p>create-commercials works!</p>
+<div class="custom-file overflow-hidden rounded-pill mb-5" style="text-align:center;padding: 2%;margin-top:2%;float:center">
+    <div class="form-outline mb-4">
+    <label class="form-label" for="form2Example1" style="font-size:17px">Title:</label>
+    <input type="email" id="form2Example1" class="form-input" style="text-align:center;padding: 0.5%;margin-top:2%;margin-left:0.5%;" [(ngModel)]="commercial.title" /> 
+  </div>
+  <div class="form-outline mb-4">
+    <label class="form-label" for="form2Example1" style="font-size:17px">Text:</label>
+    <input type="email" id="form2Example1" class="form-input" style="text-align:center;padding: 0.5%;margin-top:2%;margin-left:0.5%;" [(ngModel)]="commercial.text" />
+  </div>
+  <div class="form-outline mb-4" style="text-align: center;">
+    <input id="customFile" type="file" for="form2Example1" (change)="selectFile($event)" class="custom-file-input rounded-pill" style="text-align:center;padding: 0.5%;margin-top:2%;">
+  </div>
+  <button  class="smalltext" (click)="createCommercial()"> Submit!</button>
+</div>

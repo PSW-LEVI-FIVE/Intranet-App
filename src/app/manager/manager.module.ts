@@ -26,6 +26,7 @@ import { EquipmentComponent } from './equipment/equipment.component';
 import { DoctorStatisticsLeavesComponent } from './doctor-statistics-leaves/doctor-statistics-leaves.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { MaliciousPatientsComponent } from './malicious-patients/malicious-patients.component';
+import { CreateCommercialsComponent } from './create-commercials/create-commercials.component';
 
 
 const routes: Routes = [
@@ -95,6 +96,10 @@ const routes: Routes = [
       { 
         path: 'doctors-leave-statistics', 
         component: DoctorStatisticsLeavesComponent
+      },
+      { 
+        path: 'create-commercials', 
+        component: CreateCommercialsComponent
       }
     ]
 
@@ -109,7 +114,8 @@ const routes: Routes = [
     AllergenStatisticsFrequencyComponent,
     EquipmentComponent,
     DoctorStatisticsLeavesComponent,
-    MaliciousPatientsComponent
+    MaliciousPatientsComponent,
+    CreateCommercialsComponent
   ],
   imports: [
     CommonModule,
