@@ -4,6 +4,7 @@ import { BuildingMapService } from '../services/building-map.service';
 import { CreateBuilding, IBuilding } from '../model/building.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
+import { NavigationService } from '../services/navigation.service';
 
 @Component({
   selector: 'app-building-map',
@@ -23,9 +24,15 @@ export class BuildingMapComponent implements OnInit {
   public selectedBuildingId:any;
   formVisible: any = "hidden";
 
-  constructor(private buildingMapService: BuildingMapService, private router:Router, private toastService: ToastrService) { }
+  constructor(
+    private buildingMapService: BuildingMapService, 
+    private router:Router, 
+    private toastService: ToastrService,
+    private navigationService: NavigationService
+  ) { }
 
   ngOnInit(): void {
+    this.navigationService.resetNavigation();
     this.buildingMapService.getBuildings().subscribe(res => {
       this.buildings = res;
       this.dataSource.data = this.buildings;

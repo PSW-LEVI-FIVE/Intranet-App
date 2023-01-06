@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { B } from 'chart.js/dist/chunks/helpers.core';
+import { flatRollup } from 'd3';
 import { IFloor } from '../model/floor.model';
 import { IterationBlock } from '../model/navigation.model';
 import { IRoom } from '../model/room.model';
@@ -15,9 +16,11 @@ export class NavigationService {
   public buildingRooms: IRoom[] = [];
   public buildingScope: {room: IRoom; floor: IFloor}[] = [];
 
-  private source: IRoom | string | undefined;
+  private source: IRoom | undefined;
   private destination: IRoom | undefined;
   private markedFloor: IFloor | undefined;
+
+  private destinations: {room: IRoom; floor: IFloor}[] = [];
 
   private iterationBlockSize = 10;
   private mapHeight = 500;
@@ -54,27 +57,65 @@ export class NavigationService {
     return this.buildingRooms;
   }
 
-  public navigateSetup(destinationRoom: IRoom): void {
-    this.source = 'entrance';
+  public navigateSetup(sourceRoom?: IRoom ,destinationRoom?: IRoom): void {
+    if(!destinationRoom) return;
+    
+    this.source = sourceRoom;
     this.destination = destinationRoom;
-    this.markedFloor = this.buildingScope.find(entry => {
-      return entry.room.id === destinationRoom.id;
-    })?.floor;
-  }
 
-  public visualizeNavigation(svg: any): void {
-    if(!this.destination || !this.source) return;
-    const startBlock = <IterationBlock> {
-      x: 0,
-      y: 10,
-      width: this.iterationBlockSize,
-      height: this.iterationBlockSize
+    const sourceFloor = this.findRoomFloor(sourceRoom);
+    const destinationFloor = this.findRoomFloor(destinationRoom);
+
+    if(this.source && sourceFloor && destinationFloor && sourceFloor.floor.id !== destinationFloor.floor.id) {
+      this.destinations = [sourceFloor, destinationFloor];
+      this.source = undefined;
     }
 
-    this.navigate(startBlock, svg);
+    this.markedFloor = destinationFloor?.floor;
   }
 
-  private navigate(block: IterationBlock, svg: any): IterationBlock | undefined {
+  private findRoomFloor(room?: IRoom) {
+    return this.buildingScope.find(entry => {
+      return entry.room.id === room?.id;
+    })
+  }
+
+  private matchRoomToFloor(floorId: string) {
+    return this.destinations.find(entry => {
+      return Number(entry.floor.id) === Number(floorId);
+    })?.room
+  }
+
+  public visualizeNavigation(svg: any, floorId: string): void {
+    if(this.destinations.length > 0) {
+      this.destination = this.matchRoomToFloor(floorId);  
+    }
+      
+    if(this.doNotNavigate(floorId)) return;
+
+    const startBlock = this.makeStartBlock();
+    
+    if(!this.navigate(startBlock, svg, 1))
+      this.navigate(startBlock, svg,-1);
+
+    this.winningBlock = undefined;
+    this.alreadyChecked = [];
+  }
+
+  private doNotNavigate(floorId: string): boolean {
+    return !this.destination || Number(this.findRoomFloor(this.destination)?.floor.id) !== Number(floorId);
+  }
+
+  private makeStartBlock(): IterationBlock { 
+    return <IterationBlock> {
+      x: !this.source ? 0 : this.source.xCoordinate + this.source.width/2, 
+      y: !this.source ? 10 : this.source.yCoordinate - 10, 
+      width: this.iterationBlockSize,
+      height: this.iterationBlockSize  
+    }
+  }
+
+  private navigate(block: IterationBlock, svg: any, direction: number): IterationBlock | undefined {
     this.alreadyChecked.push(block);
 
     if(this.destination && this.checkBlockInRoom(block, this.destination) && this.checkDestinationEntrance(block) && !this.winningBlock){
@@ -82,16 +123,16 @@ export class NavigationService {
       return block;
     }
 
-    const moveHorizontally = this.moveHorizontally(block);
-    const moveVertically = this.moveVertically(block);
+    const moveHorizontally = this.moveHorizontally(block, direction);
+    const moveDown = this.moveVertically(block, 1);
+    const moveUp = this.moveVertically(block, -1);
 
-    const horizontalFound = this.checkMove(moveHorizontally) ? undefined : this.navigate(moveHorizontally, svg);
-    const verticalFound = this.checkMove(moveVertically) ? undefined : this.navigate(moveVertically, svg);   
-
-    if(horizontalFound || verticalFound) {
-      this.renderBlock(block, svg);
-      return block;
-    }
+    const horizontallyFound = this.checkMove(moveHorizontally) ? undefined : this.navigate(moveHorizontally, svg, direction);
+    const downFound = this.checkMove(moveDown) ? undefined : this.navigate(moveDown, svg, direction);   
+    const upFound = this.checkMove(moveUp) ? undefined : this.navigate(moveUp, svg, direction);
+    
+    if(horizontallyFound || downFound || upFound)
+      return this.renderBlock(block, svg);
 
     return undefined;
   }
@@ -109,7 +150,7 @@ export class NavigationService {
   }
 
   private checkMapBounds(block: IterationBlock): boolean {
-    return block.y + block.height >= this.mapHeight || block.x + block.width >= this.mapWidth
+    return block.y + block.height >= this.mapHeight || block.x + block.width >= this.mapWidth || block.x < 0 || block.y < 0;
   }
 
   private checkBlockFit(block: IterationBlock): {} | undefined {
@@ -135,19 +176,19 @@ export class NavigationService {
           (block.y >= room.yCoordinate && block.y <= room.yCoordinate + room.height)
   }
 
-  private moveHorizontally(block: IterationBlock): IterationBlock {
+  private moveHorizontally(block: IterationBlock, direction: number): IterationBlock {
     return <IterationBlock> {
-      x: block.x + this.iterationBlockSize,
+      x: block.x + this.iterationBlockSize * direction,
       y: block.y,
       height: block.height,
       width: block.width
     }
   }
 
-  private moveVertically(block: IterationBlock): IterationBlock {
+  private moveVertically(block: IterationBlock, direction: number): IterationBlock {
     return <IterationBlock> {
       x: block.x,
-      y: block.y + this.iterationBlockSize,
+      y: block.y + this.iterationBlockSize * direction,
       height: block.height,
       width: block.width
     }
@@ -161,6 +202,8 @@ export class NavigationService {
     .attr('height', block.height)
     .attr('stroke', 'black')
     .attr('fill', '#d7ee00');
+
+    return block;
   }
 
   public resetNavigation(): void {
@@ -169,6 +212,7 @@ export class NavigationService {
     this.markedFloor = undefined;
     this.alreadyChecked = [];
     this.winningBlock = undefined;
+    this.destinations = [];
   }
 
   public getDestination(): IRoom | undefined {

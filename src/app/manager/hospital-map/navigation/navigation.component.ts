@@ -11,12 +11,13 @@ export class NavigationComponent implements OnInit {
 
   @Input() public selectedBuilding: number | undefined;
   public buildingRooms: IRoom[] = [];
-  public selectedRoom: IRoom = <IRoom>{};
+  public selectedFromRoom: IRoom | undefined;
+  public selectedToRoom: IRoom | undefined;
 
   constructor(private navigationService: NavigationService) { }
 
   ngOnInit(): void {
-    this.navigationService.resetNavigation();
+    //this.navigationService.resetNavigation();
   }
 
   ngOnChanges(): void {
@@ -27,6 +28,10 @@ export class NavigationComponent implements OnInit {
   }
 
   public navigate(): void {
-    this.navigationService.navigateSetup(this.selectedRoom);
+    this.navigationService.navigateSetup(this.selectedFromRoom, this.selectedToRoom);
+  }
+
+  public filterRooms(): IRoom[] {
+    return this.buildingRooms.filter(r => r.id !== this.selectedFromRoom?.id);
   }
 }
