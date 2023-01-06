@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^14.1.0",
     "@angular/router": "^14.1.0",
     "@ng-select/ng-select": "^10.0.1",
+    "@supabase/supabase-js": "^2.2.3",
     "chart.js": "^4.0.1",
     "d3": "^7.6.1",
     "ng-multiselect-dropdown": "^0.3.9",
