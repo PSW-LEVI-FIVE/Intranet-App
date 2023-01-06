@@ -8,16 +8,17 @@
         <canvas baseChart [type]="'bar'" [data]="succUnsuccData" [options]="succUnsuccOptions"></canvas>
     </div>
     <div class="canvas-wrapper">
-        <app-loader [isLoading]="succUnsuccSpecLoading"></app-loader>
-        <canvas baseChart [type]="'bar'" [data]="succUnsuccSpecData" [options]="succUnsuccSpecOptions"></canvas>
+        <app-loader [isLoading]="stepStatsLoading"></app-loader>
+        <canvas baseChart [type]="'bar'" [data]="stepStatsData" [options]="stepStatsOptions"></canvas>
     </div>
     <div class="canvas-wrapper">
         <app-loader [isLoading]="avgMinMaxLoading"></app-loader>
         <canvas baseChart [type]="'bar'" [data]="avgMinMaxData" [options]="avgMinMaxOptions"></canvas>
     </div>
     <div class="canvas-wrapper">
-        <app-loader [isLoading]="stepStatsLoading"></app-loader>
-        <canvas baseChart [type]="'bar'" [data]="stepStatsData" [options]="stepStatsOptions"></canvas>
+        <app-loader [isLoading]="succUnsuccSpecLoading"></app-loader>
+        <canvas baseChart [type]="'bar'" [data]="succUnsuccSpecData" [options]="succUnsuccSpecOptions"></canvas>
     </div>
+
 
 </div>
