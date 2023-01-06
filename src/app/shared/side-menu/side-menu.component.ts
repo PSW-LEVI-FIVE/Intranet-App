@@ -29,7 +29,7 @@ import { MenuService } from '../services/menu.service';
   ]
 })
 export class SideMenuComponent implements OnInit {
-
+  role: string | null = ""
   private burgerState: boolean = true;
   constructor(
     private readonly menuService: MenuService,
@@ -37,6 +37,8 @@ export class SideMenuComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(localStorage.getItem('role'))
+    this.role = localStorage.getItem('role')
   }
 
 
@@ -44,7 +46,7 @@ export class SideMenuComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     this.router.navigate(["/"]);
-
+    this.role = ""
   }
 
   toggleBurger() {
