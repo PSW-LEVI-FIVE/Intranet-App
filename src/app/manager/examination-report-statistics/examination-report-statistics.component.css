@@ -1,0 +1,22 @@
+.graph-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: auto;
+    gap: 20px;
+}
+
+.canvas-wrapper { 
+    position: relative;
+}
+
+.canvas-wrapper {
+    max-height: 400px;
+    min-width: 45%;
+}
+
+.full-canvas-wrapper {
+    min-width: 100%;
+    max-width: 100%;
+    max-height: 400px;
+}

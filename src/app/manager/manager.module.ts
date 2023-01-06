@@ -24,16 +24,18 @@ import { CreateFloorComponent } from './hospital-map/create-floor/create-floor.c
 import { CreateMapRoomComponent } from './hospital-map/create-map-room/create-map-room.component';
 import { EquipmentComponent } from './equipment/equipment.component';
 import { DoctorStatisticsLeavesComponent } from './doctor-statistics-leaves/doctor-statistics-leaves.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MaliciousPatientsComponent } from './malicious-patients/malicious-patients.component';
 import { CreateCommercialsComponent } from './create-commercials/create-commercials.component';
+import { ExaminationReportStatisticsModule } from './examination-report-statistics/examination-report-statistics.module';
+import { ExaminationReportStatisticsComponent } from './examination-report-statistics/examination-report-statistics.component';
 
 
 const routes: Routes = [
   {
     path: 'manager',
     component: ManagerComponent,
-    canActivate:[AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'malicious-patients',
@@ -61,28 +63,28 @@ const routes: Routes = [
           { path: ':id/update', component: UpdateRoomComponent },
         ]
       },
-      { 
-        path: 'building-map', 
-        component: BuildingMapComponent 
+      {
+        path: 'building-map',
+        component: BuildingMapComponent
       },
-      { 
-        path: 'floor-map/:id', 
-        component: FloorMapComponent 
+      {
+        path: 'floor-map/:id',
+        component: FloorMapComponent
       },
-      { 
-        path: 'room-map/:id', 
-        component: RoomMapComponent 
+      {
+        path: 'room-map/:id',
+        component: RoomMapComponent
       },
       {
         path: 'create-building',
         component: CreateBuildingComponent
       },
-      { 
-        path: 'annual-leave', 
-        component: AnnualLeaveComponent 
+      {
+        path: 'annual-leave',
+        component: AnnualLeaveComponent
       },
-      { 
-        path: 'annual-leave/:id/review', 
+      {
+        path: 'annual-leave/:id/review',
         component: AnnualLeaveReviewComponent
       },
       {
@@ -93,13 +95,17 @@ const routes: Routes = [
         path: 'create-room',
         component: CreateMapRoomComponent
       },
-      { 
-        path: 'doctors-leave-statistics', 
+      {
+        path: 'doctors-leave-statistics',
         component: DoctorStatisticsLeavesComponent
       },
-      { 
-        path: 'create-commercials', 
+      {
+        path: 'create-commercials',
         component: CreateCommercialsComponent
+      },
+      {
+        path: 'examination-report-statistics',
+        component: ExaminationReportStatisticsComponent
       }
     ]
 
@@ -123,7 +129,8 @@ const routes: Routes = [
     FormsModule,
     MaterialModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ExaminationReportStatisticsModule
   ],
   exports: [RouterModule]
 })
