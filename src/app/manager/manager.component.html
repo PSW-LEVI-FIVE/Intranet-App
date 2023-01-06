@@ -1,4 +1,4 @@
-<mat-toolbar class="nav">
+<!-- <mat-toolbar class="nav">
     <a routerLink="building-map" >Hospital map</a>
     <a routerLink="annual-leave" >Annual leave requests</a>
     <a routerLink="feedback" >Feedbacks</a>
@@ -6,8 +6,20 @@
     <a routerLink="doctor-statistics" >Doctor popularity statistics</a>
     <a routerLink="doctors-leave-statistics" >Doctors leaves statistics</a>
     <a routerLink="doctor-statistics" >Doctor statistics</a>
+    <a routerLink="create-commercials" >Advertisement</a>
     <a routerLink="malicious-patients">Malicious Patients</a>
     <a routerLink="rooms" >Rooms</a>
     <a (click)="onLogout()">Logout</a>
   </mat-toolbar>
-<router-outlet></router-outlet>
+<router-outlet></router-outlet> -->
+
+<app-doctor-menu></app-doctor-menu>
+<div class="content-wrapper">
+  <div class="side-menu-placeholder">
+  </div>
+  <app-side-menu></app-side-menu>
+
+  <div id="frame">
+    <router-outlet></router-outlet>
+  </div>
+</div>

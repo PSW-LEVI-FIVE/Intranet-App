@@ -82,6 +82,11 @@ export class CreateExaminationComponent implements OnInit {
       examinationReportId: this.startedReport.id
     }
     this.examinationReportService.sendEvent(dto).subscribe();
+      console.log(res)
+      console.log(res.uuid)
+      this.reportUuid = res.uuid;
+      this.startedReport = res
+    })
   }
 
   remove(val: Symptom) {

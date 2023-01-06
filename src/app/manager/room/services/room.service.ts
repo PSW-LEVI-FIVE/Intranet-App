@@ -34,7 +34,7 @@ export class RoomService {
     return this.http.put<any>(this.apiHost + '/rooms/' + room.id, room, { headers: this.headers });
   }
 
-  getRoomEquipment(roomId: number): Observable<Equipment[]>{
+  getRoomEquipment(roomId: number): Observable<Equipment[]> {
     return this.http.get<Equipment[]>(this.apiHost + '/rooms/equipment/room/' + roomId, { headers: this.headers })
   }
 }
