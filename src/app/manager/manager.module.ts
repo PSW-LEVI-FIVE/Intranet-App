@@ -31,6 +31,7 @@ import { ExaminationReportStatisticsModule } from './examination-report-statisti
 import { ExaminationReportStatisticsComponent } from './examination-report-statistics/examination-report-statistics.component';
 import { SharedModule } from "../shared/shared.module";
 import { StatisticsComponent } from './statistics/statistics.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 const routes: Routes = [

@@ -81,7 +81,7 @@ export class CreateExaminationComponent implements OnInit {
       uuid: this.reportUuid,
       examinationReportId: this.startedReport.id
     }
-    this.examinationReportService.sendEvent(dto).subscribe();
+    this.examinationReportService.sendEvent(dto).subscribe(res => {
       console.log(res)
       console.log(res.uuid)
       this.reportUuid = res.uuid;
