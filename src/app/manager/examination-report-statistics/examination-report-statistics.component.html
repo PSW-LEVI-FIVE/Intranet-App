@@ -1,4 +1,8 @@
 <div class="graph-wrapper">
+    <div class="full-canvas-wrapper">
+        <app-loader [isLoading]="hourStatsLoading"></app-loader>
+        <canvas baseChart [type]="'line'" [data]="hourStatsData" [options]="hourStatsOptions"></canvas>
+    </div>
     <div class="canvas-wrapper">
         <app-loader [isLoading]="succUnsuccLoading"></app-loader>
         <canvas baseChart [type]="'bar'" [data]="succUnsuccData" [options]="succUnsuccOptions"></canvas>
@@ -15,8 +19,5 @@
         <app-loader [isLoading]="stepStatsLoading"></app-loader>
         <canvas baseChart [type]="'bar'" [data]="stepStatsData" [options]="stepStatsOptions"></canvas>
     </div>
-    <div class="full-canvas-wrapper">
-        <app-loader [isLoading]="hourStatsLoading"></app-loader>
-        <canvas baseChart [type]="'line'" [data]="hourStatsData" [options]="hourStatsOptions"></canvas>
-    </div>
+
 </div>

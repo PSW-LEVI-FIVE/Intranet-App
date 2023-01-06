@@ -38,6 +38,7 @@ export class ExaminationReportStatisticsComponent implements OnInit {
   hourStatsOptions: any = {
     color: '#037ffc',
     borderColor: '#037ffc',
+    maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
       title: {

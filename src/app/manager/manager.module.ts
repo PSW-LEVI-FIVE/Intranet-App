@@ -29,6 +29,8 @@ import { MaliciousPatientsComponent } from './malicious-patients/malicious-patie
 import { CreateCommercialsComponent } from './create-commercials/create-commercials.component';
 import { ExaminationReportStatisticsModule } from './examination-report-statistics/examination-report-statistics.module';
 import { ExaminationReportStatisticsComponent } from './examination-report-statistics/examination-report-statistics.component';
+import { SharedModule } from "../shared/shared.module";
+import { StatisticsComponent } from './statistics/statistics.component';
 
 
 const routes: Routes = [
@@ -106,6 +108,10 @@ const routes: Routes = [
       {
         path: 'examination-report-statistics',
         component: ExaminationReportStatisticsComponent
+      },
+      {
+        path: 'statistics',
+        component: StatisticsComponent
       }
     ]
 
@@ -121,8 +127,10 @@ const routes: Routes = [
     EquipmentComponent,
     DoctorStatisticsLeavesComponent,
     MaliciousPatientsComponent,
-    CreateCommercialsComponent
+    CreateCommercialsComponent,
+    StatisticsComponent
   ],
+  exports: [RouterModule],
   imports: [
     CommonModule,
     RoomModule,
@@ -130,8 +138,8 @@ const routes: Routes = [
     MaterialModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    ExaminationReportStatisticsModule
-  ],
-  exports: [RouterModule]
+    ExaminationReportStatisticsModule,
+    SharedModule
+  ]
 })
 export class ManagerModule { }
