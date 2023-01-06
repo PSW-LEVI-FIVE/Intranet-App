@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Room } from '../../room/model/room.model';
 import { RoomService } from '../../room/services/room.service';
-import { TimeInterval } from '../shared/model';
+import { SplitDTO, TimeInterval, TimeSlotRegDTO } from '../shared/model';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -24,14 +24,22 @@ export class SplitRoomComponent implements OnInit {
   public isLinear = false;
   public nextStep : boolean = true;
   public resumeAction: boolean = true;
+  public finishAction: boolean = true;
+  public schedule: boolean = true;
   public floorId: number = 0;
   public durationInput: number = 0;
-  public pick: Date = new Date()
+  public pick: TimeInterval = new TimeInterval()
   public floorRooms: Room[] = [];
   public selectedRoomId = 0;
+  public producedRoomName1: string = '';
+  public producedRoomType1: RoomTypes = RoomTypes.NO_TYPE;
+  public producedRoomName2: string = '';
+  public producedRoomType2: RoomTypes = RoomTypes.NO_TYPE;
 
   public intervals:TimeInterval[]=[];
-  public selectedInterval:TimeInterval=new TimeInterval;
+  public selectedInterval:TimeInterval=new TimeInterval();
+  public splitDto: SplitDTO = new SplitDTO();
+  public timeSlotDto: TimeSlotRegDTO = new TimeSlotRegDTO();
 
   constructor(private roomService: RoomService,  
               private toastService: ToastrService,
@@ -67,22 +75,37 @@ export class SplitRoomComponent implements OnInit {
  }
 
  public checkFirstStepInput(){
- if(this.durationInput <= 0 || this.selectedRoomId === 0){
+ if(this.durationInput <= 0 || this.selectedRoomId === 0 || this.pick.end === null){
      this.nextStep = true;
   }
   else this.nextStep = false;
 }
 
-public checkThirdStepInput(){
-  
-}
+public checkSecondStepInput(){
+  this.resumeAction = false;
+ }
+
+ public checkThirdStepInput(){
+  if(this.producedRoomType1 !== RoomTypes.NO_TYPE && this.producedRoomType2 !== RoomTypes.NO_TYPE && this.producedRoomName1 !== '' && this.producedRoomName2 !== '')
+    this.finishAction = false;
+  else
+    this.finishAction = true;
+ }
 
  public abortRenovation(){
   this.router.navigate([`manager/room-map/${this.floorId}`]);
  }
 
  public scheduleSplit(){
-  this.router.navigate([`manager/room-map/${this.floorId}`]);
+  if(this.resumeAction || this.finishAction || this.nextStep)
+    this.schedule = true;
+  else{
+    this.schedule = false;
+    this.splitDto.mainRoomId = this.selectedRoomId;
+  }
  }
+
+ public getFreeAppointments(){
+}
 
 }

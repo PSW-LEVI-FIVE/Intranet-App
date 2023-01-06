@@ -1,18 +1,18 @@
 .quit-button{
     background-color: #c23241;
-    margin-right: 1%;
+    margin-right: 8%;
     margin-top: 1%;
     width: 90px;
 }
 
-.confirm-button{
-    width: 90px;
-    margin-left: 5%;
+.step-button, .confirm-button{
+    margin-right: 1%; 
     border: solid 0.5px;
+    width: 90px;
 }
 
-.step-button{
-    margin-right: 1%; 
+.next-button{
+    margin-left: 4%; 
     border: solid 0.5px;
     width: 90px;
 }
@@ -43,9 +43,13 @@
 }
 
 #fourthStep{
-    margin-left: 1300px;
+    margin-left: 1350px;
 }
 
 #centerForm{
     margin-left: 700px;
+}
+
+.form-data{
+    width: 380px;
 }
