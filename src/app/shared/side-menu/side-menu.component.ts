@@ -37,7 +37,6 @@ export class SideMenuComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(localStorage.getItem('role'))
     this.role = localStorage.getItem('role')
   }
 
