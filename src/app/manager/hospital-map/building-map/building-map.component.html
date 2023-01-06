@@ -4,24 +4,23 @@
     <div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 800px;">
     </div>
     <div [style.visibility]="formVisible" class="build-info">
-        <h1 class="card-title">  Building information  </h1>
+        <h1 class="card-title"> Building information </h1>
         <table style="margin-left:40px;">
             <mat-form-field appearance="fill">
                 <mat-label>Building ID</mat-label>
-                <input matInput disabled [value]="selectedBuilding.id">
+                <input matInput disabled [value]="selectedBuilding?.id">
             </mat-form-field><br>
             <mat-form-field appearance="fill">
                 <mat-label>Building name</mat-label>
-                <input matInput [value]="selectedBuilding.name">
+                <input matInput [value]="selectedBuilding?.name">
             </mat-form-field><br>
-    </table>
-    <div style="margin-top: 30px; margin-bottom: 15px;">
-        <button class="confirmButton" mat-stroked-button app:backgroundTint="#d1d5db" (click)="updateBuilding()">
-            Submit
-        </button>
-    </div>
+        </table>
+        <div style="margin-top: 30px; margin-bottom: 15px;">
+            <button class="confirmButton" mat-stroked-button app:backgroundTint="#d1d5db" (click)="updateBuilding()">
+                Submit
+            </button>
+        </div>
     </div>
 </div>
 
-<button id="add-button" mat-fab color="primary" (click)="toggleCreate()">Add</button> 
-
+<button id="add-button" mat-fab color="primary" (click)="toggleCreate()">Add</button>

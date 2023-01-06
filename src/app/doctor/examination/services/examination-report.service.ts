@@ -11,10 +11,14 @@ export class ExaminationReportService {
     constructor(private readonly httpClient: HttpClient) { }
 
 
-
-    sendReport(dto: CreateExaminationReportDTO) {
+    startReport(examinationId: number) {
         const url = `${this.url}/examination/report`
-        return this.httpClient.post<any>(url, dto)
+        return this.httpClient.post<any>(url, { examinationId })
+    }
+
+    sendReport(dto: CreateExaminationReportDTO, uuid: string) {
+        const url = `${this.url}/examination/report/${uuid}`
+        return this.httpClient.patch<any>(url, dto)
     }
 
     getReportByExaminationId(id: number) {
