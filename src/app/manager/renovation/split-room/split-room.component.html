@@ -36,7 +36,7 @@
             </mat-form-field> 
           </div>
           <div>
-            <button mat-button class="quit-button" (click)="abortRenovation()" style="margin-top: 5%;">Quit</button>
+            <button mat-button class="quit-button" (click)="abortRenovation()" style="margin-top: 3%;">Quit</button>
             <button mat-button class="next-button" matStepperNext [disabled]="nextStep" (click)="getFreeAppointments()">Next</button>
           </div>
       </form>
@@ -55,7 +55,7 @@
             </mat-form-field>
           </div>
           <div>
-            <button mat-button class="quit-button" (click)="abortRenovation()" style="margin-top: 25%;">Quit</button>
+            <button mat-button class="quit-button" (click)="abortRenovation()" style="margin-top: 23%;">Quit</button>
             <button mat-button matStepperPrevious class="step-button">Back</button>
             <button mat-button matStepperNext class="step-button" [disabled]="resumeAction">Next</button>
           </div>
@@ -113,7 +113,7 @@
             <label class="data-view">Result of renovation are rooms: {{producedRoomName1}} and  {{producedRoomName2}} </label>
            </div>
            <div>
-            <button mat-button class="quit-button" (click)="abortRenovation()" style="margin-top: 65%;">Quit</button>
+            <button mat-button class="quit-button" (click)="abortRenovation()" style="margin-top: 82%;">Quit</button>
             <button mat-button matStepperPrevious class="step-button">Back</button>
             <button mat-button class="confirm-button" (click)="scheduleSplit()" [disabled]="schedule">Schedule</button>
            </div>
