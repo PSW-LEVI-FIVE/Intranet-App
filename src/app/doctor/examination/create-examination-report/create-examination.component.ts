@@ -81,9 +81,8 @@ export class CreateExaminationComponent implements OnInit {
       uuid: this.reportUuid,
       examinationReportId: this.startedReport.id
     }
-    this.examinationReportService.sendEvent(dto).subscribe();
-      console.log(res)
-      console.log(res.uuid)
+    
+    this.examinationReportService.sendEvent(dto).subscribe(res => {
       this.reportUuid = res.uuid;
       this.startedReport = res
     })
@@ -168,6 +167,5 @@ export class CreateExaminationComponent implements OnInit {
     })
 
   }
-
 
 }
