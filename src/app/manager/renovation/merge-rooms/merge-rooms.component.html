@@ -40,7 +40,7 @@
           </div>
           <div>
             <mat-form-field appearance="fill" class="form-data">
-              <mat-label>Duration (in minutes)</mat-label>
+              <mat-label>Duration (in days)</mat-label>
               <input matInput [(ngModel)]="durationInput" name="dur" (change)="checkFirstStepInput()" required>
             </mat-form-field> 
           </div>
@@ -57,8 +57,8 @@
           <div>
             <mat-form-field class="form-data">
             <mat-label>Select Time Interval</mat-label>
-            <mat-select [(value)]="selectedInterval" (change)="checkSecondStepInput()">
-              <mat-option *ngFor="let interval of intervals" [value]="interval" > {{interval.start}} - {{interval.end}}
+            <mat-select [(value)]="selectedInterval">
+              <mat-option *ngFor="let interval of intervals" [value]="interval"> {{interval.start}} - {{interval.end}}
               </mat-option>
             </mat-select>
             </mat-form-field>
@@ -66,7 +66,7 @@
           <div>
             <button mat-button class="quit-button" (click)="abortRenovation()"  style="margin-top: 27%;">Quit</button>
             <button mat-button matStepperPrevious class="step-button">Back</button>
-            <button mat-button matStepperNext class="step-button" [disabled]="resumeAction">Next</button>
+            <button mat-button matStepperNext class="step-button">Next</button>
           </div>
         </form>
       </mat-step>
@@ -103,7 +103,7 @@
             <label class="data-view">Selected rooms for merging: {{selectedFirstRoomId}} and {{selectedSecondRoomId}}</label>
            </div>
            <div class="data-container">
-            <label class="data-view">Selected interval:</label>
+            <label class="data-view">Selected interval: {{selectedInterval.start}} - {{selectedInterval.end}}</label>
            </div>
            <div class="data-container">
             <label class="data-view">Result of renovation is room: {{productRoomName}}</label>
@@ -111,7 +111,7 @@
            <div>
             <button mat-button class="quit-button" (click)="abortRenovation()"  style="margin-top: 72%;">Quit</button>
             <button mat-button matStepperPrevious class="step-button">Back</button>
-            <button mat-button class="confirm-button" (click)="scheduleMerge()" [disabled]="schedule">Schedule</button>
+            <button mat-button class="confirm-button" (click)="scheduleMerge()">Schedule</button>
            </div>
         </div>
         </form>

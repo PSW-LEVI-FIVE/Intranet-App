@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MergeDTO, TimeInterval, TimeSlotRegDTO } from '../shared/model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoomMapService } from '../../hospital-map/services/room-map.service';
+import { RenovationService } from '../services/renovation.service';
 
 enum RoomTypes {
   NO_TYPE,
@@ -47,7 +48,8 @@ export class MergeRoomsComponent implements OnInit {
               private toastService: ToastrService,
                private router: Router,
                private route: ActivatedRoute,
-               private roomMapService: RoomMapService) { }
+               private roomMapService: RoomMapService,
+               private renovationService: RenovationService) { }
 
   ngOnInit(): void {
       this.route.params.subscribe(params => {
@@ -87,10 +89,6 @@ export class MergeRoomsComponent implements OnInit {
      else this.nextStep = false;
  }
 
- public checkSecondStepInput(){
-  this.resumeAction = false;
- }
-
  public checkThirdStepInput(){
   if(this.productRoomType !== RoomTypes.NO_TYPE && this.productRoomName !== '')
     this.finishAction = false;
@@ -103,15 +101,28 @@ export class MergeRoomsComponent implements OnInit {
  }
 
  public scheduleMerge(){
-  if(this.resumeAction || this.finishAction || this.nextStep)
+  if(this.finishAction || this.nextStep)
     this.schedule = true;
   else{
     this.schedule = false;
     this.mergeDto.mainRoomId = this.selectedFirstRoomId;
-    this.mergeDto.secondRoomId = this.selectedSecondRoomId;
+    this.mergeDto.secondaryId = this.selectedSecondRoomId;
+    this.mergeDto.startDate = this.selectedInterval.start;
+    this.mergeDto.endDate = this.selectedInterval.end;
+    this.renovationService.createMerge(this.mergeDto).subscribe(response => {
+      this.toastService.info('Renovation scheduling is completed');
+    })
   }
  }
 
  public getFreeAppointments(){
+  this.timeSlotDto.duration = this.durationInput;
+  this.timeSlotDto.roomId = this.selectedFirstRoomId;
+  this.timeSlotDto.startDate = this.pick.start;
+  this.timeSlotDto.endDate = this.pick.end;
+  this.timeSlotDto.endDate.setDate( this.pick.end.getDate() + 1 );
+  this.renovationService.getTimeSlots(this.timeSlotDto).subscribe(response=>{
+    this.intervals = response;
+  })
  }
 }

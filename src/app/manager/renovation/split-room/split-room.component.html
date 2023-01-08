@@ -31,7 +31,7 @@
           </div>
           <div>
             <mat-form-field appearance="fill" class="form-data">
-              <mat-label>Duration (in minutes)</mat-label>
+              <mat-label>Duration (in days)</mat-label>
               <input matInput [(ngModel)]="durationInput" name="dur" (change)="checkFirstStepInput()" required>
             </mat-form-field> 
           </div>
@@ -57,7 +57,7 @@
           <div>
             <button mat-button class="quit-button" (click)="abortRenovation()" style="margin-top: 23%;">Quit</button>
             <button mat-button matStepperPrevious class="step-button">Back</button>
-            <button mat-button matStepperNext class="step-button" [disabled]="resumeAction">Next</button>
+            <button mat-button matStepperNext class="step-button">Next</button>
           </div>
         </form>
       </mat-step>
@@ -78,19 +78,6 @@
                 </mat-select>
               </mat-form-field>
            </div>
-           <div>
-            <mat-form-field appearance="fill" class="form-data">
-              <mat-label>(2)Room name</mat-label>
-              <input matInput placeholder="Room name" (change)="checkThirdStepInput()" [(ngModel)]="producedRoomName2" name="producedRoomName2" required>
-            </mat-form-field>
-          </div>
-          <div>
-              <mat-form-field appearance="fill" class="form-data">
-                <mat-select (selectionChange)="checkThirdStepInput()" [(ngModel)]="producedRoomType2" name="producedRoomType2">
-                    <mat-option [value]="option" *ngFor="let option of availableRoomTypes">{{getOptionLabel(option)}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
           <div>
             <button mat-button class="quit-button" (click)="abortRenovation()">Quit</button>
             <button mat-button matStepperPrevious class="step-button" style="margin-left: 7%;">Back</button>
@@ -107,15 +94,15 @@
             <label class="data-view">Selected room for split: {{selectedRoomId}}</label>
            </div>
            <div class="data-container">
-            <label class="data-view">Selected interval:</label>
+            <label class="data-view">Selected interval: {{selectedInterval.start}} - {{selectedInterval.end}}</label>
            </div>
            <div class="data-container">
-            <label class="data-view">Result of renovation are rooms: {{producedRoomName1}} and  {{producedRoomName2}} </label>
+            <label class="data-view">Result of renovation are rooms: {{producedRoomName1}} and  {{selectedRoomId}} </label>
            </div>
            <div>
             <button mat-button class="quit-button" (click)="abortRenovation()" style="margin-top: 82%;">Quit</button>
             <button mat-button matStepperPrevious class="step-button">Back</button>
-            <button mat-button class="confirm-button" (click)="scheduleSplit()" [disabled]="schedule">Schedule</button>
+            <button mat-button class="confirm-button" (click)="scheduleSplit()">Schedule</button>
            </div>
         </div>
         </form>
