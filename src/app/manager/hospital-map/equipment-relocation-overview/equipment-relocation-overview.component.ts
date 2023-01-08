@@ -24,8 +24,6 @@ export class EquipmentRelocationOverviewComponent implements OnInit {
   
   roomId:number = 0
   dataSource:IEquipmentRelocation[]=[]
-  startRoomNameArray:any[]=[]
-  a:any
   equipment:any
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => { 
@@ -33,39 +31,27 @@ export class EquipmentRelocationOverviewComponent implements OnInit {
     });
     this.roomOverViewService.GetEquipmentRelocationForRoom(this.roomId).subscribe(res=>
       {
-        this.dataSource = res
-        this.dataSource.forEach((leave) => { 
+          this.dataSource = res
+          this.dataSource.forEach((leave) => { 
           leave.startAt = leave.startAt.split('T')[0]
           leave.endAt = leave.endAt.split('T')[0]
           this.roomOverViewService.GetEquipmentName(leave.equipmentId).subscribe(res=>{
             this.equipment = res
             leave.equipmentName = this.equipment.name
           })
-          
-        
+                 
         })
-        console.log(this.dataSource)
-        for (var val of this.dataSource) {
-          this.roomService.getByID(val.startingRoomId).subscribe(r=>{
-            this.a =r
-            this.startRoomNameArray.push(this.a)
-          })
-
-        }
         
       })
       
   }
   CancelRellocation(id:number){
-      this.roomOverViewService.CancelRellocation(id).pipe(catchError(res => {
-        const error = res.error
-              this.toastService.error(error.Message)
-              return EMPTY
-            }))
-            .subscribe()
-      this.roomOverViewService.GetEquipmentRelocationForRoom(this.roomId).subscribe(res=>
-              {
-                this.dataSource = res })       
+    this.roomOverViewService.CancelRellocation(id).pipe(catchError(res => {
+    const error = res.error
+    this.toastService.error(error.Message)
+      return EMPTY })).subscribe()           
+    this.roomOverViewService.GetEquipmentRelocationForRoom(this.roomId).subscribe(res=>{      
+    this.dataSource = res })       
           
   }
 

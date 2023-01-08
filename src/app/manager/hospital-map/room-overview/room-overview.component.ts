@@ -35,15 +35,14 @@ export class RoomOverviewComponent implements OnInit {
       this.roomId = params['id'];
     });
     this.roomOverViewService.GetRoomSchedule(this.roomId).subscribe(res=>
-      {
-        console.log(this.roomId)
+      { 
         this.dataSource = res
         this.dataSource.forEach((leave) => { 
-          leave.startAt = leave.startAt.split('T')[0]+" "+ leave.startAt.split('T')[1]
-          leave.endAt = leave.endAt.split('T')[0] +" "+ leave.endAt.split('T')[1]
+        leave.startAt = leave.startAt.split('T')[0]+" "+ leave.startAt.split('T')[1]
+        leave.endAt = leave.endAt.split('T')[0] +" "+ leave.endAt.split('T')[1]
         
         })
-        console.log(this.dataSource)
+        
       })
 
   }

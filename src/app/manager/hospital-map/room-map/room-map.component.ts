@@ -68,7 +68,7 @@ export class RoomMapComponent implements OnInit {
 
         this.showInformation(this.rooms);
         this.markRoom(this.rooms);
-        
+
         this.textNavigation = [];
         this.showDestinationRoom();
         this.visualizeNavigation(params['id']);
@@ -93,22 +93,15 @@ export class RoomMapComponent implements OnInit {
     if(room) d3.select('#id'+ room.id).style("fill",'#d7ee00');
   }
 
-
   private visualizeNavigation(floorId: string): void {
     this.navigationService.visualizeNavigation(this.svg, floorId);
   }
-
- 
-
+  
   showInformation(svg:any){
     svg.on('dblclick',(d:any, i:any) => {
       this.roomMapService.getByID(i.id).subscribe(res => {
-        this.selectedRoomModel = res;  
-
-      var ids = this.floorId + '-'+ i.id
+      this.selectedRoomModel = res;  
       this.router.navigate(['manager/room-info/'+this.floorId+'/'+i.id]);
-
-
     })
   })
 }

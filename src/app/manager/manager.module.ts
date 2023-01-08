@@ -83,6 +83,7 @@ const routes: Routes = [
         path: 'room-map/:id',
         component: RoomMapComponent
       },
+
       { 
         path: 'room-map/:id', 
         component: RoomMapComponent ,
@@ -117,7 +118,12 @@ const routes: Routes = [
         path: 'create-room',
         component: CreateMapRoomComponent
       },
-      
+
+      {
+        path: 'doctors-leave-statistics',
+        component: DoctorStatisticsLeavesComponent
+      },
+
       {
         path: 'create-commercials',
         component: CreateCommercialsComponent
@@ -139,6 +145,8 @@ const routes: Routes = [
         path: 'split-room/:floorId',
         component: SplitRoomComponent
       },
+       
+
       { 
         path: 'doctors-leave-statistics', 
         component: DoctorStatisticsLeavesComponent
