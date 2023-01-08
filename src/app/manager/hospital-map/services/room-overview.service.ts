@@ -17,22 +17,22 @@ export class RoomOverviewService {
     return this.http.get(this.apiHost+"api/intranet/rooms/schedule/appointment/"+roomId)
   }
 
-  GetEquipmentRelocationForRoom(roomId:number):Observable<any>{
+  getEquipmentRelocationForRoom(roomId:number):Observable<any>{
     return this.http.get(this.apiHost+"api/intranet/rooms/schedule/relocation/"+roomId)
   }
 
-  GetRenovationForRoom(roomId:number):Observable<any>{
+  getRenovationForRoom(roomId:number):Observable<any>{
     return this.http.get(this.apiHost+"api/intranet/rooms/schedule/renovation/"+roomId)
   }
 
-  CancelRenovationForRoom(renovationId:number):any{
+  cancelRenovationForRoom(renovationId:number):any{
     return this.http.get<any>(this.apiHost+"api/intranet/rooms/schedule/cancel/renovation/"+renovationId)
   }
-  CancelRellocation(rellocationId:number):any{
+  cancelRellocation(rellocationId:number):any{
     return this.http.get<any>(this.apiHost+"api/intranet/rooms/schedule/cancel/relocation/"+rellocationId)
   }
 
-  GetEquipmentName(equipmentId:number):Observable<any>{
+  getEquipmentName(equipmentId:number):Observable<any>{
     return this.http.get<any>(this.apiHost+"api/intranet/equipment/get/"+equipmentId)
   }
 
