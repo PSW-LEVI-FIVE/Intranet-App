@@ -44,29 +44,25 @@ export class RoomRenovationOverviewComponent implements OnInit {
     });
     this.roomOverViewService.GetRenovationForRoom(this.roomId).subscribe(res=>
       {
-        console.log(this.roomId)
         this.dataSource = res
         this.dataSource.forEach((leave) => { 
-          leave.startAt = leave.startAt.split('T')[0]
-          leave.endAt = leave.endAt.split('T')[0]
+        leave.startAt = leave.startAt.split('T')[0]
+        leave.endAt = leave.endAt.split('T')[0]
         
         })
-        console.log(this.dataSource)
       })
   }
 
   cancelRenovation(id:number){
     this.roomOverViewService.CancelRenovationForRoom(id).pipe(catchError(res => {
-      const error = res.error
-        console.log(res.error)
-              this.toastService.error(error.Message)
-              return EMPTY
-            }))
-            .subscribe()
+    const error = res.error
+    this.toastService.error(error.Message)
+      return EMPTY})).subscribe()
+
     this.roomOverViewService.GetRenovationForRoom(this.roomId).subscribe(res=>
-              {
-                console.log(this.roomId)
-                this.dataSource = res })       
+          {  this.dataSource = res 
+              
+           })       
   
 }
 

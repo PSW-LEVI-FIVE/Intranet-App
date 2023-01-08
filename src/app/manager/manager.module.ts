@@ -80,6 +80,7 @@ const routes: Routes = [
         path: 'room-map/:id',
         component: RoomMapComponent
       },
+
       { 
         path: 'room-map/:id', 
         component: RoomMapComponent ,
@@ -114,7 +115,12 @@ const routes: Routes = [
         path: 'create-room',
         component: CreateMapRoomComponent
       },
-      
+
+      {
+        path: 'doctors-leave-statistics',
+        component: DoctorStatisticsLeavesComponent
+      },
+
       {
         path: 'create-commercials',
         component: CreateCommercialsComponent
@@ -126,7 +132,7 @@ const routes: Routes = [
       {
         path: 'statistics',
         component: StatisticsComponent
-      },
+      }, 
       { 
         path: 'doctors-leave-statistics', 
         component: DoctorStatisticsLeavesComponent
