@@ -38,6 +38,8 @@ import { RoomInformationComponent } from './hospital-map/room-information/room-i
 import { DoctorStatisticsWorkloadComponent } from './doctor-statistics-workload/doctor-statistics-workload.component';
 import { SchedulingAppointmentStatisticsModule } from './scheduling-appointment-statistics/scheduling-appointment-statistics.module';
 import { SchedulingAppointmentStatisticsComponent } from './scheduling-appointment-statistics/scheduling-appointment-statistics.component';
+import { RenovationStatisticsScheduleComponent } from './renovation-statistics-schedule/renovation-statistics-schedule.component';
+import { RenovationStatisticsScheduleModule } from './renovation-statistics-schedule/renovation-statistics-schedule.module';
 
 
 const routes: Routes = [
@@ -139,6 +141,10 @@ const routes: Routes = [
         component: SchedulingAppointmentStatisticsComponent
       },
       {
+        path: 'renovation-statistics-schedule',
+        component: RenovationStatisticsScheduleComponent
+      },
+      {
         path: 'statistics',
         component: StatisticsComponent
 
@@ -179,6 +185,7 @@ const routes: Routes = [
     MergeRoomsComponent,
     SplitRoomComponent,
     DoctorStatisticsWorkloadComponent,
+    RenovationStatisticsScheduleComponent
   ],
   exports: [RouterModule],
   imports: [
