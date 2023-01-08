@@ -13,7 +13,7 @@ export class RoomOverviewService {
 
   constructor(private http:HttpClient) { }
 
-  GetRoomSchedule(roomId:number):Observable<any>{
+  getRoomSchedule(roomId:number):Observable<any>{
     return this.http.get(this.apiHost+"api/intranet/rooms/schedule/appointment/"+roomId)
   }
 
