@@ -51,7 +51,7 @@ export class EquipmentRelocationOverviewComponent implements OnInit {
       })
       
   }
-  CancelRellocation(id:number){
+  cancelRellocation(id:number){
     this.roomOverViewService.cancelRellocation(id).pipe(catchError(res => {
     const error = res.error
     this.toastService.error(error.Message)
