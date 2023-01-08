@@ -111,6 +111,7 @@ export class MergeRoomsComponent implements OnInit {
     this.mergeDto.endDate = this.selectedInterval.end;
     this.renovationService.createMerge(this.mergeDto).subscribe(response => {
       this.toastService.info('Renovation scheduling is completed');
+      this.router.navigate([`manager/room-map/${this.floorId}`]);
     })
   }
  }

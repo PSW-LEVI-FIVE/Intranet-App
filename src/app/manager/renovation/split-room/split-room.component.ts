@@ -106,6 +106,7 @@ public checkSecondStepInput(){
     this.splitDto.endDate = this.selectedInterval.end;
     this.renovationService.createSplit(this.splitDto).subscribe(response =>{
       this.toastService.info('Renovation scheduling is completed');
+      this.router.navigate([`manager/room-map/${this.floorId}`]);
     })
  }
 
