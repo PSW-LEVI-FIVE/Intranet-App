@@ -40,20 +40,32 @@ export class RoomOverviewService {
     return this.http.get(this.apiHost+"api/intranet/rooms/schedule/appointment/"+roomId)
   }
 
-  GetEquipmentRelocationForRoom(roomId:number):Observable<any>{
+  getEquipmentRelocationForRoom(roomId:number):Observable<any>{
     return this.http.get(this.apiHost+"api/intranet/rooms/schedule/relocation/"+roomId)
   }
 
-  GetRenovationForRoom(roomId:number):Observable<any>{
+  getRenovationForRoom(roomId:number):Observable<any>{
     return this.http.get(this.apiHost+"api/intranet/rooms/schedule/renovation/"+roomId)
   }
 
+<<<<<<< HEAD
   CancelRenovationForRoom(renovationId:number){
     return this.http.get(this.apiHost+"api/intranet/rooms/schedule/cancel/renovation"+renovationId)
   }
   CancelRellocation(rellocationId:number):any{
     return this.http.get(this.apiHost+"api/intranet/rooms/schedule/cancel/renovation"+rellocationId)
 >>>>>>> 68cc2e7 (refactored code)
+=======
+  cancelRenovationForRoom(renovationId:number):any{
+    return this.http.get<any>(this.apiHost+"api/intranet/rooms/schedule/cancel/renovation/"+renovationId)
+  }
+  cancelRellocation(rellocationId:number):any{
+    return this.http.get<any>(this.apiHost+"api/intranet/rooms/schedule/cancel/relocation/"+rellocationId)
+  }
+
+  getEquipmentName(equipmentId:number):Observable<any>{
+    return this.http.get<any>(this.apiHost+"api/intranet/equipment/get/"+equipmentId)
+>>>>>>> 64b84c5 (refactored code)
   }
 
  

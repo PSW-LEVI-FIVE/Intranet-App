@@ -35,6 +35,7 @@
 </mat-tab-group>
     </div>
 
+
   </div>
 
   <div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 800px;">
@@ -89,6 +90,24 @@
     
 
 </div>
+=======
+    <div *ngIf ="selectedRoomModel">
+        <h1 class="card-title">  Room information  </h1>
+        <table style="margin-left:40px;">
+            <mat-form-field appearance="fill">
+                <mat-label>Room ID</mat-label>
+                <input matInput disabled [value]="selectedRoomModel.id">
+            </mat-form-field><br>
+            <mat-form-field  appearance="fill">
+                <mat-label>Room name</mat-label>
+                <input id="roomNameInput" matInput [(ngModel)]="selectedRoomModel.roomNumber">
+            </mat-form-field><br>
+            <button mat-stroked-button (click)="roomSchedule(selectedObjects.id)"><span>Room schedule</span> </button>
+
+    </table>
+    
+
+>>>>>>> 64b84c5 (refactored code)
 
 
 
@@ -127,6 +146,7 @@
         </tr>
       </tbody>
     </table>
+
 
   </div>
   </div>

@@ -19,8 +19,6 @@ export interface IEquipmentRelocation {
   styleUrls: ['./equipment-relocation-overview.component.css']
 })
 export class EquipmentRelocationOverviewComponent implements OnInit {
-
-
   @Input() roomID: any
   constructor(
     private http: HttpClient,
@@ -35,10 +33,12 @@ export class EquipmentRelocationOverviewComponent implements OnInit {
   dataSource: IEquipmentRelocation[] = []
   equipment: any
 
+
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.roomId = params['id'];
     });
+
 
     this.roomOverViewService.getEquipmentRelocationForRoom(this.roomId).subscribe(res => {
       this.dataSource = res
@@ -48,6 +48,7 @@ export class EquipmentRelocationOverviewComponent implements OnInit {
         this.roomOverViewService.getEquipmentName(leave.equipmentId).subscribe(res => {
           this.equipment = res
           leave.equipmentName = this.equipment.name
+
         })
 
       })
@@ -57,6 +58,7 @@ export class EquipmentRelocationOverviewComponent implements OnInit {
 
       
   }
+
 
   cancelRellocation(id: number) {
     this.roomOverViewService.cancelRellocation(id).pipe(catchError(res => {
@@ -69,7 +71,6 @@ export class EquipmentRelocationOverviewComponent implements OnInit {
     })
 
 
-  
 
 }
 }
