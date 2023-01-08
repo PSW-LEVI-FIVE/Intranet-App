@@ -19,7 +19,13 @@ export interface IEquipmentRelocation{
 })
 export class EquipmentRelocationOverviewComponent implements OnInit {
   @Input() roomID :any
-  constructor(private http:HttpClient,private roomService:RoomMapService,private toastService:ToastrService, private roomOverViewService:RoomOverviewService,private router:Router, private route: ActivatedRoute) { }
+  constructor(
+    private http:HttpClient,
+    private roomService:RoomMapService,
+    private toastService:ToastrService,
+    private roomOverViewService:RoomOverviewService,
+    private router:Router,
+    private route: ActivatedRoute) { }
   displayedColumns: string[] = ['start_date', 'end_date', 'start_room', 'destination_room','equipment_type','amount','cancel'];
   
   roomId:number = 0
@@ -29,13 +35,13 @@ export class EquipmentRelocationOverviewComponent implements OnInit {
     this.route.params.subscribe((params: Params) => { 
       this.roomId = params['id'];
     });
-    this.roomOverViewService.GetEquipmentRelocationForRoom(this.roomId).subscribe(res=>
+    this.roomOverViewService.getEquipmentRelocationForRoom(this.roomId).subscribe(res=>
       {
           this.dataSource = res
           this.dataSource.forEach((leave) => { 
           leave.startAt = leave.startAt.split('T')[0]
           leave.endAt = leave.endAt.split('T')[0]
-          this.roomOverViewService.GetEquipmentName(leave.equipmentId).subscribe(res=>{
+          this.roomOverViewService.getEquipmentName(leave.equipmentId).subscribe(res=>{
             this.equipment = res
             leave.equipmentName = this.equipment.name
           })
@@ -46,11 +52,11 @@ export class EquipmentRelocationOverviewComponent implements OnInit {
       
   }
   CancelRellocation(id:number){
-    this.roomOverViewService.CancelRellocation(id).pipe(catchError(res => {
+    this.roomOverViewService.cancelRellocation(id).pipe(catchError(res => {
     const error = res.error
     this.toastService.error(error.Message)
       return EMPTY })).subscribe()           
-    this.roomOverViewService.GetEquipmentRelocationForRoom(this.roomId).subscribe(res=>{      
+    this.roomOverViewService.getEquipmentRelocationForRoom(this.roomId).subscribe(res=>{      
     this.dataSource = res })       
           
   }
