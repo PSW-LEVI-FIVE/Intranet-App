@@ -50,7 +50,7 @@ export class BloodConsumptionViewComponent implements OnInit {
   format(dt: Date | null) {
     if (dt == null) return ""
     let date = new Date(dt)
-    return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
   }
 
   assignPosition(blood: BloodConsumption[]) {
