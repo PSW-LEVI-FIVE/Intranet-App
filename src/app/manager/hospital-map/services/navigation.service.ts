@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { flatRollup, svg } from 'd3';
 import { B, p } from 'chart.js/dist/chunks/helpers.core';
 import { index } from 'd3';
@@ -12,6 +13,11 @@ import { B, p } from 'chart.js/dist/chunks/helpers.core';
 import { index } from 'd3';
 >>>>>>> 2883640 (add text navigation)
 >>>>>>> 51bf0a1 (add text navigation)
+=======
+import { flatRollup, svg } from 'd3';
+import { B, p } from 'chart.js/dist/chunks/helpers.core';
+import { index } from 'd3';
+>>>>>>> de5c554 (refactored code)
 import { IFloor } from '../model/floor.model';
 import { IterationBlock } from '../model/navigation.model';
 import { IRoom } from '../model/room.model';
@@ -86,18 +92,24 @@ export class NavigationService {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     this.markedFloor = destinationFloor?.floor;
    
 
 =======
 <<<<<<< HEAD
-    this.markedFloor = destinationFloor?.floor;
 =======
-    this.navigate(startBlock, svg);
+
+>>>>>>> de5c554 (refactored code)
+    this.markedFloor = destinationFloor?.floor;
     this.writeDirections();
+<<<<<<< HEAD
 >>>>>>> 2883640 (add text navigation)
 >>>>>>> 51bf0a1 (add text navigation)
+=======
+
+>>>>>>> de5c554 (refactored code)
   }
 
   private findRoomFloor(room?: IRoom) {
@@ -229,16 +241,21 @@ export class NavigationService {
     .attr('stroke', 'black')
     .attr('fill', '#d7ee00');
 <<<<<<< HEAD
+<<<<<<< HEAD
     return block;
     this.textPath.push(block);
 =======
 
 <<<<<<< HEAD
-    return block;
 =======
+>>>>>>> de5c554 (refactored code)
+    return block;
     this.textPath.push(block);
+<<<<<<< HEAD
 >>>>>>> 2883640 (add text navigation)
 >>>>>>> 51bf0a1 (add text navigation)
+=======
+>>>>>>> de5c554 (refactored code)
   }
 
   public resetNavigation(): void {

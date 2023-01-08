@@ -20,6 +20,7 @@ export interface IEquipmentRelocation {
 })
 export class EquipmentRelocationOverviewComponent implements OnInit {
 
+
   @Input() roomID: any
   constructor(
     private http: HttpClient,
@@ -33,10 +34,12 @@ export class EquipmentRelocationOverviewComponent implements OnInit {
   roomId: number = 0
   dataSource: IEquipmentRelocation[] = []
   equipment: any
+
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.roomId = params['id'];
     });
+
     this.roomOverViewService.getEquipmentRelocationForRoom(this.roomId).subscribe(res => {
       this.dataSource = res
       this.dataSource.forEach((leave) => {
@@ -51,7 +54,10 @@ export class EquipmentRelocationOverviewComponent implements OnInit {
 
     })
 
+
+      
   }
+
   cancelRellocation(id: number) {
     this.roomOverViewService.cancelRellocation(id).pipe(catchError(res => {
       const error = res.error

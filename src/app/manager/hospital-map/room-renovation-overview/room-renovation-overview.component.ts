@@ -52,10 +52,10 @@ export class RoomRenovationOverviewComponent implements OnInit {
         leave.startAt = leave.startAt.split('T')[0]
         leave.endAt = leave.endAt.split('T')[0]
 
+
       })
     })
   }
-
   cancelRenovation(id: number) {
     this.roomOverViewService.cancelRenovationForRoom(id).pipe(catchError(res => {
       const error = res.error
@@ -69,7 +69,6 @@ export class RoomRenovationOverviewComponent implements OnInit {
     })
 
   }
-
 
 
 

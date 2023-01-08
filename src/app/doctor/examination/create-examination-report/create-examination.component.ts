@@ -94,8 +94,13 @@ export class CreateExaminationComponent implements OnInit {
       uuid: this.reportUuid,
       examinationReportId: this.startedReport.id
     }
+<<<<<<< HEAD
 
     this.examinationReportService.sendEvent(dto).subscribe(res => {
+=======
+    
+    this.examinationReportService.sendEvent(dto).subscribe(res=>{
+>>>>>>> de5c554 (refactored code)
       this.reportUuid = res.uuid;
       this.startedReport = res
     })

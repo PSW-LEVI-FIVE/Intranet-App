@@ -89,6 +89,7 @@ const routes: Routes = [
         path: 'room-map/:id',
         component: RoomMapComponent
       },
+
       { 
         path: 'room-map/:id', 
         component: RoomMapComponent ,
@@ -148,7 +149,11 @@ const routes: Routes = [
       {
         path: 'statistics',
         component: StatisticsComponent
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+>>>>>>> de5c554 (refactored code)
       },
       {
         path: 'merge-rooms/:floorId',
@@ -169,6 +174,9 @@ const routes: Routes = [
         component: DoctorStatisticsWorkloadComponent
       },
 
+=======
+      }, 
+>>>>>>> 3a36f5f (refactored code)
       { 
         path: 'doctors-leave-statistics', 
         component: DoctorStatisticsLeavesComponent
