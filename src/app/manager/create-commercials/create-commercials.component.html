@@ -1,14 +1,17 @@
-<div class="custom-file overflow-hidden rounded-pill mb-5" style="text-align:center;padding: 2%;margin-top:2%;float:center">
-    <div class="form-outline mb-4">
-    <label class="form-label" for="form2Example1" style="font-size:17px">Title:</label>
-    <input type="email" id="form2Example1" class="form-input" style="text-align:center;padding: 0.5%;margin-top:2%;margin-left:0.5%;" [(ngModel)]="commercial.title" /> 
+<div class="box">
+		<span class="text-center">Create advertisements</span>
+	<div class="input-container">
+    <input type="text" id="form2Example1" class="form-input input__field" [(ngModel)]="commercial.title" /> 
+		<label>Title</label>		
+	</div>
+	<div class="input-container">		
+		<input type="text" required="" [(ngModel)]="commercial.text"/>
+		<label>Text</label>
+	</div>
+  
+  <div style="vertical-align:center;">
+    <input type="file" size="60" class="file-design" style="float:left;" (change)="rememberEvent($event)" />
+    <img [style.visibility]="(commercial.pictureUrl != '')? 'visible' : 'hidden'" src="https://pdphmpovyeiqspzsxqzq.supabase.co/storage/v1/object/public/photos/{{commercial.pictureUrl}}" class="selected-img" width="120px" height="120px">
   </div>
-  <div class="form-outline mb-4">
-    <label class="form-label" for="form2Example1" style="font-size:17px">Text:</label>
-    <input type="email" id="form2Example1" class="form-input" style="text-align:center;padding: 0.5%;margin-top:2%;margin-left:0.5%;" [(ngModel)]="commercial.text" />
-  </div>
-  <div class="form-outline mb-4" style="text-align: center;">
-    <input id="customFile" type="file" for="form2Example1" (change)="rememberEvent($event)" class="custom-file-input rounded-pill" style="text-align:center;padding: 0.5%;margin-top:2%;">
-  </div>
-  <button  class="smalltext" (click)="selectFile();createCommercial()"> Submit!</button>
+		<button type="button" class="btn" (click)="selectFile();createCommercial()">submit</button>
 </div>

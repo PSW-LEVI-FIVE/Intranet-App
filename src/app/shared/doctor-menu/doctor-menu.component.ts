@@ -19,7 +19,6 @@ export class DoctorMenuComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log("started")
 
     this.loginService.getUserProfile().subscribe(res => {
       this.profile = res
