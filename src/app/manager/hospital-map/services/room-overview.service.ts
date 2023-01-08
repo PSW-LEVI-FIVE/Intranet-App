@@ -14,6 +14,9 @@ export class RoomOverviewService {
   constructor(private http:HttpClient) { }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ccd0d99 (changed name of function)
   getRoomSchedule(roomId:number):Observable<any>{
     return this.http.get(this.apiHost+"api/intranet/rooms/schedule/appointment/"+roomId)
   }

@@ -13,6 +13,7 @@ export interface IRoomAppointment {
 }
 export enum Type {
 
+
   Examination = 0,
   Hospitalisation = 1,
   Type3 = 2,
@@ -26,10 +27,12 @@ export enum Type {
 export class RoomOverviewComponent implements OnInit {
 
 
+
   displayedColumns: string[] = ['start_date', 'end_date','appointment_type'];
   
   roomId:number = 0
   dataSource:IRoomAppointment[]=[]
+
   Type = Type
   constructor(private http: HttpClient,
     private roomOverViewService: RoomOverviewService,
@@ -40,7 +43,6 @@ export class RoomOverviewComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.roomId = params['id'];
     });
-
     this.roomOverViewService.getRoomSchedule(this.roomId).subscribe(res => {
       this.dataSource = res
       this.dataSource.forEach((leave) => {
@@ -51,6 +53,8 @@ export class RoomOverviewComponent implements OnInit {
       })
     })
  
+
+    
 
   }
 

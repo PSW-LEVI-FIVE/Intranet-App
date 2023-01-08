@@ -33,12 +33,10 @@ export class EquipmentRelocationOverviewComponent implements OnInit {
   dataSource: IEquipmentRelocation[] = []
   equipment: any
 
-
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.roomId = params['id'];
     });
-
 
     this.roomOverViewService.getEquipmentRelocationForRoom(this.roomId).subscribe(res => {
       this.dataSource = res
@@ -55,11 +53,7 @@ export class EquipmentRelocationOverviewComponent implements OnInit {
 
     })
 
-
-      
   }
-
-
   cancelRellocation(id: number) {
     this.roomOverViewService.cancelRellocation(id).pipe(catchError(res => {
       const error = res.error

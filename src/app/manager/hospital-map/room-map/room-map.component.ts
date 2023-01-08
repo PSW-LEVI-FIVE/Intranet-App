@@ -169,7 +169,6 @@ export class RoomMapComponent implements OnInit {
     })
   }
 
-
   public searchEquipmentInRoom() {
     if (this.searchEquipmentInput.name == undefined || this.searchEquipmentInput.name == "") this.searchEquipmentInput.name = "0";
 
