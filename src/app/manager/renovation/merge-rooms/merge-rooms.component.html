@@ -6,7 +6,7 @@
         <div>
           <mat-form-field appearance="fill" class="form-data">
             <mat-label>Select first room</mat-label>
-                <mat-select [(ngModel)]="selectedFirstRoomId" (selectionChange)="checkFirstStepInput()" name="mainRoomId">
+                <mat-select [(ngModel)]="mergeDto.mainRoomId" (selectionChange)="checkFirstStepInput()" name="mainRoomId">
                   <mat-option *ngFor="let room of floorRooms" [value]="room.id" >{{room.id}} - {{room.roomNumber}}
                   </mat-option>
             </mat-select>
@@ -15,7 +15,7 @@
         <div>
           <mat-form-field appearance="fill" class="form-data">
             <mat-label>Select second room</mat-label>
-            <mat-select [(value)]="selectedSecondRoomId" (selectionChange)="checkFirstStepInput()">
+            <mat-select [(ngModel)]="mergeDto.secondaryId" (selectionChange)="checkFirstStepInput()" name="secondaryId">
               <mat-option *ngFor="let room of floorRooms" [value]="room.id" > {{room.id}} -{{room.roomNumber}}
               </mat-option>
             </mat-select>
@@ -25,8 +25,8 @@
             <mat-form-field appearance="fill" class="form-data">
               <mat-label>Enter a date range</mat-label>
               <mat-date-range-input [rangePicker]="rangePicker">
-                <input matStartDate placeholder="Start date" [(ngModel)]="pick.start" name="pickStart">
-                <input matEndDate placeholder="End date" [(ngModel)]="pick.end" name="pickEnd">
+                <input matStartDate placeholder="Start date" [(ngModel)]="timeSlotDto.startDate" name="pickStart">
+                <input matEndDate placeholder="End date" [(ngModel)]="timeSlotDto.endDate" name="pickEnd">
               </mat-date-range-input>
               <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
               <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
@@ -41,12 +41,12 @@
           <div>
             <mat-form-field appearance="fill" class="form-data">
               <mat-label>Duration (in days)</mat-label>
-              <input matInput [(ngModel)]="durationInput" name="dur" (change)="checkFirstStepInput()" required>
+              <input matInput [(ngModel)]="timeSlotDto.duration" name="dur" (change)="checkFirstStepInput()" required>
             </mat-form-field> 
           </div>
           <div>
             <button mat-button class="quit-button" (click)="abortRenovation()">Quit</button>
-            <button mat-button class="next-button" matStepperNext [disabled]="nextStep" (click)="getFreeAppointments()">Next</button>
+            <button mat-button class="next-button" matStepperNext (click)="getFreeAppointments()" [disabled]="nextStep">Next</button>
           </div>
       </form>
     </mat-step>
@@ -90,7 +90,7 @@
           <div>
             <button mat-button class="quit-button" (click)="abortRenovation()">Quit</button>
             <button mat-button matStepperPrevious class="step-button" style="margin-left: 7%; margin-top: 32%;">Back</button>
-            <button mat-button matStepperNext class="step-button" [disabled]="finishAction">Next</button>
+            <button mat-button matStepperNext class="step-button" [disabled]="finishAction" (click)="approveRenovation()">Next</button>
           </div>
         </form>
       </mat-step>
@@ -100,7 +100,7 @@
           <ng-template matStepLabel>Confirm data for merging</ng-template>
           <div>
            <div class="data-container">
-            <label class="data-view">Selected rooms for merging: {{selectedFirstRoomId}} and {{selectedSecondRoomId}}</label>
+            <label class="data-view">Selected rooms for merging: {{mergeDto.mainRoomId}} and {{mergeDto.secondaryId}}</label>
            </div>
            <div class="data-container">
             <label class="data-view">Selected interval: {{selectedInterval.start}} - {{selectedInterval.end}}</label>
@@ -111,7 +111,7 @@
            <div>
             <button mat-button class="quit-button" (click)="abortRenovation()"  style="margin-top: 72%;">Quit</button>
             <button mat-button matStepperPrevious class="step-button">Back</button>
-            <button mat-button class="confirm-button" (click)="scheduleMerge()">Schedule</button>
+            <button mat-button class="confirm-button" (click)="scheduleMerge()" [disabled]="schedule">Schedule</button>
            </div>
         </div>
         </form>

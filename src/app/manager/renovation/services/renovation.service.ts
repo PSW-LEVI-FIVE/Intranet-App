@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MergeDTO, SplitDTO, TimeInterval, TimeSlotRegDTO } from '../shared/model';
+import { MergeDTO } from '../shared/merge.model';
+import { TimeInterval, TimeSlotRegDTO } from '../shared/model';
+import { SplitDTO } from '../shared/split.model';
 
 @Injectable({
   providedIn: 'root'
