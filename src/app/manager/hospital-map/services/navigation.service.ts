@@ -77,7 +77,7 @@ export class NavigationService {
 
 
     this.markedFloor = destinationFloor?.floor;
-    this.writeDirections();
+   
 
   }
 
