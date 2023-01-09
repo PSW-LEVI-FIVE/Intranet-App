@@ -28,6 +28,8 @@ import { CreateExaminationComponent } from './examination/create-examination-rep
 import { ConsiliumsModule } from './consiliums/consiliums.module';
 import { CreateConsiliumComponent } from './consiliums/components/create-consilium/create-consilium.component';
 import { CreateforFormComponent } from './appointments/createfor-form/createfor-form.component';
+import { ViewBloodOrdersComponent } from './blood-orders/components/view-blood-orders/view-blood-orders.component';
+import { ViewBloodSuppliesComponent } from './blood-orders/components/view-blood-supplies/view-blood-supplies.component';
 
 const routes = [
   {
@@ -105,6 +107,14 @@ const routes = [
       {
         path: 'consilium',
         component: CreateConsiliumComponent,
+      },
+      {
+        path: 'blood-order-view',
+        component: ViewBloodOrdersComponent,
+      },
+      {
+        path: 'blood-supply-view',
+        component: ViewBloodSuppliesComponent,
       },
     ]
   }

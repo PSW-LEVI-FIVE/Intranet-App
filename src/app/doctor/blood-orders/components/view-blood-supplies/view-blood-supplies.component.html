@@ -1,0 +1,25 @@
+<div class="blood-supply-view">
+    <div class="template-form-title h3">
+        <h3>Blood on supply</h3>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th *ngFor="let column of columns">{{column}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let blood of bloodTypes">
+                <td>
+                    {{blood.position}}
+                </td>
+                <td>
+                    {{blood.bloodType}}
+                </td>
+                <td>
+                    {{blood.quantity}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

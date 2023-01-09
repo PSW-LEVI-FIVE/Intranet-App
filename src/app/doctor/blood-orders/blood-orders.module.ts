@@ -9,12 +9,16 @@ import { RouterModule } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxMatDatetimePickerModule } from '@angular-material-components/datetime-picker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ViewBloodOrdersComponent } from './components/view-blood-orders/view-blood-orders.component';
+import { ViewBloodSuppliesComponent } from './components/view-blood-supplies/view-blood-supplies.component';
 
 
 
 @NgModule({
   declarations: [
-    CreateBloodOrderComponent
+    CreateBloodOrderComponent,
+    ViewBloodOrdersComponent,
+    ViewBloodSuppliesComponent
   ],
   imports: [
     ReactiveFormsModule,
