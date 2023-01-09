@@ -107,6 +107,7 @@ export class NavigationService {
 
     this.winningBlock = undefined;
     this.alreadyChecked = [];
+    this.writeDirections();
   }
 
   private doNotNavigate(floorId: string): boolean {
@@ -209,9 +210,9 @@ export class NavigationService {
     .attr('height', block.height)
     .attr('stroke', 'black')
     .attr('fill', '#d7ee00');
-    return block;
-    this.textPath.push(block);
 
+    this.textPath.push(block);
+    return block;
   }
 
   public resetNavigation(): void {
@@ -232,5 +233,115 @@ export class NavigationService {
 
   public getDestinationFloor(): IFloor | undefined {
     return this.markedFloor;
+  }
+
+  private writeDirections(){
+      this.textPath.reverse();
+      let orientation = true;
+      let forward = true;
+      let direction_orientation = true;
+      this.defineMovingOrientation(orientation, forward, direction_orientation);
+      
+         
+      //this.navigationTips.push("Go to floor: " + this.markedFloor?.id);
+      for(let i = 0; i < this.textPath.length; i++){
+        if( i>2 && this.textPath[i].y !== this.textPath[i-1].y && this.textPath[i].x !== this.textPath[i-2].x)
+        {
+          const foundRoom = this.foundRoomsId.pop();
+          this.foundRoomsId.push(foundRoom as string);
+          if(direction_orientation)
+            this.navigationTips.push("Turn right at hai: "+ foundRoom);
+            // console.log('DESNO' + foundRoom);
+          else 
+            //console.log('LEVO' + foundRoom);
+            this.navigationTips.push("Turn left at hai: "+ foundRoom);
+          forward = !forward;
+        }
+        else if(i > 2 && this.textPath[i].x !== this.textPath[i-1].x && this.textPath[i].y !== this.textPath[i-2].y)
+        {
+          const foundRoom = this.foundRoomsId.pop();
+          this.foundRoomsId.push(foundRoom as string);
+          if(direction_orientation)
+            this.navigationTips.push("Turn left at: "+ foundRoom);
+            //console.log('LEVO'+ foundRoom);
+          else 
+            this.navigationTips.push("Turn right at: "+ foundRoom);
+            //console.log('DESNO'+ foundRoom);
+          forward = !forward;
+        }
+        else{
+          if(orientation){
+            if(forward)
+            {
+              //console.log('po y-osi');
+              this.isInContrastToRoomY(this.textPath[i]);
+            }else
+            {
+               //console.log('po x-osi')
+               this.isInContrastToRoom(this.textPath[i]);
+            }
+           }
+            else  {
+              if(forward){
+               //console.log('po x-osi');
+                this.isInContrastToRoom(this.textPath[i]);
+              }else{
+                //console.log('po y-osi')
+                this.isInContrastToRoomY(this.textPath[i]);
+              }
+            }
+        }
+      }
+
+      this.getDirections();
+  }
+
+  private isInContrastToRoom(p: IterationBlock){
+     const found = this.buildingScope.find( room => {
+        return room.room.xCoordinate < p.x && room.room.xCoordinate + room.room.width > p.x && p.y < room.room.yCoordinate;
+      })
+      if(found){
+        this.makeTextPath(found.room.id);
+      }
+  }
+
+  private isInContrastToRoomY(p: IterationBlock){
+    const found = this.buildingScope.find( room => {
+       return room.room.yCoordinate < p.y && room.room.yCoordinate + room.room.height > p.y && p.x < room.room.xCoordinate;
+     })
+     if(found){
+       this.makeTextPath(found.room.id);
+     }
+ }
+
+  private makeTextPath(room: string){
+    if(this.foundRoomsId.indexOf(room) === -1){
+      this.foundRoomsId.push(room);
+      this.navigationTips.push('Keep moving forward to room: '+ room);
+    } 
+  }
+
+  private getDirections(){
+    let textRoute = this.navigationTips;
+    //this.navigationTips = [];
+    this.textPath = [];
+    console.log(this.navigationTips);
+    //return textRoute
+  }
+
+  private defineMovingOrientation(orientation:boolean, forward:boolean, direction_orientation:boolean){
+    if(this.textPath[0].x === this.textPath[2].x)
+    { 
+      orientation = true;
+    }else{
+      orientation = false;
+    }
+
+    if(this.textPath[0].x < this.textPath[1].x){
+      direction_orientation = true;
+    }
+    else{
+      direction_orientation = false;
+    }
   }
 }
