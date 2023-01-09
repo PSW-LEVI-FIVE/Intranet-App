@@ -20,7 +20,7 @@
 
     <mat-form-field inputs>
       <mat-label>From </mat-label>
-      <ng-template [ngIf]="!isEditFrom" [ngIfElse]="editingFrom" id="">
+      <ng-template [ngIf]="!isEditFrom" [ngIfElse]="editingFrom">
         <div>
           <input [(ngModel)]="from" matInput required disabled id="Test">
           <mat-icon class="icon" fontIcon="edit" (click)="editFrom()" id="clickFromTime"></mat-icon>
