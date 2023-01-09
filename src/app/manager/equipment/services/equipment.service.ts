@@ -21,4 +21,7 @@ export class EquipmentService {
   searchRoomsByFloorContainigEquipment(equipment: Equipment): Observable<Room[]>{
     return this.http.get<Room[]>(this.apiHost + '/equipment/floor-search' + '?Name=' + equipment.name + '&Quantity=' + equipment.quantity + '&roomId=' + equipment.roomId, { headers: this.headers })
   }
+  getEquipmentByRoom(roomId:number):Observable<Equipment[]>{
+    return this.http.get<any>(this.apiHost+'/equipment/room/'+roomId)
+  }
 }

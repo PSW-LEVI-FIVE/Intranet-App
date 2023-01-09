@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { B } from 'chart.js/dist/chunks/helpers.core';
-import { flatRollup } from 'd3';
+import { flatRollup, svg } from 'd3';
+import { B, p } from 'chart.js/dist/chunks/helpers.core';
+import { index } from 'd3';
 import { IFloor } from '../model/floor.model';
 import { IterationBlock } from '../model/navigation.model';
 import { IRoom } from '../model/room.model';
@@ -15,10 +16,13 @@ export class NavigationService {
   public buildingId: number = -1;
   public buildingRooms: IRoom[] = [];
   public buildingScope: {room: IRoom; floor: IFloor}[] = [];
+  public textPath: IterationBlock[] = [];
 
   private source: IRoom | undefined;
   private destination: IRoom | undefined;
   private markedFloor: IFloor | undefined;
+  private navigationTips: string[] = [];
+  private foundRoomsId: string[] = [];
 
   private destinations: {room: IRoom; floor: IFloor}[] = [];
 
@@ -71,7 +75,10 @@ export class NavigationService {
       this.source = undefined;
     }
 
+
     this.markedFloor = destinationFloor?.floor;
+   
+
   }
 
   private findRoomFloor(room?: IRoom) {
@@ -202,8 +209,8 @@ export class NavigationService {
     .attr('height', block.height)
     .attr('stroke', 'black')
     .attr('fill', '#d7ee00');
-
     return block;
+    this.textPath.push(block);
   }
 
   public resetNavigation(): void {
@@ -222,5 +229,6 @@ export class NavigationService {
   public getDestinationFloor(): IFloor | undefined {
     return this.markedFloor;
   }
+
 
 }
