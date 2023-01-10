@@ -79,4 +79,14 @@
       </div>
     </mat-step>
   </mat-stepper>
+  <div>
+  <mat-form-field class="record-search">
+    <mat-label>Search Previous Reports</mat-label>
+    <input matInput placeholder="Ex. word1 word2 /or/ 'phrase' " [formControl]="searchText">
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="emitSearch()">Search</button>
+    <div *ngFor="let exam of searchResults">
+      <a target="_blank" [href]="exam.url">{{exam.doctorName}} ->  </a>
+    </div>
+  </div>
 </div>
