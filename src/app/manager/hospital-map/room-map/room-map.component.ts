@@ -32,6 +32,7 @@ export class RoomMapComponent implements OnInit {
   searchedRooms: Room[] = [];
   searchEquipmentInput: Equipment = {} as Equipment;
   searchFloorInput: Equipment = {} as Equipment;
+  roomsOnFloor: Room[] = [];
   
   constructor(
     private roomMapService:RoomMapService, 
@@ -49,6 +50,7 @@ export class RoomMapComponent implements OnInit {
       this.floorId = params['id'];
       console.log(this.floorId)
       this.searchFloorInput.roomId = params['id']
+      this.checkNumberOfRooms()
     });
     
     this.svg  = this.buildingMapService.createSVG();
@@ -153,6 +155,29 @@ public updateRoom(): void {
        this.searchedRooms = res;
        if(this.searchFloorInput.name == "0") this.searchFloorInput.name = "";
     }) 
+  }
+
+  public checkNumberOfRooms(){
+    this.roomService.getRoomsbyFloor(this.floorId).subscribe(res =>{
+      this.roomsOnFloor = res;
+      console.log(this.roomsOnFloor);
+    })
+  }
+
+  public toggleMerge(): void {
+    if(this.roomsOnFloor.length > 1) {
+      this.router.navigate(['manager/merge-rooms/' + this.floorId]);
+    } else {
+      this.toastService.info('Not enough rooms for merge renovation');
+    }
+  }
+
+  public toggleSplit(): void {
+    if(this.roomsOnFloor.length > 0) {
+      this.router.navigate(['manager/split-room/' + this.floorId]);
+    } else {
+      this.toastService.info('There is no room on this floor');
+    }
   }
 }
 

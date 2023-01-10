@@ -1,0 +1,55 @@
+.quit-button{
+    background-color: #c23241;
+    margin-right: 8%;
+    margin-top: 1%;
+    width: 90px;
+}
+
+.step-button, .confirm-button{
+    margin-right: 1%; 
+    border: solid 0.5px;
+    width: 90px;
+}
+
+.next-button{
+    margin-left: 4%; 
+    border: solid 0.5px;
+    width: 90px;
+}
+
+.data-view{
+    font-size: 18px;
+}
+
+.data-container{
+    display: block;
+    margin-bottom: 3%;
+}
+
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+.mat-form-field {
+    margin-top: 16px;
+  }
+
+#secondStep{
+    margin-left: 400px;
+}
+
+#thirdStep{
+    margin-left: 850px;
+}
+
+#fourthStep{
+    margin-left: 1250px;
+}
+
+#centerForm{
+    margin-left: 700px;
+}
+
+.form-data{
+    width: 380px;
+}
