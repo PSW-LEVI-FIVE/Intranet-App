@@ -32,6 +32,8 @@ export class NavigationService {
   private alreadyChecked: IterationBlock[] = [];
   private winningBlock: IterationBlock | undefined;
 
+  public axis_movment: boolean = true;
+
   constructor(
     private floorService: FloorMapService, 
     private roomService: RoomMapService
@@ -225,6 +227,7 @@ export class NavigationService {
     this.navigationTips = [];
     this.textPath = [];
     this.foundRoomsId = [];
+    this.axis_movment = true;
   }
 
   public getDestination(): IRoom | undefined {
@@ -236,67 +239,36 @@ export class NavigationService {
   }
 
   private writeDirections(){
-      this.textPath.reverse();
-      let orientation = true;
-      let forward = true;
-      let direction_orientation = true;
-      this.defineMovingOrientation(orientation, forward, direction_orientation);
+    this.textPath.reverse();
+    let orientation = true;
+    let direction = true;
+    if(this.textPath[0].x === this.textPath[2].x) orientation = true;
+    else orientation = false;
+    
+    let sourceFloor = this.findRoomFloor(this.source);
+    if (sourceFloor === undefined) this.navigationTips.push("Go to floor: " + this.markedFloor?.id);
+      console.log(sourceFloor?.floor.id);
       
-         
-      //this.navigationTips.push("Go to floor: " + this.markedFloor?.id);
-      for(let i = 0; i < this.textPath.length; i++){
-        if( i>2 && this.textPath[i].y !== this.textPath[i-1].y && this.textPath[i].x !== this.textPath[i-2].x)
-        {
-          const foundRoom = this.foundRoomsId.pop();
-          this.foundRoomsId.push(foundRoom as string);
-          if(direction_orientation)
-            this.navigationTips.push("Turn right at hai: "+ foundRoom);
-            // console.log('DESNO' + foundRoom);
-          else 
-            //console.log('LEVO' + foundRoom);
-            this.navigationTips.push("Turn left at hai: "+ foundRoom);
-          forward = !forward;
+    for(let i = 0; i < this.textPath.length; i++){
+      if( i>2 && this.textPath[i].y !== this.textPath[i-1].y && this.textPath[i].x !== this.textPath[i-2].x)
+      {
+         direction = true;
+         this.directionChange(this.textPath[i], this.textPath[i-2], direction);
         }
         else if(i > 2 && this.textPath[i].x !== this.textPath[i-1].x && this.textPath[i].y !== this.textPath[i-2].y)
         {
-          const foundRoom = this.foundRoomsId.pop();
-          this.foundRoomsId.push(foundRoom as string);
-          if(direction_orientation)
-            this.navigationTips.push("Turn left at: "+ foundRoom);
-            //console.log('LEVO'+ foundRoom);
-          else 
-            this.navigationTips.push("Turn right at: "+ foundRoom);
-            //console.log('DESNO'+ foundRoom);
-          forward = !forward;
+          direction = false;
+          this.directionChange(this.textPath[i], this.textPath[i-2], direction);
         }
         else{
-          if(orientation){
-            if(forward)
-            {
-              //console.log('po y-osi');
-              this.isInContrastToRoomY(this.textPath[i]);
-            }else
-            {
-               //console.log('po x-osi')
-               this.isInContrastToRoom(this.textPath[i]);
-            }
-           }
-            else  {
-              if(forward){
-               //console.log('po x-osi');
-                this.isInContrastToRoom(this.textPath[i]);
-              }else{
-                //console.log('po y-osi')
-                this.isInContrastToRoomY(this.textPath[i]);
-              }
-            }
+          this.defineMovingOrientation(orientation, this.textPath[i])
         }
       }
 
       this.getDirections();
   }
 
-  private isInContrastToRoom(p: IterationBlock){
+  private isInContrastToRoomX(p: IterationBlock){
      const found = this.buildingScope.find( room => {
         return room.room.xCoordinate < p.x && room.room.xCoordinate + room.room.width > p.x && p.y < room.room.yCoordinate;
       })
@@ -329,19 +301,46 @@ export class NavigationService {
     //return textRoute
   }
 
-  private defineMovingOrientation(orientation:boolean, forward:boolean, direction_orientation:boolean){
-    if(this.textPath[0].x === this.textPath[2].x)
-    { 
-      orientation = true;
-    }else{
-      orientation = false;
-    }
+  private defineMovingOrientation(orientation:boolean, currentPosition: IterationBlock){
+    if(orientation){
+      if(this.axis_movment)
+      {
+        console.log('po y-osi');
+        this.isInContrastToRoomY(currentPosition);
+      }else
+      {
+         console.log('po x-osi')
+         this.isInContrastToRoomX(currentPosition);
+      }
+     }
+      else  {
+        if(this.axis_movment){
+         console.log('po x-osi');
+          this.isInContrastToRoomX(currentPosition);
+        }else{
+          console.log('po y-osi')
+          this.isInContrastToRoomY(currentPosition);
+        }
+      }
+  }
 
-    if(this.textPath[0].x < this.textPath[1].x){
-      direction_orientation = true;
+  private directionChange(currentPosition: IterationBlock, previousPosition:IterationBlock, direction: boolean){
+    let foundRoom = this.foundRoomsId.pop();
+    this.foundRoomsId.push(foundRoom as string);
+    if(foundRoom === undefined) foundRoom = this.buildingScope[0].room.id;
+    this.axis_movment = !this.axis_movment;
+    if(direction)
+    {
+      if((currentPosition.y > previousPosition.y && currentPosition.x > previousPosition.x) || (currentPosition.y < previousPosition.y && currentPosition.x < previousPosition.x))
+        this.navigationTips.push("Turn right at: "+ foundRoom);
+      else this.navigationTips.push("Turn left at: "+ foundRoom);
+
     }
     else{
-      direction_orientation = false;
+      if((currentPosition.y > previousPosition.y && currentPosition.x > previousPosition.x) || (currentPosition.y < previousPosition.y && currentPosition.x < previousPosition.x))
+           this.navigationTips.push("Turn left at: "+ foundRoom);
+      else this.navigationTips.push("Turn right at: "+ foundRoom);
     }
+   
   }
 }
