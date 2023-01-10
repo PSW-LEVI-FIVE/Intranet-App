@@ -11,6 +11,10 @@ export class ExaminationReportService {
     private url: string = "http://localhost:5000/api/intranet"
     constructor(private readonly httpClient: HttpClient) { }
 
+    searchReports(searchTerm:any){
+      const url = `${this.url}/examination/search`
+      return this.httpClient.post<any>(url,  searchTerm)
+    }
 
     startReport(examinationId: number) {
         const url = `${this.url}/examination/report`
