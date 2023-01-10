@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY } from 'rxjs';
-//import { TeamBuildingInvitationService } from '../hospital-map/services/team-building-invitation.service';
+import { TeamBuildingInvitationService } from '../hospital-map/services/team-building-invitation.service';
 export interface ISpeciality{  
 id: number,
 name: string
 }
+
 export interface ICreateInvitation {
   title: string,
   description: string,
@@ -18,6 +19,7 @@ export interface ICreateInvitation {
   specialityId: number
 
 }
+
 @Component({
   selector: 'app-team-building-invitations',
   templateUrl: './team-building-invitations.component.html',
@@ -41,7 +43,7 @@ public title: string = '';
   public description: string =""
   public place: string = "";
   public name: string = ""
- 
+
 
   ngOnInit(): void {
     this.inivitationService.getDoctorSpecialities().subscribe(res=>
@@ -105,6 +107,8 @@ public title: string = '';
         }, 1000)})
     }
   }
+
+
 
 
 }

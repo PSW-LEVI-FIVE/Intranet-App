@@ -40,6 +40,11 @@ import { SchedulingAppointmentStatisticsModule } from './scheduling-appointment-
 import { SchedulingAppointmentStatisticsComponent } from './scheduling-appointment-statistics/scheduling-appointment-statistics.component';
 import { RenovationStatisticsScheduleComponent } from './renovation-statistics-schedule/renovation-statistics-schedule.component';
 import { RenovationStatisticsScheduleModule } from './renovation-statistics-schedule/renovation-statistics-schedule.module';
+import { TeamBuildingInvitationsComponent } from './team-building-invitations/team-building-invitations.component';
+import { InvitationMenuComponent } from './invitation-menu/invitation-menu.component';
+import { InvitationListComponent } from './invitation-list/invitation-list.component';
+
+
 
 
 
@@ -66,6 +71,9 @@ const routes: Routes = [
         path: 'doctor-statistics',
         component: DoctorStatisticsPopularityComponent
       },
+      
+
+      
       {
         path: 'rooms',
         component: RoomComponent,
@@ -170,7 +178,7 @@ const routes: Routes = [
         component: DoctorStatisticsWorkloadComponent
       },
 
-       
+
 
       { 
         path: 'doctors-leave-statistics', 
@@ -181,6 +189,18 @@ const routes: Routes = [
         path:'room-schedule/:id',
         component: RoomOverviewComponent
 
+      },
+      {
+        path:'invitation',
+        component:TeamBuildingInvitationsComponent
+      },
+      {
+        path:'invitation-menu',
+        component:InvitationMenuComponent
+      },
+      {
+        path:'invitation-list',
+        component:InvitationListComponent
       }
     ]
 
@@ -201,7 +221,13 @@ const routes: Routes = [
     MergeRoomsComponent,
     SplitRoomComponent,
     DoctorStatisticsWorkloadComponent,
-    RenovationStatisticsScheduleComponent
+    RenovationStatisticsScheduleComponent,
+    TeamBuildingInvitationsComponent,
+    InvitationMenuComponent,
+    InvitationListComponent
+
+
+
   ],
   exports: [RouterModule],
   imports: [

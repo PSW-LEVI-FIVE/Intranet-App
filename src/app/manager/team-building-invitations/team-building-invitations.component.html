@@ -1,5 +1,7 @@
 
+
 <div style="height:1000px; width:500px;margin-left: 500px;">
+
     <mat-card class="mat-card-css">
         <mat-card-title>Create event </mat-card-title>
         <mat-card-content>
@@ -56,12 +58,35 @@
             <mat-form-field style="width:400px !important; margin-top: 30px!important;margin-right: 20px;" appearance="fill">
                 <label>Invite</label>
                 <mat-select [(ngModel)]="invite"  >
+            <mat-form-field>
+                <mat-label>Event name</mat-label>
+                <input matInput>
+            </mat-form-field>
+            </div>
+            <div>
+           <mat-form-field>
+            <mat-label>Description</mat-label>
+            <input matInput>
+           </mat-form-field>
+           </div>
+           <div>
+            <mat-form-field>
+                <mat-label>Place</mat-label>
+                <input matInput>
+            </mat-form-field>
+           </div>
+           <div>
+            <mat-form-field>
+                <label>Invite</label>
+                <mat-select [(ngModel)]="createInvitationDto.invites" >
                     <mat-option [value]="option" *ngFor="let option of specialties"><mat-radio-button>{{option.name}}</mat-radio-button></mat-option>
                     </mat-select>
             </mat-form-field>
            </div>
            <div>
+
             <button class="button-2" (click) = "createEvent()"> Create</button>
+
            </div>
         </mat-card-content>
     </mat-card>
