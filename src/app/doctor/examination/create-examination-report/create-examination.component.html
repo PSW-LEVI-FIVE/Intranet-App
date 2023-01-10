@@ -23,7 +23,8 @@
           </mat-autocomplete>
         </mat-form-field>
         <div>
-          <button mat-raised-button color="primary" matStepperNext id="symptoms-next" (click)="sendEvent(1)">Next</button>
+          <button mat-raised-button color="primary" matStepperNext id="symptoms-next"
+            (click)="sendEvent(1)">Next</button>
         </div>
       </form>
     </mat-step>
@@ -64,7 +65,8 @@
           </div>
         </form>
         <div>
-          <button mat-raised-button color="primary" matStepperNext id="prescriptions-next" (click)="sendEvent(3)">Next</button>
+          <button mat-raised-button color="primary" matStepperNext id="prescriptions-next"
+            (click)="sendEvent(3)">Next</button>
         </div>
       </form>
     </mat-step>
@@ -79,14 +81,28 @@
       </div>
     </mat-step>
   </mat-stepper>
-  <div>
-  <mat-form-field class="record-search">
-    <mat-label>Search Previous Reports</mat-label>
-    <input matInput placeholder="Ex. word1 word2 /or/ 'phrase' " [formControl]="searchText">
-  </mat-form-field>
-  <button mat-raised-button color="primary" (click)="emitSearch()">Search</button>
-    <div *ngFor="let exam of searchResults">
-      <a target="_blank" [href]="exam.url">{{exam.doctorName}} ->  </a>
+
+  <div class="search-wrapper">
+    <mat-form-field class="record-search">
+      <mat-label>Search Previous Reports</mat-label>
+      <input matInput placeholder="Ex. word1 word2 /or/ 'phrase' " [formControl]="searchText">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="emitSearch()">Search</button>
+    <div class="results">
+      <div *ngFor="let exam of searchResults" class="result" (click)="selectResult(exam.id)">
+        <div class="header">
+          {{ exam.doctorName }}
+        </div>
+        <div class="content" *ngIf="selectedResult==exam.id">
+          <a [href]="exam.url" target="_blank">PDF</a>
+          <div class="inner-content">
+            {{exam.content}}
+          </div>
+        </div>
+      </div>
     </div>
+
   </div>
+
 </div>

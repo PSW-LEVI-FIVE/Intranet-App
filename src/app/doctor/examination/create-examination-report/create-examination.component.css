@@ -1,8 +1,11 @@
 .create-examination-report {
     width: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    padding-top: 30px;
+    gap: 10px;
+
 }
 
 
@@ -11,7 +14,7 @@
 }
 
 .mat-stepper-vertical {
-    width: 800px!important;
+    width: 500px!important;
 }
 
 .mat-stepper-vertical-line {
@@ -27,6 +30,7 @@
 }
 .mat-form-field{
     width: 400px!important;
+    font-size: 20px!important;
 }
 textarea {
     min-height: 200px!important;
@@ -52,3 +56,58 @@ textarea {
     justify-content: flex-start;
     gap: 5px;
 }
+
+
+.search-wrapper {
+    width: 500px;
+    max-width: 500px;
+    margin-top: 10px;
+}
+
+
+.results {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-cotent: center;
+}
+
+.result {
+    width: 100%;
+    min-height: 50px;
+    border: 1px solid lightgray;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    cursor: pointer;
+}
+
+.result .header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 10px;
+    min-height: 50px;
+    font-size: 22px;
+}
+
+.result .content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+    font-size: 18px;
+    
+}
+
+.result .inner-content {
+    width: 100%;
+    word-break: break-all;
+}
+
+
+
