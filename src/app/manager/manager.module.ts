@@ -38,6 +38,7 @@ import { RoomInformationComponent } from './hospital-map/room-information/room-i
 
 
 
+
 const routes: Routes = [
   {
     path: 'manager',
@@ -135,6 +136,7 @@ const routes: Routes = [
       {
         path: 'statistics',
         component: StatisticsComponent
+
       },
 
       {
@@ -145,8 +147,6 @@ const routes: Routes = [
         path: 'split-room/:floorId',
         component: SplitRoomComponent
       },
-       
-
       { 
         path: 'doctors-leave-statistics', 
         component: DoctorStatisticsLeavesComponent

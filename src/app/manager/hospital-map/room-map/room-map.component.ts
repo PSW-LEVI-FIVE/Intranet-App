@@ -95,8 +95,9 @@ export class RoomMapComponent implements OnInit {
 
   private visualizeNavigation(floorId: string): void {
     this.navigationService.visualizeNavigation(this.svg, floorId);
+
   }
-  
+
   showInformation(svg: any) {
     svg.on('dblclick', (d: any, i: any) => {
       this.roomMapService.getByID(i.id).subscribe(res => {
@@ -157,6 +158,7 @@ export class RoomMapComponent implements OnInit {
       this.searchedRooms = res;
       if (this.searchFloorInput.name == "0") this.searchFloorInput.name = "";
     })
+
   }
 
   public checkNumberOfRooms(){
