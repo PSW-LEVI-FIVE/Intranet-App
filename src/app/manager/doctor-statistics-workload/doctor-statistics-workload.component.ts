@@ -1,10 +1,11 @@
 import { DoctorWorkloadStatisticsService } from './services/doctor-workload-statistics.service';
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Chart } from 'chart.js';
 import { Observable, of, startWith } from 'rxjs';
 import { IDoctor } from '../doctor-statistics-leaves/model/doctor.model';
 import { IWorkloadStatistic } from './model/statistic.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-doctor-statistics-workload',
@@ -13,16 +14,16 @@ import { IWorkloadStatistic } from './model/statistic.model';
 })
 export class DoctorStatisticsWorkloadComponent implements OnInit {
 
-  myControl = new FormControl<string | IDoctor>('');
-  selectedMonth = new FormControl<number>(0);
-  selectedStart = new FormControl<Date>(new Date());
-  selectedEnd = new FormControl<Date>(new Date());
+  myControl = new FormControl<string | IDoctor>('', Validators.required);
+  selectedMonth = new FormControl('', Validators.required);
+  selectedStart = new FormControl('', Validators.required);
+  selectedEnd = new FormControl('', Validators.required);
   public doctors: IDoctor[] = [];
   public statics: IWorkloadStatistic[] = [];
   public dates: string[] = [];
   public appointments: number[] = [];
   filteredOptions: Observable<IDoctor[]> | undefined;
-  constructor(private doctorsWorkloadStatisticsService:DoctorWorkloadStatisticsService) { }
+  constructor(private doctorsWorkloadStatisticsService:DoctorWorkloadStatisticsService, private readonly toastService: ToastrService,) { }
 
   ngOnInit(): void {
     this.doctorsWorkloadStatisticsService.getDoctors().subscribe(res => {
@@ -43,6 +44,10 @@ export class DoctorStatisticsWorkloadComponent implements OnInit {
     );
   }
   showYearStats(selectedDoctor:any){
+    if(this.myControl.status == 'INVALID') {
+      this.toastService.error("All fields should be filled!")
+      return
+    }
     this.doctorsWorkloadStatisticsService.getYearStatistics(selectedDoctor.id).subscribe(res => {
       res.forEach(statistics => {
         this.dates.push(statistics.date);
@@ -52,6 +57,10 @@ export class DoctorStatisticsWorkloadComponent implements OnInit {
     });
   }
   showMonthStats(selectedDoctor:any){
+    if(this.myControl.status == 'INVALID' || this.selectedMonth.status == 'INVALID') {
+      this.toastService.error("All fields should be filled!")
+      return
+    }
     this.doctorsWorkloadStatisticsService.getMonthStatistics(selectedDoctor.id, this.selectedMonth.value).subscribe(res => {
       res.forEach(statistics => {
         this.dates.push(statistics.date);
@@ -61,6 +70,10 @@ export class DoctorStatisticsWorkloadComponent implements OnInit {
     });
   }
   showRangeStats(selectedDoctor:any){
+    if(this.myControl.status == 'INVALID' || this.selectedStart.status == 'INVALID' || this.selectedEnd.status == 'INVALID') {
+      this.toastService.error("All fields should be filled!")
+      return
+    }
     this.doctorsWorkloadStatisticsService.getTimeRangeStatistics(selectedDoctor.id, this.selectedStart.value, this.selectedEnd.value).subscribe(res => {
       res.forEach(statistics => {
         console.log(statistics);
