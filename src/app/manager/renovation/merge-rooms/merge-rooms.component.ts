@@ -8,6 +8,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RoomMapService } from '../../hospital-map/services/room-map.service';
 import { RenovationService } from '../services/renovation.service';
 import { MergeDTO } from '../shared/merge.model';
+import { RenovationEventDto } from '../shared/renovation-event-dto';
+import { CreateEventDto } from '../shared/create-event-dto';
+import { AddEventDto } from '../shared/add-event-dto';
+import { RenovationDto } from '../shared/renovation-dto';
 
 enum RoomTypes {
   NO_TYPE,
@@ -37,6 +41,10 @@ export class MergeRoomsComponent implements OnInit {
   public selectedInterval:TimeInterval = new TimeInterval();
   public mergeDto: MergeDTO = new MergeDTO();
   public timeSlotDto: TimeSlotRegDTO = new TimeSlotRegDTO();
+  public renovationEvenetDto: RenovationEventDto = new RenovationEventDto();
+  public createEvenetDto: CreateEventDto = new CreateEventDto();
+  public addEventDto: AddEventDto = new AddEventDto();
+  public renovationDto: RenovationDto = new RenovationDto();
   
   
   constructor(private roomService: RoomService,  
@@ -75,13 +83,19 @@ export class MergeRoomsComponent implements OnInit {
  }
 
  public checkFirstStepInput(){
-    if(this.mergeDto.mainRoomId === this.mergeDto.secondaryId && this.mergeDto.mainRoomId !== 0 && this.mergeDto.secondaryId !== 0){
-        this.toastService.info('Please select two DIFFERENT rooms');
+    //if(this.mergeDto.mainRoomId === this.mergeDto.secondaryId && this.mergeDto.mainRoomId !== 0 && this.mergeDto.secondaryId !== 0){
+      /*   this.toastService.info('Please select two DIFFERENT rooms');
         this.nextStep = true;
      }else if(this.timeSlotDto.duration <= 0 || this.mergeDto.mainRoomId === 0 || this.mergeDto.secondaryId === 0 || this.timeSlotDto.endDate === null){
         this.nextStep = true;
      }
-     else this.nextStep = false;
+     else this.nextStep = false;*/
+     
+     this.createEvenetDto.mainRoomId = this.mergeDto.mainRoomId;
+     this.createEvenetDto.type = 0;
+     this.renovationService.createEvent(this.createEvenetDto).subscribe(resposne=>{
+        this.renovationEvenetDto = resposne;
+     })
  }
 
  public checkThirdStepInput(){
@@ -116,4 +130,28 @@ export class MergeRoomsComponent implements OnInit {
     this.intervals = response;
   })
  }
+
+ public addEvent(type: number){
+  this.addEventDto.eventType = type;
+  this.addEventDto.renovationId = this.renovationEvenetDto.id;
+  this.addEventDto.type = this.renovationEvenetDto.type;
+  this.addEventDto.uuid = this.renovationEvenetDto.uuid;
+  this.addEventDto.time.setHours(this.addEventDto.time.getHours()+1)
+  this.renovationService.addEvent(this.addEventDto).subscribe(response =>{
+    
+  })
+ }
+
+ public updateEvent(){
+  this.mergeDto.startDate = this.selectedInterval.start;
+  this.mergeDto.endDate = this.selectedInterval.end;
+  this.renovationEvenetDto.roomName = this.productRoomName;
+  this.renovationEvenetDto.secondaryRoomId = this.mergeDto.secondaryId;
+  this.renovationEvenetDto.startAt = this.mergeDto.startDate;
+  this.renovationEvenetDto.endAt = this.mergeDto.endDate;   
+  this.renovationService.updateEvent(this.renovationEvenetDto).subscribe(response =>{
+    
+  })
+ }
+
 }
