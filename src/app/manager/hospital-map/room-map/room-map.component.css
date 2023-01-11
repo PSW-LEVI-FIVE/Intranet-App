@@ -182,9 +182,14 @@
 .navigation-container{
     width: auto;
     height: auto;
-    margin-right: 10%;
+    margin-right: 5%;
     align-items: center;
     font-size: 15px;
+    margin-left: 5%;
 }
 
-
+.navigation-text{
+    list-style-position: inside;
+    padding: 0;
+    border-left: solid 2px black;
+}

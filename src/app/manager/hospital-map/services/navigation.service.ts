@@ -243,12 +243,9 @@ export class NavigationService {
     let orientation = true;
     let direction = true;
     if(this.textPath[0].x === this.textPath[2].x) orientation = true;
-    else orientation = false;
-    
-    let sourceFloor = this.findRoomFloor(this.source);
-    if (sourceFloor === undefined) this.navigationTips.push("Go to floor: " + this.markedFloor?.id);
-      console.log(sourceFloor?.floor.id);
+    else orientation = false; 
       
+    this.navigationTips.push("Go to floor: " + this.markedFloor?.id); 
     for(let i = 0; i < this.textPath.length; i++){
       if( i>2 && this.textPath[i].y !== this.textPath[i-1].y && this.textPath[i].x !== this.textPath[i-2].x)
       {
@@ -264,13 +261,11 @@ export class NavigationService {
           this.defineMovingOrientation(orientation, this.textPath[i])
         }
       }
-
-      this.getDirections();
   }
 
   private isInContrastToRoomX(p: IterationBlock){
      const found = this.buildingScope.find( room => {
-        return room.room.xCoordinate < p.x && room.room.xCoordinate + room.room.width > p.x && p.y < room.room.yCoordinate;
+        return room.room.xCoordinate < p.x && room.room.xCoordinate + room.room.width > p.x && p.y < room.room.yCoordinate && room.floor === this.markedFloor;
       })
       if(found){
         this.makeTextPath(found.room.id);
@@ -279,7 +274,7 @@ export class NavigationService {
 
   private isInContrastToRoomY(p: IterationBlock){
     const found = this.buildingScope.find( room => {
-       return room.room.yCoordinate < p.y && room.room.yCoordinate + room.room.height > p.y && p.x < room.room.xCoordinate;
+       return room.room.yCoordinate < p.y && room.room.yCoordinate + room.room.height > p.y && p.x < room.room.xCoordinate && room.floor === this.markedFloor;
      })
      if(found){
        this.makeTextPath(found.room.id);
@@ -293,32 +288,23 @@ export class NavigationService {
     } 
   }
 
-  private getDirections(){
-    let textRoute = this.navigationTips;
-    //this.navigationTips = [];
-    this.textPath = [];
-    console.log(this.navigationTips);
-    //return textRoute
+  public getDirections(){
+    console.log(this.navigationTips)
+    return this.navigationTips;
   }
 
   private defineMovingOrientation(orientation:boolean, currentPosition: IterationBlock){
     if(orientation){
-      if(this.axis_movment)
-      {
-        console.log('po y-osi');
+      if(this.axis_movment){
         this.isInContrastToRoomY(currentPosition);
-      }else
-      {
-         console.log('po x-osi')
+      }else{
          this.isInContrastToRoomX(currentPosition);
       }
      }
       else  {
         if(this.axis_movment){
-         console.log('po x-osi');
           this.isInContrastToRoomX(currentPosition);
         }else{
-          console.log('po y-osi')
           this.isInContrastToRoomY(currentPosition);
         }
       }
@@ -327,19 +313,24 @@ export class NavigationService {
   private directionChange(currentPosition: IterationBlock, previousPosition:IterationBlock, direction: boolean){
     let foundRoom = this.foundRoomsId.pop();
     this.foundRoomsId.push(foundRoom as string);
-    if(foundRoom === undefined) foundRoom = this.buildingScope[0].room.id;
+    if(foundRoom === undefined) //foundRoom = this.buildingScope[0].room.id;
+    { const found = this.buildingScope.find( room => {
+      return room.floor === this.markedFloor;
+    })
+    foundRoom = found?.room.id;
+    }
     this.axis_movment = !this.axis_movment;
     if(direction)
     {
       if((currentPosition.y > previousPosition.y && currentPosition.x > previousPosition.x) || (currentPosition.y < previousPosition.y && currentPosition.x < previousPosition.x))
-        this.navigationTips.push("Turn right at: "+ foundRoom);
-      else this.navigationTips.push("Turn left at: "+ foundRoom);
+        this.navigationTips.push("Turn right at room: "+ foundRoom);
+      else this.navigationTips.push("Turn left at room: "+ foundRoom);
 
     }
     else{
       if((currentPosition.y > previousPosition.y && currentPosition.x > previousPosition.x) || (currentPosition.y < previousPosition.y && currentPosition.x < previousPosition.x))
-           this.navigationTips.push("Turn left at: "+ foundRoom);
-      else this.navigationTips.push("Turn right at: "+ foundRoom);
+           this.navigationTips.push("Turn left at room: "+ foundRoom);
+      else this.navigationTips.push("Turn right at room: "+ foundRoom);
     }
    
   }

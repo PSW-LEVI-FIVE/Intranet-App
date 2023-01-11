@@ -108,7 +108,8 @@ export class RoomMapComponent implements OnInit {
 
   private visualizeNavigation(floorId: string): void {
     this.navigationService.visualizeNavigation(this.svg, floorId);
-
+    this.textNavigation = this.navigationService.getDirections();
+    if(this.textNavigation.length !== 0) this.navigation = false;
   }
   private showInformationBasic(svg: any) {
     svg.on('dblclick', (d: any, i: any) => {
