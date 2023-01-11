@@ -19,7 +19,6 @@ export class DoctorStatisticsWorkloadComponent implements OnInit {
   selectedStart = new FormControl('', Validators.required);
   selectedEnd = new FormControl('', Validators.required);
   public doctors: IDoctor[] = [];
-  public statics: IWorkloadStatistic[] = [];
   public dates: string[] = [];
   public appointments: number[] = [];
   filteredOptions: Observable<IDoctor[]> | undefined;
@@ -76,7 +75,6 @@ export class DoctorStatisticsWorkloadComponent implements OnInit {
     }
     this.doctorsWorkloadStatisticsService.getTimeRangeStatistics(selectedDoctor.id, this.selectedStart.value, this.selectedEnd.value).subscribe(res => {
       res.forEach(statistics => {
-        console.log(statistics);
         this.dates.push(statistics.date);
         this.appointments.push(statistics.numOfAppointments);
       });
