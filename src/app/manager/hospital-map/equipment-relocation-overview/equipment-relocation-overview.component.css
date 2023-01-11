@@ -1,0 +1,13 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-row:hover {
+    background-color: rgb(143, 135, 135);
+  }
+  #object-1{ 
+    color: red;
+}
+#object-2{
+    color: green;
+}

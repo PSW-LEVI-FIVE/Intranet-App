@@ -15,7 +15,7 @@ export class SearchServiceService {
   constructor(private http:HttpClient) { }
 
   searchRooms(searchRoomsFloor:any,searchRoomDTO:any):Observable<any>{
-      return this.http.post<IRoom[]>(this.apiHost + 'api/intranet/rooms/search/' + searchRoomsFloor,searchRoomDTO,{headers: this.headers}) 
+      return this.http.post<any>(this.apiHost + 'api/intranet/rooms/search/' + searchRoomsFloor,searchRoomDTO,{headers: this.headers}) 
 
   }
 }
