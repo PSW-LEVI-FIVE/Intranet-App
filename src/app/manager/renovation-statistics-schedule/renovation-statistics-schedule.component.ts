@@ -26,6 +26,7 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
   ngOnInit(): void {
     this.createYearReviewChart();
     this.createAverageScheduleDurationChart();
+    this.createAverageStepCountChart();
 
     this.createStepsDurationMergeChart();
     this.createStepsDurationSplitChart();
@@ -49,7 +50,7 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
           {
             label: "SPLIT",
             data: [10,3,8,4,9,0,0,3,1,3,2,6],
-            borderColor: "#0978e0",
+            borderColor: "#1f4d78",
             fill: false
           }
         ]
@@ -58,7 +59,7 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
         plugins:
         {
           legend:
-          {
+          { 
             labels: { font: { size: 20 } }
           },
           title: {
@@ -87,11 +88,11 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
     this.chart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ["Merge", "Split", "Multi-Merge"],
+        labels: ["Merge", "Split"],
         datasets: [
           {
-            backgroundColor: ["#f5a30a","#0978e0", "#0be0d6"],
-            data: [2478,5267, 3762]
+            backgroundColor: ["#f5a30a","#1f4d78"],
+            data: [2478,5267]
           }
         ]
       },
@@ -100,7 +101,7 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
         legend: { display: false },
         title: {
           display: true,
-          text: 'Average time spent on scheduling'
+          text: 'Average TIME spent on scheduling'
         }
       }}
   });
@@ -111,10 +112,11 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
     this.chart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ["1. Renovation definition", "2. Choose time slot", "3. Enter data", "4. Confirm schedule"],
+        labels: ["1.Basic info", "2. Choose time slot", "3. Additional info", "4. Confirm schedule"],
         datasets: [
           {
-            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"],
+            backgroundColor: ["#f5a30a","#1f4d78","#0871a6","#4891b8"],
+            //backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"],
             data: [2,3,7,1]
           }
         ]
@@ -135,17 +137,17 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
     this.chart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ["1. Renovation definition", "2. Choose time slot", "3. Enter data", "4. Confirm schedule"],
+        labels: ["1.Basic info", "2. Choose time slot", "3. Additional info", "4. Confirm schedule"],
         datasets: [
           {
-            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"],
+            backgroundColor: ["#f5a30a","#1f4d78","#0871a6","#4891b8"],
             data: [2,10,6,1]
           }
         ]
       },
       options: {
         plugins :{
-        legend: { display: false },
+        legend: { display: false},
         title: {
           display: true,
           text: 'Average time spent per step for SPLITING'
@@ -159,19 +161,19 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
    new Chart(ctx, {
       type: 'doughnut',
     data: {
-      labels: ["1. Renovation definition", "2. Choose time slot", "3. Enter data", "4. Confirm schedule"],
+      labels: ["Started","1.Basic info", "2. Choose time slot", "3. Additional info", "4. Confirm schedule", "Canceled"],
       datasets: [{
         label: "Merge",
-        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"],
-        data: [2,3,7,1]
+        backgroundColor: ["#b1d0e0", "#f5a30a","#1f4d78","#0871a6","#4891b8","#5fa3c7"],
+        data: [2,3,7,1,9,2]
       }]
     },
     options: {
       plugins :{
-        legend: { display: false },
+        legend: { display: true, position: 'bottom' },
         title: {
           display: true,
-          text: 'Average time per step for MERGING'
+          text: 'Average count of visits per step for MERGING'
         }
       }
     }
@@ -183,23 +185,47 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
    new Chart(ctx, {
       type: 'doughnut',
     data: {
-      labels: ["1. Renovation definition", "2. Choose time slot", "3. Enter data", "4. Confirm schedule"],
+      labels: ["Started","1.Basic info", "2. Choose time slot", "3. Additional info", "4. Confirm schedule", "Canceled"],
       datasets: [{
         label: "Split",
-        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"],
-        data: [13,20,9,2]
+        backgroundColor: ["#b1d0e0", "#f5a30a","#1f4d78","#0871a6","#4891b8","#5fa3c7"],
+        data: [2,3,7,1,9,2]
       }]
     },
     options: {
       plugins :{
-        legend: { display: false },
+        legend: { display: true, position: 'bottom'},
         title: {
           display: true,
-          text: 'Average click per step for SPLITING'
+          text: 'Average count of visits per step for SPLITING'
         }
       }
     }
 });
+  }
+
+  public createAverageStepCountChart(){
+    let ctx = document.getElementById("bar-chart-step-count") as HTMLCanvasElement;
+    this.chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ["Merge", "Split"],
+        datasets: [
+          {
+            backgroundColor: ["#f5a30a","#1f4d78"],
+            data: [2478,5267, 3762]
+          }
+        ]
+      },
+      options: {
+        plugins :{
+        legend: { display: false },
+        title: {
+          display: true,
+          text: 'Average STEPS spent on scheduling'
+        }
+      }}
+  });
   }
 
 }
