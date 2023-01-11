@@ -33,6 +33,10 @@ import { SharedModule } from "../shared/shared.module";
 import { StatisticsComponent } from './statistics/statistics.component';
 import { MergeRoomsComponent } from './renovation/merge-rooms/merge-rooms.component';
 import { SplitRoomComponent } from './renovation/split-room/split-room.component';
+import {RoomOverviewComponent} from './hospital-map/room-overview/room-overview.component'
+import { RoomInformationComponent } from './hospital-map/room-information/room-information.component';
+
+
 
 
 const routes: Routes = [
@@ -75,10 +79,26 @@ const routes: Routes = [
         path: 'floor-map/:id',
         component: FloorMapComponent
       },
+
       {
         path: 'room-map/:id',
         component: RoomMapComponent
       },
+
+      { 
+        path: 'room-map/:id', 
+        component: RoomMapComponent ,
+        children:[
+          {path:'view', component:RoomInformationComponent}
+        ]
+
+      },
+
+      {
+        path:'room-info/:id/:fid',
+        component: RoomInformationComponent
+      },
+      
       {
         path: 'create-building',
         component: CreateBuildingComponent
@@ -99,10 +119,12 @@ const routes: Routes = [
         path: 'create-room',
         component: CreateMapRoomComponent
       },
+
       {
         path: 'doctors-leave-statistics',
         component: DoctorStatisticsLeavesComponent
       },
+
       {
         path: 'create-commercials',
         component: CreateCommercialsComponent
@@ -114,7 +136,9 @@ const routes: Routes = [
       {
         path: 'statistics',
         component: StatisticsComponent
+
       },
+
       {
         path: 'merge-rooms/:floorId',
         component: MergeRoomsComponent
@@ -122,6 +146,16 @@ const routes: Routes = [
       {
         path: 'split-room/:floorId',
         component: SplitRoomComponent
+      },
+      { 
+        path: 'doctors-leave-statistics', 
+        component: DoctorStatisticsLeavesComponent
+      },
+
+      {
+        path:'room-schedule/:id',
+        component: RoomOverviewComponent
+
       }
     ]
 

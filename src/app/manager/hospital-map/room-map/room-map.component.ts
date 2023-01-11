@@ -20,52 +20,56 @@ import { NavigationService } from '../services/navigation.service';
 })
 export class RoomMapComponent implements OnInit {
 
-  data:any;
-  svg:any;
-  rooms:any;
-  roomsText:any;
-  floorId :any 
-  selected:any
-  enableEditing : boolean = false;
+  data: any;
+  svg: any;
+  rooms: any;
+  roomsText: any;
+  floorId: any
+  selected: any
+  enableEditing: boolean = false;
   public selectedRoomModel: IRoomModel | undefined;
+  selectedObjects: any;
+  roomObject: any
   searchedEquipment: Equipment[] = [];
   searchedRooms: Room[] = [];
   searchEquipmentInput: Equipment = {} as Equipment;
   searchFloorInput: Equipment = {} as Equipment;
   roomsOnFloor: Room[] = [];
-  
+  textNavigation: string[] = [];
+  navigation: boolean = true;
+
   constructor(
-    private roomMapService:RoomMapService, 
-    private buildingMapService:BuildingMapService, 
-    private route: ActivatedRoute, 
-    private router:Router, 
+    private roomMapService: RoomMapService,
+    private buildingMapService: BuildingMapService,
+    private route: ActivatedRoute,
+    private router: Router,
     private toastService: ToastrService,
     private equipmentService: EquipmentService,
     private roomService: RoomService,
     private navigationService: NavigationService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.floorId = params['id'];
-      console.log(this.floorId)
       this.searchFloorInput.roomId = params['id']
       this.checkNumberOfRooms()
     });
-    
-    this.svg  = this.buildingMapService.createSVG();
-    
+
+    this.svg = this.buildingMapService.createSVG();
+
     this.route.params.subscribe((params: Params) => {
       this.roomMapService.getRoomsByFloor(params['id']).subscribe(res => {
         this.data = res;
         console.log(this.data)
-        this.svg  = this.buildingMapService.createSVG();
-        this.rooms = this.roomMapService.createRectangles(this.svg,this.data)
+        this.svg = this.buildingMapService.createSVG();
+        this.rooms = this.roomMapService.createRectangles(this.svg, this.data)
         this.roomsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)
 
         this.showInformation(this.rooms);
         this.markRoom(this.rooms);
 
+        this.textNavigation = [];
         this.showDestinationRoom();
         this.visualizeNavigation(params['id']);
       })
@@ -76,9 +80,9 @@ export class RoomMapComponent implements OnInit {
 
   public toggleCreate(): void {
     const createRoom = this.roomMapService.handleRoomGeneration(this.data);
-    if(createRoom) {
+    if (createRoom) {
       this.route.params.subscribe((params: Params) => createRoom.mapFloorId = params['id']);
-      this.router.navigate(['manager/create-room'], {state: {data: createRoom}});
+      this.router.navigate(['manager/create-room'], { state: { data: createRoom } });
     } else {
       this.toastService.info('Maximum number of rooms reached');
     }
@@ -86,75 +90,75 @@ export class RoomMapComponent implements OnInit {
 
   private showDestinationRoom(): void {
     const room = this.navigationService.getDestination();
-    if(room) d3.select('#id'+ room.id).style("fill",'#d7ee00');
+    if (room) d3.select('#id' + room.id).style("fill", '#d7ee00');
   }
 
   private visualizeNavigation(floorId: string): void {
     this.navigationService.visualizeNavigation(this.svg, floorId);
+
   }
 
-  showInformation(svg:any){
-    svg.on('dblclick',(d:any, i:any) => {
-    
-      
+  showInformation(svg: any) {
+    svg.on('dblclick', (d: any, i: any) => {
       this.roomMapService.getByID(i.id).subscribe(res => {
-        this.selectedRoomModel = res;  
-        this.enableEditing = false;
+        this.selectedRoomModel = res;
+        this.router.navigate(['manager/room-info/' + this.floorId + '/' + i.id]);
       })
+    })
+  }
 
-      this.roomService.getRoomEquipment(i.id).subscribe(res =>{
-        this.searchedEquipment = res;
-        this.searchEquipmentInput.roomId = i.id;
-        this.searchEquipmentInput.quantity = 0;
-      })
+  markRoom(svg: any) {
+    svg.on('click', function (this: any, d: any, i: any,) {
+      d3.selectAll("rect").style("fill", '#d7d5db');
+      d3.select(this).style("fill", "#9e91bd");
+    })
+  }
+
+  public editForm() {
+    if (this.selectedRoomModel) this.enableEditing = true;
+  }
+
+  public updateRoom(): void {
+    if (this.selectedRoomModel) {
+      this.roomMapService.updateRoom(this.selectedRoomModel).subscribe(() => {
+        this.toastService.success('Successfully updated room name');
+      });
+    }
+  }
+
+
+  highlight(id: any) {
+    d3.selectAll("rect").style("fill", 'white')
+    d3.select("#id" + id).style("fill", '#d7d5db')
+
+  }
+
+  openRoomEquipmentSearch(id: any) {
+    this.roomMapService.getByID(id).subscribe(res => {
+      this.roomObject = res;
 
     })
-}
-
-markRoom(svg:any){
-  svg.on('click', function(this:any,d:any,i:any,) { 
-    d3.selectAll("rect").style("fill",'#d7d5db');
-    d3.select(this).style("fill","#9e91bd")})
-}
-
-public editForm(){
-  if(this.selectedRoomModel) this.enableEditing = true;
-}
-
-public updateRoom(): void {
-  if(this.selectedRoomModel){
-    this.roomMapService.updateRoom(this.selectedRoomModel).subscribe(() => {
-      this.toastService.success('Successfully updated room name');
-    });
   }
-}
-
-
- highlight(id:any){
-  d3.selectAll("rect").style("fill",'white')
-  
-  d3.select("#id"+id).style("fill",'#d7d5db')
-
-}
- click(svg:any){
- 
+  roomSchedule(roomId: number) {
+    this.router.navigate(['manager/room-schedule/' + roomId]);
   }
 
-  public searchEquipmentInRoom(){
-    if(this.searchEquipmentInput.name == undefined || this.searchEquipmentInput.name == "") this.searchEquipmentInput.name = "0";
+  public searchEquipmentInRoom() {
+    if (this.searchEquipmentInput.name == undefined || this.searchEquipmentInput.name == "") this.searchEquipmentInput.name = "0";
 
-     this.equipmentService.searchEquipmentInRoom(this.searchEquipmentInput).subscribe(res =>{
+    this.equipmentService.searchEquipmentInRoom(this.searchEquipmentInput).subscribe(res => {
       this.searchedEquipment = res;
-      if(this.searchEquipmentInput.name == "0") this.searchEquipmentInput.name = "";
-     })
+      if (this.searchEquipmentInput.name == "0") this.searchEquipmentInput.name = "";
+    })
   }
 
-  public searchRoomsByFloorContainigEquipment(){
-    if(this.searchFloorInput.name == undefined || this.searchFloorInput.name == "") this.searchFloorInput.name = "0";
-    this.equipmentService.searchRoomsByFloorContainigEquipment(this.searchFloorInput).subscribe(res =>{
-       this.searchedRooms = res;
-       if(this.searchFloorInput.name == "0") this.searchFloorInput.name = "";
-    }) 
+  public searchRoomsByFloorContainigEquipment() {
+    if (this.searchFloorInput.name == undefined || this.searchFloorInput.name == "") this.searchFloorInput.name = "0";
+    this.equipmentService.searchRoomsByFloorContainigEquipment(this.searchFloorInput).subscribe(res => {
+      this.searchedRooms = res;
+      if (this.searchFloorInput.name == "0") this.searchFloorInput.name = "";
+    })
+
   }
 
   public checkNumberOfRooms(){
