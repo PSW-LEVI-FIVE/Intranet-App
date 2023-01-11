@@ -1,0 +1,104 @@
+<mat-tab-group>
+    <mat-tab label="Year">  
+        <form class="example-form">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Doctor</mat-label>
+              <input type="text"
+                     placeholder="Pick one"
+                     aria-label="Doctor"
+                     matInput
+                     [formControl]="myControl"
+                     [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let option of filteredOptions|async" [value]="option">
+                    {{option.id}} - {{option.name}} {{option.surname}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <button mat-icon-button (click)="showYearStats(this.myControl.value)">
+                <mat-icon matTooltip="Show stats">arrow_forward</mat-icon>
+            </button>
+        </form>
+          <div id="divChart">
+            <canvas id="myChart" style="font-size:100px;"></canvas>
+        </div>
+    </mat-tab>
+    <mat-tab label="Month">
+        <form class="example-form">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Doctor</mat-label>
+                <input type="text"
+                       placeholder="Pick one"
+                       aria-label="Doctor"
+                       matInput
+                       [formControl]="myControl"
+                       [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let option of filteredOptions|async" [value]="option">
+                      {{option.id}} - {{option.name}} {{option.surname}}
+                  </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Month</mat-label>
+                    <mat-select [formControl]="selectedMonth">
+                      <mat-option value="1">January</mat-option>
+                      <mat-option value="2">February</mat-option>
+                      <mat-option value="3">March</mat-option>
+                      <mat-option value="4">April</mat-option>
+                      <mat-option value="5">May</mat-option>
+                      <mat-option value="6">June</mat-option>
+                      <mat-option value="7">July</mat-option>
+                      <mat-option value="8">August</mat-option>
+                      <mat-option value="9">September</mat-option>
+                      <mat-option value="10">October</mat-option>
+                      <mat-option value="11">November</mat-option>
+                      <mat-option value="12">December</mat-option>
+                    </mat-select>
+            </mat-form-field>
+            <button mat-icon-button (click)="showMonthStats(this.myControl.value)">
+                <mat-icon matTooltip="Show stats">arrow_forward</mat-icon>
+            </button>
+        </form>
+        <div id="divChart">
+            <canvas id="myChart" style="font-size:100px;"></canvas>
+        </div>
+    </mat-tab>
+    <mat-tab label="Time range">
+        <form class="example-form">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Doctor</mat-label>
+                <input type="text"
+                       placeholder="Pick one"
+                       aria-label="Doctor"
+                       matInput
+                       [formControl]="myControl"
+                       [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let option of filteredOptions|async" [value]="option">
+                      {{option.id}} - {{option.name}} {{option.surname}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            <mat-form-field appearance="fill" class="example-full-width">
+                <mat-label>Enter a date range</mat-label>
+                <div class="date-container">
+                    <mat-date-range-input [rangePicker]="picker">
+                    <input matStartDate [formControl]="selectedStart" placeholder="Start date">
+                    <input matEndDate [formControl]="selectedEnd" placeholder="End date">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </div>
+                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            </mat-form-field>
+            <button mat-icon-button (click)="showRangeStats(this.myControl.value)">
+                <mat-icon matTooltip="Show stats">arrow_forward</mat-icon>
+            </button>
+        </form>
+        <div id="divChart">
+            <canvas id="myChart" style="font-size:100px;"></canvas>
+        </div>
+    </mat-tab>
+  </mat-tab-group>
+
