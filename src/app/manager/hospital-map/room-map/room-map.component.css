@@ -131,7 +131,9 @@
 }
 
 .option-container{
-    display: flex;
+    display:block;
+    margin-left: 200px;
+    
 }
 
 #merge-button{
