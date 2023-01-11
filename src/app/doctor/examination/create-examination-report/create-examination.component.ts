@@ -33,15 +33,20 @@ export class CreateExaminationComponent implements OnInit {
     medicine: new FormControl('')
   })
   prescriptionFormGroup = new FormGroup({})
+  public searchText: FormControl = new FormControl()
+
+
+  selectedResult: number | null = null
+
 
   startedReport: any = null
   reportUuid: string = '';
-
   symptoms: Symptom[] = []
   allSymptoms: Symptom[] = []
   prescriptions: Prescription[] = []
   allMedicines: Medicine[] = []
   addOnBlur = true;
+  searchResults: any[] = [];
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
   isLinear = false
@@ -73,7 +78,15 @@ export class CreateExaminationComponent implements OnInit {
       this.startedReport = res
     })
   }
-
+  emitSearch() {
+    const dto = {
+      Content: this.searchText.value
+    }
+    this.examinationReportService.searchReports(dto).subscribe(res => {
+      this.searchResults = res;
+      console.log(res);
+    })
+  }
   sendEvent(type: number) {
     const dto: ExaminationReportEventDTO = {
       eventType: type,
@@ -81,8 +94,8 @@ export class CreateExaminationComponent implements OnInit {
       uuid: this.reportUuid,
       examinationReportId: this.startedReport.id
     }
-    
-    this.examinationReportService.sendEvent(dto).subscribe(res=>{
+
+    this.examinationReportService.sendEvent(dto).subscribe(res => {
       this.reportUuid = res.uuid;
       this.startedReport = res
     })
@@ -166,6 +179,14 @@ export class CreateExaminationComponent implements OnInit {
       return prescription
     })
 
+  }
+
+  selectResult(id: number) {
+    if (this.selectedResult == id)
+      this.selectedResult = null
+    else
+      this.selectedResult = id
+    console.log(id, this.selectedResult)
   }
 
 }
