@@ -36,6 +36,8 @@ import { SplitRoomComponent } from './renovation/split-room/split-room.component
 import {RoomOverviewComponent} from './hospital-map/room-overview/room-overview.component'
 import { RoomInformationComponent } from './hospital-map/room-information/room-information.component';
 import { DoctorStatisticsWorkloadComponent } from './doctor-statistics-workload/doctor-statistics-workload.component';
+import { SchedulingAppointmentStatisticsModule } from './scheduling-appointment-statistics/scheduling-appointment-statistics.module';
+import { SchedulingAppointmentStatisticsComponent } from './scheduling-appointment-statistics/scheduling-appointment-statistics.component';
 
 
 const routes: Routes = [
@@ -133,6 +135,10 @@ const routes: Routes = [
         component: ExaminationReportStatisticsComponent
       },
       {
+        path: 'scheduling-appointment-statistics',
+        component: SchedulingAppointmentStatisticsComponent
+      },
+      {
         path: 'statistics',
         component: StatisticsComponent
 
@@ -172,7 +178,7 @@ const routes: Routes = [
     StatisticsComponent,
     MergeRoomsComponent,
     SplitRoomComponent,
-    DoctorStatisticsWorkloadComponent
+    DoctorStatisticsWorkloadComponent,
   ],
   exports: [RouterModule],
   imports: [
@@ -183,6 +189,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     ExaminationReportStatisticsModule,
+    SchedulingAppointmentStatisticsModule,
     SharedModule
   ]
 })

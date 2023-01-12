@@ -1,0 +1,53 @@
+.graph-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: auto;
+    gap: 20px;
+    padding: 24px 0px;
+}
+
+.canvas-wrapper { 
+    position: relative;
+}
+
+.canvas-wrapper {
+    max-height: 400px;
+    min-width: 45%;
+}
+
+.full-canvas-wrapper {
+    position: relative;
+    min-width: calc(90% + 20px);
+    max-width: calc(90% + 20px);
+    max-height: 400px;
+    min-height: 400px;
+}
+
+.button {
+    background-color: #333399;
+    border: none;
+    color: white;
+    width: fit-content;
+    padding: 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 40px;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+
+  .horizontalSpace{
+    width: 50px;
+    display: inline-block;
+}
+
+.verticalSpace{
+    height: 50px;
+}
+
+table, th, td {
+    border: 1px solid black;
+  }
+  

@@ -3,5 +3,3 @@ export interface StepStatsDTO {
     reportAverage: number,
     prescriptionAverage: number
 }
-
-
