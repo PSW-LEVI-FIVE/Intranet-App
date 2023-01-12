@@ -1,10 +1,7 @@
 <div>
     <div style="font-size: 12px">
     <mat-form-field appearance="outline" fxFlex="80" style="height:50px; margin-right:20px">
-<<<<<<< HEAD
 
-=======
->>>>>>> 68cc2e7 (refactored code)
         <mat-select [(ngModel)]="searchRoomDTO.roomType" (selectionChange)="changedRoomType(option)" placeholder="Choose room type">
             <mat-option [value]="option" *ngFor="let option of availableRoomTypes"><span>{{getOptionLabel(option)}}</span></mat-option>
             
@@ -18,11 +15,8 @@
 
 <ul class="list">
     <li *ngFor="let r of rooms" id="r.roomNumber" (click)="highlightRoom(r.id)">
-<<<<<<< HEAD
 {{r.id}} {{r.roomNumber}} <button style="margin-left:100px" (click)="openSearchForEquipment(r.id)">Room equipment</button>
 
-=======
->>>>>>> 68cc2e7 (refactored code)
     </li>
 </ul>
 </section>
