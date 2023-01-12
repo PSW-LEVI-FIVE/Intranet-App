@@ -21,6 +21,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -48,8 +49,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatCheckboxModule,
     MatStepperModule,
     MatChipsModule,
-    MatRadioModule
-
+    MatRadioModule,
+    MatDialogModule
   ],
   exports: [
     CommonModule,
@@ -76,7 +77,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatCheckboxModule,
     MatStepperModule,
     MatChipsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule { }

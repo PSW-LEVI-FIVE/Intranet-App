@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY } from 'rxjs';
+import { ReasonDialogComponent } from './dialogs/reason-dialog.component';
 import { TeamBuildingInvitation } from './model/invitation.model';
 import { TeamBuildingService } from './services/team-building.service';
 
@@ -15,7 +17,8 @@ export class TeamBuildingComponent implements OnInit {
 
   constructor(
     private readonly teamBuildingService: TeamBuildingService,
-    private readonly toast: ToastrService
+    private readonly toast: ToastrService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -42,9 +45,27 @@ export class TeamBuildingComponent implements OnInit {
       })
   }
 
-  declineInvitation(id: number) {
-    this.teamBuildingService.acceptInvitation(id)
+  openDialog(id: number): void {
+    const dialogRef = this.dialog.open(ReasonDialogComponent, {
+      width: '500px',
+      height: '200px',
+      data: { reason: "" },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === undefined) return
+      if (result.trim().length == 0) {
+        this.toast.error("There should be a reason for declining!")
+        return
+      }
+      this.declineInvitation(id, result)
+    });
+  }
+
+  declineInvitation(id: number, reason: string) {
+    this.teamBuildingService.declineInvitation(id, reason)
       .pipe(catchError(res => {
+        console.log(res)
         this.toast.error("Declining invitation failed!")
         return EMPTY
       }))
