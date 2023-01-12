@@ -53,13 +53,12 @@ export class TeamBuildingComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined) {
-        if (result.trim().length == 0) {
-          this.toast.error("There should be a reason for declining!")
-          return
-        }
-        this.declineInvitation(id, result)
+      if (result === undefined) return
+      if (result.trim().length == 0) {
+        this.toast.error("There should be a reason for declining!")
+        return
       }
+      this.declineInvitation(id, result)
     });
   }
 
