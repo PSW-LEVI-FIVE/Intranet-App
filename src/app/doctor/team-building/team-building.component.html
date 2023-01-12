@@ -1,0 +1,12 @@
+<div class="outer">
+    <div class="team-buildings" *ngIf="invitations.length > 0">
+        <app-team-building-card *ngFor="let invitation of invitations" [invitation]="invitation"
+            (acceptedInvitation)="acceptInvitation($event)"
+            (declinedInvitation)="declineInvitation($event)"></app-team-building-card>
+    </div>
+    <div class="empty" *ngIf="invitations.length == 0">
+        <mat-icon aria-hidden="false" class="mat-icon-rtl-mirror" aria-label="Example home icon"
+            fontIcon="calendar_today"></mat-icon>
+        <h2>No Invitations!</h2>
+    </div>
+</div>

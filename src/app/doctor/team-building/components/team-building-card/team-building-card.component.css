@@ -1,0 +1,86 @@
+.card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: 250px;
+    width: 400px;
+    border: 1px solid lightgray;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #303434;
+    color: white;
+    position: relative;
+}
+
+.card-wrapper .mat-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.tooltip {
+    position: absolute;
+    top: 0;
+    right: -80%;
+    display: none;
+    background: black;
+    color: white;
+    max-width: 300px;
+    font-size: 20px;
+    text-overflow: wrap;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 1.5;
+    z-index: 100;
+}
+
+
+.card-wrapper .mat-icon:hover + .tooltip {
+    display: block;
+} 
+
+
+.title {
+    width: 100%;
+    flex: 1;
+    font-size: 22px;
+    text-align: center;
+    max-width: 100%;
+    text-overflow: wrap;
+    line-height: 1.5;
+}
+
+.date {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    text-align: left;
+    flex: 1;
+}
+
+
+.buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+.buttons button:first-child {
+    background: #3da465!important
+}
+
+.buttons button {
+    width: 150px;
+}

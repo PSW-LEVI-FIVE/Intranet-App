@@ -1,0 +1,16 @@
+<div class="card-wrapper">
+    <div class="date">
+        <span>{{formatDate(invitation.startAt)}}</span>
+        <span>-</span>
+        <span>{{formatDate(invitation.endAt)}}</span>
+    </div>
+    <div class="title">
+        {{invitation.title}}
+    </div>
+    <div class="buttons">
+        <button mat-raised-button color="primary" (click)="acceptInvitation(invitation.id)">Accept</button>
+        <button mat-raised-button (click)="declineInvitation(invitation.id)">Decline</button>
+    </div>
+    <mat-icon aria-hidden="false" class="mat-icon-rtl-mirror" aria-label="Example home icon" fontIcon="info"></mat-icon>
+    <div class="tooltip">{{invitation.description}}</div>
+</div>
