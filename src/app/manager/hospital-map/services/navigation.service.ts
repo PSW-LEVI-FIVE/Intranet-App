@@ -244,8 +244,9 @@ export class NavigationService {
     let direction = true;
     if(this.textPath[0].x === this.textPath[2].x) orientation = true;
     else orientation = false; 
-      
-    this.navigationTips.push("Go to floor: " + this.markedFloor?.id); 
+
+    if(this.findRoomFloor(this.source) === undefined)  this.navigationTips.push("Go to floor: " + this.markedFloor?.id); 
+    
     for(let i = 0; i < this.textPath.length; i++){
       if( i>2 && this.textPath[i].y !== this.textPath[i-1].y && this.textPath[i].x !== this.textPath[i-2].x)
       {
