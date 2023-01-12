@@ -4,24 +4,6 @@
       <form>
         <ng-template matStepLabel>Choose rooms for MERGING<br> and define time slot</ng-template>
         <div>
-          <mat-form-field appearance="fill" class="form-data">
-            <mat-label>Select first room</mat-label>
-                <mat-select [(ngModel)]="mergeDto.mainRoomId" (selectionChange)="checkFirstStepInput()" name="mainRoomId">
-                  <mat-option *ngFor="let room of floorRooms" [value]="room.id" >{{room.id}} - {{room.roomNumber}}
-                  </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field appearance="fill" class="form-data">
-            <mat-label>Select second room</mat-label>
-            <mat-select [(ngModel)]="mergeDto.secondaryId" (selectionChange)="checkFirstStepInput()" name="secondaryId">
-              <mat-option *ngFor="let room of floorRooms" [value]="room.id" > {{room.id}} -{{room.roomNumber}}
-              </mat-option>
-            </mat-select>
-            </mat-form-field>
-        </div>
-        <div>
             <mat-form-field appearance="fill" class="form-data">
               <mat-label>Enter a date range</mat-label>
               <mat-date-range-input [rangePicker]="rangePicker">
@@ -100,7 +82,7 @@
           <ng-template matStepLabel>Confirm data for merging</ng-template>
           <div>
            <div class="data-container">
-            <label class="data-view">Selected rooms for merging: {{mergeDto.mainRoomId}} and {{mergeDto.secondaryId}}</label>
+            <label class="data-view">Selected rooms for merging: {{mergeDto.mainRoomId}} and {{mergeDto.secondaryIds}}</label>
            </div>
            <div class="data-container">
             <label class="data-view">Selected interval: {{selectedInterval.start}} - {{selectedInterval.end}}</label>

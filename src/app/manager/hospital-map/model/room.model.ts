@@ -7,8 +7,20 @@ export interface IRoom{
     room: {
         roomNumber: string,
         area: number
-        
     }
+    secondaryCoordinates: Coordinates[];
+}
+
+export interface Coordinates {
+    xCoordinate: number;
+    yCoordinate: number;
+    width: number;
+    height: number;    
+}
+
+export interface RoomArea {
+    roomId: number;
+    areaStrokes: {x: number; y:number}[];
 }
 
 export interface IRoomModel {
