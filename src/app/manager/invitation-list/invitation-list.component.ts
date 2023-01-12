@@ -27,13 +27,12 @@ export class InvitationListComponent implements OnInit {
   ngOnInit(): void {
     this.invitationService.getAllInvitationRequests().subscribe(res => {
       this.invitationRequests = res
-        console.log(this.invitationRequests)
       this.invitationRequests.forEach((leave) => {
         leave.startAt = leave.startAt.split('T')[0]
         leave.endAt = leave.endAt.split('T')[0]
         this.invitationService.getDoctorById(leave.doctorId).subscribe(res => {
           this.doctor = res
-          leave.doctorName = this.doctor.name +" "+ this.doctor.surname
+          leave.doctorName = this.doctor.name + " " + this.doctor.surname
 
         })
 

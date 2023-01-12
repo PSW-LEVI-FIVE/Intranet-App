@@ -8,7 +8,7 @@ export interface IRoomAppointment {
   roomId: number | null;
   startAt: any;
   endAt: any;
-  type:Type;
+  type: Type;
 
 }
 export enum Type {
@@ -28,10 +28,10 @@ export class RoomOverviewComponent implements OnInit {
 
 
 
-  displayedColumns: string[] = ['start_date', 'end_date','appointment_type'];
-  
-  roomId:number = 0
-  dataSource:IRoomAppointment[]=[]
+  displayedColumns: string[] = ['start_date', 'end_date', 'appointment_type'];
+
+  roomId: number = 0
+  dataSource: IRoomAppointment[] = []
 
   Type = Type
   constructor(private http: HttpClient,
@@ -52,9 +52,9 @@ export class RoomOverviewComponent implements OnInit {
 
       })
     })
- 
 
-    
+
+
 
   }
 

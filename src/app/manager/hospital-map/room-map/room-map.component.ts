@@ -112,7 +112,6 @@ export class RoomMapComponent implements OnInit {
     if (room) d3.select('#id' + room.id).style('fill', '#d7ee00');
   }
 
-
   private visualizeNavigation(floorId: string): void {
     this.navigationService.visualizeNavigation(this.svg, floorId);
 
