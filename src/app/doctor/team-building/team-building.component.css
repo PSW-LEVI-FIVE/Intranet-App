@@ -1,0 +1,45 @@
+.outer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    max-width: 100%;
+}
+.team-buildings {
+    min-width: calc(100% - 120px);
+    min-height: calc(100% - 120px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 60px;
+}
+
+.team-buildings > * {
+    max-height: 260px;
+}
+
+.empty {
+    min-width: 400px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+    align-items: center;
+}
+
+
+.empty .mat-icon {
+    width: 250px!important;
+    height: 250px!important;
+    font-size: 250px;
+}
+
+.empty h2 {
+    font-size: 40px;
+}
+
+.no-buildings {
+    justify-content: center!important;
+    align-items: center!important;
+}

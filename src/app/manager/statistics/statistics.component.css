@@ -6,6 +6,8 @@
     padding-top: 150px;
     margin: auto;
     gap: 50px;
+    align-items: center;
+    justify-content: center;
 }
 
 .card {

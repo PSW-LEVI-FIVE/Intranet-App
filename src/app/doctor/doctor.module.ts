@@ -30,6 +30,8 @@ import { CreateConsiliumComponent } from './consiliums/components/create-consili
 import { CreateforFormComponent } from './appointments/createfor-form/createfor-form.component';
 import { ViewBloodOrdersComponent } from './blood-orders/components/view-blood-orders/view-blood-orders.component';
 import { ViewBloodSuppliesComponent } from './blood-orders/components/view-blood-supplies/view-blood-supplies.component';
+import { TeamBuildingComponent } from './team-building/team-building.component';
+import { TeamBuildingModule } from './team-building/team-building.module';
 
 const routes = [
   {
@@ -116,6 +118,10 @@ const routes = [
         path: 'blood-supply-view',
         component: ViewBloodSuppliesComponent,
       },
+      {
+        path: 'team-buildings',
+        component: TeamBuildingComponent
+      }
     ]
   }
 ]
@@ -123,7 +129,8 @@ const routes = [
 
 @NgModule({
   declarations: [
-    DoctorComponent
+    DoctorComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -136,6 +143,7 @@ const routes = [
     BloodConsumptionModule,
     ExaminationModule,
     ConsiliumsModule,
+    TeamBuildingModule
   ],
   exports: [RouterModule]
 })
