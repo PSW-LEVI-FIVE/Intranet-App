@@ -2,10 +2,11 @@
 <div class="container">
 
   <div class="navigation-container" *ngIf="!navigation">
-    <label style="font-size: 18px;">Navigation</label>
-    <ul *ngFor="let item of textNavigation" style="size: 500;">
-      <li>{{item}}</li>
-    </ul>
+    <label style="font-size: 18px;">Navigation tips:</label>
+    <mat-list *ngFor="let item of textNavigation" style="size: 500;">
+      <mat-list-item *ngIf="item === textNavigation[0] || item === textNavigation.slice(-1)[0]"><mat-icon> location_on</mat-icon>{{item}}</mat-list-item>
+      <mat-list-item *ngIf="item !== textNavigation[0] && item !== textNavigation.slice(-1)[0]" class="navigation-text">{{item}}</mat-list-item>
+    </mat-list>
   </div>
 
   <div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 800px;">
@@ -53,6 +54,7 @@
       </mat-tab>
     </mat-tab-group>
 
+<<<<<<< HEAD
   </div>
   <div *ngIf="selectedRoomModel">
     <h1 class="card-title"> Room information </h1>
@@ -77,3 +79,4 @@
 </div>
 
   </div>
+</div>

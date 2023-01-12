@@ -132,10 +132,8 @@
 
 
 .option-container{
-    display:block;
+    display: inline-block;
     margin-left: 200px;
-    
-
 }
 
 #merge-button{
