@@ -99,7 +99,7 @@ export class SplitRoomComponent implements OnInit {
   }
   else this.nextStep = false;*/
   this.createEventDto.mainRoomId = this.splitDto.mainRoomId;
-     this.createEventDto.type = 0;
+     this.createEventDto.type = 1;
      this.renovationService.createEvent(this.createEventDto).subscribe(resposne=>{
         this.renovationEventDto = resposne;
      })
@@ -148,6 +148,7 @@ public addEvent(type: number){
   this.renovationEventDto.startAt = this.splitDto.startDate;
   this.renovationEventDto.endAt = this.splitDto.endDate;   
   this.renovationService.updateEvent(this.renovationEventDto).subscribe(response =>{
+    this.router.navigate([`manager/room-map/${this.floorId}`]);
     
   })
  }

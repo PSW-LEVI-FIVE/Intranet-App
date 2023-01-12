@@ -1,6 +1,6 @@
 export interface AvgStepTimeDTO {
     basicInfo: number,
     timeChosen: number,
-    additionalInfo: number,
+    additionInfo: number,
     finished: number
 }

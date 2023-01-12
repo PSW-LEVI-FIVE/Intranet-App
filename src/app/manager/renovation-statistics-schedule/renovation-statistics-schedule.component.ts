@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, ChartData } from 'chart.js';
+import { thresholdScott } from 'd3';
 import { AvgStepCountDTO } from './dtos/avg-step-count.dto';
+import { RenovationStatisticsService } from './services/renovation-statistics.service';
 
 @Component({
   selector: 'app-renovation-statistics-schedule',
@@ -9,10 +11,22 @@ import { AvgStepCountDTO } from './dtos/avg-step-count.dto';
 })
 export class RenovationStatisticsScheduleComponent implements OnInit {
 
-  constructor() { }
+  constructor(private renovationStatisticsService: RenovationStatisticsService) { }
 
-  succUnsuccLoading = true
   public chart?: Chart;
+  averageScheduleDurationLoading = true
+  averageStepCountLoading = true
+  averageStepMergeLoading = true
+  averageStepSplitLoading = true
+  stepsDurationSplitLoading = true
+  stepsDurationMergeLoading = true
+  tableLoader = true;
+  minTimeMerge: any;
+  maxTimeMerge: any;
+  avgTimeMerge: any;
+  minTimeSplit: any;
+  maxTimeSplit: any;
+  avgTimeSplit: any;
 
   succUnsuccOptions: any = {
     plugins: {
@@ -25,7 +39,7 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.createYearReviewChart();
+    this.createTableView();
     this.createAverageScheduleDurationChart();
     this.createAverageStepCountChart();
 
@@ -35,69 +49,37 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
     this.creatAverageStepSplitChart();
   }
 
-  public createYearReviewChart(){
-    var ctx = document.getElementById("line-chart") as HTMLCanvasElement;
-    this.chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May","Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [
-          {
-            label: "MERGE",
-            data: [0,5,7,7,4,8,9,1,2,0,9,4],
-            borderColor: "#f5a30a",
-            fill: false
-          },
-          {
-            label: "SPLIT",
-            data: [10,3,8,4,9,0,0,3,1,3,2,6],
-            borderColor: "#1f4d78",
-            fill: false
-          }
-        ]
-      },
-      options: {
-        plugins:
-        {
-          legend:
-          { 
-            labels: { font: { size: 20 } }
-          },
-          title: {
-            display: true,
-            position: 'top',
-            text: 'Amount of successufull renovation in year'
-          },
-        },
-        scales:
-        {
-          y:
-          {
-            ticks:
-            {
-              callback: function (value: any) { if (Number.isInteger(value)) { return value; } return null; },
-            },
-            beginAtZero: true
-          }
-        }
-      }
-  });
+  public createTableView(){
+    this.renovationStatisticsService.getMinStepTimeMerge().subscribe(response => {
+       this.minTimeMerge = response;
+    })
+    this.renovationStatisticsService.getMaxStepTimeMerge().subscribe(response => {
+      this.maxTimeMerge = response;
+    })
+    this.renovationStatisticsService.getMinStepTimeSplit().subscribe(response => {
+       this.minTimeSplit = response;
+    })
+    this.renovationStatisticsService.getMaxStepTimeSplit().subscribe(response => {
+      this.maxTimeSplit = response;
+    })
+
   }
 
   public createAverageScheduleDurationChart(){
-    let ctx = document.getElementById("bar-chart-schedule-duration") as HTMLCanvasElement;
-    this.chart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ["Merge", "Split"],
-        datasets: [
+    this.renovationStatisticsService.getAverageTime().subscribe(response =>{
+      let ctx = document.getElementById("bar-chart-schedule-duration") as HTMLCanvasElement;
+      this.chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+         labels: ["Merge", "Split"],
+         datasets: [
           {
             backgroundColor: ["#f5a30a","#1f4d78"],
-            data: [2478,5267]
+            data: [response.merge,response.split]
           }
         ]
-      },
-      options: {
+       },
+       options: {
         plugins :{
         legend: { display: false },
         title: {
@@ -106,47 +88,55 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
         }
       }}
   });
+   this.averageScheduleDurationLoading = false
+  
+    })
   }
 
   public createStepsDurationMergeChart(){
-    let ctx = document.getElementById("bar-chart-merge-steps") as HTMLCanvasElement;
-    this.chart = new Chart(ctx, {
-      type: 'bar',
-      data: {
+    this.renovationStatisticsService.getAverageStepTimeMerge().subscribe(response => {
+      this.avgTimeMerge = response;
+      let ctx = document.getElementById("bar-chart-merge-steps") as HTMLCanvasElement;
+      this.chart = new Chart(ctx, {
+       type: 'bar',
+       data: {
         labels: ["1.Basic info", "2. Choose time slot", "3. Additional info", "4. Confirm schedule"],
         datasets: [
           {
             backgroundColor: ["#f5a30a","#1f4d78","#0871a6","#4891b8"],
             //backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"],
-            data: [2,3,7,1]
+            data: [response.basicInfo,response.timeChosen,response.additionInfo,response.finished]
           }
         ]
-      },
-      options: {
+       },
+       options: {
         plugins :{
         legend: { display: false },
         title: {
           display: true,
           text: 'Average time spent per step for MERGING'
         }
-      }}
-  });
+       }}
+    });
+     this.stepsDurationMergeLoading = false;
+    })
   }
 
   public createStepsDurationSplitChart(){
-    let ctx = document.getElementById("bar-chart-split-steps") as HTMLCanvasElement;
-    this.chart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ["1.Basic info", "2. Choose time slot", "3. Additional info", "4. Confirm schedule"],
-        datasets: [
-          {
+    this.renovationStatisticsService.getAverageStepTimeSplit().subscribe(response => {
+      let ctx = document.getElementById("bar-chart-split-steps") as HTMLCanvasElement;
+      this.chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ["1.Basic info", "2. Choose time slot", "3. Additional info", "4. Confirm schedule"],
+          datasets: [
+           {
             backgroundColor: ["#f5a30a","#1f4d78","#0871a6","#4891b8"],
-            data: [2,10,6,1]
-          }
-        ]
-      },
-      options: {
+            data: [response.basicInfo,response.timeChosen,response.additionInfo,response.finished]
+           }
+         ]
+       },
+       options: {
         plugins :{
         legend: { display: false},
         title: {
@@ -154,59 +144,69 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
           text: 'Average time spent per step for SPLITING'
         }
       }}
-  });
+    });
+    this.stepsDurationSplitLoading = false;
+   })
+
   }
 
   public creatAverageStepMergeChart(){
-    var ctx = document.getElementById("doughnut-chart-merge") as HTMLCanvasElement;
-   new Chart(ctx, {
-      type: 'doughnut',
-    data: {
-      labels: ["Started","1.Basic info", "2. Choose time slot", "3. Additional info", "4. Confirm schedule", "Canceled"],
-      datasets: [{
+    this.renovationStatisticsService.getMergeVisitCount().subscribe(response => {
+      var ctx = document.getElementById("doughnut-chart-merge") as HTMLCanvasElement;
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+        labels: ["Started","1.Basic info", "2. Choose time slot", "3. Additional info", "4. Confirm schedule", "Canceled"],
+        datasets: [{
         label: "Merge",
         backgroundColor: ["#b1d0e0", "#f5a30a","#1f4d78","#0871a6","#4891b8","#5fa3c7"],
-        data: [2,3,7,1,9,2]
+        data: [response.start,response.basicInfo,response.timeChosen,response.additionalInfo,response.finished,response.canceled]
       }]
-    },
-    options: {
-      plugins :{
-        legend: { display: true, position: 'bottom' },
-        title: {
+      },
+      options: {
+        plugins :{
+         legend: { display: true, position: 'bottom' },
+         title: {
           display: true,
           text: 'Average count of visits per step for MERGING'
         }
+       }
       }
-    }
-});
+     });
+     this.averageStepMergeLoading = false;
+    })
   }
 
   public creatAverageStepSplitChart(){
-    var ctx = document.getElementById("doughnut-chart-split") as HTMLCanvasElement;
-   new Chart(ctx, {
-      type: 'doughnut',
-    data: {
-      labels: ["Started","1.Basic info", "2. Choose time slot", "3. Additional info", "4. Confirm schedule", "Canceled"],
-      datasets: [{
-        label: "Split",
-        backgroundColor: ["#b1d0e0", "#f5a30a","#1f4d78","#0871a6","#4891b8","#5fa3c7"],
-        data: [2,3,7,1,9,2]
-      }]
-    },
-    options: {
-      plugins :{
-        legend: { display: true, position: 'bottom'},
-        title: {
-          display: true,
-          text: 'Average count of visits per step for SPLITING'
+    this.renovationStatisticsService.getSplitVisitCount().subscribe(response => {
+      var ctx = document.getElementById("doughnut-chart-split") as HTMLCanvasElement;
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ["Started","1.Basic info", "2. Choose time slot", "3. Additional info", "4. Confirm schedule", "Canceled"],
+          datasets: [{
+          label: "Split",
+          backgroundColor: ["#b1d0e0", "#f5a30a","#1f4d78","#0871a6","#4891b8","#5fa3c7"],
+           data: [response.start,response.basicInfo,response.timeChosen,response.additionalInfo,response.finished,response.canceled]
+        }]
+       },
+        options: {
+           plugins :{
+             legend: { display: true, position: 'bottom'},
+            title: {
+             display: true,
+             text: 'Average count of visits per step for SPLITING'
         }
       }
-    }
-});
+     }
+    });
+      this.averageStepSplitLoading = false;
+    })
   }
 
   public createAverageStepCountChart(){
-    let ctx = document.getElementById("bar-chart-step-count") as HTMLCanvasElement;
+    this.renovationStatisticsService.getAverageStepCount().subscribe(response=>{
+      let ctx = document.getElementById("bar-chart-step-count") as HTMLCanvasElement;
     this.chart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -214,7 +214,7 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
         datasets: [
           {
             backgroundColor: ["#f5a30a","#1f4d78"],
-            data: [2478,5267, 3762]
+            data: [response.merge,response.split]
           }
         ]
       },
@@ -227,6 +227,8 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
         }
       }}
   });
+      this.averageStepCountLoading = false;
+    })
   }
 
 }
