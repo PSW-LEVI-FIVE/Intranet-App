@@ -110,7 +110,6 @@ export class MergeRoomsComponent implements OnInit {
  public scheduleMerge(){
    this.mergeDto.startDate = this.selectedInterval.start;
    this.mergeDto.endDate = this.selectedInterval.end;
-   console.log(this.mergeDto);
    this.renovationService.createMerge(this.mergeDto).subscribe(response => {
     this.toastService.info('Renovation scheduling is completed');
     this.router.navigate([`manager/room-map/${this.floorId}`]);
