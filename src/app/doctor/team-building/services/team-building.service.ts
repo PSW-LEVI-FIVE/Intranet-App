@@ -23,8 +23,9 @@ export class TeamBuildingService {
     return this.httpClient.patch(url, {})
   }
 
-  declineInvitation(id: number) {
-    const url = `${this.url}/decline/${id}`
-    return this.httpClient.patch(url, {})
+  declineInvitation(id: number, reason: string) {
+    const body = { invitationId: id, reason }
+    const url = `${this.url}/decline`
+    return this.httpClient.post(url, body)
   }
 }

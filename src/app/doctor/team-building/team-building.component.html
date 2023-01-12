@@ -2,7 +2,7 @@
     <div class="team-buildings" *ngIf="invitations.length > 0">
         <app-team-building-card *ngFor="let invitation of invitations" [invitation]="invitation"
             (acceptedInvitation)="acceptInvitation($event)"
-            (declinedInvitation)="declineInvitation($event)"></app-team-building-card>
+            (declinedInvitation)="openDialog($event)"></app-team-building-card>
     </div>
     <div class="empty" *ngIf="invitations.length == 0">
         <mat-icon aria-hidden="false" class="mat-icon-rtl-mirror" aria-label="Example home icon"
