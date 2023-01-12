@@ -194,11 +194,18 @@ export class RoomMapComponent implements OnInit {
   }
 
   public toggleMerge(): void {
+
     if (!this.select) {
       this.select = true;
       this.toastService.info('Please select rooms for merging');
       this.toggleMergeSelect(this.rooms);
       return;
+
+    if (this.roomsOnFloor.length > 1) {
+      this.router.navigate(['manager/merge-rooms/' + this.floorId]);
+    } else {
+      this.toastService.info('Not enough rooms for merge renovation');
+
     }
 
     if (this.selectedRooms.length < 2) {
@@ -208,6 +215,7 @@ export class RoomMapComponent implements OnInit {
 
     this.router.navigate(['manager/merge-rooms/' + this.floorId], { state: { data: this.selectedRooms } });
   }
+}
 
   public toggleSplit(): void {
     if (this.roomsOnFloor.length > 0) {

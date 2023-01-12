@@ -16,4 +16,18 @@ getDoctorSpecialities():Observable<any>{
      return this.http.get<any>(this.apiHost+"api/intranet/doctors/specialities")
 }
 
+createTeamBulidingEventForEveryOne(createInvitationDto:any){
+  return this.http.post(this.apiHost+"api/intranet/invitations/create/all",createInvitationDto,{ headers: this.headers })
+}
+
+createTeamBuildingEventForSpeciality(invitationDto:any){
+  return this.http.post(this.apiHost+"api/intranet/invitations/create/special",invitationDto,{ headers: this.headers })
+}
+getAllInvitationRequests(){
+  return this.http.get<any>(this.apiHost+"api/intranet/invitations/all",{ headers: this.headers })
+}
+getDoctorById(doctorId:any){
+  return this.http.get<any>(this.apiHost+"api/intranet/doctors/get/"+doctorId,{ headers: this.headers })
+}
+
 }

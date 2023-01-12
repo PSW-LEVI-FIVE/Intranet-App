@@ -7,7 +7,6 @@ export interface ISpeciality{
 id: number,
 name: string
 }
-
 export interface ICreateInvitation {
   title: string,
   description: string,
@@ -19,6 +18,7 @@ export interface ICreateInvitation {
   specialityId: number
 
 }
+
 
 @Component({
   selector: 'app-team-building-invitations',

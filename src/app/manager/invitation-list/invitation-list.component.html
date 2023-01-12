@@ -1,14 +1,21 @@
-<div>
-<h1>Invitation requests</h1>   
-
-
-
+<div style="font-size:large;margin-top:15px">
+ <p style="font-size:50px;text-align: center;">Invitation requests</p> 
 </div>
-<div>
-    <mat-list >
-    <mat-list-item *ngFor="let request of invitationRequests">
-        <span matListItemTitle>This is the title</span>
-      </mat-list-item>
-      <mat-list-item>Also the title</mat-list-item>
-    </mat-list>
+<div style="width:800px;height:700px;margin-left: 300px; margin-top: 150px;">
+  <mat-list style="width:800px;height:700px">
+    <mat-list-item *ngFor="let request of invitationRequests" style="height:130px">
+      <div>
+
+        <div><p style="font-weight:bold">{{request.doctorName}}</p></div>
+        <div>
+          <p style="font-weight:bold">
+        {{request.title}}  {{request.startAt}}- {{request.endAt }} </p>
+        <p style="color:grey">{{request.reason}}</p>
+        <button id="{{ 'object-'+request.invitationStatus}}">{{getOptionLabel(request.invitationStatus)}}</button>
+      </div>
+      </div>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+  </mat-list>
 </div>
