@@ -85,7 +85,7 @@ export class RoomMapComponent implements OnInit {
         this.markRoom(this.rooms);
         if(this.complexRooms) {
           this.showInformationComplex(this.complexRooms, this);
-          this.markRoom(this.complexRooms);
+          this.complexRooms.forEach((room: any) => this.markRoom(room));
         }
 
         this.textNavigation = [];
@@ -123,11 +123,13 @@ export class RoomMapComponent implements OnInit {
     });
   }
 
-  private showInformationComplex(svg: any, component: any) {
-    svg.on('dblclick', function(this: any) {
+  private showInformationComplex(svgs: any, component: any) {
+    svgs.forEach((svg: any) => {
+      svg.on('dblclick', function(this: any) {
         const room = <RoomArea>d3.select(this).datum();
         component.showInformation(room.roomId);
-    })
+      });
+    });
   }
 
   private showInformation(roomId: number) {

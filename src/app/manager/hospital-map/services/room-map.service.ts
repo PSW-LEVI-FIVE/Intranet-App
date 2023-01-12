@@ -100,18 +100,21 @@ export class RoomMapService {
     const plotRoomStroke = d3.line()
       .x(d => d[0])      
       .y(d => d[1])
-      
+
+    const svgs: any = [];      
     rooms.forEach(room => {
-      svg = svg.append('path')
+      svgs.push(
+        svg.append('path')
         .datum(room)
         .attr('d', plotRoomStroke(room.areaStrokes.map(stroke => [stroke.x, stroke.y])))
         .attr('stroke', 'black')
         .attr('fill', 'white')
         .attr('id', room.roomId)
-        .attr('cursor', 'pointer');
+        .attr('cursor', 'pointer')
+      );
     });
 
-    return svg;
+    return svgs;
   }
  
 
