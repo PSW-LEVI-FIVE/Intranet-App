@@ -94,6 +94,7 @@ export class RoomMapService {
   }
 
   public createComplexRoom(svg: any, roomData: IRoom[]) {
+    if(roomData.length === 0) return undefined;
     const rooms = this.handleComplexCoordinates(roomData);
 
     const plotRoomStroke = d3.line()

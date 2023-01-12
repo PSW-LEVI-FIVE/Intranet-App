@@ -82,9 +82,11 @@ export class RoomMapComponent implements OnInit {
         this.roomsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)
 
         this.showInformationBasic(this.rooms);
-        this.showInformationComplex(this.complexRooms, this);
         this.markRoom(this.rooms);
-        this.markRoom(this.complexRooms);
+        if(this.complexRooms) {
+          this.showInformationComplex(this.complexRooms, this);
+          this.markRoom(this.complexRooms);
+        }
 
         this.textNavigation = [];
         this.showDestinationRoom();
