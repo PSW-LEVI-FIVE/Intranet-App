@@ -1,0 +1,55 @@
+<div class="graph-wrapper">
+    <div class="full-canvas-wrapper">
+        <app-loader [isLoading]="stepAverageLoading"></app-loader>
+        <canvas baseChart [type]="'bar'" [data]="stepAverageData" [options]="stepAverageOptions"></canvas>
+    </div>
+    <div class="full-canvas-wrapper">
+        <app-loader [isLoading]="timeOnStepLoading"></app-loader>
+        <canvas baseChart [type]="'bar'" [data]="timeOnStepData" [options]="timeOnStepOptions"></canvas>
+    </div>
+    <div class="full-canvas-wrapper">
+        <app-loader [isLoading]="timePerAgeLoading"></app-loader>
+        <canvas baseChart [type]="'bar'" [data]="timePerAgeData" [options]="timePerAgeOptions"></canvas>
+    </div>
+    <div>
+        <p class="horizontalSpace"></p>
+        <input type="number" min="0" max="300" [(ngModel)]="fromAge" (blur)="agesFocusOut()" style="width: 130px; font-size: 50pt; display: inline-block;">
+        <p class="horizontalSpace"></p>
+        <p style="font-size: 40pt; display: inline-block;"> to </p>
+        <p class="horizontalSpace"></p>
+        <input type="number" min="0" max="300"  [(ngModel)]="toAge" (blur)="agesFocusOut()"  style="width: 130px; font-size: 50pt; display: inline-block;">
+        <p class="horizontalSpace"></p>
+        <button mat-stroked-button type="Submit" class="button" (click)="changeStatistics()">Submit</button>
+    </div>
+    <div class="full-canvas-wrapper">
+        <app-loader [isLoading]="averageScheduleLoading"></app-loader>
+        <canvas baseChart [type]="'bar'" [data]="averageScheduleData" [options]="averageScheduleOptions"></canvas>
+    </div>
+    <div class="full-canvas-wrapper">
+        <app-loader [isLoading]="quitOnStepLoading"></app-loader>
+        <canvas baseChart [type]="'bar'" [data]="quitOnStepData" [options]="quitOnStepOptions"></canvas>
+    </div>
+    <div>
+    <div>
+    <p>Average time per step when its longer that 30 seconds</p>
+    </div>
+    <table>
+    <thead>
+        <tr>
+          <th>Date Step</th>
+          <th>Speciality Step</th>
+          <th>Doctor Step</th>
+          <th>Time Step</th>
+          <th>Scheduled Step</th>
+        </tr>
+        </thead>
+        <tr>
+            <td>{{this.longTermedSteps?.dateStep}}</td>
+            <td>{{longTermedSteps?.specialityStep}}</td>
+            <td>{{longTermedSteps?.doctorStep}}</td>
+            <td>{{longTermedSteps?.timeStep}}</td>
+            <td>{{longTermedSteps?.finishedStep}}</td>
+        </tr>
+    </table>
+</div>
+</div>
