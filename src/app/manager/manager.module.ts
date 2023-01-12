@@ -134,11 +134,6 @@ const routes: Routes = [
       },
 
       {
-        path: 'doctors-leave-statistics',
-        component: DoctorStatisticsLeavesComponent
-      },
-
-      {
         path: 'create-commercials',
         component: CreateCommercialsComponent
       },
@@ -168,10 +163,6 @@ const routes: Routes = [
         component: SplitRoomComponent
 
 
-      },
-      {
-        path:'room-schedule/:id',
-        component: RoomOverviewComponent
       },
       {
         path: 'doctors-workload-statistics',

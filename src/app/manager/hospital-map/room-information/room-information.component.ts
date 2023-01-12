@@ -10,7 +10,8 @@ import { RoomMapService } from '../services/room-map.service';
 
 export interface IRoomEquipment{
   quantity:number,
-  name:string
+  name:string,
+  roomId:number
 }
 @Component({
   selector: 'app-room-information',
@@ -50,8 +51,10 @@ export class RoomInformationComponent implements OnInit {
       this.floorId = params['id'];
       this.roomId = params['fid']
     })
+    this.searchEquipmentInput.roomId = this.roomId
       this.roomMapService.getByID(this.roomId).subscribe(res => {
         this.selectedObjects=res;
+        
     });
     this.equipmentService.getEquipmentByRoom(this.roomId).subscribe(res=>{
       this.dataSource = res
@@ -67,7 +70,7 @@ export class RoomInformationComponent implements OnInit {
     if(this.searchEquipmentInput.name == undefined || this.searchEquipmentInput.name == "") this.searchEquipmentInput.name = "0";
 
      this.equipmentService.searchEquipmentInRoom(this.searchEquipmentInput).subscribe(res =>{
-      this.searchedEquipment = res;
+      this.dataSource = res;
       if(this.searchEquipmentInput.name == "0") this.searchEquipmentInput.name = "";
      })
   }

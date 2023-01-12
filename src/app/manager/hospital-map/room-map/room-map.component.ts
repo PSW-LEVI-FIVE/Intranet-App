@@ -79,8 +79,7 @@ export class RoomMapComponent implements OnInit {
           this.svg,
           this.data.filter(room => room.secondaryCoordinates)
         );
-        this.roomsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)
-
+        this.roomsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)   
         this.showInformationBasic(this.rooms);
         this.markRoom(this.rooms);
         if (this.complexRooms) {
@@ -116,17 +115,19 @@ export class RoomMapComponent implements OnInit {
     this.navigationService.visualizeNavigation(this.svg, floorId);
 
   }
-
   private showInformationBasic(svg: any) {
     svg.on('dblclick', (d: any, i: any) => {
-      this.showInformation(i.id);
+      this.router.navigate(['manager/room-info/' + this.floorId + '/' + i.id]);
+      //this.showInformation(i.id);
     });
   }
+
 
   private showInformationComplex(svgs: any, component: any) {
     svgs.forEach((svg: any) => {
       svg.on('dblclick', function(this: any) {
         const room = <RoomArea>d3.select(this).datum();
+        this.router.navigate(['manager/room-info/' + this.floorId + '/' + room.roomId]);
         component.showInformation(room.roomId);
       });
     });
@@ -148,7 +149,13 @@ export class RoomMapComponent implements OnInit {
     d3.selectAll('rect').style('fill', 'white');
     d3.select("#id" + id).style('fill', '#d7d5db');
   }
-
+  public updateRoom(): void {
+    if (this.selectedRoomModel) {
+      this.roomMapService.updateRoom(this.selectedRoomModel).subscribe(() => {
+        this.toastService.success('Successfully updated room name');
+      });
+    }
+  }
   openRoomEquipmentSearch(id: any) {
     this.roomMapService.getByID(id).subscribe(res => {
       this.roomObject = res;
