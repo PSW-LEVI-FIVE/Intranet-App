@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, ChartData } from 'chart.js';
+import { AvgStepCountDTO } from './dtos/avg-step-count.dto';
 
 @Component({
   selector: 'app-renovation-statistics-schedule',
