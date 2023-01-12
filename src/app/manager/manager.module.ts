@@ -35,8 +35,7 @@ import { MergeRoomsComponent } from './renovation/merge-rooms/merge-rooms.compon
 import { SplitRoomComponent } from './renovation/split-room/split-room.component';
 import {RoomOverviewComponent} from './hospital-map/room-overview/room-overview.component'
 import { RoomInformationComponent } from './hospital-map/room-information/room-information.component';
-
-
+import { DoctorStatisticsWorkloadComponent } from './doctor-statistics-workload/doctor-statistics-workload.component';
 
 
 const routes: Routes = [
@@ -147,15 +146,13 @@ const routes: Routes = [
         path: 'split-room/:floorId',
         component: SplitRoomComponent
       },
-      { 
-        path: 'doctors-leave-statistics', 
-        component: DoctorStatisticsLeavesComponent
-      },
-
       {
         path:'room-schedule/:id',
         component: RoomOverviewComponent
-
+      },
+      {
+        path: 'doctors-workload-statistics',
+        component: DoctorStatisticsWorkloadComponent
       }
     ]
 
@@ -174,7 +171,8 @@ const routes: Routes = [
     CreateCommercialsComponent,
     StatisticsComponent,
     MergeRoomsComponent,
-    SplitRoomComponent
+    SplitRoomComponent,
+    DoctorStatisticsWorkloadComponent
   ],
   exports: [RouterModule],
   imports: [
