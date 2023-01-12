@@ -1,7 +1,10 @@
-import { CreateRoom, IRoom, IRoomModel } from './../model/room.model';
+import { Coordinates, CreateRoom, IRoom, IRoomModel, RoomArea } from './../model/room.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { cA, S } from 'chart.js/dist/chunks/helpers.core';
+import { area, Area, thresholdSturges } from 'd3';
+import * as d3 from 'd3';
 
 @Injectable({
   providedIn: 'root'
@@ -78,15 +81,155 @@ export class RoomMapService {
     return this.http.put<IRoomModel>(this.apiHost + 'api/intranet/rooms/' + room.id, JSON.stringify(room.roomNumber), {headers: this.headers});
   }
 
-  createRectangles(svg:any,data:any){
+  public createRectangles(svg:any,data:IRoom[]){
     return svg.selectAll("rect").data(data).enter().append("rect")
-    .attr("height", function(d:any){ return d.height;})
-    .attr("width", function(d:any){ return d.width;})
+    .attr("height", (d:IRoom) => d.height)
+    .attr("width", (d:IRoom) => d.width)
     .attr("fill", 'white')
     .attr("stroke", "black")
-    .attr("x", function(d:any){ return d.xCoordinate })
-    .attr("y", function(d:any){ return d.yCoordinate})
-    .attr('id',function(d:any){ return "id"+ d.id})
+    .attr("x", (d:IRoom) => d.xCoordinate)
+    .attr("y", (d:IRoom) => d.yCoordinate)
+    .attr('id', (d:IRoom) => "id"+ d.id)
     .attr('cursor', 'pointer')
+  }
+
+  public createComplexRoom(svg: any, roomData: IRoom[]) {
+    const rooms = this.handleComplexCoordinates(roomData);
+
+    const plotRoomStroke = d3.line()
+      .x(d => d[0])      
+      .y(d => d[1])
+      
+    rooms.forEach(room => {
+      svg = svg.append('path')
+        .datum(room)
+        .attr('d', plotRoomStroke(room.areaStrokes.map(stroke => [stroke.x, stroke.y])))
+        .attr('stroke', 'black')
+        .attr('fill', 'white')
+        .attr('id', room.roomId)
+        .attr('cursor', 'pointer');
+    });
+
+    return svg;
+  }
+ 
+
+  public handleComplexCoordinates(rooms: IRoom[]) {
+    return rooms.map(room => {
+      const shapes: Coordinates[] = room.secondaryCoordinates;
+      shapes.push(<Coordinates>{
+        xCoordinate: room.xCoordinate,
+        yCoordinate: room.yCoordinate,
+        width: room.width,
+        height: room.height
+      });
+      
+      const grouped = this.groupByXCoordinate(shapes);
+      const roomArea = <RoomArea>{roomId: +room.id, areaStrokes: []}; 
+
+      roomArea.areaStrokes.push(...this.getTopLevelPoints(grouped));
+      roomArea.areaStrokes.push(...this.getBottomLevelPoints(grouped));
+      roomArea.areaStrokes.push(roomArea.areaStrokes[0]);
+
+      return roomArea;
+    });
+  }
+
+  private getTopLevelPoints(grouped: Coordinates[][]) {
+    const areaStrokes: {
+      x: number;
+      y: number;
+    }[] = [];
+
+
+    grouped.forEach(group => {
+      areaStrokes.push({
+        x: group[0].xCoordinate,
+        y: group[0].yCoordinate
+      });
+
+      areaStrokes.push({
+        x: group[0].xCoordinate + group[0].width + (this.checkLast(grouped, group[0]) ? 0: this.offset),
+        y: group[0].yCoordinate
+      });
+
+    });
+
+    return areaStrokes;
+  }
+
+  private checkLast(grouped: Coordinates[][], coordinate: Coordinates) {
+    return grouped[grouped.length -1][0] === coordinate;
+  }
+
+  private getBottomLevelPoints(grouped: Coordinates[][]) {
+    const areaStrokes: {
+      x: number;
+      y: number;
+    }[] = [];
+
+    grouped.reverse().forEach(group => {
+      areaStrokes.push({
+        x: group[group.length -1].xCoordinate + group[group.length -1].width,
+        y: group[group.length -1].yCoordinate + group[group.length -1].height
+      });
+
+      areaStrokes.push({
+        x: group[group.length -1].xCoordinate + (this.checkLast(grouped, group[0]) ? 0: this.offset),
+        y: group[group.length -1].yCoordinate + group[group.length -1].height
+      });
+    })
+
+    return areaStrokes;
+  }
+
+
+  private groupByXCoordinate(coordinates: Coordinates[]) {
+    const grouped: Coordinates[][] = [];
+
+    coordinates
+    .forEach(coordinate => {
+      const groupIndex = grouped.findIndex(group => group[0].xCoordinate === coordinate.xCoordinate);
+      if(groupIndex >= 0)
+        grouped[groupIndex].push(coordinate);
+      else 
+        grouped.push([coordinate]);
+    });
+
+    return grouped
+    .sort((g1,g2) => g1[0].xCoordinate - g2[0].xCoordinate)
+    .map(group => group.sort((c1, c2) => c1.yCoordinate - c2.yCoordinate));
+  }
+
+  public canSelect(selectedRooms: IRoom[], candidate: IRoom) {
+    for(const room of selectedRooms) {
+      if(room.yCoordinate === candidate.yCoordinate)
+        return room.xCoordinate < candidate.xCoordinate ? this.checkRightAdd(room, candidate) : this.checkLeftAdd(room, candidate);
+      
+      if(room.xCoordinate === candidate.xCoordinate) 
+        return room.yCoordinate < candidate.yCoordinate ? this.checkBelowAdd(room,candidate) : this.checkAboveAdd(room, candidate); 
+    }
+
+    return false;
+  }
+
+  public checkRightAdd(room: IRoom, candidate: IRoom) {
+    return candidate.xCoordinate <= room.xCoordinate + room.width + this.offset && candidate.yCoordinate === room.yCoordinate;
+  }
+
+  public checkLeftAdd(room: IRoom, candidate: IRoom) {
+    return candidate.xCoordinate + candidate.width >= room.xCoordinate - this.offset && candidate.yCoordinate === room.yCoordinate;
+  }
+
+  public checkAboveAdd(room: IRoom, candidate: IRoom) {
+    return candidate.yCoordinate + candidate.height >= room.yCoordinate - this.offset && candidate.xCoordinate === room.xCoordinate;
+  }
+
+  public checkBelowAdd(room: IRoom, candidate: IRoom) {
+    return candidate.yCoordinate <= room.yCoordinate + room.height + this.offset && candidate.xCoordinate === candidate.xCoordinate;
+  }
+
+  public canDeselect(selectedRooms: IRoom[], candidate: IRoom) {
+    return selectedRooms[selectedRooms.length - 1].id === candidate.id;
   }
 }

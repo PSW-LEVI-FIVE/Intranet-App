@@ -4,7 +4,7 @@ import { RoomMapService } from './../services/room-map.service';
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import { ToastrService } from 'ngx-toastr';
-import { CreateRoom, IRoom, IRoomModel } from '../model/room.model';
+import { CreateRoom, IRoom, IRoomModel, RoomArea } from '../model/room.model';
 import { create } from 'd3';
 import { Equipment } from '../../equipment/model/equipment.model';
 import { Room } from '../../room/model/room.model';
@@ -20,12 +20,14 @@ import { NavigationService } from '../services/navigation.service';
 })
 export class RoomMapComponent implements OnInit {
 
-  data: any;
-  svg: any;
-  rooms: any;
+
+  private data: IRoom[] = [];
+  private svg: any;
+  private rooms: any;
+  private complexRooms: any;
   roomsText: any;
-  floorId: any
-  selected: any
+  floorId: any;
+  selected: any;
   enableEditing: boolean = false;
   public selectedRoomModel: IRoomModel | undefined;
   selectedObjects: any;
@@ -35,8 +37,12 @@ export class RoomMapComponent implements OnInit {
   searchEquipmentInput: Equipment = {} as Equipment;
   searchFloorInput: Equipment = {} as Equipment;
   roomsOnFloor: Room[] = [];
+
   textNavigation: string[] = [];
   navigation: boolean = true;
+
+  private select = false;
+  private selectedRooms: IRoom[] = [];
 
   constructor(
     private roomMapService: RoomMapService,
@@ -61,13 +67,24 @@ export class RoomMapComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.roomMapService.getRoomsByFloor(params['id']).subscribe(res => {
         this.data = res;
-        console.log(this.data)
+
         this.svg = this.buildingMapService.createSVG();
-        this.rooms = this.roomMapService.createRectangles(this.svg, this.data)
+        
+        this.rooms = this.roomMapService.createRectangles(
+          this.svg, 
+          this.data.filter(room => !room.secondaryCoordinates)
+        );
+
+        this.complexRooms = this.roomMapService.createComplexRoom(
+          this.svg, 
+          this.data.filter(room => room.secondaryCoordinates)
+        );
         this.roomsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)
 
-        this.showInformation(this.rooms);
+        this.showInformationBasic(this.rooms);
+        this.showInformationComplex(this.complexRooms, this);
         this.markRoom(this.rooms);
+        this.markRoom(this.complexRooms);
 
         this.textNavigation = [];
         this.showDestinationRoom();
@@ -90,7 +107,7 @@ export class RoomMapComponent implements OnInit {
 
   private showDestinationRoom(): void {
     const room = this.navigationService.getDestination();
-    if (room) d3.select('#id' + room.id).style("fill", '#d7ee00');
+    if (room) d3.select('#id' + room.id).style('fill', '#d7ee00');
   }
 
   private visualizeNavigation(floorId: string): void {
@@ -98,25 +115,56 @@ export class RoomMapComponent implements OnInit {
 
   }
 
-  showInformation(svg: any) {
+  private showInformationBasic(svg: any) {
     svg.on('dblclick', (d: any, i: any) => {
-      this.roomMapService.getByID(i.id).subscribe(res => {
-        this.selectedRoomModel = res;
-        this.router.navigate(['manager/room-info/' + this.floorId + '/' + i.id]);
-      })
+      this.showInformation(i.id);
+    });
+  }
+
+  private showInformationComplex(svg: any, component: any) {
+    svg.on('dblclick', function(this: any) {
+        const room = <RoomArea>d3.select(this).datum();
+        component.showInformation(room.roomId);
     })
   }
 
-  markRoom(svg: any) {
+  private showInformation(roomId: number) {
+    this.roomMapService.getByID(roomId).subscribe(res => {
+      this.selectedRoomModel = res;
+      this.enableEditing = false;
+    })
+
+    this.roomService.getRoomEquipment(roomId).subscribe(res => {
+      this.searchedEquipment = res;
+      this.searchEquipmentInput.roomId = roomId;
+      this.searchEquipmentInput.quantity = 0;
+    })
+  }
+
+  private markRoom(svg: any) {
     svg.on('click', function (this: any, d: any, i: any,) {
-      d3.selectAll("rect").style("fill", '#d7d5db');
-      d3.select(this).style("fill", "#9e91bd");
+      d3.selectAll('rect').style('fill', '#FFFFFF');
+      d3.selectAll('path').style('fill', '#FFFFFF');  
+      d3.select(this).style('fill', '#9e91bd');
     })
   }
 
   public editForm() {
     if (this.selectedRoomModel) this.enableEditing = true;
   }
+
+
+  
+  openRoomEquipmentSearch(id: any) {
+    this.roomMapService.getByID(id).subscribe(res => {
+      this.roomObject = res;
+
+    })
+  }
+  roomSchedule(roomId: number) {
+    this.router.navigate(['manager/room-schedule/' + roomId]);
+  }
+
 
   public updateRoom(): void {
     if (this.selectedRoomModel) {
@@ -126,21 +174,9 @@ export class RoomMapComponent implements OnInit {
     }
   }
 
-
-  highlight(id: any) {
-    d3.selectAll("rect").style("fill", 'white')
-    d3.select("#id" + id).style("fill", '#d7d5db')
-
-  }
-
-  openRoomEquipmentSearch(id: any) {
-    this.roomMapService.getByID(id).subscribe(res => {
-      this.roomObject = res;
-
-    })
-  }
-  roomSchedule(roomId: number) {
-    this.router.navigate(['manager/room-schedule/' + roomId]);
+  public highlight(id: any) {
+    d3.selectAll('rect').style('fill', 'white');
+    d3.select("#id" + id).style('fill', '#d7d5db');
   }
 
   public searchEquipmentInRoom() {
@@ -158,30 +194,49 @@ export class RoomMapComponent implements OnInit {
       this.searchedRooms = res;
       if (this.searchFloorInput.name == "0") this.searchFloorInput.name = "";
     })
-
   }
 
-  public checkNumberOfRooms(){
-    this.roomService.getRoomsbyFloor(this.floorId).subscribe(res =>{
+  public checkNumberOfRooms() {
+    this.roomService.getRoomsbyFloor(this.floorId).subscribe(res => {
       this.roomsOnFloor = res;
       console.log(this.roomsOnFloor);
     })
   }
 
   public toggleMerge(): void {
-    if(this.roomsOnFloor.length > 1) {
-      this.router.navigate(['manager/merge-rooms/' + this.floorId]);
-    } else {
-      this.toastService.info('Not enough rooms for merge renovation');
+    if(!this.select) {
+      this.select = true;
+      this.toastService.info('Please select rooms for merging');
+      this.toggleMergeSelect(this.rooms);
+      return;
+    } 
+    
+    if(this.selectedRooms.length < 2) {
+      this.toastService.error('Please select at least two rooms to merge');
+      return;
     }
+
+    this.router.navigate(['manager/merge-rooms/' + this.floorId], { state: { data: this.selectedRooms } });
   }
 
   public toggleSplit(): void {
-    if(this.roomsOnFloor.length > 0) {
+    if (this.roomsOnFloor.length > 0) {
       this.router.navigate(['manager/split-room/' + this.floorId]);
     } else {
       this.toastService.info('There is no room on this floor');
     }
+  }
+
+  private toggleMergeSelect(svg: any) {
+    svg.on('click', (d : any, i: IRoom) => {
+      if(this.selectedRooms.length === 0 || !this.selectedRooms.find(room => room.id === i.id) && this.roomMapService.canSelect(this.selectedRooms, i)) {
+        this.selectedRooms.push(i);
+        d3.select('#id' + i.id).style("fill", "#89023E");
+      } else if (this.roomMapService.canDeselect(this.selectedRooms, i)) {
+        this.selectedRooms.pop();
+        d3.select('#id' + i.id).style("fill", "#FFFFFF");  
+      } 
+    });
   }
 }
 
