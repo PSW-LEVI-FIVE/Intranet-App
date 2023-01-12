@@ -90,6 +90,7 @@ export class MergeRoomsComponent implements OnInit {
     });
     
     this.mergeDto.secondaryIds = stringBuilder;
+    this.createEvent();
   }
 
 
@@ -161,7 +162,7 @@ export class MergeRoomsComponent implements OnInit {
   this.renovationEventDto.startAt = this.mergeDto.startDate;
   this.renovationEventDto.endAt = this.mergeDto.endDate;   
   this.renovationService.updateEvent(this.renovationEventDto).subscribe(response =>{
-    
+    this.router.navigate([`manager/room-map/${this.floorId}`]);
   })
  }
 
@@ -170,5 +171,13 @@ export class MergeRoomsComponent implements OnInit {
   const month = newDate.getMonth()
   const hours = newDate.getHours() < 10 ? '0' + newDate.getHours() : newDate.getHours()
   return `${ newDate.getFullYear()} - ${this.months[month]} - ${newDate.getDate()} ${hours}:${newDate.getMinutes()}`
+}
+
+private createEvent(){
+  this.createEventDto.mainRoomId = this.mergeDto.mainRoomId;
+  this.createEventDto.type = 0;
+  this.renovationService.createEvent(this.createEventDto).subscribe(resposne=>{
+     this.renovationEventDto = resposne;
+  })
 }
 }

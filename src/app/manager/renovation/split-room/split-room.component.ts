@@ -144,7 +144,7 @@ public addEvent(type: number){
   this.splitDto.startDate = this.selectedInterval.start;
   this.splitDto.endDate = this.selectedInterval.end;
   this.renovationEventDto.roomName = this.splitDto.roomName;
-  this.renovationEventDto.secondaryRoomId = this.splitDto.mainRoomId;//?????
+  this.renovationEventDto.secondaryRoomIds = '';//?????
   this.renovationEventDto.startAt = this.splitDto.startDate;
   this.renovationEventDto.endAt = this.splitDto.endDate;   
   this.renovationService.updateEvent(this.renovationEventDto).subscribe(response =>{
