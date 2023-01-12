@@ -108,7 +108,4 @@ export class TeamBuildingInvitationsComponent implements OnInit {
     }
   }
 
-
-
-
 }
