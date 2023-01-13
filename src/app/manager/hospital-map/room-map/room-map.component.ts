@@ -128,7 +128,7 @@ export class RoomMapComponent implements OnInit {
       svg.on('dblclick', function(this: any) {
         const room = <RoomArea>d3.select(this).datum();
         this.router.navigate(['manager/room-info/' + this.floorId + '/' + room.roomId]);
-        component.showInformation(room.roomId);
+        //component.showInformation(room.roomId);
       });
     });
   }
