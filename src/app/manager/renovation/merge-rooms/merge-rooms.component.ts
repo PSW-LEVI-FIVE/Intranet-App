@@ -9,6 +9,10 @@ import { RoomMapService } from '../../hospital-map/services/room-map.service';
 import { RenovationService } from '../services/renovation.service';
 import { MergeDTO } from '../shared/merge.model';
 import { IRoom } from '../../hospital-map/model/room.model';
+import { RenovationEventDto } from '../shared/renovation-event-dto';
+import { CreateEventDto } from '../shared/create-event-dto';
+import { AddEventDto } from '../shared/add-event-dto';
+import { RenovationDto } from '../shared/renovation-dto';
 
 enum RoomTypes {
   NO_TYPE,
@@ -38,9 +42,26 @@ export class MergeRoomsComponent implements OnInit {
   public selectedInterval:TimeInterval = new TimeInterval();
   public mergeDto: MergeDTO = new MergeDTO();
   public timeSlotDto: TimeSlotRegDTO = new TimeSlotRegDTO();
-
   private selectedRooms: IRoom[] | undefined;
-  
+  public renovationEventDto: RenovationEventDto = new RenovationEventDto();
+  public createEventDto: CreateEventDto = new CreateEventDto();
+  public addEventDto: AddEventDto = new AddEventDto();
+  public renovationDto: RenovationDto = new RenovationDto();
+
+  months: any = {
+    '0': 'January',
+    '1': 'February',
+    '2': 'March',
+    '3': 'April',
+    '4': 'May',
+    '5': 'June',
+    '6': 'July',
+    '7': 'August',
+    '8': 'September',
+    '9': 'October',
+    '10': 'November',
+    '11': 'December',
+  }
   
   constructor(private roomService: RoomService,  
               private toastService: ToastrService,
@@ -69,6 +90,7 @@ export class MergeRoomsComponent implements OnInit {
     });
     
     this.mergeDto.secondaryIds = stringBuilder;
+    this.createEvent();
   }
 
 
@@ -87,8 +109,14 @@ export class MergeRoomsComponent implements OnInit {
     }
  }
 
+
  public checkFirstStepInput() {
     this.nextStep = (this.timeSlotDto.duration <= 0 || this.timeSlotDto.endDate === null);
+   /* this.createEventDto.mainRoomId = this.mergeDto.mainRoomId;
+     this.createEventDto.type = 0;
+     this.renovationService.createEvent(this.createEventDto).subscribe(resposne=>{
+        this.renovationEventDto = resposne;
+     })*/
  }
 
  public checkThirdStepInput(){
@@ -107,15 +135,6 @@ export class MergeRoomsComponent implements OnInit {
   this.router.navigate([`manager/room-map/${this.floorId}`]);
  }
 
- public scheduleMerge(){
-   this.mergeDto.startDate = this.selectedInterval.start;
-   this.mergeDto.endDate = this.selectedInterval.end;
-   this.renovationService.createMerge(this.mergeDto).subscribe(response => {
-    this.toastService.info('Renovation scheduling is completed');
-    this.router.navigate([`manager/room-map/${this.floorId}`]);
-  })
- }
-
  public getFreeAppointments(){
   this.timeSlotDto.roomId = this.mergeDto.mainRoomId;
   this.timeSlotDto.endDate.setDate( this.timeSlotDto.endDate.getDate() + 1 );
@@ -123,4 +142,42 @@ export class MergeRoomsComponent implements OnInit {
     this.intervals = response;
   })
  }
+
+ public addEvent(type: number){
+  this.addEventDto.eventType = type;
+  this.addEventDto.renovationId = this.renovationEventDto.id;
+  this.addEventDto.type = this.renovationEventDto.type;
+  this.addEventDto.uuid = this.renovationEventDto.uuid;
+  this.addEventDto.time.setHours(this.addEventDto.time.getHours()+1)
+  this.renovationService.addEvent(this.addEventDto).subscribe(response =>{
+    
+  })
+ }
+
+ public updateEvent(){
+  this.mergeDto.startDate = this.selectedInterval.start;
+  this.mergeDto.endDate = this.selectedInterval.end;
+  this.renovationEventDto.roomName = this.productRoomName;
+  this.renovationEventDto.secondaryRoomIds = this.mergeDto.secondaryIds;
+  this.renovationEventDto.startAt = this.mergeDto.startDate;
+  this.renovationEventDto.endAt = this.mergeDto.endDate;   
+  this.renovationService.updateEvent(this.renovationEventDto).subscribe(response =>{
+    this.router.navigate([`manager/room-map/${this.floorId}`]);
+  })
+ }
+
+ formatDate(date: Date) {
+  const newDate = new Date(date)
+  const month = newDate.getMonth()
+  const hours = newDate.getHours() < 10 ? '0' + newDate.getHours() : newDate.getHours()
+  return `${ newDate.getFullYear()} - ${this.months[month]} - ${newDate.getDate()} ${hours}:${newDate.getMinutes()}`
+}
+
+private createEvent(){
+  this.createEventDto.mainRoomId = this.mergeDto.mainRoomId;
+  this.createEventDto.type = 0;
+  this.renovationService.createEvent(this.createEventDto).subscribe(resposne=>{
+     this.renovationEventDto = resposne;
+  })
+}
 }
