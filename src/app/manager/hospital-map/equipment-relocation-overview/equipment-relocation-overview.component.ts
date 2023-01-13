@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY } from 'rxjs';
 import { RoomMapService } from '../services/room-map.service';
 import { RoomOverviewService } from '../services/room-overview.service';
+
 export interface IEquipmentRelocation {
   startingRoomId: number,
   startAt: any,
@@ -31,10 +32,12 @@ export class EquipmentRelocationOverviewComponent implements OnInit {
   roomId: number = 0
   dataSource: IEquipmentRelocation[] = []
   equipment: any
+
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.roomId = params['id'];
     });
+
     this.roomOverViewService.getEquipmentRelocationForRoom(this.roomId).subscribe(res => {
       this.dataSource = res
       this.dataSource.forEach((leave) => {
@@ -43,6 +46,7 @@ export class EquipmentRelocationOverviewComponent implements OnInit {
         this.roomOverViewService.getEquipmentName(leave.equipmentId).subscribe(res => {
           this.equipment = res
           leave.equipmentName = this.equipment.name
+
         })
 
       })
@@ -60,6 +64,7 @@ export class EquipmentRelocationOverviewComponent implements OnInit {
       this.dataSource = res
     })
 
-  }
 
+
+}
 }

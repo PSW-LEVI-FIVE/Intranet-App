@@ -77,7 +77,7 @@ export class NavigationService {
 
 
     this.markedFloor = destinationFloor?.floor;
-   
+    
 
   }
 
@@ -211,6 +211,7 @@ export class NavigationService {
     .attr('fill', '#d7ee00');
     return block;
     this.textPath.push(block);
+
   }
 
   public resetNavigation(): void {
@@ -229,6 +230,7 @@ export class NavigationService {
   public getDestinationFloor(): IFloor | undefined {
     return this.markedFloor;
   }
+
 
 
 }

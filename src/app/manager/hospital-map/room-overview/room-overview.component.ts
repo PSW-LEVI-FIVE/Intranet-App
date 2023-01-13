@@ -9,8 +9,11 @@ export interface IRoomAppointment {
   startAt: any;
   endAt: any;
   type: Type;
+
 }
 export enum Type {
+
+
   Examination = 0,
   Hospitalisation = 1,
   Type3 = 2,
@@ -23,10 +26,13 @@ export enum Type {
 })
 export class RoomOverviewComponent implements OnInit {
 
+
+
   displayedColumns: string[] = ['start_date', 'end_date', 'appointment_type'];
 
   roomId: number = 0
   dataSource: IRoomAppointment[] = []
+
   Type = Type
   constructor(private http: HttpClient,
     private roomOverViewService: RoomOverviewService,
@@ -43,9 +49,12 @@ export class RoomOverviewComponent implements OnInit {
         leave.startAt = leave.startAt.split('T')[0] + " " + leave.startAt.split('T')[1]
         leave.endAt = leave.endAt.split('T')[0] + " " + leave.endAt.split('T')[1]
 
-      })
 
+      })
     })
+
+
+
 
   }
 

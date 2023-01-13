@@ -1,3 +1,8 @@
+mat-card-css{
+    height:900px;
+    width: 200px;
+    
+}
 .button-2 {
     background-color: rgba(51, 51, 51, 0.05);
     border-radius: 8px;
@@ -9,28 +14,28 @@
     font-size: 14px;
     font-weight: 500;
     line-height: 20px;
+    width: 300px;
+    margin-left: 80px;
     list-style: none;
-    margin: 0;
     padding: 10px 12px;
     text-align: center;
     transition: all 200ms;
-    vertical-align: baseline;
+    vertical-align:bottom;
     white-space: nowrap;
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
   
-
   }
-
- .card-app
- {
-  width: 300px;
-  background-color: gainsboro;
-  margin-left: 40%;
-  
- }
- table {
-  width: 100%;
+  .md-datepicker-input-container {
+    width: 300px;
 }
 
+event-mat{
+    width: 300px !important;
+}
+::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0px !important;}
+::ng-deep .mat-datepicker-content  {
+    width: 100px!important;
+    height: 100px!important;
+}

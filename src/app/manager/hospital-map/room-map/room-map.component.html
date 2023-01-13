@@ -41,6 +41,7 @@
       </mat-tab>
       <mat-tab label="Renovation">
         <div class="option-container">
+
           <div><button mat-fab color="primary" (click)="toggleCreate()">Add</button></div>
           <div>
             <button mat-fab color="primary" (click)="toggleMerge()">Merge</button>
@@ -53,7 +54,6 @@
     </mat-tab-group>
 
   </div>
-
   <div *ngIf="selectedRoomModel">
     <h1 class="card-title"> Room information </h1>
     <table style="margin-left:40px;">
@@ -75,6 +75,4 @@
       </button>
     </div>
 
-
 </div>
-
