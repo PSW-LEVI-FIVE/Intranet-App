@@ -12,8 +12,8 @@ export class BuildingMapService {
   apiHost: string = 'http://localhost:5000/';
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-  private mapHeight = 500;
-  private mapWidth = 800;
+  private mapHeight = 580;
+  private mapWidth = 880;
 
   private defaultBuildingHeight = 200;
   private defaultBuildingWidth = 200;
@@ -89,6 +89,7 @@ export class BuildingMapService {
     .attr("x", function(d:any){ return d.xCoordinate })
     .attr("y", function(d:any){ return d.yCoordinate})
     .attr("id", function(d:any){ return d.id})
+    .attr('cursor', 'pointer')
     
   }
   onClickShowName(svg:any, data2:any){
@@ -109,7 +110,7 @@ export class BuildingMapService {
       .attr("text-anchor", "start")
       .attr("stroke", "black")
       .attr("stroke-width", "1")
-      .attr("font-size", 10)
+      .attr("font-size", 15)
       .text(function(d:any){ return d.id; })
   }
 }

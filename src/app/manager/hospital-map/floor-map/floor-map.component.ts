@@ -24,6 +24,7 @@ export class FloorMapComponent implements OnInit {
   clickInfo:any
   formVisible: any="hidden";
   selectedFloor: any;
+  buildingId: number = 0;
 
   constructor(
     private toastService: ToastrService, 
@@ -37,6 +38,7 @@ export class FloorMapComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.floorMapService.getFloorsByBuilding(params['id']).subscribe(res => {
+        this.buildingId = params['id'];
         this.data = res;
         this.svg  = this.floorMapService.createSVG();
         this.floors = this.floorMapService.createRectangles(this.svg,this.data)
@@ -81,8 +83,8 @@ export class FloorMapComponent implements OnInit {
     })
   }
   markFloor(svg:any){
-    svg.on('mouseover', function(this:any,d:any,i:any,) { 
-      d3.selectAll("rect").style("fill",'#d7d5db');
+    svg.on('click', function(this:any,d:any,i:any,) { 
+      d3.selectAll("rect").style("fill",'#ffffff');
       d3.select(this).style("fill","#9e91bd")})
   }
 

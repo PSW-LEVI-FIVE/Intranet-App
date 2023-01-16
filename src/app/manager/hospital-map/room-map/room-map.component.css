@@ -78,7 +78,9 @@
 }
 .container{
    display: flex;
-   flex-wrap: wrap;
+   flex-direction: row;
+   margin-top: 3rem;
+   justify-content: center;
 }
 
 #add-button {
@@ -177,14 +179,14 @@
 }
 
 .navigation-container{
-    width: 650px;
-    height: 250px;
+    width: 600px;
+    height: 330px;
     margin-right: 5%;
     align-items: center;
     font-size: 12px;
     margin-left: 2%;
     overflow: auto;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
 }
 
 .navigation-text{
@@ -194,9 +196,11 @@
 }
 
 .item-container{
-  flex-basis: 100px;
-  height: 800px;
-  margin: 5px;
+ display: flex;
+ justify-content: center;
+ padding-left: 1rem;
+ padding-right: 1rem;
+
 }
 
 .renovation-buttons{
@@ -205,4 +209,40 @@
     margin-top: 15px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.list  li{
+    position: relative;
+    left: 0px;
+    color: rgb(14, 14, 14);
+    list-style: none;
+    transition: 0.5s;
+    cursor: pointer;
+    
+    font-size:large;
+    margin-bottom: 20px;
+    overflow-x: hidden !important;
+    
+}
+.list li:hover{
+   
+    left: 10px;
+    background-color: azure;
+    overflow-x: hidden !important;
+    
+}
+list li::before{
+    content: "";
+    position: absolute;
+    width: 700;
+    height: 100%;
+    background:burlywood;
+    transform: scaleX(0);
+    transition: 0.5s;
+    transform-origin: left;
+    overflow-x: hidden !important;
+}
+.list li:hover::before{
+    transform: scaleX(1);
+    overflow-x: hidden !important;
 }

@@ -8,12 +8,14 @@
     
     font-size:large;
     margin-bottom: 20px;
+    overflow-x: hidden !important;
     
 }
 .list li:hover{
    
     left: 10px;
     background-color: azure;
+    overflow-x: hidden !important;
     
 }
 list li::before{
@@ -25,7 +27,9 @@ list li::before{
     transform: scaleX(0);
     transition: 0.5s;
     transform-origin: left;
+    overflow-x: hidden !important;
 }
 .list li:hover::before{
     transform: scaleX(1);
+    overflow-x: hidden !important;
 }

@@ -79,9 +79,10 @@
     
 }
 .container{
-   align-items: center;
-   display: flex;
-   justify-content: center
+    display: flex;
+    flex-direction: row;
+    margin-top: 3rem;
+    justify-content: center;
 }
 
 #add-button {
@@ -89,6 +90,30 @@
     margin-left: 5%;
     margin-top: 5%;
     font-size: 24px;
-    width: 100px;
+    width: 400px;
     height: 100px;
+}
+
+.item-container{
+    display: flex;
+    justify-content: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    }
+  
+.renovation-buttons{
+    width: 400px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+  
+.option-container{
+    display: inline-block;
+    margin-left: 100px;
+}
+
+.confirmButton{
+    width: 400px;
 }

@@ -27,8 +27,8 @@ export class NavigationService {
   private destinations: {room: IRoom; floor: IFloor}[] = [];
 
   private iterationBlockSize = 10;
-  private mapHeight = 500;
-  private mapWidth = 800;
+  private mapHeight = 580;
+  private mapWidth = 880;
   private alreadyChecked: IterationBlock[] = [];
   private winningBlock: IterationBlock | undefined;
 

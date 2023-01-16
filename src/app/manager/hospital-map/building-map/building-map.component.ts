@@ -5,6 +5,7 @@ import { CreateBuilding, IBuilding } from '../model/building.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { NavigationService } from '../services/navigation.service';
+import * as d3 from 'd3';
 
 @Component({
   selector: 'app-building-map',
@@ -39,7 +40,7 @@ export class BuildingMapComponent implements OnInit {
       this.svg  = this.buildingMapService.createSVG();
       this.buildingsMap = this.buildingMapService.createRectangles(this.svg, this.buildings);
       this.buildingsText = this.buildingMapService.addTextToRectangles(this.svg, this.buildings);
-      this.addOnClick(this.buildingsMap);
+      this.addOnClick(this.buildingsMap, this);
       this.showFloors(this.buildingsMap, this.router);
     })
   }
@@ -59,12 +60,13 @@ export class BuildingMapComponent implements OnInit {
     localStorage.removeItem('role');
     this.router.navigate(["/login"]);
   }
-  addOnClick(svg:any){
-    svg.on("click", (d:any, i:any) =>{
-      this.formVisible = "visible";
-      this.selectedBuilding = i;
-      this.buildingMapService.getBuilding(i.id).subscribe(res => {this.selectedBuilding=res;})
-
+  addOnClick(svg:any, component: BuildingMapComponent ){
+    svg.on("click", function(this:any, d:any, i:any){
+      component.formVisible = "visible";
+      component.selectedBuilding = i;
+      component.buildingMapService.getBuilding(i.id).subscribe(res => {component.selectedBuilding=res;})
+      d3.selectAll("rect").style("fill",'#ffffff');
+      d3.select(this).style("fill","#9e91bd")
     })
   }
   showFloors(svg:any, router:any){
