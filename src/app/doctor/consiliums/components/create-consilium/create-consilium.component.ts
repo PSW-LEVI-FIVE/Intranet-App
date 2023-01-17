@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY } from 'rxjs';
@@ -77,7 +78,9 @@ export class CreateConsiliumComponent implements OnInit {
   constructor(private readonly toastService: ToastrService,
     private readonly router: Router,
     private fb: FormBuilder,
-    private readonly consiliumService: ConsiliumService) { }
+    private readonly consiliumService: ConsiliumService,
+    public readonly dialogRef: MatDialogRef<CreateConsiliumComponent>,
+    ) { }
 
   ngOnInit(): void {
     this.consiliumService.getAllDoctors()
@@ -107,7 +110,7 @@ export class CreateConsiliumComponent implements OnInit {
     if (from == null || to == null) return;
     let today = new Date()
 
-    if (from.getDate() <= today.getDate()) {
+    if (from <= today) {
       this.toastService.error("Date should be in future!")
       return
     }
@@ -221,6 +224,7 @@ export class CreateConsiliumComponent implements OnInit {
     }))
     .subscribe(res => {
       this.toastService.success("Successfully created consilium")
+      this.dialogRef.close();
       setTimeout(() => {
         this.router.navigate(["doctor/appointments"])
       }, 1000)
