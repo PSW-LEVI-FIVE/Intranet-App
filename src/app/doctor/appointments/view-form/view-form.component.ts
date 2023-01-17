@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { AppointmentsService } from "../services/appointments.service";
 import { ICreateAppointment } from "../create-form/create-form.component";
 import { catchError, EMPTY } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface IUpdateAppointment {
   Start: Date;
@@ -35,16 +36,19 @@ export class ViewFormComponent implements OnInit {
     private route: ActivatedRoute,
     private appointmentService: AppointmentsService,
     private readonly toastService: ToastrService,
-    private readonly router: Router
+    private readonly router: Router,
+    @Inject(MAT_DIALOG_DATA) public data: {id: number},
+    public readonly dialogRef: MatDialogRef<ViewFormComponent>,
   ) { }
 
   ngOnInit(): void {
-    console.log(this.route.snapshot.paramMap.get('id'))
+    // console.log(this.route.snapshot.paramMap.get('id'))
     this.getAppointment();
   }
 
   getAppointment(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'))
+    // const id = Number(this.route.snapshot.paramMap.get('id'))
+    const id = this.data.id;
     this.appointmentService.getAppointmentById(id)
       .subscribe(appointment => {
         this.fillAppointmentInfo(appointment)
@@ -72,7 +76,8 @@ export class ViewFormComponent implements OnInit {
   }
 
   cancelAppointment() {
-    let id = Number(this.route.snapshot.paramMap.get('id'))
+    // let id = Number(this.route.snapshot.paramMap.get('id'))
+    let id = this.data.id;
     this.appointmentService.cancelAppointmentById(id).pipe(catchError(res => {
       const error = res.error
       if (error.errors) {
@@ -88,9 +93,10 @@ export class ViewFormComponent implements OnInit {
     }))
       .subscribe(res => {
         this.toastService.success("Successfully updated appointment")
-        setTimeout(() => {
-          this.router.navigate(["doctor/appointments"])
-        }, 1000)
+        this.dialogRef.close();
+        // setTimeout(() => {
+        //   this.router.navigate(["doctor/appointments"])
+        // }, 1000)
 
       })
   }
@@ -98,7 +104,8 @@ export class ViewFormComponent implements OnInit {
     let startDate = this.convertToDateTime(this.newStartDate, this.newFrom)
     let endDate = this.convertToDateTime(this.newStartDate, this.newTo)
 
-    let id = Number(this.route.snapshot.paramMap.get('id'))
+    // let id = Number(this.route.snapshot.paramMap.get('id'))
+    let id = this.data.id;
     let body: IUpdateAppointment = {
       Start: startDate,
       End: endDate,
@@ -118,9 +125,10 @@ export class ViewFormComponent implements OnInit {
     }))
       .subscribe(res => {
         this.toastService.success("Successfully updated appointment")
-        setTimeout(() => {
-          this.router.navigate(["doctor/appointments"])
-        }, 1000)
+        this.dialogRef.close();
+        // setTimeout(() => {
+        //   this.router.navigate(["doctor/appointments"])
+        // }, 1000)
 
       })
   }

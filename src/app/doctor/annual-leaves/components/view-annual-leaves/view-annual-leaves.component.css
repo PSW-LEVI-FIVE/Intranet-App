@@ -1,12 +1,15 @@
 .annual-leaves-outer{
-  display: flex;
   padding: 10px;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
 }
 
 .button-wrapper{
   flex:1;
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap:30px;
   padding-top: 30px;

@@ -10,7 +10,7 @@
     margin: auto;
     padding-top: 40px;
     height: 91vh;
-    background: #f5f5f5;
+    background: white;
 }
 
 table {
@@ -27,7 +27,7 @@ table {
 
 tr {
     border-color: black;
-    background: white;
+    background: #f0f0f0;
 }
 
 td {

@@ -1,7 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { CreateExaminationComponent } from 'src/app/doctor/examination/create-examination-report/create-examination.component';
 import { ExaminationReportService } from 'src/app/doctor/examination/services/examination-report.service';
+import { ViewFormComponent } from '../../../view-form/view-form.component';
 import { ITimeInterval, ITimeSpan } from '../../calendar.component';
+import { CalendarDataService } from '../../services/calendar-data.service';
 
 @Component({
   selector: 'app-calendar-interval',
@@ -17,12 +21,15 @@ export class CalendarIntervalComponent implements OnInit {
     type: 0,
     id: 0
   }
+  
   public startPosition: number = 0;
   public height: number = 0;
 
   constructor(
     private readonly router: Router,
-    private readonly reportService: ExaminationReportService
+    private readonly reportService: ExaminationReportService,
+    private readonly dialog: MatDialog,
+    private readonly dataUpdater: CalendarDataService
   ) { }
 
   ngOnInit(): void {
@@ -37,7 +44,15 @@ export class CalendarIntervalComponent implements OnInit {
   redirectToAppointment() {
     if (this.interval.type == 1)
       return this.isReportDone();
-    return this.router.navigate(['doctor/appointments/' + this.interval.id])
+    
+    const dialogRef = this.dialog.open(ViewFormComponent, {
+      data: { id: this.interval.id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.dataUpdater.updateData(5);
+    });
+    // return this.router.navigate(['doctor/appointments/' + this.interval.id])
   }
 
   formatDate() {
@@ -66,7 +81,12 @@ export class CalendarIntervalComponent implements OnInit {
   private isReportDone() {
     this.reportService.getReportByExaminationId(this.interval.id).subscribe(response => {
       if (response == null || response.url == null) {
-        this.router.navigate(['doctor/examination/' + this.interval.id + '/report']);
+        const dialogRef = this.dialog.open(CreateExaminationComponent, {
+          data: { id: this.interval.id }
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+        });
       } else {
         window.location.href = response.url;
       }

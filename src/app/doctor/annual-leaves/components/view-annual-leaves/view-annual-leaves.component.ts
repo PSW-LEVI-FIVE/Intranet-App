@@ -8,7 +8,7 @@ export const enum AnnualLeaveState { PENDING, APPROVED, DELETED, CANCELED }
 
 export interface AnnualLeave {
   id: number;
-  reason: string;
+  reason: any;
   startAt: Date;
   endAt: Date;
   state: AnnualLeaveState;
@@ -38,6 +38,7 @@ export class ViewAnnualLeavesComponent implements OnInit {
     this.annualLeaveService.getAnnualLeaves()
       .subscribe(result => {
         this.annualLeaves = result
+        console.log(result)
       })
   }
 

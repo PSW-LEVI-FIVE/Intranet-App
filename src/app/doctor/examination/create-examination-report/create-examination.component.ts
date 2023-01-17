@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
@@ -13,6 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExaminationReportEventDTO } from '../dtos/examination-report-event.dto';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogData } from '../../team-building/dialogs/reason-dialog.component';
 
 @Component({
   selector: 'app-create-examination',
@@ -56,7 +58,9 @@ export class CreateExaminationComponent implements OnInit {
     private readonly examinationReportService: ExaminationReportService,
     private readonly toastService: ToastrService,
     private readonly route: ActivatedRoute,
-    private readonly router: Router
+    private readonly router: Router,
+    @Inject(MAT_DIALOG_DATA) public data: {id: number},
+    public readonly dialogRef: MatDialogRef<CreateExaminationComponent>,
   ) { }
 
   ngOnInit(): void {
@@ -72,7 +76,8 @@ export class CreateExaminationComponent implements OnInit {
       this.findMedicines(change)
     })
 
-    let examinationId = Number(this.route.snapshot.paramMap.get("id"))
+    // let examinationId = Number(this.route.snapshot.paramMap.get("id"))
+    let examinationId = this.data.id;
     this.examinationReportService.startReport(examinationId).subscribe(res => {
       this.reportUuid = res.uuid;
       this.startedReport = res
@@ -151,7 +156,7 @@ export class CreateExaminationComponent implements OnInit {
       content: this.reportFormGroup.get('report')?.value,
       prescriptions: this.mapPrescriptionDoses(),
       symptoms: this.symptoms,
-      examinationId: Number(this.route.snapshot.paramMap.get("id"))
+      examinationId: this.data.id
     }
 
     this.examinationReportService.sendReport(dto, this.reportUuid)
@@ -164,7 +169,7 @@ export class CreateExaminationComponent implements OnInit {
       }))
       .subscribe(res => {
         this.toastService.success("Successfully created report")
-        this.router.navigate(["/doctor/appointments"])
+        this.dialogRef.close();
       })
   }
 

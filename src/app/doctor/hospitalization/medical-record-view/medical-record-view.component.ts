@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY } from 'rxjs';
@@ -19,6 +19,8 @@ export class MedicalRecordViewComponent implements OnInit {
   public columns: string[] = ["No.", "Started At", "Ended At", "Pdf", "State", "Action"]
   public isLoading: boolean = false
   public showCreate: boolean = false
+
+  @Output() create: EventEmitter<any> = new EventEmitter()
 
   constructor(
     private readonly toastService: ToastrService,
@@ -42,6 +44,9 @@ export class MedicalRecordViewComponent implements OnInit {
     this.showCreate = true
   }
 
+  showCreateForm() {
+    this.create.emit()
+  }
   finishHospitalization(id: number) {
     const today = new Date();
     this.isLoading = true

@@ -7,6 +7,7 @@ import { AppointmentsService } from '../services/appointments.service';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { CreateFormComponent } from '../create-form/create-form.component';
 import { CreateConsiliumComponent } from '../../consiliums/components/create-consilium/create-consilium.component';
+import { CalendarDataService } from './services/calendar-data.service';
 
 export interface ITimeSpan {
   hours: number,
@@ -57,13 +58,18 @@ export class CalendarComponent implements OnInit {
   public showCalendarWidget = true
   private burgerSub: Subscription = new Subscription()
 
-
   constructor(
     private readonly appointmentService: AppointmentsService,
     private readonly router: Router,
     private readonly menuService: MenuService,
-    private readonly dialog: MatDialog
-  ) { }
+    private readonly dialog: MatDialog,
+    private readonly dataUpdater: CalendarDataService
+  ) { 
+    this.dataUpdater.updater$.subscribe(updater => {
+      // console.log(profile)
+      this.loadAppointmentsFromChild()
+    });
+  }
 
   ngOnInit(): void {
     this.burgerSub = this.menuService.getBurgerState().subscribe(val => {
@@ -82,6 +88,10 @@ export class CalendarComponent implements OnInit {
 
     this.loadAppointments(this.selected)
 
+  }
+
+  loadAppointmentsFromChild() {
+    this.loadAppointments(this.selected);
   }
   
   createAppointment() {
