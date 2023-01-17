@@ -1,38 +1,4 @@
 <div class="graph-wrapper">
-    <div class="full-canvas-wrapper">
-        <app-loader [isLoading]="tableLoader"></app-loader>
-        <!--<canvas id="line-chart" style="width: 1000px;"></canvas>-->
-        <!--<table>
-            <tr>
-                <th>MERGE</th>
-                <th>1. Baic info</th>
-                <th>2. Choose time slot</th>
-                <th>3. Additional info</th>
-                <th>4. Schedule</th>
-            </tr>
-            <tr>
-                <th>Minimal time per step</th>
-                <td>{{minTimeMerge.basicInfo}}</td>
-                <td>{{minTimeMerge.timeChosen}}</td>
-                <td>{{minTimeMerge.additionInfo}}</td>
-                <td>{{minTimeMerge.finished}}</td>
-            </tr>
-            <tr>
-                <th>Average time per step</th>
-                <td>{{avgTimeMerge.basicInfo}}</td>
-                <td>{{avgTimeMerge.timeChosen}}</td>
-                <td>{{avgTimeMerge.additionInfo}}</td>
-                <td>{{avgTimeMerge.finished}}</td>
-            </tr>
-            <tr>
-                <th>Maximal time per step</th>
-                <td>{{maxTimeMerge.basicInfo}}</td>
-                <td>{{maxTimeMerge.timeChosen}}</td>
-                <td>{{maxTimeMerge.additionInfo}}</td>
-                <td>{{maxTimeMerge.finished}}</td>
-            </tr>
-        </table>-->
-    </div>
     <div class="canvas-wrapper">
         <app-loader [isLoading]="averageScheduleDurationLoading"></app-loader>
         <canvas id="bar-chart-schedule-duration"></canvas>

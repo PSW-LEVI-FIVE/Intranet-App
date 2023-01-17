@@ -1,24 +1,32 @@
-<form class="example-form">
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Doctor</mat-label>
-      <input type="text"
-             placeholder="Pick one"
-             aria-label="Doctor"
-             matInput
-             [formControl]="myControl"
-             [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-        <mat-option *ngFor="let option of filteredOptions|async" [value]="option">
-            {{option.id}} - {{option.name}} {{option.surname}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <button mat-icon-button (click)="showStats(this.myControl.value)">
-        <mat-icon matTooltip="Show stats">arrow_forward</mat-icon>
-    </button>
-  </form>
-  <p>Total days taken this year: {{inTotal}}</p>
-  <div id="divChart">
-    <canvas id="myChart" style="font-size:100px;"></canvas>
+<div>
+    <form class="example-form">
+        <div class="form">
+            <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Doctor</mat-label>
+            <input type="text"
+                    placeholder="Pick one"
+                    aria-label="Doctor"
+                    matInput
+                    [formControl]="myControl"
+                    [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let option of filteredOptions|async" [value]="option">
+                    {{option.id}} - {{option.name}} {{option.surname}}
+                </mat-option>
+            </mat-autocomplete>
+            </mat-form-field>
+            <div class="button">
+                <button mat-icon-button (click)="showStats(this.myControl.value)">
+                    <mat-icon matTooltip="Show stats">arrow_forward</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="text-div">
+            <p>Total days taken this year: {{inTotal}}</p>
+        </div>
+    </form>
+    <div id="divChart">
+        <canvas id="myChart" style="font-size:100px;"></canvas>
+    </div>
 </div>
   

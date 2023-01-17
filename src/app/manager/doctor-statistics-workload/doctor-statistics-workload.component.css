@@ -1,6 +1,6 @@
 .example-form {
     margin-top: 30px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     display:flex;
     justify-content: center;
   }
@@ -19,15 +19,29 @@
     margin-right: auto;
     padding-left: 24px;
     padding-right: 24px;
+    margin-bottom: 24px;
     width: 1000px;
     height: 500px;
     font-size: large;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-p {
-  padding-bottom: 20px;
-  padding-top: 20px;
-  padding-left: 300px;
-  font-size: 20px;
-  font-weight: bold;
+.text-div{
+    text-align: left;
+    padding-left: 32px;
+    padding-right: 32px;
+    margin-bottom: 18.813px;
+    width: 50%;
+    display: flex;
+}
+p{
+    font-size: 20px!important;
+    font-weight: bold!important;
+    color: black !important;
+    margin-top: auto!important;
+    margin-bottom: auto!important;
+}
+.button{
+    height: 60px;
+    margin-top: auto;
+    margin-bottom: auto;
 }

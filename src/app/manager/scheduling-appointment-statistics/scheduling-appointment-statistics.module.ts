@@ -1,3 +1,4 @@
+import { MaterialModule } from 'src/app/material/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SchedulingAppointmentStatisticsComponent } from './scheduling-appointment-statistics.component';
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms'
         CommonModule,
         NgChartsModule,
         SharedModule,
-        FormsModule
+        FormsModule,
+        MaterialModule
     ]
 })
 export class SchedulingAppointmentStatisticsModule { }

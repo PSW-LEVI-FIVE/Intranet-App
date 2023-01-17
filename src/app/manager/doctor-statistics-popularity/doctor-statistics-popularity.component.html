@@ -1,27 +1,18 @@
-<div>
-<div id="divChart">
-    <canvas id="myChart" style="font-size:100px;"></canvas>
+
+<div class="container">
+<div class="graph">
+    <canvas id="doctor-graph"></canvas>
 </div>
-<hr>
-<div id="divChart">
-<p class="verticalSpace"></p>
-<p style="font-size:50px;">Choose age group you want to see statistics from</p>
-<p class="verticalSpace"></p>
-<div>
-    <p class="horizontalSpace"></p>
-    <input type="number" min="0" max="300" [(ngModel)]="fromAge" (blur)="agesFocusOut()" style="width: 130px; font-size: 50pt; display: inline-block;">
-    <p class="horizontalSpace"></p>
-    <p style="font-size: 40pt; display: inline-block;"> to </p>
-    <p class="horizontalSpace"></p>
-    <input type="number" min="0" max="300"  [(ngModel)]="toAge" (blur)="agesFocusOut()"  style="width: 130px; font-size: 50pt; display: inline-block;">
-    <p class="horizontalSpace"></p>
-    <button mat-stroked-button type="Submit" class="button" (click)="changeStatistics()">Submit</button>
-    <p class="horizontalSpace"></p>
-    <p class="horizontalSpace"></p>
-    <p class="horizontalSpace"></p>
-    <p class="horizontalSpace"></p>
-    <p class="horizontalSpace"></p>
-    <button  style="display:inline-block;" mat-stroked-button type="Submit" class="button" (click)="ngOnInit()">All Patients</button>
-</div>
+<div class="input-wrapper">
+    <h2 class="input-text">Choose age group you want to see statistics from</h2>
+    <mat-form-field appearance="fill">
+        <mat-label>From age</mat-label>
+        <input matInput type="number" min="0" max="300" [(ngModel)]="fromAge" (blur)="agesFocusOut()">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>To age</mat-label>
+        <input matInput type="number" min="0" max="300" [(ngModel)]="toAge" (blur)="agesFocusOut()">
+    </mat-form-field>
+        <button mat-stroked-button (click)="changeStatistics()">Submit</button>
 </div>
 </div>

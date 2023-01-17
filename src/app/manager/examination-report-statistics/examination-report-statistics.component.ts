@@ -23,8 +23,8 @@ export class ExaminationReportStatisticsComponent implements OnInit {
   hourStatsLoading = true
 
   succUnsuccSpecOptions: any = {
-    color: 'blue',
-    backgroundColor: 'blue',
+    backgroundColor: ["#b1d0e0", "#f5a30a","#1f4d78","#0871a6","#4891b8","#5fa3c7"],
+    maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
       title: {
@@ -36,8 +36,9 @@ export class ExaminationReportStatisticsComponent implements OnInit {
   }
 
   hourStatsOptions: any = {
-    color: '#037ffc',
-    borderColor: '#037ffc',
+    borderColor:"#1f4d78",
+    pointBackgroundColor:"#f5a30a",
+    backgroundColor: ["#b1d0e0", "#f5a30a","#1f4d78","#0871a6","#4891b8","#5fa3c7"],
     maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
@@ -50,8 +51,8 @@ export class ExaminationReportStatisticsComponent implements OnInit {
   }
 
   succUnsuccOptions: any = {
-    color: 'orange',
-    backgroundColor: 'orange',
+    maintainAspectRatio: false,
+    backgroundColor: ["#b1d0e0", "#f5a30a","#1f4d78","#0871a6","#4891b8","#5fa3c7"],
     plugins: {
       legend: { display: false },
       title: {
@@ -63,8 +64,8 @@ export class ExaminationReportStatisticsComponent implements OnInit {
   }
 
   avgMinMaxOptions: any = {
-    color: 'purple',
-    backgroundColor: 'purple',
+    maintainAspectRatio: false,
+    backgroundColor: ["#b1d0e0", "#f5a30a","#1f4d78","#0871a6","#4891b8","#5fa3c7"],
     plugins: {
       legend: { display: false },
       title: {
@@ -76,8 +77,8 @@ export class ExaminationReportStatisticsComponent implements OnInit {
   }
 
   stepStatsOptions: any = {
-    color: 'green',
-    backgroundColor: 'green',
+    maintainAspectRatio: false,
+    backgroundColor: ["#b1d0e0", "#f5a30a","#1f4d78","#0871a6","#4891b8","#5fa3c7"],
     plugins: {
       legend: { display: false },
       title: {

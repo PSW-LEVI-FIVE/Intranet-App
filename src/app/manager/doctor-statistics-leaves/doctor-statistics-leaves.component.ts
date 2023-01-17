@@ -26,6 +26,7 @@ export class DoctorStatisticsLeavesComponent implements OnInit {
     this.doctorsLeaveStatisticsService.getDoctors().subscribe(res => {
       this.doctors = res;
       this.filteredOptions = of(res);
+      this.createChart();
     });
     this.myControl.valueChanges.pipe(startWith('')).subscribe(value =>
       this.filteredOptions = of(this._filter(value as string)));
@@ -57,46 +58,26 @@ export class DoctorStatisticsLeavesComponent implements OnInit {
     if (chartStatus!= undefined) {
       chartStatus.destroy();
     }
-    Chart.defaults.backgroundColor = 'rgba(0, 0, 0, 0.3)';
-    Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.3)';
-    Chart.defaults.color = 'rgba(0, 0, 0, 1)';
-    Chart.defaults.font.size = 30;
-
-    var ctx = document.getElementById("myChart") as HTMLCanvasElement;
-    var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
+    let ctx = document.getElementById("myChart") as HTMLCanvasElement;
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
         labels: this.months,
-        datasets: [{
-          label: "Months and days taken that month",
-          data: this.days,
-          borderWidth: 3,
-          backgroundColor: '#5DADEC'
-        }]
-      },
-      options:
-      {
-        plugins:
-        {
-          legend:
-          {
-            labels: { font: { size: 20 } }
-          }
-        },
-        scales:
-        {
-          y:
-          {
-            ticks:
+        datasets: [
             {
-              callback: function (value: any) {
-                if (Number.isInteger(value)) { return value; } return null;
-              },
-            },
-            beginAtZero: true
-          }
+                backgroundColor: ["#b1d0e0"],
+                data: this.days,
+            }
+        ]
+        },
+        options: {
+        plugins :{
+            legend: { display: false},
+        title: {
+            display: true,
+            text: 'Months and days taken that month'
         }
-      }
+        }}
     });
     this.months = [];
     this.days = [];

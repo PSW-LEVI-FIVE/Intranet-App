@@ -1,5 +1,5 @@
-<mat-tab-group>
-    <mat-tab label="Year">  
+<mat-tab-group [selectedIndex]="selectedTab">
+    <mat-tab label="Year" >  
         <form class="example-form">
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Doctor</mat-label>
@@ -15,12 +15,14 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
-            <button mat-icon-button (click)="showYearStats(this.myControl.value)">
-                <mat-icon matTooltip="Show stats">arrow_forward</mat-icon>
-            </button>
+            <div class="button">
+                <button mat-icon-button (click)="showYearStats(this.myControl.value)">
+                    <mat-icon matTooltip="Show stats">arrow_forward</mat-icon>
+                </button>
+            </div>
         </form>
           <div id="divChart">
-            <canvas id="myChart" style="font-size:100px;"></canvas>
+            <canvas id="myChartYear" style="font-size:100px;"></canvas>
         </div>
     </mat-tab>
     <mat-tab label="Month">
@@ -56,12 +58,14 @@
                       <mat-option value="12">December</mat-option>
                     </mat-select>
             </mat-form-field>
-            <button mat-icon-button (click)="showMonthStats(this.myControl.value)">
-                <mat-icon matTooltip="Show stats">arrow_forward</mat-icon>
-            </button>
+            <div class="button">
+                <button mat-icon-button (click)="showMonthStats(this.myControl.value)">
+                    <mat-icon matTooltip="Show stats">arrow_forward</mat-icon>
+                </button>
+            </div>
         </form>
         <div id="divChart">
-            <canvas id="myChart" style="font-size:100px;"></canvas>
+            <canvas id="myChartMonth" style="font-size:100px;"></canvas>
         </div>
     </mat-tab>
     <mat-tab label="Time range">
@@ -82,22 +86,22 @@
               </mat-form-field>
             <mat-form-field appearance="fill" class="example-full-width">
                 <mat-label>Enter a date range</mat-label>
-                <div class="date-container">
                     <mat-date-range-input [rangePicker]="picker">
                     <input matStartDate [formControl]="selectedStart" placeholder="Start date">
                     <input matEndDate [formControl]="selectedEnd" placeholder="End date">
                     </mat-date-range-input>
-                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-date-range-picker #picker></mat-date-range-picker>
-                </div>
                 <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
             </mat-form-field>
-            <button mat-icon-button (click)="showRangeStats(this.myControl.value)">
-                <mat-icon matTooltip="Show stats">arrow_forward</mat-icon>
-            </button>
+            <div class="button">
+                <button mat-icon-button (click)="showRangeStats(this.myControl.value)">
+                    <mat-icon matTooltip="Show stats">arrow_forward</mat-icon>
+                </button>
+            </div>
         </form>
         <div id="divChart">
-            <canvas id="myChart" style="font-size:100px;"></canvas>
+            <canvas id="myChartRange" style="font-size:100px;"></canvas>
         </div>
     </mat-tab>
   </mat-tab-group>

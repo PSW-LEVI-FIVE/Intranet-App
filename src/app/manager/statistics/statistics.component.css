@@ -3,9 +3,10 @@
     display: flex;
     flex-wrap: wrap;
     width: 80%;
-    padding-top: 150px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     margin: auto;
-    gap: 50px;
+    gap: 40px;
     align-items: center;
     justify-content: center;
 }
@@ -16,23 +17,13 @@
     padding: 5px;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    width: 300px;
-    height: 400px;
+    width: 280px;
+    height: 370px;
     cursor: pointer;
 }
 
 .img-holder {
     flex: 1;
-}
-
-.img-holder:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: gray;
 }
 .content-holder {
     flex: 1;

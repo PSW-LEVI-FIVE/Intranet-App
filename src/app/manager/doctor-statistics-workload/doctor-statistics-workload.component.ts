@@ -18,6 +18,7 @@ export class DoctorStatisticsWorkloadComponent implements OnInit {
   selectedMonth = new FormControl('', Validators.required);
   selectedStart = new FormControl('', Validators.required);
   selectedEnd = new FormControl('', Validators.required);
+  selectedTab = 0;
   public doctors: IDoctor[] = [];
   public dates: string[] = [];
   public appointments: number[] = [];
@@ -28,6 +29,9 @@ export class DoctorStatisticsWorkloadComponent implements OnInit {
     this.doctorsWorkloadStatisticsService.getDoctors().subscribe(res => {
       this.doctors = res;
       this.filteredOptions = of(res);
+      this.createChart("myChartMonth");
+      this.createChart("myChartYear");
+      this.createChart("myChartRange");
     });
     this.myControl.valueChanges.pipe(startWith('')).subscribe(value =>
       this.filteredOptions = of(this._filter(value as string)));
@@ -52,7 +56,7 @@ export class DoctorStatisticsWorkloadComponent implements OnInit {
         this.dates.push(statistics.date);
         this.appointments.push(statistics.numOfAppointments);
       });
-    this.createChart();
+    this.createChart("myChartYear");
     });
   }
   showMonthStats(selectedDoctor:any){
@@ -65,7 +69,7 @@ export class DoctorStatisticsWorkloadComponent implements OnInit {
         this.dates.push(statistics.date);
         this.appointments.push(statistics.numOfAppointments);
       });
-    this.createChart();
+    this.createChart("myChartMonth");
     });
   }
   showRangeStats(selectedDoctor:any){
@@ -78,54 +82,36 @@ export class DoctorStatisticsWorkloadComponent implements OnInit {
         this.dates.push(statistics.date);
         this.appointments.push(statistics.numOfAppointments);
       });
-    this.createChart();
+    this.createChart("myChartRange");
     });
   }
-  createChart() {
-    let chartStatus = Chart.getChart("myChart");
+  createChart(chartName:string) {
+    let chartStatus = Chart.getChart(chartName);
     if (chartStatus!= undefined) {
       chartStatus.destroy();
     }
-    Chart.defaults.backgroundColor = 'rgba(0, 0, 0, 0.3)';
-    Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.3)';
-    Chart.defaults.color = 'rgba(0, 0, 0, 1)';
-    Chart.defaults.font.size = 30;
 
-    var ctx = document.getElementById("myChart") as HTMLCanvasElement;
-    var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
+    
+    let ctx = document.getElementById(chartName) as HTMLCanvasElement;
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
         labels: this.dates,
-        datasets: [{
-          label: "Dates and number of appointments",
-          data: this.appointments,
-          borderWidth: 3,
-          backgroundColor: '#5DADEC'
-        }]
-      },
-      options:
-      {
-        plugins:
-        {
-          legend:
-          {
-            labels: { font: { size: 20 } }
-          }
-        },
-        scales:
-        {
-          y:
-          {
-            ticks:
+        datasets: [
             {
-              callback: function (value: any) {
-                if (Number.isInteger(value)) { return value; } return null;
-              },
-            },
-            beginAtZero: true
-          }
+                backgroundColor: ["#b1d0e0"],
+                data: this.appointments,
+            }
+        ]
+        },
+        options: {
+        plugins :{
+            legend: { display: false},
+        title: {
+            display: true,
+            text: 'Dates and number of appointments'
         }
-      }
+        }}
     });
     this.dates = [];
     this.appointments = [];
