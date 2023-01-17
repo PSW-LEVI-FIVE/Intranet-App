@@ -27,10 +27,12 @@ export class NavigationService {
   private destinations: {room: IRoom; floor: IFloor}[] = [];
 
   private iterationBlockSize = 10;
-  private mapHeight = 500;
-  private mapWidth = 800;
+  private mapHeight = 580;
+  private mapWidth = 880;
   private alreadyChecked: IterationBlock[] = [];
   private winningBlock: IterationBlock | undefined;
+
+  public axis_movment: boolean = true;
 
   constructor(
     private floorService: FloorMapService, 
@@ -107,6 +109,7 @@ export class NavigationService {
 
     this.winningBlock = undefined;
     this.alreadyChecked = [];
+    this.writeDirections();
   }
 
   private doNotNavigate(floorId: string): boolean {
@@ -209,9 +212,9 @@ export class NavigationService {
     .attr('height', block.height)
     .attr('stroke', 'black')
     .attr('fill', '#d7ee00');
-    return block;
-    this.textPath.push(block);
 
+    this.textPath.push(block);
+    return block;
   }
 
   public resetNavigation(): void {
@@ -221,6 +224,10 @@ export class NavigationService {
     this.alreadyChecked = [];
     this.winningBlock = undefined;
     this.destinations = [];
+    this.navigationTips = [];
+    this.textPath = [];
+    this.foundRoomsId = [];
+    this.axis_movment = true;
   }
 
   public getDestination(): IRoom | undefined {
@@ -231,6 +238,101 @@ export class NavigationService {
     return this.markedFloor;
   }
 
+  private writeDirections(){
+    this.textPath.reverse();
+    let orientation = true;
+    let direction = true;
+    if(this.textPath[0].x === this.textPath[2].x) orientation = true;
+    else orientation = false; 
 
+    if(this.findRoomFloor(this.source) === undefined)  this.navigationTips.push("Go to floor: " + this.markedFloor?.id); 
+    
+    for(let i = 0; i < this.textPath.length; i++){
+      if( i>2 && this.textPath[i].y !== this.textPath[i-1].y && this.textPath[i].x !== this.textPath[i-2].x)
+      {
+         direction = true;
+         this.directionChange(this.textPath[i], this.textPath[i-2], direction);
+        }
+        else if(i > 2 && this.textPath[i].x !== this.textPath[i-1].x && this.textPath[i].y !== this.textPath[i-2].y)
+        {
+          direction = false;
+          this.directionChange(this.textPath[i], this.textPath[i-2], direction);
+        }
+        else{
+          this.defineMovingOrientation(orientation, this.textPath[i])
+        }
+      }
+  }
 
+  private isInContrastToRoomX(p: IterationBlock){
+     const found = this.buildingScope.find( room => {
+        return room.room.xCoordinate < p.x && room.room.xCoordinate + room.room.width > p.x && p.y < room.room.yCoordinate && room.floor === this.markedFloor;
+      })
+      if(found){
+        this.makeTextPath(found.room.id);
+      }
+  }
+
+  private isInContrastToRoomY(p: IterationBlock){
+    const found = this.buildingScope.find( room => {
+       return room.room.yCoordinate < p.y && room.room.yCoordinate + room.room.height > p.y && p.x < room.room.xCoordinate && room.floor === this.markedFloor;
+     })
+     if(found){
+       this.makeTextPath(found.room.id);
+     }
+ }
+
+  private makeTextPath(room: string){
+    if(this.foundRoomsId.indexOf(room) === -1){
+      this.foundRoomsId.push(room);
+      this.navigationTips.push('Keep moving forward to room: '+ room);
+    } 
+  }
+
+  public getDirections(){
+    console.log(this.navigationTips)
+    return this.navigationTips;
+  }
+
+  private defineMovingOrientation(orientation:boolean, currentPosition: IterationBlock){
+    if(orientation){
+      if(this.axis_movment){
+        this.isInContrastToRoomY(currentPosition);
+      }else{
+         this.isInContrastToRoomX(currentPosition);
+      }
+     }
+      else  {
+        if(this.axis_movment){
+          this.isInContrastToRoomX(currentPosition);
+        }else{
+          this.isInContrastToRoomY(currentPosition);
+        }
+      }
+  }
+
+  private directionChange(currentPosition: IterationBlock, previousPosition:IterationBlock, direction: boolean){
+    let foundRoom = this.foundRoomsId.pop();
+    this.foundRoomsId.push(foundRoom as string);
+    if(foundRoom === undefined) //foundRoom = this.buildingScope[0].room.id;
+    { const found = this.buildingScope.find( room => {
+      return room.floor === this.markedFloor;
+    })
+    foundRoom = found?.room.id;
+    }
+    this.axis_movment = !this.axis_movment;
+    if(direction)
+    {
+      if((currentPosition.y > previousPosition.y && currentPosition.x > previousPosition.x) || (currentPosition.y < previousPosition.y && currentPosition.x < previousPosition.x))
+        this.navigationTips.push("Turn right at room: "+ foundRoom);
+      else this.navigationTips.push("Turn left at room: "+ foundRoom);
+
+    }
+    else{
+      if((currentPosition.y > previousPosition.y && currentPosition.x > previousPosition.x) || (currentPosition.y < previousPosition.y && currentPosition.x < previousPosition.x))
+           this.navigationTips.push("Turn left at room: "+ foundRoom);
+      else this.navigationTips.push("Turn right at room: "+ foundRoom);
+    }
+   
+  }
 }

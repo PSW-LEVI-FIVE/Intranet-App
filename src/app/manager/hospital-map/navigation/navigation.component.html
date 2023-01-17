@@ -1,4 +1,4 @@
-<mat-form-field class="combobox" appearance="outline">
+<mat-form-field class="combobox-source" appearance="outline">
     <mat-label>Navigate from:</mat-label>
      <mat-select [(ngModel)]="selectedFromRoom" (selectionChange)="navigate()" name="type" required>
         <mat-option   [value]="undefined">
@@ -9,7 +9,7 @@
         </mat-option>
     </mat-select> 
 </mat-form-field>
-<mat-form-field class="combobox" appearance="outline">
+<mat-form-field class="combobox-destination" appearance="outline">
     <mat-label>Navigate to:</mat-label>
      <mat-select [(ngModel)]="selectedToRoom" (selectionChange)="navigate()" name="type" required>
         <mat-option *ngFor="let room of filterRooms()" [value]="room">

@@ -14,8 +14,8 @@ export class RoomMapService {
   apiHost: string = 'http://localhost:5000/';
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-  private mapHeight = 500;
-  private mapWidth = 800;
+  private mapHeight = 580;
+  private mapWidth = 880;
 
   private defaultRoomHeight = 80;
   private defaultRoomWidth = 80;

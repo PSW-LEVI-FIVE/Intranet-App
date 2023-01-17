@@ -24,6 +24,7 @@ export class FloorMapComponent implements OnInit {
   clickInfo:any
   formVisible: any="hidden";
   selectedFloor: any;
+  buildingId: number = 0;
 
   constructor(
     private toastService: ToastrService, 
@@ -37,12 +38,13 @@ export class FloorMapComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.floorMapService.getFloorsByBuilding(params['id']).subscribe(res => {
+        this.buildingId = params['id'];
         this.data = res;
         this.svg  = this.floorMapService.createSVG();
         this.floors = this.floorMapService.createRectangles(this.svg,this.data)
         this.floorsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)
-        this.addOnClick(this.floors)
-      this.markFloor(this.floors)
+        //this.addOnClick(this.floors)
+      this.markFloor(this.floors, this)
       this.showRooms(this.floors, this.router)
       this.showDestinationFloor();
       })
@@ -65,7 +67,7 @@ export class FloorMapComponent implements OnInit {
     if(floor) d3.select('#id' + floor.id).style("fill",'#d7ee00');
   }
 
-  addOnClick(svg:any){
+  /*addOnClick(svg:any){
     svg.on("click", (d:any, i:any) =>{
       this.formVisible = "visible";
       this.selectedFloor = i;
@@ -73,18 +75,23 @@ export class FloorMapComponent implements OnInit {
       this.floorMapService.getFloorById(i.id).subscribe(res => {this.selectedFloor=res;})
     })
 
-  }
+  }*/
   showRooms(svg:any, router:any){
     svg.on("dblclick", function(d:any, i:any){
       router.navigate(['manager/room-map/'+ i.id]);
       
     })
   }
-  markFloor(svg:any){
-    svg.on('mouseover', function(this:any,d:any,i:any,) { 
-      d3.selectAll("rect").style("fill",'#d7d5db');
-      d3.select(this).style("fill","#9e91bd")})
-  }
+  markFloor(svg:any, component:FloorMapComponent){
+    svg.on('click', function(this:any,d:any,i:any,) {
+      component.formVisible = "visible";
+      component.selectedFloor = i;
+
+      component.floorMapService.getFloorById(i.id).subscribe(res => {component.selectedFloor=res; 
+      d3.selectAll("rect").style("fill",'#ffffff');
+      d3.select(this).style("fill","#9e91bd")
+    })
+  })}
 
   public updateFloor(): void {
     if (!this.isValidInput()) return;

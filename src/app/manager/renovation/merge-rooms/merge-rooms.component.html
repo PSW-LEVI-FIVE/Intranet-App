@@ -27,7 +27,7 @@
             </mat-form-field> 
           </div>
           <div>
-            <button mat-button class="quit-button" (click)="abortRenovation()" (click)="addEvent(5)">Quit</button>
+            <button mat-button class="quit-button" (click)="abortRenovation()" (click)="addEvent(5)" style="margin-top: 12%;">Quit</button>
             <button mat-button class="next-button" matStepperNext (click)="getFreeAppointments()" (click)="addEvent(1)">Next</button>
           </div>
       </form>
@@ -71,7 +71,7 @@
             </div>
           <div>
             <button mat-button class="quit-button" (click)="abortRenovation()" (click)="addEvent(5)">Quit</button>
-            <button mat-button matStepperPrevious class="step-button" style="margin-left: 7%; margin-top: 32%;">Back</button>
+            <button mat-button matStepperPrevious class="step-button" style="margin-left: 7%; margin-top: 30%;">Back</button>
             <button mat-button matStepperNext class="step-button" (click)="approveRenovation()" (click)="addEvent(3)">Next</button>
           </div>
         </form>

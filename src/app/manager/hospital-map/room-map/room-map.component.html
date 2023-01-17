@@ -1,78 +1,100 @@
-<h1 class="title">Room map</h1>
 <div class="container">
-
-  <div class="navigation-container" *ngIf="!navigation">
-    <label style="font-size: 18px;">Navigation</label>
-    <ul *ngFor="let item of textNavigation" style="size: 500;">
-      <li>{{item}}</li>
-    </ul>
+  
+  <div class="item-container" style="margin-top: 10px;">
+  <div id="svgDiv" class="mapa" style="height: 580px; width: 880px;">
+  </div>
   </div>
 
-  <div id="svgDiv" class="mapa" text-align="left" style="height: 500px; width: 800px;">
-  </div>
-  <div style="margin-left: 30px; height:600px; width:500px ">
-    <mat-tab-group>
-      <mat-tab label="Room search" style="margin-bottom:40px">
-        <app-search-rooms style="margin-bottom:40px; margin-left:30px" (newItemEvent)="highlight($event)"
+  <div class="item-container">
+    <div style="margin-left: 20px; height:650px; width:650px; border-left: solid 3px #232629; padding-left: 1rem; padding-right: 1rem;">
+      <div style="float: left; height: 400px; width: 650px;">
+      <h2 class="title">Room map</h2>
+      <mat-tab-group>
+        <mat-tab label="Room search" style="margin-bottom:40px">
+         <app-search-rooms style="margin-bottom:40px; margin-left:40px; margin-top: 30px;" (newItemEvent)="highlight($event)"
           (emit)="openRoomEquipmentSearch($event)" [floorID]="floorId">
 
-        </app-search-rooms>
-      </mat-tab>
-      <mat-tab label=" equipment search">
-        <div>
-
-          <div>
-            <mat-form-field appearance="outline" style="width:250px; margin-right:10px">
-              <input matInput placeholder="Equipment name" [(ngModel)]="searchFloorInput.name">
+         </app-search-rooms>
+        </mat-tab>
+        <mat-tab label=" Equipment search">
+          <div style="display: inline-flex; justify-content: center;">
+            <mat-form-field appearance="outline" style="margin-right:10px; margin-top: 15px;">
+              <input matInput placeholder="Equipment name" [(ngModel)]="searchFloorInput.name" style="font-size: 12px;">
             </mat-form-field>
-          </div>
-          <div>
-            <input type="number" matInput style="border-radius:5px; width:250px; height:40px; border-color:black"
+            <input type="number" matInput style="border: solid 0.5px;border-radius:5px; width:80px; height:45px; border-color:black; margin-top: 23px;"
               [(ngModel)]="searchFloorInput.quantity" min="0">
-          </div>
-          <div><button class="button-2" (click)="searchRoomsByFloorContainigEquipment()">Search</button></div>
-
-          <div>
-            <ul class="list">
-              <li *ngFor="let room of searchedRooms">{{room.id}} {{room.roomNumber}}</li>
-            </ul>
-          </div>
+            <button mat-flat-button color="primary" (click)="searchRoomsByFloorContainigEquipment()" style="height: 50px; margin-top: 23px; margin-left: 10px;">Search rooms by equipment</button>
+         </div>
+         <div>
+          <ul class="list">
+            <li *ngFor="let room of searchedRooms">{{room.id}} - {{room.roomNumber}}</li>
+          </ul>
+         </div>
+        </mat-tab>
+        <mat-tab label="Renovation">
+         <div class="option-container">
+          <div><button  mat-flat-button color="primary" (click)="toggleCreate()" class="renovation-buttons"><mat-icon>add</mat-icon>Add new room</button></div>
+          <div><button  mat-flat-button color="primary" (click)="toggleMerge()" class="renovation-buttons"><mat-icon> call_merge</mat-icon>Merge rooms</button></div>
+          <div><button  mat-flat-button color="primary" (click)="toggleSplit()" class="renovation-buttons"><mat-icon> call_split</mat-icon>Split room</button></div>
         </div>
       </mat-tab>
-      <mat-tab label="Renovation">
-        <div class="option-container">
-
-          <div><button mat-fab color="primary" (click)="toggleCreate()">Add</button></div>
-          <div>
-            <button mat-fab color="primary" (click)="toggleMerge()">Merge</button>
-          </div>
-          <div>
-            <button mat-fab color="primary" (click)="toggleSplit()">Split</button>
-          </div>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>info</mat-icon>
+          <label>Information</label>
+        </ng-template>
+        <div style="margin: 10px">
+          <label style="font-size: 17px;">You are currently on floor: <b>{{floorId}}</b></label><br>
+        </div>
+        <div style="margin: 10px">
+          <label style="font-size: 17px;">In order to see further information about specific room, <b>double-click</b> on room of interest.</label>
+        </div>
+        <div style="margin: 10px">
+          <label style="font-size: 17px;">If you have trouble finding your way around our hospital, use <b>navigation.</b>
+           Navigation text will be represented below.</label>
+        </div>
+        <div style="margin-top: 20px; margin-left: 10px;">
+          <label style="font-size: 17px;" *ngIf="!navigation">Instructions:</label>
+        </div>
+        <div class="navigation-container" *ngIf="!navigation">
+              <mat-list *ngFor="let item of textNavigation" style="margin-left: 25px;" >
+                <mat-list-item *ngIf="item === textNavigation[0] || item === textNavigation.slice(-1)[0]"><mat-icon> location_on</mat-icon>{{item}}</mat-list-item>
+                <mat-list-item *ngIf="item !== textNavigation[0] && item !== textNavigation.slice(-1)[0]" class="navigation-text">{{item}}</mat-list-item>
+              </mat-list>
         </div>
       </mat-tab>
     </mat-tab-group>
-
   </div>
-  <div *ngIf="selectedRoomModel">
-    <h1 class="card-title"> Room information </h1>
-    <table style="margin-left:40px;">
-      <mat-form-field appearance="fill">
-        <mat-label>Room ID</mat-label>
-        <input matInput disabled [value]="selectedRoomModel.id">
-      </mat-form-field><br>
-      <mat-form-field appearance="fill">
-        <mat-label>Room name</mat-label>
-        <input id="roomNameInput" matInput [(ngModel)]="selectedRoomModel.roomNumber">
-      </mat-form-field><br>
-      <button mat-stroked-button (click)="roomSchedule(selectedObjects.id)"><span>Room schedule</span> </button>
   
-    </table>
-    <div style="margin-top: 30px; margin-bottom: 15px; margin-left: 40px;">
-      <button class="confirmButton" mat-stroked-button (click)="updateRoom()">
-  
-        Submit
-      </button>
+  <!--<div style="float: left;clear: left; height: 250px; width: 650px;">
+    <div class="navigation-container" *ngIf="!navigation">
+      <label style="font-size: 18px; text-align: center; margin-left: 30px;">Navigation tips:</label>
+          <mat-list *ngFor="let item of textNavigation" style="margin-left: 25px;" >
+            <mat-list-item *ngIf="item === textNavigation[0] || item === textNavigation.slice(-1)[0]"><mat-icon> location_on</mat-icon>{{item}}</mat-list-item>
+            <mat-list-item *ngIf="item !== textNavigation[0] && item !== textNavigation.slice(-1)[0]" class="navigation-text">{{item}}</mat-list-item>
+          </mat-list>
     </div>
+  </div>-->
+   
+  </div>
 
 </div>
+
+
+</div>
+
+    
+    <!--<div *ngIf ="selectedRoomModel">
+        <h1 class="card-title">  Room information  </h1>
+        <table style="margin-left:40px;">
+            <mat-form-field appearance="fill">
+                <mat-label>Room ID</mat-label>
+                <input matInput disabled [value]="selectedRoomModel.id">
+            </mat-form-field><br>
+            <mat-form-field  appearance="fill">
+                <mat-label>Room name</mat-label>
+                <input id="roomNameInput" matInput [(ngModel)]="selectedRoomModel.roomNumber">
+            </mat-form-field><br>
+            <button mat-stroked-button (click)="roomSchedule(selectedObjects.id)"><span>Room schedule</span> </button>
+
+  </div>-->

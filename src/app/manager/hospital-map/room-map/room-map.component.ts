@@ -82,11 +82,6 @@ export class RoomMapComponent implements OnInit {
         this.roomsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)   
         this.showInformationBasic(this.rooms);
         this.markRoom(this.rooms);
-        if (this.complexRooms) {
-          this.showInformationComplex(this.complexRooms, this);
-          this.complexRooms.forEach((room: any) => this.markRoom(room));
-        }
-
         this.textNavigation = [];
         this.showDestinationRoom();
         this.visualizeNavigation(params['id']);
@@ -113,7 +108,8 @@ export class RoomMapComponent implements OnInit {
 
   private visualizeNavigation(floorId: string): void {
     this.navigationService.visualizeNavigation(this.svg, floorId);
-
+    this.textNavigation = this.navigationService.getDirections();
+    if(this.textNavigation.length !== 0) this.navigation = false;
   }
   private showInformationBasic(svg: any) {
     svg.on('dblclick', (d: any, i: any) => {

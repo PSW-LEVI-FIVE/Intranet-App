@@ -13,13 +13,13 @@ export class FloorMapService {
   apiHost: string = 'http://localhost:5000/';
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-  private mapHeight = 500;
-  private mapWidth = 800;
+  private mapHeight = 580;
+  private mapWidth = 880;
 
   private defaultFloorHeight = 80;
-  private defaultFloorWidth = 700;
+  private defaultFloorWidth = 750;
   private xOffset = 50;
-  private yOffset = 350;
+  private yOffset = 450;
   private decrement = 100;
 
   constructor(private http: HttpClient) { }
@@ -81,6 +81,7 @@ export class FloorMapService {
     .attr("x", function(d:any){ return d.xCoordinate })
     .attr("y", function(d:any){ return d.yCoordinate})
     .attr("id", function(d:any){ return 'id'+ d.id})
+    .attr('cursor', 'pointer')
     .on("click", function(data2:any) {
       
     });
