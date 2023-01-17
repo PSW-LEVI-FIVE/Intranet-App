@@ -18,6 +18,7 @@ import { RoomOverviewComponent } from './room-overview/room-overview.component';
 import { EquipmentRelocationOverviewComponent } from './equipment-relocation-overview/equipment-relocation-overview.component';
 import { RoomRenovationOverviewComponent } from './room-renovation-overview/room-renovation-overview.component';
 import { RoomInformationComponent } from './room-information/room-information.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -46,6 +47,8 @@ import { RoomInformationComponent } from './room-information/room-information.co
     FormsModule,
     MatInputModule,
     MatSelectModule,
-  ]
+    MatDialogModule
+  ],
+  entryComponents: [ CreateBuildingComponent ]
 })
 export class HospitalMapModule { }

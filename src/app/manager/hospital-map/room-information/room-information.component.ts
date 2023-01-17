@@ -34,6 +34,7 @@ export class RoomInformationComponent implements OnInit {
     floorId:any
     roomId:any
     selectedObjects:any
+    roomIdProba:number =4
     data:any;
     svg:any;
     rooms:any;
@@ -61,7 +62,9 @@ export class RoomInformationComponent implements OnInit {
     });
 
   }
-
+  navigate(where: string) {
+    this.router.navigate(["/manager" + where])
+  }
   roomSchedule(id:number){
     this.router.navigate(['manager/room-schedule/'+id]);
   }

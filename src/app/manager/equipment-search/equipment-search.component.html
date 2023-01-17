@@ -1,0 +1,30 @@
+<div style="background-color: rgb(68, 223, 232);">
+        
+            
+    <mat-form-field appearance="outline">
+      <input matInput placeholder="Equipment name" [(ngModel)]="searchEquipmentInput.name">
+    </mat-form-field>
+    <mat-form-field >
+    <input   appearance="outline"  type="number" matInput class="quantity-search" [(ngModel)]="searchEquipmentInput.quantity" min="0">
+  </mat-form-field>
+    <button mat-raised-button color="primary"  (click)="searchEquipmentInRoom()">Search</button>
+    </div>
+    <div>
+
+       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Equipment name  </th>
+          <td mat-cell *matCellDef="let equipment"> {{equipment.name}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef> Quantity  </th>
+          <td mat-cell *matCellDef="let equipment"> {{equipment.quantity}} </td>
+        </ng-container>
+
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+</div>

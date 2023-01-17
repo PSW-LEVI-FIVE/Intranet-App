@@ -64,6 +64,7 @@ export class RoomMapComponent implements OnInit {
       this.checkNumberOfRooms()
     });
 
+
     this.route.params.subscribe((params: Params) => {
       this.roomMapService.getRoomsByFloor(params['id']).subscribe(res => {
         this.data = res;

@@ -43,6 +43,8 @@ import { RenovationStatisticsScheduleModule } from './renovation-statistics-sche
 import { TeamBuildingInvitationsComponent } from './team-building-invitations/team-building-invitations.component';
 import { InvitationMenuComponent } from './invitation-menu/invitation-menu.component';
 import { InvitationListComponent } from './invitation-list/invitation-list.component';
+import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { EquipmentSearchComponent } from './equipment-search/equipment-search.component';
 
 
 
@@ -192,6 +194,10 @@ const routes: Routes = [
       {
         path:'invitation-list',
         component:InvitationListComponent
+      },
+      {
+        path:'equipment-search/:id',
+        component:EquipmentSearchComponent
       }
     ]
 
@@ -215,11 +221,18 @@ const routes: Routes = [
     RenovationStatisticsScheduleComponent,
     TeamBuildingInvitationsComponent,
     InvitationMenuComponent,
-    InvitationListComponent
+    InvitationListComponent,
+    EquipmentSearchComponent
 
 
 
   ],
+  providers:[ 
+    {
+      provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false }
+    }
+  ],
+  
   exports: [RouterModule],
   imports: [
     CommonModule,
@@ -230,7 +243,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ExaminationReportStatisticsModule,
     SchedulingAppointmentStatisticsModule,
-    SharedModule
+    SharedModule,
+    MatDialogModule
   ]
 })
 export class ManagerModule { }

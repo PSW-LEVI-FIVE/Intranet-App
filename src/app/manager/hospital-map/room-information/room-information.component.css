@@ -1,36 +1,53 @@
-.button-2 {
-    background-color: rgba(51, 51, 51, 0.05);
-    border-radius: 8px;
-    border-width: 0;
-    color: #333333;
-    cursor: pointer;
-    display: inline-block;
-    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    list-style: none;
-    margin: 0;
-    padding: 10px 12px;
-    text-align: center;
-    transition: all 200ms;
-    vertical-align: baseline;
-    white-space: nowrap;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-  
 
-  }
-
- .card-app
- {
-  width: 300px;
-  background-color: gainsboro;
-  margin-left: 40%;
-  
- }
- table {
-  width: 100%;
+.card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  padding-top: 150px;
+  margin: auto;
+  margin-left: 300px;
+  gap: 50px;
 }
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  width: 300px;
+  height: 400px;
+  cursor: pointer;
+}
+
+.img-holder {
+  flex: 1;
+}
+
+.img-holder:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: gray;
+}
+.content-holder {
+  flex: 1;
+  text-align: center;
+}
+
+.img-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-holder .mat-icon {
+  font-size: 80px;
+  width: 80px;
+  height: 80px;
+}
+
 

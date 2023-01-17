@@ -6,6 +6,8 @@ import * as d3 from 'd3';
 import { ToastrService } from 'ngx-toastr';
 import { IFloor } from '../model/floor.model';
 import { NavigationService } from '../services/navigation.service';
+import { CreateFloorComponent } from '../create-floor/create-floor.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-floor-map',
@@ -32,7 +34,8 @@ export class FloorMapComponent implements OnInit {
     private buildingMapService:BuildingMapService,
     private route: ActivatedRoute, 
     private router:Router,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    public dialog:MatDialog
   ) { }
   
   ngOnInit(): void {
@@ -40,6 +43,7 @@ export class FloorMapComponent implements OnInit {
       this.floorMapService.getFloorsByBuilding(params['id']).subscribe(res => {
         this.buildingId = params['id'];
         this.data = res;
+        console.log(this.data)
         this.svg  = this.floorMapService.createSVG();
         this.floors = this.floorMapService.createRectangles(this.svg,this.data)
         this.floorsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)
@@ -51,7 +55,14 @@ export class FloorMapComponent implements OnInit {
     });
 
   }
-
+  openDialog(): void {
+    const createFloor = this.floorMapService.handleFloorGeneration(this.data);
+    if(createFloor)
+    this.route.params.subscribe((params: Params) => createFloor.buildingId = params['id']);
+    const dialogRef = this.dialog.open(CreateFloorComponent, {
+      data: {state: {data: createFloor}},
+  });
+}
   public toggleCreate(): void {
     const createFloor = this.floorMapService.handleFloorGeneration(this.data);
     if(createFloor) {

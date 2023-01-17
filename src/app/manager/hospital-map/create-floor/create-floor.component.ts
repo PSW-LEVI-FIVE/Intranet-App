@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY } from 'rxjs';
@@ -15,10 +16,15 @@ export class CreateFloorComponent implements OnInit {
 
   public createFloor: CreateFloor = <CreateFloor>{};
 
-  constructor(private router: Router, private floorService: FloorMapService, private toastService: ToastrService) { }
+  constructor(private router: Router,
+     private floorService: FloorMapService,
+     private toastService: ToastrService,
+     public dialogRef: MatDialogRef<CreateFloorComponent>,
+      @Inject(MAT_DIALOG_DATA) public data: any,) { }
 
   ngOnInit(): void {
-    this.createFloor = <CreateFloor>history.state.data;
+    //CreateFloor>history
+    this.createFloor = this.data.state.data;
     if(!this.createFloor) {
       this.router.navigate([`manager/building-map`]);
     }

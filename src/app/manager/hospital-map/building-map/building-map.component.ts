@@ -4,8 +4,11 @@ import { BuildingMapService } from '../services/building-map.service';
 import { CreateBuilding, IBuilding } from '../model/building.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
+import { NgZone} from '@angular/core'
 import { NavigationService } from '../services/navigation.service';
 import * as d3 from 'd3';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateBuildingComponent } from '../create-building/create-building.component';
 
 @Component({
   selector: 'app-building-map',
@@ -29,7 +32,9 @@ export class BuildingMapComponent implements OnInit {
     private buildingMapService: BuildingMapService, 
     private router:Router, 
     private toastService: ToastrService,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    public dialog:MatDialog,
+    private zone: NgZone
   ) { }
 
   ngOnInit(): void {
@@ -44,11 +49,36 @@ export class BuildingMapComponent implements OnInit {
       this.showFloors(this.buildingsMap, this.router);
     })
   }
+  openDialog(): void {
+    const createBuilding = this.buildingMapService.handleBuildingGeneration(this.buildings);
+    const dialogRef = this.dialog.open(CreateBuildingComponent, {
+      data: {state: {data: createBuilding}},
+  });
+    
+
+    dialogRef.afterClosed().subscribe(()=> {
+      
+      this.buildingMapService.getBuildings().subscribe(res => {
+        this.buildings = res;
+        this.dataSource.data = this.buildings;
+        //this.svg  = this.buildingMapService.createSVG();
+        this.buildingsMap = this.buildingMapService.createRectangles(this.svg, this.buildings);
+        this.buildingsText = this.buildingMapService.addTextToRectangles(this.svg, this.buildings);
+        this.addOnClick(this.buildingsMap,this);
+        //this.showFloors(this.buildingsMap, this.router);
+      })
+    })
+      
+  
+  }
 
   public toggleCreate(): void {
     const createBuilding = this.buildingMapService.handleBuildingGeneration(this.buildings);
     if(createBuilding) {
-      this.router.navigate(['manager/create-building'], {state: {data: createBuilding}});
+      //this.router.navigate(['manager/create-building'], {state: {data: createBuilding}});
+      ///onst dialogRef = this.dialog.open(CreateBuildingComponent, {
+        //data: {state: {data: createBuilding}},
+      //});
     } else {
       this.toastService.info('Maximum number of buildings reached');
     }
@@ -75,13 +105,12 @@ export class BuildingMapComponent implements OnInit {
     })
   }
   public updateBuilding(): void {
-    if (!this.isValidInput()) return;
+    
+    console.log(this.selectedBuilding)
     this.buildingMapService.updateBuilding(this.selectedBuilding);
   }
 
-  private isValidInput(): boolean {
-    return this.selectedBuilding?.number != '' && this.selectedBuilding?.floors.toString() != '';
-  }
+
 }
 
 
