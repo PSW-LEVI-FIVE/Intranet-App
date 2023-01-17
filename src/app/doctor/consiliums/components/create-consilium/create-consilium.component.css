@@ -1,8 +1,8 @@
 .mat-form-field {
     width: 100%;
   }
-  
-  
+
+
   .form-wrapper {
     display: flex;
     height: 100%;
@@ -12,7 +12,6 @@
   }
 
   .template-form-box {
-    border: 1px solid lightgray;
     text-align: center;
     display: flex;
     flex-direction: column;

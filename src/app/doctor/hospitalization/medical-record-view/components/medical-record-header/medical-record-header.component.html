@@ -1,5 +1,10 @@
 <div class="medical-record-header">
     <div class="left-side-wrapper">
+      <button id="create-button" mat-raised-button color="primary" (click)="showCreateForm()">
+        <mat-icon>add</mat-icon>
+        CREATE
+      </button>
+      <div class="search-side">
         <mat-form-field class="record-search">
             <mat-label>UID</mat-label>
             <input matInput placeholder="Ex. 12199121001" [formControl]="searchText">
@@ -18,9 +23,5 @@
             </span>
         </span>
     </div>
-  <!--  <button id="create-button" mat-raised-button color="primary" (click)="showCreateForm()">
-        <mat-icon>add</mat-icon>
-        Create
-    </button>-->
-
+    </div>
 </div>
