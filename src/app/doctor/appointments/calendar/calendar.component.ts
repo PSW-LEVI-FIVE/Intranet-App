@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { catchError, EMPTY, subscribeOn, Subscription } from 'rxjs';
 import { MenuService } from 'src/app/shared/services/menu.service';
 import { AppointmentsService } from '../services/appointments.service';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { CreateFormComponent } from '../create-form/create-form.component';
+import { CreateConsiliumComponent } from '../../consiliums/components/create-consilium/create-consilium.component';
 
 export interface ITimeSpan {
   hours: number,
@@ -58,7 +61,8 @@ export class CalendarComponent implements OnInit {
   constructor(
     private readonly appointmentService: AppointmentsService,
     private readonly router: Router,
-    private readonly menuService: MenuService
+    private readonly menuService: MenuService,
+    private readonly dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -78,6 +82,23 @@ export class CalendarComponent implements OnInit {
 
     this.loadAppointments(this.selected)
 
+  }
+  
+  createAppointment() {
+    const dialogRef = this.dialog.open(CreateFormComponent, {
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadAppointments(this.selected)
+    });
+  }
+
+  createConsilium() {
+    const dialogRef = this.dialog.open(CreateConsiliumComponent, {
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
   loadAppointments(date: Date) {

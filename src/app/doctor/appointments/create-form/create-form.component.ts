@@ -9,6 +9,7 @@ import { FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { catchError, EMPTY } from 'rxjs';
+import { MatDialogRef } from '@angular/material/dialog';
 
 export interface ISelectPatient {
   id: number;
@@ -51,8 +52,8 @@ export class CreateFormComponent implements OnInit {
     private readonly patientService: PatientService,
     private readonly roomService: RoomService,
     private readonly toastService: ToastrService,
-    private readonly router: Router
-
+    private readonly router: Router,
+    public readonly dialogRef: MatDialogRef<CreateFormComponent>,
   ) { }
 
   ngOnInit(): void {
@@ -109,6 +110,7 @@ export class CreateFormComponent implements OnInit {
       }))
       .subscribe(res => {
         this.toastService.success("Successfully added appointment")
+        this.dialogRef.close();
         setTimeout(() => {
           this.router.navigate(["doctor/appointments"])
         }, 1000)

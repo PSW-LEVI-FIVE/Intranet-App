@@ -16,6 +16,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { HospitalMapModule } from "./manager/hospital-map/hospital-map.module";
 import { AuthInterception } from "./shared/login/model/auth.interceptor";
 import { HospitalizationModule } from "./doctor/hospitalization/hospitalization.module";
+import { MAT_DIALOG_DEFAULT_OPTIONS } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { HospitalizationModule } from "./doctor/hospitalization/hospitalization.
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterception,
       multi: true
-    }
+    },
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
 
   ],
   bootstrap: [AppComponent]

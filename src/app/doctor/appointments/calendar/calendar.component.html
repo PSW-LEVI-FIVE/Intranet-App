@@ -12,8 +12,12 @@
                 <button mat-menu-item (click)="navigate('/doctor/appointments/createfor')">
                     For Co-Worker
                 </button>
-                <button mat-menu-item (click)="navigate('/doctor/appointments/create')">
+                <!-- (click)="navigate('/doctor/appointments/create')" -->
+                <button mat-menu-item (click)="createAppointment()">
                     For Myself
+                </button>
+                <button mat-menu-item (click)="createConsilium()">
+                    Consilium
                 </button>
             </mat-menu>
         </div>
