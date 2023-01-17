@@ -3,6 +3,20 @@
     margin: auto;
     padding-top: 40px;
     height: 91vh;
+    display: flex;
+    justify-content: center;
+}
+
+create-btn{
+  max-height: 5%;
+  height: 5%;
+  padding-left: 5%;
+}
+
+.header-table-wrapper{
+  width: 90%;
+  max-width: 90%;
+  min-width: 90%;
 }
 
 table {
@@ -10,6 +24,7 @@ table {
     margin: auto;
     width: 80%;
     max-width: 80%;
+    min-width: 80%;
     text-align: center;
     color: black;
     border-collapse: separate;

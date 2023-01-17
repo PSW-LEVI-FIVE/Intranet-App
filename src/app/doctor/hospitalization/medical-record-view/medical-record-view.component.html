@@ -1,5 +1,13 @@
 <div class="medical-record-view">
     <app-loader [isLoading]="isLoading"></app-loader>
+
+    <div class="create-btn">
+    <button id="create-button" mat-raised-button color="primary"  (click)="showCreateForm()">
+      <mat-icon>add</mat-icon>
+      CREATE
+    </button>
+    </div>
+    <div class="header-table-wrapper">
     <app-medical-record-header [medicalRecord]="medicalRecord" (create)="openCreate()" (search)="search($event)">
     </app-medical-record-header>
     <table class="hosp-items">
@@ -62,6 +70,7 @@
             </tr>
         </tbody>
     </table>
+    </div>
     <app-create-hospitalization-form (closeModalEmitter)="closeCreate()" *ngIf="showCreate"
         (createSuccess)="getHospitalizations()">
     </app-create-hospitalization-form>
