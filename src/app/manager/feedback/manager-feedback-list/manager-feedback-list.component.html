@@ -2,7 +2,7 @@
 <div class="FeedbackViewPage">
     <h1 class="header" style="text-align:center;transform: scale(1.5)">Hospital feedbacks</h1>
     <div class="tableContainer">
-        <table mat-table [dataSource]="dataSource" class="table">
+        <table mat-table [dataSource]="dataSource" class="table mat-elevation-z0">
             <ng-container matColumnDef="Patient">
                 <th mat-header-cell *matHeaderCellDef style="width: 250px;" class="cell-center text tableHeader"> Patient </th>
                 <td mat-cell *matCellDef="let feedback" class="cell-center text">{{feedback.patient}}</td>

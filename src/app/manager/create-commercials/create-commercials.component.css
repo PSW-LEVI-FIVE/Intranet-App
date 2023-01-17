@@ -18,7 +18,7 @@
     background-color: white;
 	border-radius: 10px;
 	padding:100px 100px;
-	box-shadow: rgba(0, 0, 0, 0.56) 0px 2px 24px 8px, rgba(0, 0, 0, 0.36) 0px 0px 0px 0px !important;
+	box-shadow: rgba(0, 0, 0, 0.20) 0px 2px 24px 8px, rgba(0, 0, 0, 0.36) 0px 0px 0px 0px !important;
 }
 input{
 	border-bottom:1px solid rgba(0, 0, 0, 0.56) !important;

@@ -7,9 +7,8 @@
     padding-bottom: 24px;
     padding-left: 16px;
     padding-right: 16px;
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 2px 24px 8px, rgba(0, 0, 0, 0.36) 0px 0px 0px 0px !important;
+    box-shadow: rgba(0, 0, 0, 0.20) 0px 2px 24px 8px, rgba(0, 0, 0, 0.36) 0px 0px 0px 0px;
 }
-
 .mat-cell {
   padding: 0px 0px 0px 0px !important;
   text-align: center;
@@ -143,6 +142,6 @@ th{
     background-color: white;
     width: 150px;
     border-radius: 3px;
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 2px 24px 8px, rgba(0, 0, 0, 0.36) 0px 0px 0px 0px !important;
+    box-shadow: rgba(0, 0, 0, 0.20) 0px 2px 24px 8px, rgba(0, 0, 0, 0.36) 0px 0px 0px 0px !important;
 
 }
