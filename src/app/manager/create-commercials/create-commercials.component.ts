@@ -34,6 +34,12 @@ export class CreateCommercialsComponent implements OnInit {
         this.toastService.success("Your commercial recorded!")
     });
   }
+  clearForm()
+  {
+    this.commercial.title = "";
+    this.commercial.text = "";
+    this.commercial.pictureUrl = "";
+  }
  rememberEvent(ev : Event)
  {
   this.eventt = ev;
