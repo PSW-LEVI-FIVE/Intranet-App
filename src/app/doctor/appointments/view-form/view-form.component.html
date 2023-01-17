@@ -12,7 +12,7 @@
     </mat-form-field>
 
     <mat-form-field inputs appearance="fill">
-      <mat-label>Date {{date}}</mat-label>
+      <mat-label>Date</mat-label>
       <input matInput [matDatepicker]="date" [(ngModel)]="newStartDate" required>
       <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
       <mat-datepicker #date></mat-datepicker>

@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="calendar-body">
-            <app-calendar-column *ngFor="let col of weekIntervals" [intervals]="col" [showApps]="appointmentsShown">
+            <app-calendar-column *ngFor="let col of weekIntervals" [intervals]="col" [showApps]="appointmentsShown" >
             </app-calendar-column>
             <app-loader [isLoading]="isLoading"></app-loader>
         </div>
