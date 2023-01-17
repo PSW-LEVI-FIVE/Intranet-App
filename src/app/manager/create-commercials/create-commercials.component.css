@@ -1,16 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&subset=greek-ext');
-
-body{
-	background-image: url("https://images.pexels.com/photos/891252/pexels-photo-891252.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-	background-position: center;
-    background-origin: content-box;
-    background-repeat: no-repeat;
-    background-size: cover;
-	min-height:100vh;
-	font-family: 'Noto Sans', sans-serif;
-}
 .text-center{
-	color:#fff;	
+	color:rgba(35,38,41,1);	
 	text-transform:uppercase;
     font-size: 23px;
     margin: -50px 0 80px 0;
@@ -26,46 +15,51 @@ body{
 	left:50%;
 	top:50%;
 	transform: translate(-50%,-50%);
-    background-color: rgba(35,38,41,1);
-	border-radius:3px;
-	padding:70px 100px;
+    background-color: white;
+	border-radius: 10px;
+	padding:100px 100px;
+	box-shadow: rgba(0, 0, 0, 0.56) 0px 2px 24px 8px, rgba(0, 0, 0, 0.36) 0px 0px 0px 0px !important;
+}
+input{
+	border-bottom:1px solid rgba(0, 0, 0, 0.56) !important;
 }
 .input-container{
 	position:relative;
 	margin-bottom:25px;
+	color:rgba(35,38,41,1);
 }
 .input-container label{
 	position:absolute;
 	top:0px;
 	left:0px;
 	font-size:16px;
-	color:#fff;	
+	color:rgba(35,38,41,1);	
     pointer-events:none;
 	transition: all 0.5s ease-in-out;
 }
 .input-container input{ 
   border:0;
-  border-bottom:1px solid #555;  
+  border-bottom:1px solid #fff;  
   background:transparent;
   width:100%;
   padding:8px 0 5px 0;
   font-size:16px;
-  color:#fff;
+  color:rgba(35,38,41,1);
 }
 .input-container input:focus{ 
  border:none;	
  outline:none;
- border-bottom:1px solid #e74c3c;	
+ border-bottom:1px solid rgba(35,38,41,1);	
 }
 .file-design{
   padding:8px 0 5px 0;
 }
 .btn{
-	color:#fff;
-	background-color:#e74c3c;
+	color:rgba(35,38,41,1);
+	border:2px solid rgba(35,38,41,1);
+	background-color:rgba(35,38,41,1);
 	outline: none;
-    border: 0;
-    color: #fff;
+    color: white;
 	padding:10px 20px;
 	text-transform:uppercase;
 	margin-top:50px;
@@ -78,4 +72,31 @@ body{
 	top:-12px;
 	font-size:12px;
 	
+}
+#fileDiv{
+	text-align:center;
+	border:thin solid rgba(35,38,41,1);
+	vertical-align: center;
+	height: 120px;
+  }
+
+#inputTag{
+	display: none;
+  }
+label{
+	cursor:pointer;
+	color:rgba(35,38,41,1);
+  }
+#paragraph {
+	text-align: center;
+	font-size:25px;
+  }
+.icon-display {
+	transform: scale(1.5);
+ }
+#centerDiv{
+	padding:12%;
+}
+#lbl{
+	color:rgba(35,38,41,1) !important;
 }

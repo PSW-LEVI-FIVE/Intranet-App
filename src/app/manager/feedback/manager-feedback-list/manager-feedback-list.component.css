@@ -1,6 +1,7 @@
 .tableContainer {
     margin-top: 32px;
-    background-color: #3f51b5;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
     vertical-align: middle;
     padding-top: 24px;
     padding-bottom: 24px;
@@ -40,11 +41,11 @@
   margin-bottom: 64px;
 }
 .underLine{
-  border-bottom: 1px #06b6d4;
+  border-bottom: 1px rgb(192,192,192);
 }
 
 .table {
-  background-color: #3f51b5; 
+  background-color: white; 
   width: 100%;
   border-spacing:16px 0px;
 }
@@ -57,7 +58,7 @@
   padding-right: 16px;
 }
 .confirmButton:hover{
-  background-color: #5398e7;
+  background-color: rgb(192,192,192);
   transition: 0.2s;
 }
 
@@ -83,7 +84,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #3660d4;
+    background-color: 	rgb(128,128,128);
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -101,7 +102,7 @@
   }
   
   input:checked + .slider {
-    background-color: #83bdfe;
+    background-color: rgb(192,192,192);
   }
   input:disabled + .slider {
     background-color: #525252;
@@ -123,17 +124,25 @@
     border-radius: 50%;
   }
 .text {
-    color: white !important;
+    color: rgba(35,38,41,1) !important;
     font-family: Garamond, serif !important;
     margin-bottom: 0px !important;
+}
+td{
+  font-size:18px !important;
+}
+th{
+  font-size:23px !important;
 }
 .header{
     font-family: Garamond, serif !important;
     margin-bottom: 0px !important;
 }
 .mat-stroked-button {
-    color: white;
-    background-color: #3f51b5;
+    color: rgba(35,38,41,1);
+    background-color: white;
     width: 150px;
     border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 2px 24px 8px, rgba(0, 0, 0, 0.36) 0px 0px 0px 0px !important;
+
 }

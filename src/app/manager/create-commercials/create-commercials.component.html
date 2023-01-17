@@ -1,17 +1,25 @@
 <div class="box">
 		<span class="text-center">Create advertisements</span>
 	<div class="input-container">
-    <input type="text" id="form2Example1" class="form-input input__field" [(ngModel)]="commercial.title" /> 
-		<label>Title</label>		
+    <input id="lbl" type="text" required=""  [(ngModel)]="commercial.title" /> 
+		<label >Title</label>		
 	</div>
 	<div class="input-container">		
-		<input type="text" required="" [(ngModel)]="commercial.text"/>
+		<input id="lbl" type="text" required="" [(ngModel)]="commercial.text"/>
 		<label>Text</label>
 	</div>
-  
-  <div style="vertical-align:center;">
-    <input type="file" size="60" class="file-design" style="float:left;" (change)="rememberEvent($event)" />
-    <img [style.visibility]="(commercial.pictureUrl != '')? 'visible' : 'hidden'" src="https://pdphmpovyeiqspzsxqzq.supabase.co/storage/v1/object/public/photos/{{commercial.pictureUrl}}" class="selected-img" width="120px" height="120px">
-  </div>
-		<button type="button" class="btn" (click)="selectFile();createCommercial()">submit</button>
+
+	<div id="fileDiv">
+		<label for="inputTag" >
+		<div id="centerDiv" [style.display]="(commercial.pictureUrl == '') ? 'block' : 'none'">
+			<div id="image-info-container">
+				<p id="paragraph" >Select Image </p>
+				<mat-icon class="icon-display" aria-hidden="false" aria-label="Example home icon" fontIcon="camera"></mat-icon>
+			</div>
+		</div>
+		  <img [style.display]="(commercial.pictureUrl != '') ? 'block' : 'none'" src="https://pdphmpovyeiqspzsxqzq.supabase.co/storage/v1/object/public/photos/{{commercial.pictureUrl}}" class="selected-img" style="width:100%;height:100%">
+		  <input type="file" id="inputTag" class="file-design" style="float:left;" (change)="rememberEvent($event)" />
+		</label>
+	  </div>
+	  <button type="button" class="btn" (click)="selectFile();createCommercial();clearForm()">submit</button>
 </div>
