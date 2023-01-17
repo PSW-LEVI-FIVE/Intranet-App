@@ -10,6 +10,7 @@ import { RenovationEventDto } from '../shared/renovation-event-dto';
 import { CreateEventDto } from '../shared/create-event-dto';
 import { AddEventDto } from '../shared/add-event-dto';
 import { RenovationDto } from '../shared/renovation-dto';
+import { IRoom } from '../../hospital-map/model/room.model';
 
 enum RoomTypes {
   NO_TYPE,
@@ -66,9 +67,12 @@ export class SplitRoomComponent implements OnInit {
               private renovationService: RenovationService) { }
 
   ngOnInit(): void {
+    const selectedRoom = <number>history.state.data;
+    this.splitDto.mainRoomId = selectedRoom;
+    this.splitDto.roomName = '';
+    this.checkFirstStepInput();
     this.route.params.subscribe(params => {
       this.floorId = params['floorId'];
-      this.loadRooms(this.floorId);
     });
   }
 
@@ -94,19 +98,15 @@ export class SplitRoomComponent implements OnInit {
  }
 
  public checkFirstStepInput(){
-  /*if(this.timeSlotDto.duration <= 0 || this.splitDto.mainRoomId === 0 || this.timeSlotDto.endDate === null){
-     this.nextStep = true;
-  }
-  else this.nextStep = false;*/
   this.createEventDto.mainRoomId = this.splitDto.mainRoomId;
      this.createEventDto.type = 1;
-     this.renovationService.createEvent(this.createEventDto).subscribe(resposne=>{
-        this.renovationEventDto = resposne;
+     this.renovationService.createEvent(this.createEventDto).subscribe(response=>{
+        this.renovationEventDto = response;
      })
 }
 
  public checkThirdStepInput(){
-  if(this.producedRoomType1 !== RoomTypes.NO_TYPE && this.splitDto.roomName !== '')
+  if(this.producedRoomType1 !== RoomTypes.NO_TYPE)
     this.finishAction = false;
   else
     this.finishAction = true;
