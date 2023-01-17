@@ -10,18 +10,19 @@
 canvas{
     margin-left: auto;
     margin-right: auto;
-    min-height: 300px;
+    min-width: 80%;;
 }
 
 .canvas-wrapper {
     position: relative;
     max-height: 400px;
     min-width: 40%;
+    min-height: 400px;
 }
 
 .canvas-wrapper-inner { 
     max-height: 400px;
-    min-width: 60%;
+    min-width: 50%;
     position: relative;
 }
 .input-wrapper {
@@ -30,7 +31,7 @@ canvas{
     flex-direction: column;
     position: relative;
     max-height: 400px;
-    min-width: 60%;
+    min-width: 50%;
     padding-bottom: 32px;
 }
 
@@ -63,8 +64,8 @@ canvas{
     justify-content: center;
     max-height: 400px;
     min-height: 400px;
-    min-width: calc(90% + 20px);
-    max-width: calc(90% + 20px);
+    min-width: calc(80% + 50px);
+    max-width: calc(80% + 50px);
 }
 .mat-form-field{
     width: 50%;

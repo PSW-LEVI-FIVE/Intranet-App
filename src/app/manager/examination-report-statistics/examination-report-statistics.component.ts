@@ -24,6 +24,7 @@ export class ExaminationReportStatisticsComponent implements OnInit {
 
   succUnsuccSpecOptions: any = {
     backgroundColor: ["#b1d0e0", "#f5a30a","#1f4d78","#0871a6","#4891b8","#5fa3c7"],
+    maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
       title: {
@@ -50,6 +51,7 @@ export class ExaminationReportStatisticsComponent implements OnInit {
   }
 
   succUnsuccOptions: any = {
+    maintainAspectRatio: false,
     backgroundColor: ["#b1d0e0", "#f5a30a","#1f4d78","#0871a6","#4891b8","#5fa3c7"],
     plugins: {
       legend: { display: false },
@@ -62,6 +64,7 @@ export class ExaminationReportStatisticsComponent implements OnInit {
   }
 
   avgMinMaxOptions: any = {
+    maintainAspectRatio: false,
     backgroundColor: ["#b1d0e0", "#f5a30a","#1f4d78","#0871a6","#4891b8","#5fa3c7"],
     plugins: {
       legend: { display: false },
@@ -74,6 +77,7 @@ export class ExaminationReportStatisticsComponent implements OnInit {
   }
 
   stepStatsOptions: any = {
+    maintainAspectRatio: false,
     backgroundColor: ["#b1d0e0", "#f5a30a","#1f4d78","#0871a6","#4891b8","#5fa3c7"],
     plugins: {
       legend: { display: false },

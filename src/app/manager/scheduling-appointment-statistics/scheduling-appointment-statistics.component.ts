@@ -40,6 +40,9 @@ export class SchedulingAppointmentStatisticsComponent implements OnInit {
     this.getQuitOnStep();
   }
     public changeStatistics(){
+        this.chart = Chart.getChart("bar-per-age-count");
+        this.chart?.destroy();
+        this.timePerAgeLoading = true;
         this.getAverageTimeToScheduleInAgeRange(this.fromAge,this.toAge);
     }
 
@@ -147,7 +150,7 @@ export class SchedulingAppointmentStatisticsComponent implements OnInit {
              options: {
                 maintainAspectRatio:false,
               plugins :{
-                legend: { display: true, position: 'bottom' },
+                legend: { display: false },
               title: {
                 display: true,
                 text: 'Times each step was visited'

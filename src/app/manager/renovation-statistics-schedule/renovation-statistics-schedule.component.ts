@@ -78,6 +78,7 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
         ]
        },
        options: {
+        maintainAspectRatio:false,
         plugins :{
         legend: { display: false },
         title: {
@@ -102,12 +103,12 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
         datasets: [
           {
             backgroundColor: ["#f5a30a","#1f4d78","#0871a6","#4891b8"],
-            //backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"],
             data: [response.basicInfo,response.timeChosen,response.additionInfo,response.finished]
           }
         ]
        },
        options: {
+        maintainAspectRatio:false,
         plugins :{
         legend: { display: false },
         title: {
@@ -135,6 +136,7 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
          ]
        },
        options: {
+        maintainAspectRatio:false,
         plugins :{
         legend: { display: false},
         title: {
@@ -217,6 +219,7 @@ export class RenovationStatisticsScheduleComponent implements OnInit {
         ]
       },
       options: {
+        maintainAspectRatio:false,
         plugins :{
         legend: { display: false },
         title: {

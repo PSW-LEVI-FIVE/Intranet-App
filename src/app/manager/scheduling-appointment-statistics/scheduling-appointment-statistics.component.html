@@ -55,8 +55,8 @@
 </div> -->
 <div class="graph-wrapper">
     <div class="canvas-wrapper">
-        <app-loader [isLoading]="timeOnStepLoading"></app-loader>
-        <canvas id="bar-time-on-step"></canvas>
+        <app-loader [isLoading]="timeOnStepMore30SecondsLoading"></app-loader>
+        <canvas id="bar-times-on-step-more-30-seconds"></canvas>
     </div>
     <div class="canvas-wrapper">
         <app-loader [isLoading]="quitOnStepLoading"></app-loader>
@@ -68,7 +68,7 @@
             <canvas id="bar-per-age-count"></canvas>
         </div>
         <div class="input-wrapper">
-            <h2 class="input-text">Choose age for calculate average time spent scheduling</h2>
+            <h2 class="input-text">Choose age for calculating average time spent on scheduling</h2>
             <mat-form-field appearance="fill">
                 <mat-label>From age</mat-label>
                 <input matInput type="number" min="0" max="300" [(ngModel)]="fromAge" (blur)="agesFocusOut()">
@@ -80,13 +80,9 @@
                 <button mat-stroked-button (click)="changeStatistics()">Submit</button>
         </div>
     </div>
-    <!-- <div class="canvas-wrapper">
-        <app-loader [isLoading]="averageScheduleLoading"></app-loader>
-        <canvas id="bar-average-schedule"></canvas>
-    </div> -->
     <div class="canvas-wrapper">
-        <app-loader [isLoading]="timeOnStepMore30SecondsLoading"></app-loader>
-        <canvas id="bar-times-on-step-more-30-seconds"></canvas>
+        <app-loader [isLoading]="timeOnStepLoading"></app-loader>
+        <canvas id="bar-time-on-step"></canvas>
     </div>
     <div class="canvas-wrapper">
         <app-loader [isLoading]="stepAverageLoading"></app-loader>
