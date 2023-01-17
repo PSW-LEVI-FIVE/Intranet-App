@@ -42,6 +42,8 @@ export class RoomMapComponent implements OnInit {
   navigation: boolean = true;
 
   private select = false;
+  private selectSplit = false;
+  private selectedSplitRoom: number | undefined;
   private selectedRooms: IRoom[] = [];
 
   constructor(
@@ -61,8 +63,6 @@ export class RoomMapComponent implements OnInit {
       this.searchFloorInput.roomId = params['id']
       this.checkNumberOfRooms()
     });
-
-    this.svg = this.buildingMapService.createSVG();
 
     this.route.params.subscribe((params: Params) => {
       this.roomMapService.getRoomsByFloor(params['id']).subscribe(res => {
@@ -118,7 +118,6 @@ export class RoomMapComponent implements OnInit {
   private showInformationBasic(svg: any) {
     svg.on('dblclick', (d: any, i: any) => {
       this.router.navigate(['manager/room-info/' + this.floorId + '/' + i.id]);
-      //this.showInformation(i.id);
     });
   }
 
@@ -127,8 +126,7 @@ export class RoomMapComponent implements OnInit {
     svgs.forEach((svg: any) => {
       svg.on('dblclick', function(this: any) {
         const room = <RoomArea>d3.select(this).datum();
-        this.router.navigate(['manager/room-info/' + this.floorId + '/' + room.roomId]);
-        //component.showInformation(room.roomId);
+        component.router.navigate(['manager/room-info/' + this.floorId + '/' + room.roomId]);
       });
     });
   }
@@ -168,9 +166,10 @@ export class RoomMapComponent implements OnInit {
 
   }
 
-  markRoom(svg: any) {
+  private markRoom(svg: any) {
     svg.on('click', function (this: any, d: any, i: any,) {
-      d3.selectAll("rect").style("fill", '#d7d5db');
+      d3.selectAll("rect").style("fill", '#FFFFFF');
+      d3.selectAll('path').style("fill", '#FFFFFF');
       d3.select(this).style("fill", "#9e91bd");
     })
   }
@@ -195,7 +194,6 @@ export class RoomMapComponent implements OnInit {
   public checkNumberOfRooms() {
     this.roomService.getRoomsbyFloor(this.floorId).subscribe(res => {
       this.roomsOnFloor = res;
-      console.log(this.roomsOnFloor);
     })
   }
 
@@ -206,12 +204,6 @@ export class RoomMapComponent implements OnInit {
       this.toastService.info('Please select rooms for merging');
       this.toggleMergeSelect(this.rooms);
       return;
-
-    if (this.roomsOnFloor.length > 1) {
-      this.router.navigate(['manager/merge-rooms/' + this.floorId]);
-    } else {
-      this.toastService.info('Not enough rooms for merge renovation');
-
     }
 
     if (this.selectedRooms.length < 2) {
@@ -221,24 +213,42 @@ export class RoomMapComponent implements OnInit {
 
     this.router.navigate(['manager/merge-rooms/' + this.floorId], { state: { data: this.selectedRooms } });
   }
-}
 
   public toggleSplit(): void {
-    if (this.roomsOnFloor.length > 0) {
-      this.router.navigate(['manager/split-room/' + this.floorId]);
-    } else {
-      this.toastService.info('There is no room on this floor');
+    if(!this.selectSplit) {
+      this.selectSplit = true;
+      this.toastService.info('Please select a room to split');
+      this.toggleSplitSelect(this.complexRooms, this);
+      return;
     }
+
+    if(!this.selectedSplitRoom) {
+      this.toastService.error('You must select a room');
+      return;
+    }
+
+    this.router.navigate(['manager/split-room/' + this.floorId], { state: { data: this.selectedSplitRoom } });
+  }
+
+  private toggleSplitSelect(svgs: any, component: RoomMapComponent) {
+    svgs.forEach((svg: any) => {
+      svg.on('click', function(this: any) {
+        const roomArea = <RoomArea>d3.select(this).datum();
+        component.selectedSplitRoom = roomArea.roomId;
+        d3.selectAll('path').style('fill', '#FFFFFF');
+        d3.select(this).style('fill', '#DC143C');
+      });
+    })
   }
 
   private toggleMergeSelect(svg: any) {
     svg.on('click', (d: any, i: IRoom) => {
       if (this.selectedRooms.length === 0 || !this.selectedRooms.find(room => room.id === i.id) && this.roomMapService.canSelect(this.selectedRooms, i)) {
         this.selectedRooms.push(i);
-        d3.select('#id' + i.id).style("fill", "#89023E");
+        d3.select('#id' + i.id).style('fill', '#32CD32');
       } else if (this.roomMapService.canDeselect(this.selectedRooms, i)) {
         this.selectedRooms.pop();
-        d3.select('#id' + i.id).style("fill", "#FFFFFF");
+        d3.select('#id' + i.id).style('fill', '#FFFFFF');
       }
     });
   }

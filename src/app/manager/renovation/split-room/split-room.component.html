@@ -2,16 +2,8 @@
 
     <mat-step>
       <form>
-        <ng-template matStepLabel>Choose room for SPLITING<br> and define time slot</ng-template>
-        <div>
-          <mat-form-field appearance="fill" class="form-data">
-            <mat-label>Select room</mat-label>
-                <mat-select [(value)]="splitDto.mainRoomId" (selectionChange)="checkFirstStepInput()">
-                  <mat-option *ngFor="let room of floorRooms" [value]="room.id" >{{room.id}} - {{room.roomNumber}}
-                  </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
+        <ng-template matStepLabel>Define time slot</ng-template>
+        
         <div>
             <mat-form-field appearance="fill" class="form-data">
               <mat-label>Enter a date range</mat-label>
@@ -64,13 +56,7 @@
 
       <mat-step>
         <form id="thirdStep">
-          <ng-template matStepLabel>Fill in the data for new room</ng-template>
-          <div>
-            <mat-form-field appearance="fill" class="form-data">
-              <mat-label>(1)Room name</mat-label>
-              <input matInput placeholder="Room name" (change)="checkThirdStepInput()" [(ngModel)]="splitDto.roomName" name="producedRoomName1" required>
-            </mat-form-field>
-          </div>
+          <ng-template matStepLabel>Fill in the data for new rooms</ng-template>
           <div>
               <mat-form-field appearance="fill" class="form-data">
                 <mat-select (selectionChange)="checkThirdStepInput()" [(ngModel)]="producedRoomType1" name="producedRoomType1">

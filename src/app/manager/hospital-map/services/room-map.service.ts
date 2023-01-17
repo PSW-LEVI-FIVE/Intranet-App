@@ -39,7 +39,7 @@ export class RoomMapService {
       height: this.defaultRoomWidth,
     }
 
-    for (let room of rooms) {
+    for (let room of this.processRooms(rooms)) {
       if (this.checkFit(newRoom, room)) 
         break;
 
@@ -56,6 +56,26 @@ export class RoomMapService {
     }
 
     return newRoom;
+  }
+
+  private getUniqueYCoordinates(rooms: IRoom[]): Set<number> {
+    const set = new Set<number>();
+    rooms.forEach(room => set.add(room.yCoordinate));
+    return set;
+  }
+
+  private processRooms(rooms: IRoom[]): IRoom[] {
+    const set = this.getUniqueYCoordinates(rooms);
+
+    const sortedRooms: IRoom[] = [];
+    set.forEach(value => {
+      const batch = rooms
+                    .filter(room => room.yCoordinate === value)
+                    .sort((a, b) => a.xCoordinate - b.xCoordinate);
+      sortedRooms.push(...batch);
+    });
+
+    return sortedRooms;
   }
 
   private checkFit(newRoom: CreateRoom, room: IRoom): boolean {
