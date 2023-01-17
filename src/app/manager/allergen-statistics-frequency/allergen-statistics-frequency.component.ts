@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
-import { IAllergenWithPatients } from './model/IAllergenWithPatients';
 import { AllergenStatsService } from './services/allergen-stats.service';
 
 @Component({
@@ -12,52 +11,9 @@ export class AllergenStatisticsFrequencyComponent implements OnInit {
 
   public allergens: string[] = [];
   public numberOfPatients: number[] = [];
+  public chart?: Chart;
 
   constructor(private allergenStatsService: AllergenStatsService) { }
-
-  public createChart() {
-    Chart.defaults.backgroundColor = 'rgba(0, 0, 0, 0.3)';
-    Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.3)';
-    Chart.defaults.color = 'rgba(0, 0, 0, 1)';
-    Chart.defaults.font.size = 30;
-
-    var ctx = document.getElementById("myChart") as HTMLCanvasElement;
-    var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: this.allergens,
-        datasets: [{
-          label: "Allergens and number of patients that are alergic to them",
-          data: this.numberOfPatients,
-          borderWidth: 3,
-          backgroundColor: '#5DADEC'
-        }]
-      },
-      options:
-      {
-        plugins:
-        {
-          legend:
-          {
-            labels: { font: { size: 20 } }
-          }
-        },
-        scales:
-        {
-          y:
-          {
-            ticks:
-            {
-              callback: function (value: any) {
-                if (Number.isInteger(value)) { return value; } return null;
-              },
-            },
-            beginAtZero: true
-          }
-        }
-      }
-    });
-  }
 
   ngOnInit(): void {
     this.allergenStatsService.getAllergensWithPatients().subscribe(res => {
@@ -65,7 +21,28 @@ export class AllergenStatisticsFrequencyComponent implements OnInit {
         this.allergens.push(allergenWithPats.allergen);
         this.numberOfPatients.push(allergenWithPats.patients);
       })
-      this.createChart();
+      let ctx = document.getElementById("allergen-chart") as HTMLCanvasElement;
+      this.chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: this.allergens,
+         datasets: [
+          {
+              backgroundColor: ["#b1d0e0", "#f5a30a","#1f4d78","#0871a6","#4891b8","#5fa3c7"],
+              data: this.numberOfPatients
+          }
+        ]
+       },
+       options: {
+          maintainAspectRatio:false,
+          plugins :{
+          legend: { display: false },
+          title: {
+              display: true,
+              text: 'Number of patients with allergens'
+          }
+          }}
+        });
     });
   }
 

@@ -57,10 +57,6 @@ export class DoctorStatisticsLeavesComponent implements OnInit {
     if (chartStatus!= undefined) {
       chartStatus.destroy();
     }
-    Chart.defaults.backgroundColor = 'rgba(0, 0, 0, 0.3)';
-    Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.3)';
-    Chart.defaults.color = 'rgba(0, 0, 0, 1)';
-    Chart.defaults.font.size = 30;
 
     var ctx = document.getElementById("myChart") as HTMLCanvasElement;
     var myChart = new Chart(ctx, {

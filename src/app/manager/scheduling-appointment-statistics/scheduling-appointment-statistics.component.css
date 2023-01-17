@@ -1,53 +1,85 @@
 .graph-wrapper {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
     flex-wrap: wrap;
     width: 80%;
     margin: auto;
     gap: 20px;
-    padding: 24px 0px;
+    padding: 50px 0;
 }
-
-.canvas-wrapper { 
-    position: relative;
+canvas{
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 300px;
 }
 
 .canvas-wrapper {
+    position: relative;
     max-height: 400px;
-    min-width: 45%;
+    min-width: 40%;
+}
+
+.canvas-wrapper-inner { 
+    max-height: 400px;
+    min-width: 60%;
+    position: relative;
+}
+.input-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    max-height: 400px;
+    min-width: 60%;
+    padding-bottom: 32px;
+}
+
+.mat-stroked-button {
+    color: #fff !important;
+    background-color: #3f51b5;
+    width: 50%;
+    font-size: x-large;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.input-text{
+    text-align: center;
+    font-weight: 700;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 24px;
+    color: #1c1c1c;
+    margin-bottom: 24px;
+    line-height: 50px;
+    width: 80%;
 }
 
 .full-canvas-wrapper {
     position: relative;
-    min-width: calc(90% + 20px);
-    max-width: calc(90% + 20px);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     max-height: 400px;
     min-height: 400px;
+    min-width: calc(90% + 20px);
+    max-width: calc(90% + 20px);
+}
+.mat-form-field{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.button {
-    background-color: #333399;
-    border: none;
-    color: white;
-    width: fit-content;
-    padding: 30px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 40px;
-    border-radius: 15px;
-    cursor: pointer;
-  }
-
-  .horizontalSpace{
-    width: 50px;
-    display: inline-block;
-}
-
-.verticalSpace{
-    height: 50px;
-}
-
-table, th, td {
-    border: 1px solid black;
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
   }
   
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
-import { NgModule } from '@angular/core';
 import { IDoctorWithPopularityDTO } from './model/IDoctorWithPopularityDTO';
 import { DcotorStatisticsPopularityService } from './services/doctor-statistics-popularity.service';
-Chart.register(...registerables);
 
 @Component({
   selector: 'app-doctor-statistics-popularity',
@@ -30,49 +28,33 @@ export class DoctorStatisticsPopularityComponent implements OnInit {
   }
 
   public createChart() {
-    Chart.defaults.backgroundColor = 'rgba(0, 0, 0, 0.3)';
-    Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.3)';
-    Chart.defaults.color = 'rgba(0, 0, 0, 1)';
-    Chart.defaults.font.size = 30;
     this.chart?.destroy();
     var ages: string;
     if (this.init === false) { ages = 'How often does ALL Patients choose certain doctors'; this.init = true; }
     else ages = 'How often does Patients from age ' + this.fromAge + ' to ' + this.toAge + ' choose certain doctors';
-    var ctx = document.getElementById("myChart") as HTMLCanvasElement;
-    this.chart = new Chart(ctx, {
-      type: 'bar',
-      data:
-      {
-        labels: this.doctors,
-        datasets: [{
-          label: ages,
-          data: this.doctorsPopularities,
-          borderWidth: 3,
-          backgroundColor: '#5DADEC'
-        }]
-      },
-      options:
-      {
-        plugins:
-        {
-          legend:
-          {
-            labels: { font: { size: 20 } }
-          }
-        },
-        scales:
-        {
-          y:
-          {
-            ticks:
-            {
-              callback: function (value: any) { if (Number.isInteger(value)) { return value; } return null; },
-            },
-            beginAtZero: true
-          }
-        }
-      }
-    });
+    let ctx = document.getElementById("doctor-graph") as HTMLCanvasElement;
+            this.chart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+               labels: this.doctors,
+               datasets: [
+                {
+                    label: "times",
+                    backgroundColor: ["#b1d0e0", "#f5a30a","#1f4d78","#0871a6","#4891b8","#5fa3c7"],
+                    data: this.doctorsPopularities
+                }
+              ]
+             },
+             options: {
+                maintainAspectRatio:false,
+              plugins :{
+                legend: { display: true, position: 'bottom' },
+              title: {
+                display: true,
+                text: 'How many times patients picked doctor'
+              }
+            }}
+        });
     this.doctors = [];
     this.doctorsPopularities = [];
   }

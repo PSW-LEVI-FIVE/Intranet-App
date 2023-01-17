@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart, ChartData } from 'chart.js';
-import { thresholdScott } from 'd3';
-import { AvgStepCountDTO } from './dtos/avg-step-count.dto';
+import { Chart } from 'chart.js';
 import { RenovationStatisticsService } from './services/renovation-statistics.service';
 
 @Component({
