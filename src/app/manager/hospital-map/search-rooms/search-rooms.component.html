@@ -1,23 +1,21 @@
-<div>
-    <div style="font-size: 12px">
-    <mat-form-field appearance="outline" fxFlex="80" style="height:50px; margin-right:20px;">
-
-        <mat-select [(ngModel)]="searchRoomDTO.roomType" (selectionChange)="changedRoomType(option)" placeholder="Choose room type">
-            <mat-option [value]="option" *ngFor="let option of availableRoomTypes"><span>{{getOptionLabel(option)}}</span></mat-option>
-            
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="outline" fxFlex="20">
-        <input matInput placeholder="Search rooms" [(ngModel)]="searchRoomDTO.roomName" (keyup)="searchRoomsText()">
+<div class="wrapper">
+    <div class="inputs">
+        <mat-form-field appearance="outline" fxFlex="80">
+            <mat-select [(ngModel)]="searchRoomDTO.roomType" (selectionChange)="changedRoomType(option)"
+                placeholder="Choose room type">
+                <mat-option [value]="option"
+                    *ngFor="let option of availableRoomTypes"><span>{{getOptionLabel(option)}}</span></mat-option>
+            </mat-select>
         </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex="20">
+            <input matInput placeholder="Search rooms" [(ngModel)]="searchRoomDTO.roomName" (keyup)="searchRoomsText()">
+        </mat-form-field>
+    </div>
+    <section>
+        <div class="rooms">
+            <div *ngFor="let r of rooms" class="room-item" (click)="highlightRoom(r.id)">
+                Room Number: {{r.roomNumber}}
+            </div>
         </div>
-<section>
-
-<ul class="list">
-    <li *ngFor="let r of rooms" id="r.roomNumber" (click)="highlightRoom(r.id)">
-{{r.id}} - {{r.roomNumber}}
-
-    </li>
-</ul>
-</section>
+    </section>
 </div>

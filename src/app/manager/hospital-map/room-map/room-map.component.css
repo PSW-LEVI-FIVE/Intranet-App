@@ -1,4 +1,124 @@
+.container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding-top: 150px;
+}
 
+.item-container {
+    display: flex;
+    flex: 1;
+}
+
+.mat-tab {
+    max-width: 80%!important;
+}
+
+
+.item-container-left {
+    flex: 2;
+    align-items: center;
+    justify-content: center;   
+    flex-direction: column;
+
+}
+
+.item-container-right {
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.floor-options-inner {
+    width: 100%;
+
+}
+
+
+.mapa {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: #0891b2;
+    border-radius: 10px;
+}
+
+.add-data {
+    font-size: 25px;
+}
+
+.info {
+    margin-top: 10px;
+    font-size: 22px;
+    line-height: 1.5;
+    max-width: 400px;
+}
+
+.floor-update {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.mat-tab-body {
+    padding-top: 20px!important;
+}
+
+.description-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+}
+
+.update-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 50px;
+    align-items: center;
+}
+.mat-form-field {
+    width: 300px!important;
+    height: 50px;
+    font-size: 18px;
+}
+
+.update-btn {
+    width: 300px;
+}
+
+button {
+    width: 300px;
+    height: 60px;
+    font-size: 18px;
+}
+.option-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 500px;
+}
+
+.info-content {
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eq-search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+
+/* 
 .build-info {
     text-align: center;
     width: 300px;
@@ -245,4 +365,4 @@ list li::before{
 .list li:hover::before{
     transform: scaleX(1);
     overflow-x: hidden !important;
-}
+} */

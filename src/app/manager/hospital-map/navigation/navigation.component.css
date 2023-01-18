@@ -1,7 +1,5 @@
-.combobox-source {
-    margin-left: 0%;
-}
-
-.combobox-destination {
-    margin-left: 53%;
+.navigation-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 850px;
 }

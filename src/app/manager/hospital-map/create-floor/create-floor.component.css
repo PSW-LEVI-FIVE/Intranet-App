@@ -1,5 +1,20 @@
-#createFloorForm {
-    position: absolute;
-    top: 15%;
-    left: 5%;
+form {
+    width: 100%;
+    height: 100%;
+    min-width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+
+form .mat-form-field {
+    width: 100%!important;
+}
+
+form button {
+    width: 100%;
+    height: 50px;
 }

@@ -1,53 +1,48 @@
 <div class="container">
-    <div class="item-container" style="margin-top: 10px;">
-      <div id="svgDiv" class="mapa" text-align="left" style="height: 580px; width: 880px;"></div>
+  <div class="item-container item-container-left">
+    <div id="svgDiv" class="mapa" text-align="left" style="height: 580px; width: 880px;">
     </div>
-    <div class="item-container">
-        <div style="margin-left: 20px; height:650px; width:650px; border-left: solid 3px #232629; padding-left: 1rem; padding-right: 1rem;">
-            <div style="float: left; height: 400px; width: 650px;">
-            <h2 class="title">Floor map</h2>
-            <mat-tab-group>
-              <mat-tab label="Description" style="margin-bottom:40px">
-                <div style="margin-top: 15px;" *ngIf="selectedFloor === undefined">
-                  <label style="font-size: 17px;">Click on floor for additional data</label>
-                </div>
-                <div *ngIf="selectedFloor !== undefined">
-                <mat-form-field appearance="fill"  style="margin-top: 15px; width: 400px;">
-                    <mat-label>Floor ID</mat-label>
-                    <input matInput disabled [value]="selectedFloor.id">
-                </mat-form-field><br>
-                <mat-form-field appearance="fill" style="margin-top: 5px; width: 400px;">
-                    <mat-label>Floor Area</mat-label>
-                    <input matInput [value]="selectedFloor.area.measure">
-                </mat-form-field>
-                <div style="margin-top: 30px; margin-bottom: 15px;">
-                  <button class="confirmButton" mat-flat-button color="primary">
-                      Apply changes
-                  </button>
-              </div>
+  </div>
+  <div class="item-container item-container-right">
+    <div class="floor-options-inner">
+      <mat-tab-group>
+        <mat-tab label="Description">
+          <div class="description-content">
+            <div *ngIf="selectedFloor === undefined">
+              <mat-label class="add-data">Click on floor for additional data!</mat-label>
             </div>
-            </mat-tab>
-            <mat-tab label="Renovation">
-               <div class="option-container">
-                 <div><button  mat-flat-button color="primary" (click)="toggleCreate()" class="renovation-buttons"><mat-icon>add</mat-icon>Add new floor</button></div>
-               </div>
-             </mat-tab>
-            <mat-tab>
-              <ng-template mat-tab-label>
-                <mat-icon>info</mat-icon>
-                <label>Information</label>
-              </ng-template>
-              <div style="margin: 10px">
-                <label style="font-size: 17px;">You are currently in building: <b>{{buildingId}}</b></label><br>
-              </div>
-              <div style="margin: 10px">
-                <label style="font-size: 17px;">In order to see further information about floor rooms, <b>double-click</b> on floor of interest.</label>
-              </div>
-            </mat-tab>
-          </mat-tab-group>
-        </div>
-         
-        </div>
-        
+            <div *ngIf="selectedFloor !== undefined" class="update-form">
+              <mat-form-field appearance="fill">
+                <mat-label>Floor </mat-label>
+                <input matInput disabled [value]="selectedFloor?.id">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Floor Area</mat-label>
+                <input matInput [value]="selectedFloor.area?.measure">
+              </mat-form-field>
+              <button class="confirmButton update-btn" mat-flat-button color="primary">
+                Apply changes
+              </button>
+            </div>
+          </div>
+
+        </mat-tab>
+        <mat-tab label="Renovation">
+          <div class="option-container">
+            <button mat-flat-button color="primary" (click)="toggleCreate()"
+              class="renovation-buttons"><mat-icon>add</mat-icon>Add new floor
+            </button>
+          </div>
+        </mat-tab>
+        <mat-tab label="Information">
+          <div class="info-content">
+            <span class="info">You are currently in building: <b>{{buildingId}}</b>.
+              <br>
+              In order to see further information about floor rooms, <b>double-click</b>
+              on floor of interest.</span>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
     </div>
+  </div>
 </div>
