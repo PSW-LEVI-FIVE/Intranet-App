@@ -65,6 +65,7 @@ export class FloorMapComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
+        dialogRef.close()
       });
       // this.router.navigate(['manager/create-floor'], { state: { data: createFloor } });
     } else {

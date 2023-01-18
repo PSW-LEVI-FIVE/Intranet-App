@@ -11,6 +11,9 @@ import { Room } from '../../room/model/room.model';
 import { EquipmentService } from '../../equipment/services/equipment.service';
 import { RoomService } from '../../room/services/room.service';
 import { NavigationService } from '../services/navigation.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateRoomComponent } from '../../room/create-room/create-room.component';
+import { CreateMapRoomComponent } from '../create-map-room/create-map-room.component';
 
 @Component({
   selector: 'app-room-map',
@@ -47,6 +50,7 @@ export class RoomMapComponent implements OnInit {
   private selectedRooms: IRoom[] = [];
 
   constructor(
+    private dialog: MatDialog,
     private roomMapService: RoomMapService,
     private buildingMapService: BuildingMapService,
     private route: ActivatedRoute,
@@ -79,7 +83,7 @@ export class RoomMapComponent implements OnInit {
           this.svg,
           this.data.filter(room => room.secondaryCoordinates)
         );
-        this.roomsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)   
+        this.roomsText = this.buildingMapService.addTextToRectangles(this.svg, this.data)
         this.showInformationBasic(this.rooms);
         this.markRoom(this.rooms);
         if(this.complexRooms){
@@ -99,7 +103,15 @@ export class RoomMapComponent implements OnInit {
     const createRoom = this.roomMapService.handleRoomGeneration(this.data);
     if (createRoom) {
       this.route.params.subscribe((params: Params) => createRoom.mapFloorId = params['id']);
-      this.router.navigate(['manager/create-room'], { state: { data: createRoom } });
+      const dialogRef = this.dialog.open(CreateMapRoomComponent, {
+        data: createRoom,
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        dialogRef.close()
+      });
+      // this.router.navigate(['manager/create-room'], { state: { data: createRoom } });
     } else {
       this.toastService.info('Maximum number of rooms reached');
     }
@@ -113,7 +125,7 @@ export class RoomMapComponent implements OnInit {
   private visualizeNavigation(floorId: string): void {
     this.navigationService.visualizeNavigation(this.svg, floorId);
     this.textNavigation = this.navigationService.getDirections();
-    if(this.textNavigation.length !== 0) this.navigation = false;
+    if (this.textNavigation.length !== 0) this.navigation = false;
   }
   private showInformationBasic(svg: any) {
     svg.on('dblclick', (d: any, i: any) => {
@@ -124,7 +136,7 @@ export class RoomMapComponent implements OnInit {
 
   private showInformationComplex(svgs: any, component: any) {
     svgs.forEach((svg: any) => {
-      svg.on('dblclick', function(this: any) {
+      svg.on('dblclick', function (this: any) {
         const room = <RoomArea>d3.select(this).datum();
         component.router.navigate(['manager/room-info/' + this.floorId + '/' + room.roomId]);
       });
@@ -215,14 +227,14 @@ export class RoomMapComponent implements OnInit {
   }
 
   public toggleSplit(): void {
-    if(!this.selectSplit) {
+    if (!this.selectSplit) {
       this.selectSplit = true;
       this.toastService.info('Please select a room to split');
       this.toggleSplitSelect(this.complexRooms, this);
       return;
     }
 
-    if(!this.selectedSplitRoom) {
+    if (!this.selectedSplitRoom) {
       this.toastService.error('You must select a room');
       return;
     }
@@ -232,7 +244,7 @@ export class RoomMapComponent implements OnInit {
 
   private toggleSplitSelect(svgs: any, component: RoomMapComponent) {
     svgs.forEach((svg: any) => {
-      svg.on('click', function(this: any) {
+      svg.on('click', function (this: any) {
         const roomArea = <RoomArea>d3.select(this).datum();
         component.selectedSplitRoom = roomArea.roomId;
         d3.selectAll('path').style('fill', '#FFFFFF');

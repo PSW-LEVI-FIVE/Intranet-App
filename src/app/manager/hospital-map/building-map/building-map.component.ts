@@ -6,6 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { NavigationService } from '../services/navigation.service';
 import * as d3 from 'd3';
+import { CreateBuildingComponent } from '../create-building/create-building.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-building-map',
@@ -17,17 +19,18 @@ export class BuildingMapComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<IBuilding>();
   public buildings: IBuilding[] = [];
-  data:any;
-  svg:any;
-  buildingsMap:any;
-  buildingsText:any;
-  public selectedBuilding:any = undefined;
-  public selectedBuildingId:any;
+  data: any;
+  svg: any;
+  buildingsMap: any;
+  buildingsText: any;
+  public selectedBuilding: any = undefined;
+  public selectedBuildingId: any;
   formVisible: any = "hidden";
 
   constructor(
-    private buildingMapService: BuildingMapService, 
-    private router:Router, 
+    private dialog: MatDialog,
+    private buildingMapService: BuildingMapService,
+    private router: Router,
     private toastService: ToastrService,
     private navigationService: NavigationService
   ) { }
@@ -37,7 +40,7 @@ export class BuildingMapComponent implements OnInit {
     this.buildingMapService.getBuildings().subscribe(res => {
       this.buildings = res;
       this.dataSource.data = this.buildings;
-      this.svg  = this.buildingMapService.createSVG();
+      this.svg = this.buildingMapService.createSVG();
       this.buildingsMap = this.buildingMapService.createRectangles(this.svg, this.buildings);
       this.buildingsText = this.buildingMapService.addTextToRectangles(this.svg, this.buildings);
       this.addOnClick(this.buildingsMap, this);
@@ -47,31 +50,40 @@ export class BuildingMapComponent implements OnInit {
 
   public toggleCreate(): void {
     const createBuilding = this.buildingMapService.handleBuildingGeneration(this.buildings);
-    if(createBuilding) {
-      this.router.navigate(['manager/create-building'], {state: {data: createBuilding}});
+    if (createBuilding) {
+      const dialogRef = this.dialog.open(CreateBuildingComponent, {
+        data: createBuilding,
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+      // this.router.navigate(['manager/create-building'], { state: { data: createBuilding } });
     } else {
       this.toastService.info('Maximum number of buildings reached');
     }
   }
 
-  Logout()
-  {
+  Logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     this.router.navigate(["/login"]);
   }
-  addOnClick(svg:any, component: BuildingMapComponent ){
-    svg.on("click", function(this:any, d:any, i:any){
+  addOnClick(svg: any, component: BuildingMapComponent) {
+    svg.on("click", function (this: any, d: any, i: any) {
       component.formVisible = "visible";
       component.selectedBuilding = i;
-      component.buildingMapService.getBuilding(i.id).subscribe(res => {component.selectedBuilding=res;})
-      d3.selectAll("rect").style("fill",'#ffffff');
-      d3.select(this).style("fill","#9e91bd")
+      component.buildingMapService.getBuilding(i.id).subscribe(res => {
+        component.selectedBuilding = res;
+        console.log(res)
+      })
+      d3.selectAll("rect").style("fill", '#ffffff');
+      d3.select(this).style("fill", "#9e91bd")
     })
   }
-  showFloors(svg:any, router:any){
-    svg.on("dblclick", function(d:any, i:any){
-      router.navigate(['manager/floor-map/'+ i.id])
+  showFloors(svg: any, router: any) {
+    svg.on("dblclick", function (d: any, i: any) {
+      router.navigate(['manager/floor-map/' + i.id])
     })
   }
   public updateBuilding(): void {

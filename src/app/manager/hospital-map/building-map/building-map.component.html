@@ -1,53 +1,100 @@
 <div class="container">
-    <div class="item-container" style="display: inline-block;">
-        <app-navigation *ngIf="selectedBuilding" [selectedBuilding]="selectedBuilding.id"></app-navigation>
-        <div id="svgDiv" class="mapa" text-align="left" style="height: 580px; width: 880px;"></div>
+  <div class="item-container item-container-left">
+    <app-navigation *ngIf="selectedBuilding" [selectedBuilding]="selectedBuilding.id"></app-navigation>
+    <div id="svgDiv" class="mapa" text-align="left" style="height: 580px; width: 880px;"></div>
+  </div>
+  <div class="item-container item-container-right">
+    <div>
+      <mat-tab-group mat-stretch-tabs>
+        <mat-tab label="Description">
+          <div class="description-content">
+            <div *ngIf="selectedBuilding === undefined">
+              <mat-label class="add-data">Click on floor for additional data!</mat-label>
+            </div>
+            <div *ngIf="selectedBuilding !== undefined" class="update-form">
+              <mat-form-field appearance="fill">
+                <mat-label>Building No.</mat-label>
+                <input matInput disabled [value]="selectedBuilding?.id">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Building name</mat-label>
+                <input matInput [value]="selectedBuilding?.name">
+              </mat-form-field>
+              <button class="confirmButton" mat-flat-button color="primary" (click)="updateBuilding()">
+                Apply changes
+              </button>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Renovation">
+          <div class="option-container">
+            <div><button mat-flat-button color="primary" (click)="toggleCreate()"
+                class="renovation-buttons"><mat-icon>add</mat-icon>Add new building</button></div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Information">
+          <div class="info-content">
+            <span class="info">In order to see further information about building floors,
+              <b>double-click</b> on building of interest.
+              If you have trouble finding your way around our hospital, use
+              <b>navigation.</b><br>
+              Select building by <b>clicking</b> on it and choose source and destiniation room. <br>
+              After that, <b>double-click</b> on selected building. Text navigation will appear in 'Information' of
+              room map
+            </span>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
     </div>
-    <div class="item-container">
-        <div style="margin-left: 20px; height:650px; width:650px; border-left: solid 3px #232629; padding-left: 1rem; padding-right: 1rem;">
-            <div style="float: left; height: 400px; width: 650px;">
-            <h2 class="title">Building map</h2>
-            <mat-tab-group>
-              <mat-tab label="Description" style="margin-bottom:40px">
-                <div style="margin-top: 15px;" *ngIf="selectedBuilding === undefined">
-                    <label style="font-size: 17px;">Click on building for additional data</label>
-                </div>
-                <div *ngIf="selectedBuilding !== undefined">
-                    <mat-form-field appearance="fill" style="margin-top: 15px; width: 400px;">
-                        <mat-label>Building ID</mat-label>
-                        <input matInput disabled [value]="selectedBuilding?.id">
-                    </mat-form-field><br>
-                    <mat-form-field appearance="fill" style="margin-top: 5px; width: 400px;">
-                        <mat-label>Building name</mat-label>
-                        <input matInput [value]="selectedBuilding?.name">
-                    </mat-form-field><br>
-                    <div style="margin-top: 30px; margin-bottom: 15px;">
-                        <button class="confirmButton" mat-flat-button color="primary" (click)="updateBuilding()">
-                            Apply changes
-                        </button>
-                    </div>
-                </div>
-              </mat-tab>
-            <mat-tab label="Renovation">
-               <div class="option-container">
-                 <div><button  mat-flat-button color="primary" (click)="toggleCreate()" class="renovation-buttons"><mat-icon>add</mat-icon>Add new building</button></div>
-               </div>
-             </mat-tab>
-            <mat-tab>
-              <ng-template mat-tab-label>
-                <mat-icon>info</mat-icon>
-                <label>Information</label>
-              </ng-template>
-              <div style="margin: 10px; margin-top: 15px;">
-                <label style="font-size: 17px;">In order to see further information about building floors, <b>double-click</b> on building of interest.</label>
-              </div>
-              <div style="margin: 10px; margin-top: 15px;">
-                <label style="font-size: 17px;">If you have trouble finding your way around our hospital, use <b>navigation.</b><br>
-                  Select building by <b>clicking</b> on it and choose source and destiniation room. <br>
-                  After that, <b>double-click</b> on selected building. Text navigation will appear in 'Information' of room map</label>
-              </div>
-            </mat-tab>
-          </mat-tab-group>
-        </div>     
+  </div>
+
+
+  <!-- 
+  <div class="container">
+    <div class="item-container item-container-left">
+      <div id="svgDiv" class="mapa" text-align="left" style="height: 580px; width: 880px;">
+      </div>
     </div>
-</div>
+    <div class="item-container item-container-right">
+      <div class="floor-options-inner">
+        <mat-tab-group mat-stretch-tabs>
+          <mat-tab label="Description">
+            <div class="description-content">
+              <div *ngIf="selectedFloor === undefined">
+                <mat-label class="add-data">Click on floor for additional data!</mat-label>
+              </div>
+              <div *ngIf="selectedFloor !== undefined" class="update-form">
+                <mat-form-field appearance="fill">
+                  <mat-label>Floor </mat-label>
+                  <input matInput disabled [value]="selectedFloor.id">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>Floor Area</mat-label>
+                  <input matInput [value]="selectedFloor.area.measure">
+                </mat-form-field>
+                <button class="confirmButton update-btn" mat-flat-button color="primary">
+                  Apply changes
+                </button>
+              </div>
+            </div>
+
+          </mat-tab>
+          <mat-tab label="Renovation">
+            <div class="option-container">
+              <button mat-flat-button color="primary" (click)="toggleCreate()"
+                class="renovation-buttons"><mat-icon>add</mat-icon>Add new floor
+              </button>
+            </div>
+          </mat-tab>
+          <mat-tab label="Information">
+            <div class="info-content">
+              <span class="info">You are currently in building: <b>{{buildingId}}</b>.
+                <br>
+                In order to see further information about floor rooms, <b>double-click</b>
+                on floor of interest.</span>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div> -->

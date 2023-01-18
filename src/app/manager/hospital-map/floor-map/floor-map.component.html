@@ -5,7 +5,7 @@
   </div>
   <div class="item-container item-container-right">
     <div class="floor-options-inner">
-      <mat-tab-group mat-stretch-tabs>
+      <mat-tab-group>
         <mat-tab label="Description">
           <div class="description-content">
             <div *ngIf="selectedFloor === undefined">
@@ -14,11 +14,11 @@
             <div *ngIf="selectedFloor !== undefined" class="update-form">
               <mat-form-field appearance="fill">
                 <mat-label>Floor </mat-label>
-                <input matInput disabled [value]="selectedFloor.id">
+                <input matInput disabled [value]="selectedFloor?.id">
               </mat-form-field>
               <mat-form-field appearance="fill">
                 <mat-label>Floor Area</mat-label>
-                <input matInput [value]="selectedFloor.area.measure">
+                <input matInput [value]="selectedFloor.area?.measure">
               </mat-form-field>
               <button class="confirmButton update-btn" mat-flat-button color="primary">
                 Apply changes
