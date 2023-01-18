@@ -157,7 +157,7 @@ export class RoomMapComponent implements OnInit {
   }
   public highlight(id: any) {
     d3.selectAll('rect').style('fill', 'white');
-    d3.select("#id" + id).style('fill', '#d7d5db');
+    d3.select("#id" + id).style('fill', '#9e91bd');
   }
   public updateRoom(): void {
     if (this.selectedRoomModel) {
