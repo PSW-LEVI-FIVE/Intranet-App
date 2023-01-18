@@ -1,6 +1,6 @@
 
 
-<div style="height:1000px; width:500px;margin-left: 500px;">
+<div class="form-wrapper">
 
     <mat-card class="mat-card-css">
         <mat-card-title>Create event </mat-card-title>
@@ -12,7 +12,7 @@
                 <input matInput [(ngModel)]="title">
             </mat-form-field>
             </div>
-            <div >
+            <div>
                 <mat-form-field  style="height:70px !important; margin-top: 30px!important;margin-right: 20px;" appearance="fill">
                     <mat-label>Choose a date</mat-label>
                     <input matInput [matDatepicker]="picker" [(ngModel)]="startDate">
@@ -29,7 +29,7 @@
             </div>
             <div>
                
-                <mat-form-field  appearance="fill" style="height:70px !important; margin-top: 30px!important;margin-right: 20px;">
+                <mat-form-field  appearance="fill" style="height:50px !important; margin-top: 30px!important;margin-right: 20px;">
                     <mat-label>Choose a date</mat-label>
                     <input matInput [matDatepicker]="pdate" [(ngModel)]="endDate">
                     <mat-hint>MM/DD/YYYY</mat-hint>
@@ -38,7 +38,7 @@
                     </mat-datepicker-toggle>
                     <mat-datepicker #pdate></mat-datepicker>
                   </mat-form-field>
-                  <mat-form-field inputs>
+                  <mat-form-field inputs style="margin-top:25px!important;">
                     <mat-label>From {{from}}</mat-label>
                     <input [(ngModel)]="to" matInput type="time" required id="time-from">
                   </mat-form-field>  

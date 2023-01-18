@@ -2,29 +2,55 @@
     color:rgb(46, 140, 23);
     border-radius:12px;
     background-color: rgb(72, 224, 72);
-    margin-left: 500px;
+   
     margin-bottom: 30px;
     width: 150px;
-    height: 40px;
+    height: 30px;
     border:0px
 }
 #object-1{
     color:rgb(173, 46, 46);
     background-color: indianred;
     border-radius:12px;
-    margin-left: 500px;
+   
     margin-bottom: 30px;
     width: 150px;
-    height: 40px;
+    height: 30px;
     border:0px
 }
 #object-2{
     color:rgb(169, 129, 27);
     background-color: rgb(237, 189, 69);
     border-radius:12px;
-    margin-left: 500px;
+  
     margin-bottom: 30px;
     width: 150px;
-    height: 40px;
+    height: 30px;
     border:0px
 }
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color: #2693c9;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 20px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
