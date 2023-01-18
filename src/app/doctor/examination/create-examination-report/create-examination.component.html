@@ -49,7 +49,7 @@
           <input matInput placeholder="Search Medicine..." #medicineInput formControlName="medicine"
             [matAutocomplete]="autoMedicine" id="input-medicine">
           <mat-autocomplete #autoMedicine="matAutocomplete" (optionSelected)="selectedMedicine($event)"
-            id="medicine-autoc">
+            [displayWith]="displayFn.bind(this)" id="medicine-autoc">
             <mat-option *ngFor="let medicine of allMedicines" [value]="medicine.id">
               {{medicine.name}}
             </mat-option>

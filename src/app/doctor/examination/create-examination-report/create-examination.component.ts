@@ -59,7 +59,7 @@ export class CreateExaminationComponent implements OnInit {
     private readonly toastService: ToastrService,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    @Inject(MAT_DIALOG_DATA) public data: {id: number},
+    @Inject(MAT_DIALOG_DATA) public data: { id: number },
     public readonly dialogRef: MatDialogRef<CreateExaminationComponent>,
   ) { }
 
@@ -93,6 +93,7 @@ export class CreateExaminationComponent implements OnInit {
     })
   }
   sendEvent(type: number) {
+    this.mapPrescriptionDoses()
     const dto: ExaminationReportEventDTO = {
       eventType: type,
       time: new Date(),
@@ -133,6 +134,12 @@ export class CreateExaminationComponent implements OnInit {
     if (this.prescriptions.some(p => p.medicineId == medicine.id)) return
     this.prescriptionFormGroup.addControl(prescription.medicineId + "", new FormControl(prescription.dose, Validators.required))
     this.prescriptions.push(prescription);
+  }
+
+  displayFn(value?: number) {
+    const medicine = this.allMedicines.find(med => med.id == value)
+    if (medicine === undefined) return ""
+    return medicine.name
   }
 
   findMedicines(val: string) {

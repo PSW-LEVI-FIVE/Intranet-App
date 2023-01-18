@@ -14,9 +14,9 @@ create-btn{
 }
 
 .header-table-wrapper{
-  width: 90%;
-  max-width: 90%;
-  min-width: 90%;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
 }
 
 table {
