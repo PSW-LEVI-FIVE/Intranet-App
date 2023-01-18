@@ -138,11 +138,13 @@ font-size:23px !important;
   font-family: Garamond, serif !important;
   margin-bottom: 0px !important;
 }
-.mat-stroked-button {
-  color: rgba(35,38,41,1);
-  background-color: white;
-  width: 150px;
-  border-radius: 3px;
-  box-shadow: rgba(0, 0, 0, 0.20) 0px 2px 24px 8px, rgba(0, 0, 0, 0.36) 0px 0px 0px 0px !important;
-
+.mat-flat-button {
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: x-large;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: 150px;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.20) 0px 2px 24px 8px, rgba(0, 0, 0, 0.36) 0px 0px 0px 0px !important;
 }

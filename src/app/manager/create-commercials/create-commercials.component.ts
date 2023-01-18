@@ -16,6 +16,7 @@ export class CreateCommercialsComponent implements OnInit {
   status!: boolean;
   bucket!: string;
   eventt!: Event;
+  supabase: string = "https://pdphmpovyeiqspzsxqzq.supabase.co/storage/v1/object/public/photos/";
 
   public commercial:ICommercial = <ICommercial>{};
   constructor(private storageService: StorageService,private commercialService: CreateCommercialsService, 
@@ -52,7 +53,17 @@ export class CreateCommercialsComponent implements OnInit {
   this.status = true;
   const file: File = input.files[0];
   const name = file.name.replace(/ /g, '');
+  console.log(name);
   this.commercial.pictureUrl = name;
+  this.storageService.upload(this.bucket, name, file).then((data) => {
+    if (data.error) {
+      this.message = `Error send message ${data.error.message}`;
+    } else {
+      this.commercial.pictureUrl = name;
+      this.message = `File ${file.name} uploaded with success!`;
+    }
+    this.status = false;
+  });
  }
   
  selectFile() {

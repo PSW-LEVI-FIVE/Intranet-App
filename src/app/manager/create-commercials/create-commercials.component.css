@@ -14,11 +14,18 @@
 	position:absolute;
 	left:50%;
 	top:50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 	transform: translate(-50%,-50%);
     background-color: white;
 	border-radius: 10px;
 	padding:100px 100px;
 	box-shadow: rgba(0, 0, 0, 0.20) 0px 2px 24px 8px, rgba(0, 0, 0, 0.36) 0px 0px 0px 0px !important;
+}
+.button-wrapper{
+    margin-left: auto;
+    margin-right: auto;
 }
 input{
 	border-bottom:1px solid rgba(0, 0, 0, 0.56) !important;
@@ -54,19 +61,17 @@ input{
 .file-design{
   padding:8px 0 5px 0;
 }
-.btn{
-	color:rgba(35,38,41,1);
-	border:2px solid rgba(35,38,41,1);
-	background-color:rgba(35,38,41,1);
-	outline: none;
-    color: white;
-	padding:10px 20px;
-	text-transform:uppercase;
-	margin-top:50px;
-	border-radius:2px;
-	cursor:pointer;
-	position:relative;
-}
+.mat-flat-button {
+    margin-top: 32px;
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: x-large;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: 150px;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.20) 0px 2px 24px 8px, rgba(0, 0, 0, 0.36) 0px 0px 0px 0px !important;
+  }
 .input-container input:focus ~ label,
 .input-container input:valid ~ label{
 	top:-12px;
